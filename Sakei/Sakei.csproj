@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="login.aspx" />
     <Content Include="LoginPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -80,11 +81,25 @@
     <Compile Include="ForgotPage.aspx.designer.cs">
       <DependentUpon>ForgotPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FrontMaster.Master.cs">
+      <DependentUpon>FrontMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrontMaster.Master.designer.cs">
+      <DependentUpon>FrontMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\ConfigHelper.cs" />
     <Compile Include="Helper\Logger.cs" />
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -92,20 +107,13 @@
     <Compile Include="LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MainMaster1.Master.cs">
-      <DependentUpon>MainMaster1.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MainMaster1.Master.designer.cs">
-      <DependentUpon>MainMaster1.Master</DependentUpon>
-    </Compile>
     <Compile Include="Manager\AccountManager.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\UserLevelEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MainMaster1.Master" />
+    <Content Include="FrontMaster.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

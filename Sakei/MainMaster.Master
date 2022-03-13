@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster1.Master.cs" Inherits="SaKei.MainMaster1" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Sakei.Site1" %>
 
 <!DOCTYPE html>
 
@@ -7,21 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
-
-
-
-
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-
-
-
-
-
             </asp:ContentPlaceHolder>
         </div>
     </form>
