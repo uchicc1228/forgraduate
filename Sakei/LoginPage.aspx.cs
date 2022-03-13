@@ -49,7 +49,7 @@ namespace SaKei
 
         protected void forgotpwd_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Forgot_PWD.aspx");
+            Response.Redirect("ForgotPage.aspx");
         }
     }
 }
