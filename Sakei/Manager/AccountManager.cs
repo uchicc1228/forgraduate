@@ -13,6 +13,7 @@ namespace SaKei.Manager
 {
     public class AccountManager
     {
+        AccountModel model = new AccountModel();
         System.Net.Mail.MailMessage em = new System.Net.Mail.MailMessage();
         private AccountModel BuildAccountModel(SqlDataReader reader)
         {
@@ -54,72 +55,6 @@ namespace SaKei.Manager
 
             return result;
         }
-
-        #region "忘記密碼"
-        //回傳布林直
-        public bool ForgotEmail(string account, string email)
-        {
-            bool isAccountRight = false;
-            bool isEmailRight = false;
-
-            AccountModel member = this.GetAccount(account);
-
-            if (member == null) // 找不到
-                return false;
-
-            if (string.Compare(member.Account, account, true) == 0)
-                isAccountRight = true;
-
-            if (member.Mail == email)
-                isEmailRight = true;
-
-            // 檢查帳號密碼是否正確
-            bool result = (isAccountRight && isEmailRight);
-
-            //// 信箱和帳號正確：把值寫入 Session
-            //if (result)
-            //{
-            //    HttpContext.Current.Session["MemberEmail"] = member;
-            //    HttpContext.Current.Session["MemberAccount"] = member;
-            //}
-
-            return result;
-        }
-        //寄出認證信
-        public void SendEmail()
-        {
-            em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
-            em.To.Add(new System.Net.Mail.MailAddress("doudada0807@gmail.com"));    //收件者
-            em.Subject = "123";     //信件主題 
-            em.SubjectEncoding = System.Text.Encoding.UTF8;
-            em.Body = "123";            //內容 
-            em.BodyEncoding = System.Text.Encoding.UTF8;
-            em.IsBodyHtml = true;     //信件內容是否使用HTML格式
-
-
-
-            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
-            //登入帳號認證  
-            smtp.Credentials = new System.Net.NetworkCredential("sakei20220313@gmail.com", "lhuohuxmqnepcvic");
-            //使用587 Port - google要設定
-            smtp.Port = 587;
-            smtp.EnableSsl = true;   //啟動SSL 
-            //end of google設定
-            smtp.Host = "smtp.gmail.com";   //SMTP伺服器
-            smtp.Send(em);            //寄出
-
-
-
-        }
-
-        #endregion
-
-        public bool IsLogined()
-        {
-            AccountModel account = GetCurrentUser();
-            return (account != null);
-        }
-
         public AccountModel GetAccount(string account)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -143,10 +78,11 @@ namespace SaKei.Manager
                             AccountModel model = new AccountModel()
                             {
                                 Account = reader["Account"] as string,
-                                Mail = reader["Mail"] as string
+                                Mail = reader["Mail"] as string,
+                                ID = (Guid)reader["ID"]
                             };
                             return model;
-                           
+
                         }
 
                         return null;
@@ -193,6 +129,73 @@ namespace SaKei.Manager
                 throw;
             }
         }
+
+        #region "忘記密碼"
+        //回傳布林直
+        public bool ForgotEmail(string account, string email)
+        {
+            bool isAccountRight = false;
+            bool isEmailRight = false;
+
+            AccountModel member = this.GetAccount(account);
+
+            if (member == null) // 找不到
+                return false;
+
+            if (string.Compare(member.Account, account, true) == 0)
+                isAccountRight = true;
+
+            if (member.Mail == email)
+                isEmailRight = true;
+
+            // 檢查帳號密碼是否正確
+            bool result = (isAccountRight && isEmailRight);
+
+            //// 信箱和帳號正確：把值寫入 Session
+            //if (result)
+            //{
+            //    HttpContext.Current.Session["MemberEmail"] = member;
+            //    HttpContext.Current.Session["MemberAccount"] = member;
+            //}
+
+            return result;
+        }
+        //寄出認證信
+        public AccountModel SendEmail(Guid id)
+        {
+            string mail1 = "http://localhost:8974/MailAuthentication.aspx";
+            em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
+            em.To.Add(new System.Net.Mail.MailAddress("doudada0807@gmail.com"));    //收件者
+            em.Subject = "123";     //信件主題 
+            em.SubjectEncoding = System.Text.Encoding.UTF8;
+            em.Body = mail1 + "?" + id;            //內容 
+            em.BodyEncoding = System.Text.Encoding.UTF8;
+            em.IsBodyHtml = true;     //信件內容是否使用HTML格式
+
+            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
+            //登入帳號認證  
+            smtp.Credentials = new System.Net.NetworkCredential("sakei20220313@gmail.com", "lhuohuxmqnepcvic");
+            //使用587 Port - google要設定
+            smtp.Port = 587;
+            smtp.EnableSsl = true;   //啟動SSL 
+            //end of google設定
+            smtp.Host = "smtp.gmail.com";   //SMTP伺服器
+            smtp.Send(em);            //寄出
+
+            return model;
+
+        }
+        
+
+        #endregion
+
+        public bool IsLogined()
+        {
+            AccountModel account = GetCurrentUser();
+            return (account != null);
+        }
+
+      
         public AccountModel GetCurrentUser()
         {
             AccountModel account = HttpContext.Current.Session["MemberAccount"] as AccountModel;

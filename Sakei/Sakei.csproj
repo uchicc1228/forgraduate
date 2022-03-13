@@ -71,6 +71,7 @@
     <Content Include="Global.asax" />
     <Content Include="login.aspx" />
     <Content Include="LoginPage.aspx" />
+    <Content Include="MailAuthentication.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +107,13 @@
     </Compile>
     <Compile Include="LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MailAuthentication.aspx.cs">
+      <DependentUpon>MailAuthentication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MailAuthentication.aspx.designer.cs">
+      <DependentUpon>MailAuthentication.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AccountManager.cs" />
     <Compile Include="Models\AccountModel.cs" />

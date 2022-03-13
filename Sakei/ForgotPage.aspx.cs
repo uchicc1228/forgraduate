@@ -1,5 +1,6 @@
 ﻿using DeliciousMap.Helpers;
 using SaKei.Manager;
+using SaKei.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace Sakei
             {
                 try
                 {
-                    _accMgr.SendEmail();
+                    AccountModel id =  _accMgr.GetAccount(account);
+                    _accMgr.SendEmail(id.ID);
                 }
                catch(Exception ex)
                 {
@@ -40,6 +42,8 @@ namespace Sakei
             {
                 this.lbl.Text = "無此帳號/信箱";
             }
+
+            //同時產生亂數 這個亂數用來驗證是否收到認證信
         }
     }
 }
