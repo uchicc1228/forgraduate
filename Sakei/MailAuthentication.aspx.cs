@@ -41,7 +41,7 @@ namespace Sakei
             if (string.Compare(newpwd1, newpwd2) == 0)
             {
                  model.PWD = newpwd1;
-                _mgr.UpdateAccount(model);
+                _mgr.UpdatePwd(model);
             };
         }
     }

@@ -28,43 +28,11 @@ namespace SaKei.Manager
             return model;
         }
 
-
-
         public bool IsLogined()
         {
             AccountModel account = GetCurrentUser();
             return (account != null);
         }
-        public bool TryLogin(string account, string password)
-        {
-            bool isAccountRight = false;
-            bool isPasswordRight = false;
-
-            AccountModel member = this.GetAccount(account);
-
-            if (member == null) // 找不到就代表登入失敗
-                return false;
-
-            if (string.Compare(member.Account, account, true) == 0)
-                isAccountRight = true;
-
-            if (member.PWD == password)
-                isPasswordRight = true;
-
-            // 檢查帳號密碼是否正確
-            bool result = (isAccountRight && isPasswordRight);
-
-            // 帳密正確：把值寫入 Session
-            // 為避免任何漏洞導致 session 流出，先把密碼清除
-            if (result)
-            {
-                member.PWD = null;
-                HttpContext.Current.Session["MemberAccount"] = member;
-            }
-
-            return result;
-        }
-
 
 
         public AccountModel GetAccount(string account)
@@ -133,7 +101,7 @@ namespace SaKei.Manager
                                 ID = (Guid)reader["ID"],
                                 Account = reader["Account"] as string,
                                 PWD = reader["PWD"] as string,
-                                
+
                             };
                             return model;
                         }
@@ -214,10 +182,9 @@ namespace SaKei.Manager
 
         #endregion
 
+        #region "一般會員忘記密碼後更改自己密碼" 
 
-        #region "一般會員更改自己密碼" 
-
-        public void UpdateAccount(AccountModel 媽的幹)
+        public void UpdatePwd(AccountModel 媽的幹)
         {
             // 1. 編輯資料
             string connStr = ConfigHelper.GetConnectionString();
@@ -253,6 +220,83 @@ namespace SaKei.Manager
 
 
         #endregion
+
+        #region "登入"
+
+        public bool TryLogin(string account, string password)
+        {
+            bool isAccountRight = false;
+            bool isPasswordRight = false;
+
+            AccountModel member = this.GetAccount(account);
+
+            if (member == null) // 找不到就代表登入失敗
+                return false;
+
+            if (string.Compare(member.Account, account, true) == 0)
+                isAccountRight = true;
+
+            if (member.PWD == password)
+                isPasswordRight = true;
+
+            // 檢查帳號密碼是否正確
+            bool result = (isAccountRight && isPasswordRight);
+
+            // 帳密正確：把值寫入 Session
+            // 為避免任何漏洞導致 session 流出，先把密碼清除
+            if (result)
+            {
+                member.PWD = null;
+                HttpContext.Current.Session["MemberAccount"] = member;
+            }
+
+            return result;
+        }
+
+
+
+        #endregion
+
+        #region "註冊"
+        public void CreateAccount(AccountModel model)
+        {
+            // 1. 判斷資料庫是否有相同的 Account
+            if (this.GetAccount(model.Account) != null)
+                throw new Exception("已存在相同的帳號");
+
+            // 2. 新增資料
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                @"  INSERT INTO Accounts
+                        (ID, Account, PWD, Sex)
+                    VALUES
+                        (@id, @account, @pwd, @sex)";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        model.ID = Guid.NewGuid();
+
+                        command.Parameters.AddWithValue("@id", model.ID);
+                        command.Parameters.AddWithValue("@account", model.Account);
+                        command.Parameters.AddWithValue("@pwd", model.PWD);
+                        command.Parameters.AddWithValue("@sex", model.sex);
+
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("MapContentManager.CreateAccount", ex);
+                throw;
+            }
+        }
+        #endregion
+
     }
 
 

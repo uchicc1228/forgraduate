@@ -73,6 +73,7 @@
     <Content Include="login.aspx" />
     <Content Include="LoginPage.aspx" />
     <Content Include="MailAuthentication.aspx" />
+    <Content Include="RegisterPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +121,13 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\UserLevelEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterPage.aspx.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterPage.aspx.designer.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="FrontMaster.Master" />
