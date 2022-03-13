@@ -15,6 +15,7 @@ namespace SaKei.Manager
     {
         AccountModel model = new AccountModel();
         System.Net.Mail.MailMessage em = new System.Net.Mail.MailMessage();
+
         private AccountModel BuildAccountModel(SqlDataReader reader)
         {
             AccountModel model = new AccountModel()
@@ -25,6 +26,14 @@ namespace SaKei.Manager
                 UserLevel = (UserLevelEnum)reader["UserLevel"]
             };
             return model;
+        }
+
+
+
+        public bool IsLogined()
+        {
+            AccountModel account = GetCurrentUser();
+            return (account != null);
         }
         public bool TryLogin(string account, string password)
         {
@@ -55,6 +64,9 @@ namespace SaKei.Manager
 
             return result;
         }
+
+
+
         public AccountModel GetAccount(string account)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -95,12 +107,13 @@ namespace SaKei.Manager
                 throw;
             }
         }
+
         public AccountModel GetAccount(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                 @"  SELECT *
-                    FROM Accounts
+                    FROM Sakeiusers
                     WHERE ID = @id ";
             try
             {
@@ -115,8 +128,14 @@ namespace SaKei.Manager
 
                         if (reader.Read())
                         {
-                            AccountModel member = BuildAccountModel(reader);
-                            return member;
+                            AccountModel model = new AccountModel()
+                            {
+                                ID = (Guid)reader["ID"],
+                                Account = reader["Account"] as string,
+                                PWD = reader["PWD"] as string,
+                                
+                            };
+                            return model;
                         }
 
                         return null;
@@ -128,6 +147,12 @@ namespace SaKei.Manager
                 Logger.WriteLog("MapContentManager.GetMapList", ex);
                 throw;
             }
+        }
+
+        public AccountModel GetCurrentUser()
+        {
+            AccountModel account = HttpContext.Current.Session["MemberAccount"] as AccountModel;
+            return account;
         }
 
         #region "忘記密碼"
@@ -185,34 +210,49 @@ namespace SaKei.Manager
             return model;
 
         }
-        
+
 
         #endregion
 
-        public bool IsLogined()
+
+        #region "一般會員更改自己密碼" 
+
+        public void UpdateAccount(AccountModel 媽的幹)
         {
-            AccountModel account = GetCurrentUser();
-            return (account != null);
+            // 1. 編輯資料
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                @"  UPDATE Sakeiusers
+                    SET 
+                        PWD = @pwd
+                    WHERE
+                        ID = @id ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", 媽的幹.ID);
+                        command.Parameters.AddWithValue("@pwd", 媽的幹.PWD);
+
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("MapContentManager.UpdateAccount", ex);
+                throw;
+            }
         }
 
-      
-        public AccountModel GetCurrentUser()
-        {
-            AccountModel account = HttpContext.Current.Session["MemberAccount"] as AccountModel;
-            return account;
-        }
-        //protected void Send_mail(string authcode, string email)
-        //{
-        //    string msgstr = "";
-        //    msgstr = "your msg";
 
-        //    //Send Mail
-        //    MailMessage NewMail = new MailMessage("來源端的mail address", " 目的端的mail address", "mail title ", msgstr);
-        //    NewMail.BodyEncoding = System.Text.Encoding.GetEncoding("big5");
-        //    NewMail.IsBodyHtml = true;
-        //    SmtpClient smtp = new SmtpClient(ConfigurationManager.AppSettings["SmtpHost"].ToString());
-        //    smtp.Send(NewMail);
-        //}
+
+
+
+        #endregion
     }
 
 

@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="JavaScript\Alert.js" />
     <Content Include="login.aspx" />
     <Content Include="LoginPage.aspx" />
     <Content Include="MailAuthentication.aspx" />
