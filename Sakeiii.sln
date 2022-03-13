@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakei", "Sakei\Sakei.csproj", "{441EE4A7-ACAF-4846-B988-83AA21CE7ABB}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{441EE4A7-ACAF-4846-B988-83AA21CE7ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{441EE4A7-ACAF-4846-B988-83AA21CE7ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{441EE4A7-ACAF-4846-B988-83AA21CE7ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{441EE4A7-ACAF-4846-B988-83AA21CE7ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
