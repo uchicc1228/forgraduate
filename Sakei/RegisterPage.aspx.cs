@@ -12,7 +12,7 @@ namespace Sakei
     public partial class RegisterPage : System.Web.UI.Page
     {
         AccountModel model = new AccountModel();
-        AccountManager _mgr = new AccountManager;
+        AccountManager _mgr = new AccountManager();
         protected void Page_Load(object sender, EventArgs e)
         {
 
