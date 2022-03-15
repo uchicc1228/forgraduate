@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace SaKei.Manager
@@ -273,7 +274,7 @@ namespace SaKei.Manager
                     VALUES
                         (@account, @pwd ,@email)";
 
-                  
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -286,7 +287,7 @@ namespace SaKei.Manager
                         command.Parameters.AddWithValue("@account", model.Account);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
                         command.Parameters.AddWithValue("@email", model.Mail);
-                        
+
 
 
                         conn.Open();
@@ -299,6 +300,22 @@ namespace SaKei.Manager
                 Logger.WriteLog("CreateAccount", ex);
                 throw;
             }
+        }
+        #endregion
+
+        #region "各式防呆和驗證"
+
+        //驗證信箱格式
+        public bool isValidEmail(string inputEmail)
+        {
+            string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                  @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                  @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+            Regex re = new Regex(strRegex);
+            if (re.IsMatch(inputEmail))
+                return (true);
+            else
+                return (false);
         }
         #endregion
 

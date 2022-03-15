@@ -15,6 +15,7 @@ namespace Sakei
         AccountManager _mgr = new AccountManager();
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大或小寫字元<br/>" + "2.含數字<br/>" + "3.長度至少八碼，最長20碼 <br/>";
 
         }
 
@@ -22,9 +23,27 @@ namespace Sakei
         {
             
             model.Account = this.txtAcc.Text.Trim();
+            if(model.Account.Length < 8  ||  model.Account.Length > 20)
+            {
+                Response.Write("<script>alert('請注意帳號長度，須為８～２０字元')</script>");
+                return;
+            }
+
             model.PWD = this.txtPWD.Text.Trim();
+            if (model.PWD.Length < 8 || model.PWD.Length > 20)
+            {
+                Response.Write("<script>alert('請注意密碼長度，須為８～２０字元')</script>");
+                return;
+            }
+
+
             model.Mail = this.txtMail.Text.Trim();
-            model.UserName = this.txtNickName.Text.Trim();
+            if(!_mgr.isValidEmail(model.Mail))
+            {
+                Response.Write("<script>alert('請注意信箱格式')</script>");
+                return;
+            }
+
             if (_mgr.GetAccount(model.Account) != null)
             {
                 Response.Write("<script>alert('存在相同帳號!')</script>");
@@ -32,6 +51,11 @@ namespace Sakei
             }
             Response.Redirect(Request.RawUrl);
             _mgr.CreateAccount(model);
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
