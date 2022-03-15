@@ -17,7 +17,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-          
+    
          帳號:  <asp:TextBox runat="server" ID="txtAcc" required placeholder="【帳號】輸入８～２０字元" Width="200px"  ></asp:TextBox><br />
          密碼:  <asp:TextBox runat="server" ID="txtPWD" required　placeholder="【密碼】輸入８～２０字元"  Width="200px" ></asp:TextBox><br />      
          信箱:  <asp:TextBox runat="server" ID="txtMail" required Width="200px" ></asp:TextBox   ><br />

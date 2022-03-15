@@ -44,7 +44,7 @@ namespace Sakei
                 this.lbl.Text = "無此帳號/信箱";
             }
 
-            //同時產生亂數 這個亂數用來驗證是否收到認證信
+            
         }
     }
 }

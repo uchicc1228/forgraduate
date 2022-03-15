@@ -70,7 +70,6 @@
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="JavaScript\Alert.js" />
-    <Content Include="login.aspx" />
     <Content Include="LoginPage.aspx" />
     <Content Include="MailAuthentication.aspx" />
     <Content Include="RegisterPage.aspx" />
@@ -96,13 +95,6 @@
     </Compile>
     <Compile Include="Helper\ConfigHelper.cs" />
     <Compile Include="Helper\Logger.cs" />
-    <Compile Include="login.aspx.cs">
-      <DependentUpon>login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="login.aspx.designer.cs">
-      <DependentUpon>login.aspx</DependentUpon>
-    </Compile>
     <Compile Include="LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

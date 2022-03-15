@@ -124,7 +124,7 @@ namespace SaKei.Manager
             return account;
         }
 
-        #region "忘記密碼"
+        #region "忘記密碼 信箱"
         //回傳布林直
         public bool ForgotEmail(string account, string email)
         {
@@ -157,6 +157,7 @@ namespace SaKei.Manager
         //寄出認證信
         public AccountModel SendEmail(Guid id)
         {
+
             string mail1 = "http://localhost:8974/MailAuthentication.aspx";
             em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
             em.To.Add(new System.Net.Mail.MailAddress("doudada0807@gmail.com"));    //收件者
@@ -179,7 +180,31 @@ namespace SaKei.Manager
             return model;
 
         }
+        public void SendEmail(string email , Random rnd)
+        {
+           
+            string mail1 = "http://localhost:8974/MailAuthentication.aspx";
+            em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
+            em.To.Add(new System.Net.Mail.MailAddress(email));    //收件者
+            em.Subject = "123";     //信件主題 
+            em.SubjectEncoding = System.Text.Encoding.UTF8;
+            em.Body = "您的驗證碼為: " + rnd ;            //內容 
+            em.BodyEncoding = System.Text.Encoding.UTF8;
+            em.IsBodyHtml = true;     //信件內容是否使用HTML格式
 
+            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
+            //登入帳號認證  
+            smtp.Credentials = new System.Net.NetworkCredential("sakei20220313@gmail.com", "lhuohuxmqnepcvic");
+            //使用587 Port - google要設定
+            smtp.Port = 587;
+            smtp.EnableSsl = true;   //啟動SSL 
+            //end of google設定
+            smtp.Host = "smtp.gmail.com";   //SMTP伺服器
+            smtp.Send(em);            //寄出
+
+            
+
+        }
 
         #endregion
 
@@ -259,7 +284,7 @@ namespace SaKei.Manager
         #endregion
 
         #region "註冊"
-        public void CreateAccount(AccountModel model)
+        public bool CreateAccount(AccountModel model)
         {
             // 1. 判斷資料庫是否有相同的 Account
             if (this.GetAccount(model.Account) != null)
@@ -294,11 +319,13 @@ namespace SaKei.Manager
                         command.ExecuteNonQuery();
                     }
                 }
+            return true;
             }
             catch (Exception ex)
             {
+                
                 Logger.WriteLog("CreateAccount", ex);
-                throw;
+                return false;
             }
         }
         #endregion
