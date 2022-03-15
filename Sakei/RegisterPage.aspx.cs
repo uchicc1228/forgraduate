@@ -16,25 +16,21 @@ namespace Sakei
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            
-            
-
-
-
-
         }
 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
+            
             model.Account = this.txtAcc.Text.Trim();
             model.PWD = this.txtPWD.Text.Trim();
             model.Mail = this.txtMail.Text.Trim();
-
-            if (this.rdomale.Checked)
-                model.sex = "男";
-            else
-                model.sex = "女";
-
+            model.UserName = this.txtNickName.Text.Trim();
+            if (_mgr.GetAccount(model.Account) != null)
+            {
+                Response.Write("<script>alert('存在相同帳號!')</script>");
+                return;
+            }
+            Response.Redirect(Request.RawUrl);
             _mgr.CreateAccount(model);
         }
     }

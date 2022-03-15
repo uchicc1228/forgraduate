@@ -11,9 +11,9 @@ namespace SaKei.Models
         public string Account { get; set; }
         public string PWD { get; set; }
         public UserLevelEnum UserLevel { get; set; }
-
         public string Mail { get; set; }    
-
-        public string sex { get; set; }
+        
+        public string UserName { get; set; }    
+   
     }
 }

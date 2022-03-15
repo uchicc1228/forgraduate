@@ -40,8 +40,8 @@ namespace SaKei.Manager
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                  @" SELECT *
-                    FROM Sakeiusers
-                    WHERE Account = @account ";
+                    FROM UserAccounts
+                    WHERE UserAccount = @account ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -57,9 +57,9 @@ namespace SaKei.Manager
                         {
                             AccountModel model = new AccountModel()
                             {
-                                Account = reader["Account"] as string,
-                                Mail = reader["Mail"] as string,
-                                ID = (Guid)reader["ID"]
+                                Account = reader["UserAccount"] as string,
+                                Mail = reader["UserEmail"] as string,
+                                ID = (Guid)reader["UserID"]
                             };
                             return model;
 
@@ -81,8 +81,8 @@ namespace SaKei.Manager
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                 @"  SELECT *
-                    FROM Sakeiusers
-                    WHERE ID = @id ";
+                    FROM UserAccounts
+                    WHERE UserID = @id ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -98,9 +98,9 @@ namespace SaKei.Manager
                         {
                             AccountModel model = new AccountModel()
                             {
-                                ID = (Guid)reader["ID"],
-                                Account = reader["Account"] as string,
-                                PWD = reader["PWD"] as string,
+                                ID = (Guid)reader["UserID"],
+                                Account = reader["UseAccount"] as string,
+                                PWD = reader["UsePassword"] as string,
 
                             };
                             return model;
@@ -112,7 +112,7 @@ namespace SaKei.Manager
             }
             catch (Exception ex)
             {
-                Logger.WriteLog("MapContentManager.GetMapList", ex);
+                Logger.WriteLog("GetAccount", ex);
                 throw;
             }
         }
@@ -189,11 +189,11 @@ namespace SaKei.Manager
             // 1. 編輯資料
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                @"  UPDATE Sakeiusers
+                @"  UPDATE UserAccounts
                     SET 
-                        PWD = @pwd
+                        UserPassword = @pwd
                     WHERE
-                        ID = @id ";
+                        UserID = @id ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -210,7 +210,7 @@ namespace SaKei.Manager
             }
             catch (Exception ex)
             {
-                Logger.WriteLog("MapContentManager.UpdateAccount", ex);
+                Logger.WriteLog("UpdatePwd", ex);
                 throw;
             }
         }
@@ -262,15 +262,18 @@ namespace SaKei.Manager
         {
             // 1. 判斷資料庫是否有相同的 Account
             if (this.GetAccount(model.Account) != null)
+
                 throw new Exception("已存在相同的帳號");
 
             // 2. 新增資料
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                @"  INSERT INTO Accounts
-                        (ID, Account, PWD, Sex)
+                @"  INSERT INTO UserAccounts
+                        (UserAccount, UserPassword, UserEmail)
                     VALUES
-                        (@id, @account, @pwd, @sex)";
+                        (@account, @pwd ,@email)";
+
+                  
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -279,10 +282,12 @@ namespace SaKei.Manager
                     {
                         model.ID = Guid.NewGuid();
 
-                        command.Parameters.AddWithValue("@id", model.ID);
+                        //command.Parameters.AddWithValue("@id", model.ID);
                         command.Parameters.AddWithValue("@account", model.Account);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
-                        command.Parameters.AddWithValue("@sex", model.sex);
+                        command.Parameters.AddWithValue("@email", model.Mail);
+                        
+
 
                         conn.Open();
                         command.ExecuteNonQuery();
@@ -291,7 +296,7 @@ namespace SaKei.Manager
             }
             catch (Exception ex)
             {
-                Logger.WriteLog("MapContentManager.CreateAccount", ex);
+                Logger.WriteLog("CreateAccount", ex);
                 throw;
             }
         }
