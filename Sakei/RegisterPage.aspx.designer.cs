@@ -42,13 +42,22 @@ namespace Sakei
         protected global::System.Web.UI.WebControls.TextBox txtMail;
 
         /// <summary>
-        /// ltlmsg 控制項。
+        /// plc1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlmsg;
+        protected global::System.Web.UI.WebControls.PlaceHolder plc1;
+
+        /// <summary>
+        /// txtcaptcha 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtcaptcha;
 
         /// <summary>
         /// btnConfirm 控制項。
@@ -58,6 +67,24 @@ namespace Sakei
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConfirm;
+
+        /// <summary>
+        /// ltlmsg 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlmsg;
+
+        /// <summary>
+        /// btnSend 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSend;
 
         /// <summary>
         /// btnCancel 控制項。

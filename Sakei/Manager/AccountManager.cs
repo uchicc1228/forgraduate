@@ -180,15 +180,15 @@ namespace SaKei.Manager
             return model;
 
         }
-        public void SendEmail(string email , Random rnd)
+        public bool SendEmail(string email , int captcha)
         {
            
-            string mail1 = "http://localhost:8974/MailAuthentication.aspx";
+            
             em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
             em.To.Add(new System.Net.Mail.MailAddress(email));    //收件者
-            em.Subject = "123";     //信件主題 
+            em.Subject = "鮭魚日文，註冊帳號驗證信";     //信件主題 
             em.SubjectEncoding = System.Text.Encoding.UTF8;
-            em.Body = "您的驗證碼為: " + rnd ;            //內容 
+            em.Body = "您的驗證碼為: " + captcha;            //內容 
             em.BodyEncoding = System.Text.Encoding.UTF8;
             em.IsBodyHtml = true;     //信件內容是否使用HTML格式
 
@@ -202,7 +202,7 @@ namespace SaKei.Manager
             smtp.Host = "smtp.gmail.com";   //SMTP伺服器
             smtp.Send(em);            //寄出
 
-            
+            return true;
 
         }
 
@@ -319,6 +319,7 @@ namespace SaKei.Manager
                         command.ExecuteNonQuery();
                     }
                 }
+            
             return true;
             }
             catch (Exception ex)
@@ -345,6 +346,9 @@ namespace SaKei.Manager
                 return (false);
         }
         #endregion
+
+
+
 
     }
 
