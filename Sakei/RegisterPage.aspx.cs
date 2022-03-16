@@ -17,12 +17,58 @@ namespace Sakei
         protected void Page_Load(object sender, EventArgs e)
         {
             this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大或小寫字元<br/>" + "2.含數字<br/>" + "3.長度至少八碼，最長20碼 <br/>";
-
+            this.plc1.Visible = false;
         }
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
-            //帳號
+            model.Mail = this.txtMail.Text.Trim();
+            if (!_mgr.isValidEmail(model.Mail))
+            {
+                Response.Write("<script>alert('請注意信箱格式')</script>");
+                return;
+            }
+
+
+            //產生一組變數 帶到信封內 
+            Random rnd = new Random();
+            int captcha = Convert.ToInt32(rnd.Next(1, 99999));
+
+            if (_mgr.SendEmail(model.Mail, captcha))
+            {
+                Response.Write("<script>alert('已發送驗證信!!')</script>");
+                this.plc1.Visible = true;
+                string cook = Convert.ToString(captcha);
+                try
+                {
+                    HttpCookie cookies = new HttpCookie("Mycookies");
+                    cookies.Name = "123456"; //只能放英文跟數字 
+                    cookies.Value = cook;
+                    cookies.Expires = DateTime.Now.AddDays(220);  // 過期時間 
+                    cookies.HttpOnly = true;  //只允許server端的程式碼做要求cookies的存取 不允許第三方程式
+                    cookies.Secure = true;  //只允許https 使用存取cookies (機密性資料
+                    Response.Cookies.Add(cookies);
+
+                }
+
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+
+            }
+            else
+                return;
+
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void btnConfirm_Click(object sender, EventArgs e)
+        {
             model.Account = this.txtAcc.Text.Trim();
             if (model.Account.Length < 8 || model.Account.Length > 20)
             {
@@ -54,39 +100,9 @@ namespace Sakei
                 return;
             }
 
-            //修正此處 產生一組變數 帶到信封內 
-            Random rnd = new Random();
-            int captcha = Convert.ToInt32(rnd.Next(1, 99999));
+            HttpCookie cookies = Request.Cookies["123456"]; //找到的cookies是Name來找 
 
-            if (_mgr.SendEmail(model.Mail, captcha))
-            {
-                Response.Write("<script>alert('已發送驗證信!!')</script>");
-                this.txtcaptcha.Visible = true;
-            }
-
-            HttpCookie cookies = new HttpCookie("captcha");
-            cookies.Name = "captcha"; //只能放英文跟數字 
-            cookies.Value = captcha.ToString();
-            cookies.HttpOnly = true;  //只允許server端的程式碼做要求cookies的存取 不允許第三方程式
-            cookies.Secure = true;  //只允許https 使用存取cookies (機密性資料
-            Response.Cookies.Add(cookies);
-
-
-
-        }
-
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(Request.RawUrl);
-        }
-
-        protected void btnConfirm_Click(object sender, EventArgs e)
-        {
-
-
-            HttpCookie cookies = Request.Cookies["captcha"]; //找到的cookies是Name來找 
-
-            if (this.txtcaptcha.Text.Trim() == cookies.ToString())
+            if (this.txtcaptcha.Text.Trim() == cookies.Value)
             {
                 _mgr.CreateAccount(model);
                 Response.Write("<script>alert('註冊成功!!')</script>");

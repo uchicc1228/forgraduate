@@ -297,7 +297,7 @@ namespace SaKei.Manager
                 @"  INSERT INTO UserAccounts
                         (UserAccount, UserPassword, UserEmail)
                     VALUES
-                        (@account, @pwd ,@email)";
+                        (@account, @pwd , @email)";
 
 
             try

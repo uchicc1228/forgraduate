@@ -12,7 +12,7 @@
          帳號:  <asp:TextBox runat="server" ID="txtAcc" required placeholder="【帳號】輸入８～２０字元" Width="200px"  ></asp:TextBox><br />
          密碼:  <asp:TextBox runat="server" ID="txtPWD" required　placeholder="【密碼】輸入８～２０字元"  Width="200px" ></asp:TextBox><br />      
          信箱:  <asp:TextBox runat="server" ID="txtMail" required Width="200px" ></asp:TextBox   ><br />
-    <asp:PlaceHolder runat="server" ID="plc1" Visible="false" >
+    <asp:PlaceHolder runat="server" ID="plc1"  >
          認證密碼: <asp:TextBox runat="server" ID="txtcaptcha" required Width="200px"></asp:TextBox><br />
                   <asp:Button runat="server" ID="btnConfirm"  Text="確定" OnClick="btnConfirm_Click"/>
     </asp:PlaceHolder>
