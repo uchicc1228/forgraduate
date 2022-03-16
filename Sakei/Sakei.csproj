@@ -70,6 +70,8 @@
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="JavaScript\Alert.js" />
+    <Content Include="JavaScript\jquery\jquery.js" />
+    <Content Include="JavaScript\jquery\jquery.min.js" />
     <Content Include="LoginPage.aspx" />
     <Content Include="MailAuthentication.aspx" />
     <Content Include="RegisterPage.aspx" />
