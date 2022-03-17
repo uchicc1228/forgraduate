@@ -308,7 +308,7 @@ namespace SaKei.Manager
                     {
                         model.ID = Guid.NewGuid();
 
-                        //command.Parameters.AddWithValue("@id", model.ID);
+                       
                         command.Parameters.AddWithValue("@account", model.Account);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
                         command.Parameters.AddWithValue("@email", model.Mail);

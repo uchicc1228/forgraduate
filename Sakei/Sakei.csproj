@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="Helper\ConfigHelper.cs" />
     <Compile Include="Helper\Logger.cs" />
+    <Compile Include="Helper\LoginHelper.cs" />
     <Compile Include="LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -158,6 +159,7 @@
     <Compile Include="TestSystem\TestSystemMaster.Master.designer.cs">
       <DependentUpon>TestSystemMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Utility\UserStatusUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FrontMaster.Master" />

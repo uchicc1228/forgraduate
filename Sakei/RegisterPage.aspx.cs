@@ -29,7 +29,6 @@ namespace Sakei
                 return;
             }
 
-
             //產生一組變數 帶到信封內 
             Random rnd = new Random();
             int captcha = Convert.ToInt32(rnd.Next(1, 99999));
