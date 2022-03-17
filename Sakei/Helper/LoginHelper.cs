@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
+using System.Web.Security;
 
 namespace Sakei.Helper
 {
@@ -11,7 +13,7 @@ namespace Sakei.Helper
         public static bool IsLogined()
         {
             var loginCookie = HttpContext.Current.Request.Cookies["System"];
-            if(loginCookie != null)
+            if (loginCookie != null)
                 return true;
             else
             {
@@ -23,11 +25,11 @@ namespace Sakei.Helper
         public static string GetAccount()
         {
             var loginCookie = HttpContext.Current.Request.Cookies["System"];
-            if(loginCookie == null)
+            if (loginCookie == null)
                 return null;
 
             var account = loginCookie[Utility.UserStatusUtility.NormalMemberCookie];
-                return account;
+            return account;
         }
 
         public static int? GetUserLevel()
@@ -36,30 +38,56 @@ namespace Sakei.Helper
             if (loginCookie == null)
                 return null;
             var userLevel = loginCookie[Utility.UserStatusUtility.AdminCookie];
-            if(!int.TryParse(userLevel, out var temp))
+            if (!int.TryParse(userLevel, out var temp))
                 return null;
             else
                 return temp;
         }
 
-        public static void Login (string account, int level)
+        public static void Login(string account, string UserId)
         {
-            var logincookie = new HttpCookie("System");
+            bool isPersistence = false;
+            TimeSpan timeout = new TimeSpan(3, 0, 0);
 
-            logincookie.Values.Add(Utility.UserStatusUtility.NormalMemberCookie,account);
+            FormsAuthentication.SetAuthCookie(account, false);
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket
+             (
 
-            logincookie.Values.Add(Utility.UserStatusUtility.AdminCookie,level.ToString());
+                1,
+                account,
+                DateTime.Now,
+                DateTime.Now.Add(timeout),
+                isPersistence,
+                UserId
+                );
 
-            logincookie.Expires = DateTime.Now.AddDays(1);
+            //設定目前登入者至COOKIE
 
-            HttpContext.Current.Response.Cookies.Add(logincookie);
+            string cookiename = FormsAuthentication.FormsCookieName;
+            string encryptedText = FormsAuthentication.Encrypt(ticket);
+            HttpCookie loginCookie = new HttpCookie(cookiename, encryptedText);
+            loginCookie.HttpOnly = true;
+            HttpContext.Current.Response.Cookies.Add(loginCookie);
+
+            //設定目前登入者至current user
+
+            FormsIdentity identity = new FormsIdentity(ticket);
+
+            GenericPrincipal gp = new GenericPrincipal(identity, new string[] { });
+            HttpContext.Current.User = gp;
+
+
+
+
+
+
         }
 
 
         public static void Logout()
         {
             var loginCookie = HttpContext.Current.Request.Cookies["System"];
-            if(loginCookie != null)
+            if (loginCookie != null)
             {
                 loginCookie.Expires = DateTime.Now.AddDays(-2);
                 loginCookie.HttpOnly = true;
