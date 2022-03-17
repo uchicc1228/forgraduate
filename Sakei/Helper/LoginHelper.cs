@@ -75,10 +75,9 @@ namespace Sakei.Helper
             //設定目前登入者至current user
 
             FormsIdentity identity = new FormsIdentity(ticket);
-
             GenericPrincipal gp = new GenericPrincipal(identity, new string[] { });
             HttpContext.Current.User = gp;
-
+            
         }
 
 

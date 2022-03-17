@@ -273,9 +273,9 @@ namespace SaKei.Manager
             // 為避免任何漏洞導致 session 流出，先把密碼清除
             if (result)
             {
-                Login();
-                //member.PWD = null;
-                //HttpContext.Current.Session["MemberAccount"] = member;
+
+                member.PWD = null;
+                HttpContext.Current.Session["MemberAccount"] = member;
             }
 
             return result;
