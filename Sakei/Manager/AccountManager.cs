@@ -59,6 +59,7 @@ namespace SaKei.Manager
                             AccountModel model = new AccountModel()
                             {
                                 Account = reader["UserAccount"] as string,
+                                PWD = reader["UserPassword"] as string,
                                 Mail = reader["UserEmail"] as string,
                                 ID = (Guid)reader["UserID"]
                             };
@@ -272,8 +273,9 @@ namespace SaKei.Manager
             // 為避免任何漏洞導致 session 流出，先把密碼清除
             if (result)
             {
-                member.PWD = null;
-                HttpContext.Current.Session["MemberAccount"] = member;
+                Login();
+                //member.PWD = null;
+                //HttpContext.Current.Session["MemberAccount"] = member;
             }
 
             return result;

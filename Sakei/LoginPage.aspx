@@ -9,14 +9,15 @@
     <asp:PlaceHolder runat="server" ID="plcLogin">Account:
     <asp:TextBox ID="txtAccount" runat="server"></asp:TextBox><br />
      Password: <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox><br />
-     <asp:Button ID="btnLogin" runat="server" Text="登入" OnClick="btnLogin_Click" />
+     <asp:Button ID="btnLogin" runat="server" Text="登入" OnClick="btnLogin_Click" /> <br />
+       <%-- <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click1" /><br />--%>
       <asp:Button ID="forgotpwd" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br />
      <asp:Literal ID="ltlMessage" runat="server"></asp:Literal>
     </asp:PlaceHolder>
 
 
 
-    <asp:PlaceHolder runat="server" ID="plcUserInfo">
+    <asp:PlaceHolder runat="server" ID="plcUserInfo" >
         <asp:Literal ID="ltlAccount" runat="server"></asp:Literal><br />
         請前往 <a href="/BackAdmin/Index.aspx">後台 </a>
     </asp:PlaceHolder>

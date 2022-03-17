@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaKei.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -12,7 +13,7 @@ namespace Sakei.Helper
 
         public static bool IsLogined()
         {
-            var loginCookie = HttpContext.Current.Request.Cookies["System"];
+            var loginCookie = HttpContext.Current.Request.Cookies["??"];
             if (loginCookie != null)
                 return true;
             else
@@ -24,7 +25,7 @@ namespace Sakei.Helper
 
         public static string GetAccount()
         {
-            var loginCookie = HttpContext.Current.Request.Cookies["System"];
+            var loginCookie = HttpContext.Current.Request.Cookies["??"];
             if (loginCookie == null)
                 return null;
 
@@ -34,7 +35,7 @@ namespace Sakei.Helper
 
         public static int? GetUserLevel()
         {
-            var loginCookie = HttpContext.Current.Request.Cookies["System"];
+            var loginCookie = HttpContext.Current.Request.Cookies["??"];
             if (loginCookie == null)
                 return null;
             var userLevel = loginCookie[Utility.UserStatusUtility.AdminCookie];
@@ -44,21 +45,22 @@ namespace Sakei.Helper
                 return temp;
         }
 
-        public static void Login(string account, string UserId)
+        public static void Login(AccountModel model, string UserID)
         {
+
             bool isPersistence = false;
             TimeSpan timeout = new TimeSpan(3, 0, 0);
 
-            FormsAuthentication.SetAuthCookie(account, false);
+            FormsAuthentication.SetAuthCookie(model.Account, false);
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket
              (
 
                 1,
-                account,
+                model.Account,
                 DateTime.Now,
                 DateTime.Now.Add(timeout),
                 isPersistence,
-                UserId
+                UserID
                 );
 
             //設定目前登入者至COOKIE
@@ -67,6 +69,7 @@ namespace Sakei.Helper
             string encryptedText = FormsAuthentication.Encrypt(ticket);
             HttpCookie loginCookie = new HttpCookie(cookiename, encryptedText);
             loginCookie.HttpOnly = true;
+            loginCookie.Expires = DateTime.Now.Add(timeout);
             HttpContext.Current.Response.Cookies.Add(loginCookie);
 
             //設定目前登入者至current user
@@ -76,23 +79,12 @@ namespace Sakei.Helper
             GenericPrincipal gp = new GenericPrincipal(identity, new string[] { });
             HttpContext.Current.User = gp;
 
-
-
-
-
-
         }
 
 
         public static void Logout()
         {
-            var loginCookie = HttpContext.Current.Request.Cookies["System"];
-            if (loginCookie != null)
-            {
-                loginCookie.Expires = DateTime.Now.AddDays(-2);
-                loginCookie.HttpOnly = true;
-                HttpContext.Current.Response.Cookies.Add(loginCookie);
-            }
+           FormsAuthentication.SignOut();
         }
     }
 }
