@@ -5,6 +5,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
-        <canvas id="cavTest" width="1280" height="720"></canvas>
+        <canvas id="cavTest" width="1080" height="640"></canvas>
     </div>
 </asp:Content>

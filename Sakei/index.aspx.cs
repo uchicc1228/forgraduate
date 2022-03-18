@@ -5,18 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Sakei.TestSystem
+namespace Sakei
 {
-    public partial class TestSystemMaster : System.Web.UI.MasterPage
+    public partial class index : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void btnGiveUp_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../index.aspx");
         }
     }
 }

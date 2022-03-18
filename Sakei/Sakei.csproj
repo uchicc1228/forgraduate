@@ -71,6 +71,7 @@
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="index.aspx" />
     <Content Include="JavaScript\Alert.js" />
     <Content Include="JavaScript\bootstrap\bootstrap.js" />
     <Content Include="JavaScript\bootstrap\bootstrap.min.js" />
@@ -104,6 +105,13 @@
     <Compile Include="Helper\ConfigHelper.cs" />
     <Compile Include="Helper\Logger.cs" />
     <Compile Include="Helper\LoginHelper.cs" />
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
