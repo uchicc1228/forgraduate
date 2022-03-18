@@ -67,11 +67,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BackForm\Index.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="JavaScript\Alert.js" />
+    <Content Include="Images\back.jpg" />
     <Content Include="JavaScript\bootstrap\bootstrap.js" />
     <Content Include="JavaScript\bootstrap\bootstrap.min.js" />
     <Content Include="JavaScript\jquery\jquery.js" />
@@ -85,6 +86,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackForm\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BackForm\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForgotPage.aspx.cs">
       <DependentUpon>ForgotPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -174,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BackForm\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

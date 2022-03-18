@@ -15,10 +15,5 @@
         <asp:Button ID="btnConfirm" runat="server" Text="寄出認證信" OnClick="btnConfirm_Click" />
          <asp:Label runat="server" ID="lbl"></asp:Label>
     </asp:PlaceHolder>
-
- 
-
-
-
-
+  
 </asp:Content>
