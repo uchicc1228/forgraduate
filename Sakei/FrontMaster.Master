@@ -34,7 +34,7 @@
             
         }
     </style>
-    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server">    </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
