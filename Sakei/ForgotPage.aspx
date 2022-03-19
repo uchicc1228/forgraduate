@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true" CodeBehind="ForgotPage.aspx.cs" Inherits="Sakei.ForgotPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">  
- <title>My Master Page</title>
+
 </asp:Content>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+     <title>Forget Page</title>
    <%-- <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
         <asp:ListItem runat="server" >忘記帳號</asp:ListItem>
         <asp:ListItem  runat="server">忘記密碼</asp:ListItem>

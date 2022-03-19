@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>My Master Page</title>
+    <title></title>
     <link rel="stylesheet" href="style.css" type="text/css" />
 
     <link href="CSS/Bootstrap/bootstrap.min.css" rel="stylesheet" />
