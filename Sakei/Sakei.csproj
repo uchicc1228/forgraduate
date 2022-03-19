@@ -76,6 +76,7 @@
     <Content Include="JavaScript\bootstrap\bootstrap.min.js" />
     <Content Include="JavaScript\jquery\jquery.js" />
     <Content Include="JavaScript\jquery\jquery.min.js" />
+    <Content Include="JavaScript\TestSystem\TestSystem.js" />
     <Content Include="LoginPage.aspx" />
     <Content Include="MailAuthentication.aspx" />
     <Content Include="NoPage.aspx" />
