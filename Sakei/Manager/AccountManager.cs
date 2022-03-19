@@ -271,12 +271,12 @@ namespace SaKei.Manager
 
             // 帳密正確：把值寫入 Session
             // 為避免任何漏洞導致 session 流出，先把密碼清除
-            if (result)
-            {
+            //if (result)
+            //{
 
-                member.PWD = null;
-                HttpContext.Current.Session["MemberAccount"] = member;
-            }
+            //    member.PWD = null;
+            //    HttpContext.Current.Session["MemberAccount"] = member;
+            //}
 
             return result;
         }

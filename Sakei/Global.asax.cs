@@ -22,21 +22,21 @@ namespace Sakei
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            //var request = HttpContext.Current.Request;
-            //var response = HttpContext.Current.Response;
+            var request = HttpContext.Current.Request;
+            var response = HttpContext.Current.Response;
 
-            //if(request.RawUrl.Contains("/SystemAdmin"))
-            //{
-            //    if(!request.IsAuthenticated)
-            //    {
+            if (request.RawUrl.Contains("/SystemAdmin"))
+            {
+                if (!request.IsAuthenticated)
+                {
 
-            //        //透過id 讀取資料庫 檢查level 
-            //        response.Clear();
-            //        response.StatusCode = 403;  //預計寫一個403網頁 或是defaulterror網頁
-            //        response.Write("未授權");
-            //        response.End();
-            //    }
-            //}
+                    //透過id 讀取資料庫 檢查level 
+                    response.Clear();
+                    response.StatusCode = 403;  //預計寫一個403網頁 或是defaulterror網頁
+                    response.Write("未授權");
+                    response.End();
+                }
+            }
 
 
 

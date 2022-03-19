@@ -41,8 +41,6 @@ namespace SaKei
 
         //登出紐
 
-
-
         protected void forgotpwd_Click(object sender, EventArgs e)
         {
             Response.Redirect("ForgotPage.aspx");
