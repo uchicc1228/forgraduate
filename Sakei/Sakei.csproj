@@ -72,7 +72,6 @@
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="index.aspx" />
-    <Content Include="JavaScript\Alert.js" />
     <Content Include="JavaScript\bootstrap\bootstrap.js" />
     <Content Include="JavaScript\bootstrap\bootstrap.min.js" />
     <Content Include="JavaScript\jquery\jquery.js" />
