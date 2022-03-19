@@ -67,11 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BackForm\Index.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="index.aspx" />
     <Content Include="JavaScript\bootstrap\bootstrap.js" />
     <Content Include="JavaScript\bootstrap\bootstrap.min.js" />
     <Content Include="JavaScript\jquery\jquery.js" />
@@ -84,6 +84,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackForm\BackForm.Master.cs">
+      <DependentUpon>BackForm.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BackForm\BackForm.Master.designer.cs">
+      <DependentUpon>BackForm.Master</DependentUpon>
+    </Compile>
+    <Compile Include="BackForm\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BackForm\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForgotPage.aspx.cs">
       <DependentUpon>ForgotPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -104,13 +118,6 @@
     <Compile Include="Helper\ConfigHelper.cs" />
     <Compile Include="Helper\Logger.cs" />
     <Compile Include="Helper\LoginHelper.cs" />
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -162,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FrontMaster.Master" />
+    <Content Include="BackForm\BackForm.Master" />
     <None Include="packages.config" />
     <Content Include="TestSystem\TestSystemMaster.Master" />
     <None Include="Web.Debug.config">
@@ -173,7 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BackForm\" />
     <Folder Include="ShareControls\" />
   </ItemGroup>
   <PropertyGroup>

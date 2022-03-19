@@ -15,8 +15,7 @@
     <style>
         body {
             background-color: rgb(243, 229, 207);
-            margin: 0px;
-            background-image: url("Images/back.jpg");
+            margin: 0px;           
             background-repeat: no-repeat;
             background-size: 100%;
             background-position-x: center;
@@ -26,13 +25,13 @@
             border: 1px solid black;
         }
 
-
-
-
-
-
         .menu{
              text-align: center;
+        }
+
+        .left{
+            height : 500px;
+           
         }
        
     </style>
@@ -42,7 +41,7 @@
     <form id="form1" runat="server">
         <div class="container">
             <div class="row">
-                <div class="col-12 menu">        
+                <div class="menu">        
                      <p>
                               <a href="mainform.html" target="blank" style="color:rgb(27, 27, 83)">登入頁面</a> |
                               <a href="aboutus.html"taget="blank"style="color:rgb(27, 27, 83)">忘記密碼</a> |
@@ -52,18 +51,20 @@
             </div>
 
             <div class="row">
-                <div class="col-3">
-                    2
+                <div class="col-2 left">
+                    
+                    
+
+
                 </div>
                 
-                <div class="col-6 sp">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                <div class="col-10 sp">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
 
+                    </asp:ContentPlaceHolder>
                 </div>
 
-                <div class="col-3">
-                    4
-                </div>
+                
             </div>
         </div>
     </form>

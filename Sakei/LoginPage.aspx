@@ -17,10 +17,7 @@
 
 
 
-    <asp:PlaceHolder runat="server" ID="plcUserInfo">
-        <asp:Literal ID="ltlAccount" runat="server"></asp:Literal><br />
-        請前往 <a href="/BackAdmin/Index.aspx">後台 </a>
-    </asp:PlaceHolder>
+  
 
 
 </asp:Content>
