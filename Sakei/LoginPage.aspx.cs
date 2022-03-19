@@ -35,7 +35,8 @@ namespace SaKei
             }
             else
             {
-                this.ltlMessage.Text = "登入失敗，請檢查帳號密碼。";
+                //this.ltlMessage.Text = "登入失敗，請檢查帳號密碼。";
+                Response.Write("<script>alert('登入失敗，請檢查帳號密碼')</script>");
             }
         }
 

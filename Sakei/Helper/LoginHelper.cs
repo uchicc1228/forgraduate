@@ -45,18 +45,18 @@ namespace Sakei.Helper
                 return temp;
         }
 
-        public static void Login(AccountModel model, string UserID)
+        public static void Login(string account , string UserID)
         {
 
             bool isPersistence = false;
             TimeSpan timeout = new TimeSpan(3, 0, 0);
 
-            FormsAuthentication.SetAuthCookie(model.Account, false);
+            FormsAuthentication.SetAuthCookie(account, false);
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket
              (
 
                 1,
-                model.Account,
+                account,
                 DateTime.Now,
                 DateTime.Now.Add(timeout),
                 isPersistence,
@@ -77,6 +77,7 @@ namespace Sakei.Helper
             FormsIdentity identity = new FormsIdentity(ticket);
             GenericPrincipal gp = new GenericPrincipal(identity, new string[] { });
             HttpContext.Current.User = gp;
+            HttpContext.Current.Response.Cookies.Add(loginCookie);
             
         }
 

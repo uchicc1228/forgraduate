@@ -22,7 +22,7 @@ namespace Sakei
             NameValueCollection collection = this.Request.QueryString;
             Guid id1 = Guid.Parse(collection[0]) ;
             AccountModel _id = _mgr.GetAccount(id1);
-            this.ltl1.Text = "您的使用者帳號為" + _id.Account;
+           
            
              
 

@@ -72,6 +72,8 @@
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\back.jpg" />
+    <Content Include="Images\下載.jpg" />
     <Content Include="JavaScript\bootstrap\bootstrap.js" />
     <Content Include="JavaScript\bootstrap\bootstrap.min.js" />
     <Content Include="JavaScript\jquery\jquery.js" />
@@ -81,6 +83,7 @@
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="TestSystem\TestChallengeMode.aspx" />
+    <Content Include="testtest.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +167,13 @@
     </Compile>
     <Compile Include="TestSystem\TestSystemMaster.Master.designer.cs">
       <DependentUpon>TestSystemMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="testtest.aspx.cs">
+      <DependentUpon>testtest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testtest.aspx.designer.cs">
+      <DependentUpon>testtest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utility\UserStatusUtility.cs" />
   </ItemGroup>
