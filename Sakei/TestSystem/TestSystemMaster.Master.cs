@@ -13,5 +13,10 @@ namespace Sakei.TestSystem
         {
 
         }
+
+        protected void btnGiveUp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../index.aspx");
+        }
     }
 }
