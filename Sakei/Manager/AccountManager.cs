@@ -1,4 +1,5 @@
-﻿using SaKei.Helpers;
+﻿using Sakei.Helper;
+using SaKei.Helpers;
 using SaKei.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace SaKei.Manager
     {
         AccountModel model = new AccountModel();
         System.Net.Mail.MailMessage em = new System.Net.Mail.MailMessage();
-
+        LoginHelper _log = new LoginHelper();
         private AccountModel BuildAccountModel(SqlDataReader reader)
         {
             AccountModel model = new AccountModel()
@@ -269,14 +270,19 @@ namespace SaKei.Manager
             // 檢查帳號密碼是否正確
             bool result = (isAccountRight && isPasswordRight);
 
-            // 帳密正確：把值寫入 Session
-            // 為避免任何漏洞導致 session 流出，先把密碼清除
+            ///帳密正確：把值寫入 cookies
+            //
             //if (result)
             //{
 
             //    member.PWD = null;
             //    HttpContext.Current.Session["MemberAccount"] = member;
             //}
+           
+
+            
+            
+          
 
             return result;
         }

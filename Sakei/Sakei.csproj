@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AfterLogin\Index.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ForgotPage.aspx" />
@@ -87,6 +88,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfterLogin\AfterLogin.Master.cs">
+      <DependentUpon>AfterLogin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\AfterLogin.Master.designer.cs">
+      <DependentUpon>AfterLogin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AfterLogin\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="API\TestDataHandler.ashx.cs">
       <DependentUpon>TestDataHandler.ashx</DependentUpon>
     </Compile>
@@ -176,6 +191,7 @@
   <ItemGroup>
     <Content Include="FrontMaster.Master" />
     <Content Include="API\TestDataHandler.ashx" />
+    <Content Include="AfterLogin\AfterLogin.Master" />
     <None Include="packages.config" />
     <Content Include="TestSystem\TestSystemMaster.Master" />
     <None Include="Web.Debug.config">
