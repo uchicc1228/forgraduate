@@ -78,11 +78,11 @@
 
          <label  class="label_title">忘記密碼</label><br />
 
-        <label class="label_input">使用者名稱</label>
+        <label class="label_input">帳號</label>
         <asp:TextBox ID="txtAcc"  CssClass="text_field" runat="server"></asp:TextBox> <br />
 
 
-       <label class="label_input">使用者信箱</label>
+       <label class="label_input">信箱</label>
         <asp:TextBox ID="txtMail"  CssClass="text_field" runat="server"></asp:TextBox>
 
 
