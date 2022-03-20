@@ -9,7 +9,7 @@ namespace DeliciousMap.Helpers
     /// <summary> 設定檔讀取器 </summary>
     public class ConfigHelper
     {
-        private const string _mainDBName = "MainDB";
+        private const string _mainDBName = "SakeTest";
 
         /// <summary> 讀取設定檔中的連線字串 </summary>
         /// <returns></returns>
