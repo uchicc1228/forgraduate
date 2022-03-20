@@ -140,6 +140,10 @@
       <DependentUpon>MailAuthentication.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AccountManager.cs" />
+    <Compile Include="Manager\TestSystemManagers\MessageBoardManager.cs" />
+    <Compile Include="Manager\TestSystemManagers\PointsManager.cs" />
+    <Compile Include="Manager\TestSystemManagers\TestDataManager.cs" />
+    <Compile Include="Manager\TestSystemManagers\UserAnswerManager.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\TestSystemModels\MessageBoardModel.cs" />
     <Compile Include="Models\TestSystemModels\PointsModel.cs" />
