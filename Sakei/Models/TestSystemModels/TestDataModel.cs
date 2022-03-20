@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Sakei.Models
+namespace Sakei.Models.TestSystemModels
 {
     public class TestDataModel
     {

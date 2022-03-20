@@ -141,7 +141,10 @@
     </Compile>
     <Compile Include="Manager\AccountManager.cs" />
     <Compile Include="Models\AccountModel.cs" />
-    <Compile Include="Models\TestDataModel.cs" />
+    <Compile Include="Models\TestSystemModels\MessageBoardModel.cs" />
+    <Compile Include="Models\TestSystemModels\PointsModel.cs" />
+    <Compile Include="Models\TestSystemModels\TestDataModel.cs" />
+    <Compile Include="Models\TestSystemModels\UserAnswerModel.cs" />
     <Compile Include="Models\UserLevelEnum.cs" />
     <Compile Include="NoPage.aspx.cs">
       <DependentUpon>NoPage.aspx</DependentUpon>
