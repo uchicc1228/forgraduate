@@ -88,6 +88,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\TestDataHandler.ashx.cs">
+      <DependentUpon>TestDataHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="BackForm\BackForm.Master.cs">
       <DependentUpon>BackForm.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -181,6 +184,7 @@
   <ItemGroup>
     <Content Include="FrontMaster.Master" />
     <Content Include="BackForm\BackForm.Master" />
+    <Content Include="API\TestDataHandler.ashx" />
     <None Include="packages.config" />
     <Content Include="TestSystem\TestSystemMaster.Master" />
     <None Include="Web.Debug.config">
