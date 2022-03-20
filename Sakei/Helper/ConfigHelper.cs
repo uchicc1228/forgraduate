@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace DeliciousMap.Helpers
+namespace SaKei.Helpers
 {
     /// <summary> 設定檔讀取器 </summary>
     public class ConfigHelper

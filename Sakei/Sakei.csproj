@@ -67,7 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BackForm\Index.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ForgotPage.aspx" />
@@ -90,20 +89,6 @@
   <ItemGroup>
     <Compile Include="API\TestDataHandler.ashx.cs">
       <DependentUpon>TestDataHandler.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="BackForm\BackForm.Master.cs">
-      <DependentUpon>BackForm.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BackForm\BackForm.Master.designer.cs">
-      <DependentUpon>BackForm.Master</DependentUpon>
-    </Compile>
-    <Compile Include="BackForm\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BackForm\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForgotPage.aspx.cs">
       <DependentUpon>ForgotPage.aspx</DependentUpon>
@@ -190,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FrontMaster.Master" />
-    <Content Include="BackForm\BackForm.Master" />
     <Content Include="API\TestDataHandler.ashx" />
     <None Include="packages.config" />
     <Content Include="TestSystem\TestSystemMaster.Master" />
