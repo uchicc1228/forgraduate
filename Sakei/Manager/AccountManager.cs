@@ -100,8 +100,8 @@ namespace SaKei.Manager
                             AccountModel model = new AccountModel()
                             {
                                 ID = (Guid)reader["UserID"],
-                                Account = reader["UseAccount"] as string,
-                                PWD = reader["UsePassword"] as string,
+                                Account = reader["UserAccount"] as string,
+                                PWD = reader["UserPassword"] as string,
 
                             };
                             return model;
@@ -114,6 +114,47 @@ namespace SaKei.Manager
             catch (Exception ex)
             {
                 Logger.WriteLog("GetAccount", ex);
+                throw;
+            }
+        }
+        public AccountModel GetPWD(string PWD)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM UserAccounts
+                    WHERE UserPassword = @pwd ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@pwd", PWD);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            AccountModel model = new AccountModel()
+                            {
+                                Account = reader["UserAccount"] as string,
+                                PWD = reader["UserPassword"] as string,
+                                Mail = reader["UserEmail"] as string,
+                                ID = (Guid)reader["UserID"]
+                            };
+                            return model;
+
+                        }
+
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
                 throw;
             }
         }
@@ -154,12 +195,12 @@ namespace SaKei.Manager
             return result;
         }
         //寄出認證信
-        public AccountModel SendEmail(Guid id)
+        public AccountModel SendEmail(Guid id, string mail)
         {
 
             string mail1 = "http://localhost:8974/MailAuthentication.aspx";
             em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
-            em.To.Add(new System.Net.Mail.MailAddress("doudada0807@gmail.com"));    //收件者
+            em.To.Add(new System.Net.Mail.MailAddress(mail));    //收件者
             em.Subject = "123";     //信件主題 
             em.SubjectEncoding = System.Text.Encoding.UTF8;
             em.Body = mail1 + "?" + id;            //內容 
@@ -209,7 +250,7 @@ namespace SaKei.Manager
 
         #region "一般會員忘記密碼後更改自己密碼" 
 
-        public void UpdatePwd(AccountModel 媽的幹)
+        public void UpdatePwd(AccountModel model)
         {
             // 1. 編輯資料
             string connStr = ConfigHelper.GetConnectionString();
@@ -225,8 +266,8 @@ namespace SaKei.Manager
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@id", 媽的幹.ID);
-                        command.Parameters.AddWithValue("@pwd", 媽的幹.PWD);
+                        command.Parameters.AddWithValue("@id", model.ID);
+                        command.Parameters.AddWithValue("@pwd", model.PWD);
 
                         conn.Open();
                         command.ExecuteNonQuery();

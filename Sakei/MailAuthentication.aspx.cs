@@ -21,7 +21,7 @@ namespace Sakei
 
             NameValueCollection collection = this.Request.QueryString;
             Guid id1 = Guid.Parse(collection[0]) ;
-            AccountModel _id = _mgr.GetAccount(id1);
+            _mgr.GetAccount(id1);
            
            
              
@@ -41,6 +41,7 @@ namespace Sakei
             if (string.Compare(newpwd1, newpwd2) == 0)
             {
                  model.PWD = newpwd1;
+                Response.Write("<script>alert('已變更成功!!')</script>");
                 _mgr.UpdatePwd(model);
             };
         }

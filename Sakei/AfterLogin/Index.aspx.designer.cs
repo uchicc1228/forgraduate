@@ -78,22 +78,40 @@ namespace Sakei.AfterLogin
         protected global::System.Web.UI.WebControls.PlaceHolder plcPWDChanger;
 
         /// <summary>
-        /// txtpwd 控制項。
+        /// txtpwdOld 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpwd;
+        protected global::System.Web.UI.WebControls.TextBox txtpwdOld;
 
         /// <summary>
-        /// txtpwd2 控制項。
+        /// txtpwdNew 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpwd2;
+        protected global::System.Web.UI.WebControls.TextBox txtpwdNew;
+
+        /// <summary>
+        /// txtpwdNewx2 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtpwdNewx2;
+
+        /// <summary>
+        /// btnPWDyes 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPWDyes;
 
         /// <summary>
         /// txtnick 控制項。
@@ -105,12 +123,12 @@ namespace Sakei.AfterLogin
         protected global::System.Web.UI.WebControls.TextBox txtnick;
 
         /// <summary>
-        /// btnYes 控制項。
+        /// btnNICKyes 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnYes;
+        protected global::System.Web.UI.WebControls.Button btnNICKyes;
     }
 }

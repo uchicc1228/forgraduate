@@ -116,11 +116,13 @@
     <asp:PlaceHolder runat="server" ID="plcPWDChanger" Visible="false">
         <h1><b>變更使用者資料</b></h1>
         <div class="divPWDChanger">
-            <label class="lblfield">原密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwd"></asp:TextBox><br />
-            <label class="lblfield">新密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwd2"></asp:TextBox><br />
-            <label class="lblfield">暱稱</label> <asp:TextBox runat="server" CssClass="text_field" ID="txtnick"></asp:TextBox><br />
-            
-            <asp:Button runat="server" ID="btnYes" Text="確定變更" CssClass="btnyes" OnClick="btnYes_Click" />
+            <label class="lblfield">原密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwdOld"></asp:TextBox><br />
+            <label class="lblfield">新密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwdNew"></asp:TextBox><br />
+            <label class="lblfield">再次輸入新密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwdNewx2"></asp:TextBox><br />
+             <asp:Button runat="server" ID="btnPWDyes" Text="確定變更" CssClass="btnyes"  OnClick="btnPWDyes_Click" />
+            <hr />
+            <label class="lblfield">暱稱　</label> <asp:TextBox runat="server" CssClass="text_field" ID="txtnick"></asp:TextBox><br />            
+            <asp:Button runat="server" ID="btnNICKyes" Text="確定變更" CssClass="btnyes" OnClick="btnNICKyes_Click" />
         </div>
     </asp:PlaceHolder>
 

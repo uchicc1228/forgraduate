@@ -14,8 +14,8 @@ namespace Sakei.AfterLogin
         AccountManager _mgr = new AccountManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-             string acc = Request.QueryString["Q1"];
-             Guid guid = Guid.Parse(acc);  
+            string acc = Request.QueryString["Q1"];
+            Guid guid = Guid.Parse(acc);
             AccountModel model = _mgr.GetNickName(guid);
 
 
@@ -25,7 +25,7 @@ namespace Sakei.AfterLogin
 
 
             string nickname = model.NickName;
-            this.lblName.Text =  nickname;
+            this.lblName.Text = nickname;
 
         }
 
@@ -34,7 +34,22 @@ namespace Sakei.AfterLogin
             this.plcPWDChanger.Visible = true;
         }
 
-        protected void btnYes_Click(object sender, EventArgs e)
+        protected void btnPWDyes_Click(object sender, EventArgs e)
+        {
+            //先去確認第一個原密碼對不對 再來比對新密碼跟原密碼是否相同
+            string oldpwd = this.txtpwdOld.Text.Trim();
+            string newpwd  =this.txtpwdNew.Text.Trim();
+            string newpwd2 = this.txtpwdNewx2.Text.Trim();
+            AccountModel model  =   _mgr.GetPWD(oldpwd);
+            if(model.PWD == oldpwd  || newpwd2 == newpwd)
+            {
+                model.PWD = newpwd2;
+                //_mgr.UpdatePwd(model.PWD);
+            }
+
+        }
+
+        protected void btnNICKyes_Click(object sender, EventArgs e)
         {
 
         }
