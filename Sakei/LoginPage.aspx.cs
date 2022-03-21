@@ -30,7 +30,17 @@ namespace SaKei
             if (this._mgr.TryLogin(account, pwd))
             {
                 
-                Response.Redirect("BackForm/Index.aspx");
+                bool acc = this._mgr.TryLogin(account,pwd);
+                AccountModel acc1  =_mgr.GetAccount(account);
+                string url = "AfterLogin/Index.aspx?Q1=" + acc1.ID;
+                if (acc)
+                {
+                    Response.Redirect(url);
+                }
+
+                //將query加密
+                //AccountModel q1 = _mgr.GetAccount(account);
+                //Response.Redirect("AfterLogin/Index.aspx?Q1=" + Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(q1.Account)).Replace("+", "% 2B"));
 
             }
             else

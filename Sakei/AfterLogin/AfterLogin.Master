@@ -4,17 +4,98 @@
 
 <html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+  
+    <script src="../JavaScript/jquery/jquery.min.js"></script>
+    <link href="../CSS/Bootstrap/bootstrap.css" rel="stylesheet" />
+    <script src="../JavaScript/bootstrap/bootstrap.js"></script>
+
+     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+   
+
+
+    <style>
+        div {
+            border: 1px solid black;
+        }
+
+        body {
+            background-color: rgb(243, 229, 207);
+            margin: 0px;           
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position-x: center;
+            overflow-x: hidden;
+        }
+
+        .menu{
+             text-align: center;
+        }
+    </style>
+
+
+
+
+
+
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            <div class="container">
+                <div class="row">
+                    <div class="menu col-12">
+                        <p>
+                             <a href="dd" target="blank" style="color: rgb(27, 27, 83)">頁面一</a> |
+                              <a href="dd" target="blank" style="color: rgb(27, 27, 83)">頁面二</a> |
+                              <a href="dd" target="blank" style="color: rgb(27, 27, 83)">頁面三</a>
+
+                          
+                        </p>
+
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                        <div class="col-3">
+                              <asp:ContentPlaceHolder ID="CP2" runat="server">    </asp:ContentPlaceHolder>
+                        </div>
+
+                        <div class="col-9">
+                            <asp:ContentPlaceHolder ID="CP3" runat="server"></asp:ContentPlaceHolder>
+                        </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
         </div>
+
+
+
+
+
+
+
+
+
+       
+
+
+
     </form>
 </body>
 </html>

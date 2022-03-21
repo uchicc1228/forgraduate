@@ -18,6 +18,8 @@ namespace SaKei.Manager
         AccountModel model = new AccountModel();
         System.Net.Mail.MailMessage em = new System.Net.Mail.MailMessage();
         LoginHelper _log = new LoginHelper();
+
+
         private AccountModel BuildAccountModel(SqlDataReader reader)
         {
             AccountModel model = new AccountModel()
@@ -29,14 +31,11 @@ namespace SaKei.Manager
             };
             return model;
         }
-
         public bool IsLogined()
         {
             AccountModel account = GetCurrentUser();
             return (account != null);
         }
-
-
         public AccountModel GetAccount(string account)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -78,7 +77,6 @@ namespace SaKei.Manager
                 throw;
             }
         }
-
         public AccountModel GetAccount(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -119,7 +117,6 @@ namespace SaKei.Manager
                 throw;
             }
         }
-
         public AccountModel GetCurrentUser()
         {
             AccountModel account = HttpContext.Current.Session["MemberAccount"] as AccountModel;
@@ -296,10 +293,15 @@ namespace SaKei.Manager
             // 2. 新增資料
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                @"  INSERT INTO UserAccounts
-                        (UserAccount, UserPassword, UserEmail)
+                @" INSERT INTO UserAccounts
+                        (UserAccount, UserPassword, UserEmail ,UserID)
                     VALUES
-                        (@account, @pwd , @email)";
+                        (@account, @pwd , @email, @id1);" +
+                @"INSERT INTO[User]
+                        (UserID)
+                    VALUES
+                        (@id)";
+
 
 
             try
@@ -308,13 +310,14 @@ namespace SaKei.Manager
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        model.ID = Guid.NewGuid();
 
-                       
+                        model.ID = Guid.NewGuid();
                         command.Parameters.AddWithValue("@account", model.Account);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
                         command.Parameters.AddWithValue("@email", model.Mail);
 
+                        command.Parameters.AddWithValue("@id1", model.ID);
+                        command.Parameters.AddWithValue("@id", model.ID);
 
 
                         conn.Open();
@@ -331,6 +334,97 @@ namespace SaKei.Manager
                 return false;
             }
         }
+
+
+    
+        #endregion
+
+        #region "主頁面找暱稱"
+
+        //暫時用不到
+        public AccountModel GetNickName(string acc)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM [User]
+                    WHERE UserAccount = @account ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@account", acc);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            AccountModel model = new AccountModel()
+                            {
+                                Account = reader["UserAccount"] as string,
+                                NickName = reader["UserName"] as string, 
+                                ID = (Guid)reader["UserID"]
+                            };
+                            return model;
+
+                        }
+
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
+
+
+        public AccountModel GetNickName(Guid id)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM [User]
+                    WHERE UserID = @id ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            AccountModel model = new AccountModel()
+                            {
+                               
+                                NickName = reader["UserName"] as string,
+                                ID = (Guid)reader["UserID"]
+                            };
+                            return model;
+
+                        }
+
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
+
         #endregion
 
         #region "各式防呆和驗證"

@@ -14,8 +14,28 @@ namespace Sakei.AfterLogin
         AccountManager _mgr = new AccountManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            AccountModel account = this._mgr.GetCurrentUser();
+             string acc = Request.QueryString["Q1"];
+             Guid guid = Guid.Parse(acc);  
+            AccountModel model = _mgr.GetNickName(guid);
+
+
+            //將query解密
+            //string acc = System.Text.Encoding.Default.GetString(Convert.FromBase64String(Request.QueryString["Q1"].ToString().Replace("+", "% 2B")));
+            //AccountModel model = _mgr.GetNickName(acc);
+
+
+            string nickname = model.NickName;
+            this.lblName.Text =  nickname;
+
+        }
+
+        protected void btnInfoCh_Click(object sender, EventArgs e)
+        {
+            this.plcPWDChanger.Visible = true;
+        }
+
+        protected void btnYes_Click(object sender, EventArgs e)
+        {
 
         }
     }
