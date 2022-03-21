@@ -278,12 +278,6 @@ namespace SaKei.Manager
             //    member.PWD = null;
             //    HttpContext.Current.Session["MemberAccount"] = member;
             //}
-           
-
-            
-            
-          
-
             return result;
         }
 
