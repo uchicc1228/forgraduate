@@ -44,7 +44,12 @@ namespace Sakei.AfterLogin
             if(model.PWD == oldpwd  || newpwd2 == newpwd)
             {
                 model.PWD = newpwd2;
-                //_mgr.UpdatePwd(model.PWD);
+                _mgr.UpdatePwd(model);
+                Response.Write("<script>alert('已變更成功!!')</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('原密碼錯誤，請再確認一次!!')</script>");
             }
 
         }

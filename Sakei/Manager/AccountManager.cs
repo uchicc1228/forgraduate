@@ -201,9 +201,9 @@ namespace SaKei.Manager
             string mail1 = "http://localhost:8974/MailAuthentication.aspx";
             em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
             em.To.Add(new System.Net.Mail.MailAddress(mail));    //收件者
-            em.Subject = "123";     //信件主題 
+            em.Subject = "鮭魚日文 忘記密碼認證信";     //信件主題 
             em.SubjectEncoding = System.Text.Encoding.UTF8;
-            em.Body = mail1 + "?" + id;            //內容 
+            em.Body = "<h1>請點擊下列網址以便找回密碼</h1><br/>鮭魚日文忘記密碼網址:" + mail1 + "?" + id;            //內容 
             em.BodyEncoding = System.Text.Encoding.UTF8;
             em.IsBodyHtml = true;     //信件內容是否使用HTML格式
 
@@ -281,7 +281,7 @@ namespace SaKei.Manager
             }
         }
 
-
+       
 
 
 
