@@ -61,8 +61,9 @@ namespace SaKei.Manager
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
                                 Mail = reader["UserEmail"] as string,
-                                Salt = reader["UserPasswordSalt"] as byte[],
-                                ID = (Guid)reader["UserID"]
+                                Salt1 = reader["UserPasswordSalt"] as string,
+                                ID = (Guid)reader["UserID"],
+                               
                             };
                             return model;
 

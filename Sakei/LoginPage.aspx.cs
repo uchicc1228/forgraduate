@@ -27,21 +27,24 @@ namespace SaKei
 
             string account = this.txtAccount.Text.Trim();    
             string pwd = this.txtPassword.Text.Trim();
-            AccountModel acc = _mgr.GetAccount(account);
-            PWDHash.LoginHash(pwd, acc.ID, acc.Salt);
 
+            //雜湊 卡在這 找不到salt 原因可能是型別問題
+            //AccountModel acc = _mgr.GetAccount(account);
+            //PWDHash.LoginHash(pwd, acc.ID, acc.Salt);
 
+           
 
 
             if (this._mgr.TryLogin(account, pwd))
             {
-                AccountModel acc1 = _mgr.GetAccount(account);           
+
+                AccountModel acc1 = _mgr.GetAccount(account);
                 LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
                 Response.Redirect("AfterLogin\\Index.aspx");
 
-                //bool acc = this._mgr.TryLogin(account,pwd);
-                //AccountModel acc1  =_mgr.GetAccount(account);
-                //string url = "AfterLogin/Index.aspx?Q1=" + acc1.ID;
+
+
+               
 
                 //將query加密
                 //AccountModel q1 = _mgr.GetAccount(account);

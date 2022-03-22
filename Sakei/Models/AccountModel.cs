@@ -12,7 +12,8 @@ namespace SaKei.Models
         public string PWD { get; set; }
         public UserLevelEnum UserLevel { get; set; }
         public string Mail { get; set; }    
-       
+        
+        public string Salt1 { get; set; }
         public byte[] Salt { get; set; }
         public string NickName { get; set; }
         public string UserName { get; set; }    

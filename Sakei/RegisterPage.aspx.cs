@@ -129,30 +129,31 @@ namespace Sakei
             }
   
 
-            HttpCookie cookies = Request.Cookies["123456"]; //找到的cookies是Name來找 
+            HttpCookie cookies = Request.Cookies["123456"]; 
+            //找到的cookies是Name來找 
+             //雜湊
+         //if (this.txtcaptcha.Text.Trim() == cookies.Value)
+         //{
 
-            if (this.txtcaptcha.Text.Trim() == cookies.Value)
-            {
 
+            //    AccountModel pwd = PWDHash.Hash(model);
 
-                AccountModel pwd = PWDHash.Hash(model);
-                
-                _mgr.CreateAccount(pwd);
+            //    _mgr.CreateAccount(pwd);
 
-                Response.Write("<script>alert('註冊成功!!')</script>");
-
-            }
-            else
-            {
-                Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
-            }
-
-            //if (this.txtcaptcha.Text.Trim() == cookies.Value)
-            //{
-            //    _mgr.CreateAccount(model);
             //    Response.Write("<script>alert('註冊成功!!')</script>");
 
             //}
+            //else
+            //{
+            //    Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
+            //}
+
+            if (this.txtcaptcha.Text.Trim() == cookies.Value)
+            {
+                _mgr.CreateAccount(model);
+                Response.Write("<script>alert('註冊成功!!')</script>");
+
+            }
 
 
 

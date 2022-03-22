@@ -13,7 +13,7 @@ namespace Sakei.Helper
     public class PWDHash
     {
        
-
+        //登入用hash
         public static string LoginHash(string pwd, Guid ID, byte[] salt)
         {
            
