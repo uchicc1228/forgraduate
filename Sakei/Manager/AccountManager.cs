@@ -324,6 +324,7 @@ namespace SaKei.Manager
         #endregion
 
         #region "註冊"
+
         public bool CreateAccount(AccountModel model)
         {
             // 1. 判斷資料庫是否有相同的 Account
@@ -335,9 +336,9 @@ namespace SaKei.Manager
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                 @" INSERT INTO UserAccounts
-                        (UserAccount, UserPassword, UserEmail ,UserID)
+                        (UserAccount, UserPassword, UserEmail ,UserID, UserPasswordSalt)
                     VALUES
-                        (@account, @pwd , @email, @id1);" +
+                        (@account, @pwd , @email, @id1, @salt);" +
                 @"INSERT INTO[User]
                         (UserID)
                     VALUES
@@ -352,11 +353,11 @@ namespace SaKei.Manager
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
 
-                        model.ID = Guid.NewGuid();
+                        //model.ID = Guid.NewGuid();
                         command.Parameters.AddWithValue("@account", model.Account);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
                         command.Parameters.AddWithValue("@email", model.Mail);
-
+                        command.Parameters.AddWithValue("@salt", model.salt);
                         command.Parameters.AddWithValue("@id1", model.ID);
                         command.Parameters.AddWithValue("@id", model.ID);
 
@@ -365,19 +366,70 @@ namespace SaKei.Manager
                         command.ExecuteNonQuery();
                     }
                 }
-            
-            return true;
+
+                return true;
             }
             catch (Exception ex)
             {
-                
+
                 Logger.WriteLog("CreateAccount", ex);
                 return false;
             }
         }
+        //public bool CreateAccount(AccountModel model)
+        //{
+        //    // 1. 判斷資料庫是否有相同的 Account
+        //    if (this.GetAccount(model.Account) != null)
+
+        //        throw new Exception("已存在相同的帳號");
+
+        //    // 2. 新增資料
+        //    string connStr = ConfigHelper.GetConnectionString();
+        //    string commandText =
+        //        @" INSERT INTO UserAccounts
+        //                (UserAccount, UserPassword, UserEmail ,UserID)
+        //            VALUES
+        //                (@account, @pwd , @email, @id1);" +
+        //        @"INSERT INTO[User]
+        //                (UserID)
+        //            VALUES
+        //                (@id)";
 
 
-    
+
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connStr))
+        //        {
+        //            using (SqlCommand command = new SqlCommand(commandText, conn))
+        //            {
+
+        //                model.ID = Guid.NewGuid();
+        //                command.Parameters.AddWithValue("@account", model.Account);
+        //                command.Parameters.AddWithValue("@pwd", model.PWD);
+        //                command.Parameters.AddWithValue("@email", model.Mail);
+
+        //                command.Parameters.AddWithValue("@id1", model.ID);
+        //                command.Parameters.AddWithValue("@id", model.ID);
+
+
+        //                conn.Open();
+        //                command.ExecuteNonQuery();
+        //            }
+        //        }
+
+        //    return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        Logger.WriteLog("CreateAccount", ex);
+        //        return false;
+        //    }
+        //}
+
+
+
         #endregion
 
         #region "主頁面找暱稱"

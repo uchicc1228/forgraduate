@@ -13,6 +13,7 @@ namespace SaKei.Models
         public UserLevelEnum UserLevel { get; set; }
         public string Mail { get; set; }    
        
+        public string salt { get; set; }
         public string NickName { get; set; }
         public string UserName { get; set; }    
    

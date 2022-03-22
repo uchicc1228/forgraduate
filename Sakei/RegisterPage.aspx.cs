@@ -1,4 +1,5 @@
-﻿using SaKei.Manager;
+﻿using Sakei.Helper;
+using SaKei.Manager;
 using SaKei.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Sakei
     {
         AccountModel model = new AccountModel();
         AccountManager _mgr = new AccountManager();
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
@@ -131,10 +132,28 @@ namespace Sakei
 
             if (this.txtcaptcha.Text.Trim() == cookies.Value)
             {
-                _mgr.CreateAccount(model);
+
+
+                AccountModel pwd = PWDHash.Hash(model);
+                
+                _mgr.CreateAccount(pwd);
+
                 Response.Write("<script>alert('註冊成功!!')</script>");
 
             }
+            else
+            {
+                Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
+            }
+
+            //if (this.txtcaptcha.Text.Trim() == cookies.Value)
+            //{
+            //    _mgr.CreateAccount(model);
+            //    Response.Write("<script>alert('註冊成功!!')</script>");
+
+            //}
+
+
 
         }
 
