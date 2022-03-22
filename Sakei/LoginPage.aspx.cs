@@ -33,6 +33,7 @@ namespace SaKei
                 bool acc = this._mgr.TryLogin(account,pwd);
                 AccountModel acc1  =_mgr.GetAccount(account);
                 string url = "AfterLogin/Index.aspx?Q1=" + acc1.ID;
+
                 if (acc)
                 {
                     Response.Redirect(url);

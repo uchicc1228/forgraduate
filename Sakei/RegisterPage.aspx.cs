@@ -18,7 +18,7 @@ namespace Sakei
         {
             if(!Page.IsPostBack)
             {
-                this.ltlmsg.Text = "<b>密碼設定原則，須包含以下三點<br/>" + "1.含英文大或小寫字元<br/>" + "2.含數字<br/>" + "3.長度至少八碼，最長20碼 <br/>";
+                this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大寫及小寫字元<br/>" + "2.含至少一位數字<br/>" + "3.長度至少八碼，最長20碼 <br/>"  + "4.含一個特殊字元(#?!@$%^&*-) <br/>";
                 this.plc1.Visible = false;
 
                 this.plc2.Visible = true;
@@ -36,9 +36,14 @@ namespace Sakei
             }
 
             model.PWD = this.txtPWD.Text.Trim();
-            if (model.PWD.Length < 8 || model.PWD.Length > 20)
+            //if (model.PWD.Length < 8 || model.PWD.Length > 20)
+            //{
+            //    Response.Write("<script>alert('請注意密碼長度，須為８～２０字元')</script>");
+            //    return;
+            //}
+            if (!_mgr.isValidPWD(model.PWD))
             {
-                Response.Write("<script>alert('請注意密碼長度，須為８～２０字元')</script>");
+                Response.Write("<script>alert('請注意密碼格式')</script>");
                 return;
             }
 

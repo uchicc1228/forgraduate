@@ -482,6 +482,17 @@ namespace SaKei.Manager
             else
                 return (false);
         }
+
+        //驗證密碼格式
+        public bool isValidPWD(string inputPWD)
+        {
+            string strRegex = "(?=^.{8,20}$)((?=.*\\d)|(?=.*\\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$";
+            Regex re = new Regex(strRegex);
+            if (re.IsMatch(inputPWD))
+                return (true);
+            else
+                return (false);
+        }
         #endregion
 
 
