@@ -32,21 +32,21 @@ namespace SaKei
             //AccountModel acc = _mgr.GetAccount(account);
             //PWDHash.LoginHash(pwd, acc.ID, acc.Salt);
 
-           
-
 
             if (this._mgr.TryLogin(account, pwd))
             {
 
+
+                //票券cookies維持登入狀態 
+                //todo: 一個登出紐 寫在usercontrol
                 AccountModel acc1 = _mgr.GetAccount(account);
                 LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
                 Response.Redirect("AfterLogin\\Index.aspx");
+              
 
 
 
-               
-
-                //將query加密
+                //將query加密 可能用不著
                 //AccountModel q1 = _mgr.GetAccount(account);
                 //Response.Redirect("AfterLogin/Index.aspx?Q1=" + Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(q1.Account)).Replace("+", "% 2B"));
             }

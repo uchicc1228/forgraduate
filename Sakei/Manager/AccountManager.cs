@@ -327,7 +327,7 @@ namespace SaKei.Manager
 
         #region "註冊"
 
-        public bool CreateAccount(AccountModel model)
+        public bool CreateAccounthash(AccountModel model)
         {
             // 1. 判斷資料庫是否有相同的 Account
             if (this.GetAccount(model.Account) != null)
@@ -378,57 +378,57 @@ namespace SaKei.Manager
                 return false;
             }
         }
-        //public bool CreateAccount(AccountModel model)
-        //{
-        //    // 1. 判斷資料庫是否有相同的 Account
-        //    if (this.GetAccount(model.Account) != null)
+        public bool CreateAccount(AccountModel model)
+        {
+            // 1. 判斷資料庫是否有相同的 Account
+            if (this.GetAccount(model.Account) != null)
 
-        //        throw new Exception("已存在相同的帳號");
+                throw new Exception("已存在相同的帳號");
 
-        //    // 2. 新增資料
-        //    string connStr = ConfigHelper.GetConnectionString();
-        //    string commandText =
-        //        @" INSERT INTO UserAccounts
-        //                (UserAccount, UserPassword, UserEmail ,UserID)
-        //            VALUES
-        //                (@account, @pwd , @email, @id1);" +
-        //        @"INSERT INTO[User]
-        //                (UserID)
-        //            VALUES
-        //                (@id)";
-
-
-
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connStr))
-        //        {
-        //            using (SqlCommand command = new SqlCommand(commandText, conn))
-        //            {
-
-        //                model.ID = Guid.NewGuid();
-        //                command.Parameters.AddWithValue("@account", model.Account);
-        //                command.Parameters.AddWithValue("@pwd", model.PWD);
-        //                command.Parameters.AddWithValue("@email", model.Mail);
-
-        //                command.Parameters.AddWithValue("@id1", model.ID);
-        //                command.Parameters.AddWithValue("@id", model.ID);
+            // 2. 新增資料
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                @" INSERT INTO UserAccounts
+                        (UserAccount, UserPassword, UserEmail ,UserID)
+                    VALUES
+                        (@account, @pwd , @email, @id1);" +
+                @"INSERT INTO[User]
+                        (UserID)
+                    VALUES
+                        (@id)";
 
 
-        //                conn.Open();
-        //                command.ExecuteNonQuery();
-        //            }
-        //        }
 
-        //    return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
 
-        //        Logger.WriteLog("CreateAccount", ex);
-        //        return false;
-        //    }
-        //}
+                        model.ID = Guid.NewGuid();
+                        command.Parameters.AddWithValue("@account", model.Account);
+                        command.Parameters.AddWithValue("@pwd", model.PWD);
+                        command.Parameters.AddWithValue("@email", model.Mail);
+
+                        command.Parameters.AddWithValue("@id1", model.ID);
+                        command.Parameters.AddWithValue("@id", model.ID);
+
+
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                Logger.WriteLog("CreateAccount", ex);
+                return false;
+            }
+        }
 
 
 

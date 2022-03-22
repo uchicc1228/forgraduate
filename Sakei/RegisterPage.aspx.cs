@@ -127,33 +127,35 @@ namespace Sakei
                 Response.Write("<script>alert('請注意信箱格式')</script>");
                 return;
             }
-  
 
-            HttpCookie cookies = Request.Cookies["123456"]; 
             //找到的cookies是Name來找 
-             //雜湊
-         //if (this.txtcaptcha.Text.Trim() == cookies.Value)
-         //{
+            HttpCookie cookies = Request.Cookies["123456"];
 
-
-            //    AccountModel pwd = PWDHash.Hash(model);
-
-            //    _mgr.CreateAccount(pwd);
-
+            //這是原本ㄉ 如果要改用這ㄍ記得把SALT改為可Null==
+            //if (this.txtcaptcha.Text.Trim() == cookies.Value)
+            //{
+            //    _mgr.CreateAccount(model);
             //    Response.Write("<script>alert('註冊成功!!')</script>");
 
             //}
-            //else
-            //{
-            //    Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
-            //}
 
+            
             if (this.txtcaptcha.Text.Trim() == cookies.Value)
             {
-                _mgr.CreateAccount(model);
+
+
+                AccountModel model1 = PWDHash.Hash(model);
+
+                _mgr.CreateAccounthash(model1);
+
                 Response.Write("<script>alert('註冊成功!!')</script>");
 
             }
+            else
+            {
+                Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
+            }
+
 
 
 
