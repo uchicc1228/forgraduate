@@ -24,7 +24,6 @@ namespace Sakei
                 this.ltl.Text = "您好" + userAccount;
 
             }
-
             else
             {
 

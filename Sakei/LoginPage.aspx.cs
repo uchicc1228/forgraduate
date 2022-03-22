@@ -29,20 +29,17 @@ namespace SaKei
 
             if (this._mgr.TryLogin(account, pwd))
             {
-                
-                bool acc = this._mgr.TryLogin(account,pwd);
-                AccountModel acc1  =_mgr.GetAccount(account);
-                string url = "AfterLogin/Index.aspx?Q1=" + acc1.ID;
+                AccountModel acc1 = _mgr.GetAccount(account);
+                LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
+                Response.Redirect("AfterLogin\\Index.aspx");
 
-                if (acc)
-                {
-                    Response.Redirect(url);
-                }
+                //bool acc = this._mgr.TryLogin(account,pwd);
+                //AccountModel acc1  =_mgr.GetAccount(account);
+                //string url = "AfterLogin/Index.aspx?Q1=" + acc1.ID;
 
                 //將query加密
                 //AccountModel q1 = _mgr.GetAccount(account);
                 //Response.Redirect("AfterLogin/Index.aspx?Q1=" + Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(q1.Account)).Replace("+", "% 2B"));
-
             }
             else
             {
@@ -50,12 +47,17 @@ namespace SaKei
                 Response.Write("<script>alert('登入失敗，請檢查帳號密碼')</script>");
             }
         }
-
-        //登出紐
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            LoginHelper.Logout();
+            Response.Redirect(Request.RawUrl);
+        }
 
         protected void forgotpwd_Click(object sender, EventArgs e)
         {
             Response.Redirect("ForgotPage.aspx");
         }
+
+       
     }
 }

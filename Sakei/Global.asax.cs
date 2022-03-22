@@ -22,10 +22,10 @@ namespace Sakei
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            //var request = HttpContext.Current.Request;
-            //var response = HttpContext.Current.Response;
+            var request = HttpContext.Current.Request;
+            var response = HttpContext.Current.Response;
 
-            //if (request.RawUrl.Contains("/SystemAdmin"))
+            //if (request.RawUrl.Contains("/AfterLogin"))
             //{
             //    if (!request.IsAuthenticated)
             //    {

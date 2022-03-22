@@ -95,6 +95,7 @@
 
 
         <asp:Button ID="btnLogin" CssClass="wweebtn" runat="server" Text="登入" OnClick="btnLogin_Click " />
+        <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />
         <asp:Button ID="forgotpwd" CssClass="wweebtn" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br />
         <asp:Literal ID="ltlMessage" runat="server"></asp:Literal>
 
