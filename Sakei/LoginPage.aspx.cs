@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 namespace SaKei
 {
     //寫Login 配合今天上課的glbol 在golbol上面做驗證登入
@@ -24,12 +25,17 @@ namespace SaKei
         protected void btnLogin_Click(object sender, EventArgs e)
         {
 
-            string account = this.txtAccount.Text.Trim();
+            string account = this.txtAccount.Text.Trim();    
             string pwd = this.txtPassword.Text.Trim();
+            AccountModel acc = _mgr.GetAccount(account);
+            PWDHash.LoginHash(pwd, acc.ID, acc.Salt);
+
+
+
 
             if (this._mgr.TryLogin(account, pwd))
             {
-                AccountModel acc1 = _mgr.GetAccount(account);
+                AccountModel acc1 = _mgr.GetAccount(account);           
                 LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
                 Response.Redirect("AfterLogin\\Index.aspx");
 

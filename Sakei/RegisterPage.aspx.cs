@@ -19,7 +19,7 @@ namespace Sakei
         {
             if(!Page.IsPostBack)
             {
-                this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大寫及小寫字元<br/>" + "2.含至少一位數字<br/>" + "3.長度至少八碼，最長20碼 <br/>"  + "4.含一個特殊字元(#?!@$%^&*-) <br/>";
+                this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大寫及小寫字元<br/>" + "2.含至少一位數字<br/>" + "3.長度至少八碼，最長20碼 <br/>"  + "4.可含特殊字元(#?!@$%^&*-) <br/>";
                 this.plc1.Visible = false;
 
                 this.plc2.Visible = true;
@@ -104,6 +104,13 @@ namespace Sakei
                 return;
             }
 
+            if (_mgr.GetAccount(model.Account) != null)
+            {
+                Response.Write("<script>alert('存在相同帳號!')</script>");
+                return;
+            }
+           
+
             //密碼
             model.PWD = this.txtPWD.Text.Trim();
             if (model.PWD.Length < 8 || model.PWD.Length > 20)
@@ -120,13 +127,7 @@ namespace Sakei
                 Response.Write("<script>alert('請注意信箱格式')</script>");
                 return;
             }
-
-            //判斷帳號是否存在
-            if (_mgr.GetAccount(model.Account) != null)
-            {
-                Response.Write("<script>alert('存在相同帳號!')</script>");
-                return;
-            }
+  
 
             HttpCookie cookies = Request.Cookies["123456"]; //找到的cookies是Name來找 
 

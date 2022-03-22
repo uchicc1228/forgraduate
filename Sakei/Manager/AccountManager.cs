@@ -61,6 +61,7 @@ namespace SaKei.Manager
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
                                 Mail = reader["UserEmail"] as string,
+                                Salt = reader["UserPasswordSalt"] as byte[],
                                 ID = (Guid)reader["UserID"]
                             };
                             return model;
@@ -357,7 +358,7 @@ namespace SaKei.Manager
                         command.Parameters.AddWithValue("@account", model.Account);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
                         command.Parameters.AddWithValue("@email", model.Mail);
-                        command.Parameters.AddWithValue("@salt", model.salt);
+                        command.Parameters.AddWithValue("@salt", model.Salt);
                         command.Parameters.AddWithValue("@id1", model.ID);
                         command.Parameters.AddWithValue("@id", model.ID);
 

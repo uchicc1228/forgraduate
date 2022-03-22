@@ -12,9 +12,33 @@ namespace Sakei.Helper
 
     public class PWDHash
     {
-        AccountModel model =  new AccountModel();
-      
-        public static AccountModel  Hash(AccountModel model)
+       
+
+        public static string LoginHash(string pwd, Guid ID, byte[] salt)
+        {
+           
+            string orgText = pwd;
+            string key = Convert.ToString(ID);
+            
+
+            byte[] securityBytes = GetHashPassword(orgText, key, salt);
+            pwd =
+                string.Join(
+                    "", securityBytes.Select(obj => obj.ToString("x"))
+                    );
+            
+            return pwd;
+        }
+
+
+
+
+
+
+
+
+        #region "註冊的雜湊"
+        public static AccountModel Hash(AccountModel model)
         {
             model.ID = Guid.NewGuid();
             string orgText = model.PWD;
@@ -26,14 +50,14 @@ namespace Sakei.Helper
                 string.Join(
                     "", securityBytes.Select(obj => obj.ToString("x"))
                     );
-            model.salt = Convert.ToString(securityBytes);
+            model.Salt = securityBytes;
             return model;
         }
 
 
         public static byte[] BuildNewSalt()
         {
-            byte[] randBytes = new byte[8];
+            byte[] randBytes = new byte[32];
             RNGCryptoServiceProvider rand = new RNGCryptoServiceProvider();
             rand.GetBytes(randBytes);
             return randBytes;
@@ -54,6 +78,8 @@ namespace Sakei.Helper
             byte[] hashPwd = hmacsha512.ComputeHash(totalBytes);
             return hashPwd;
         }
+
+        #endregion
     }
 
 }

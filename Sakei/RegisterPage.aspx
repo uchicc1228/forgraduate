@@ -75,13 +75,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <label  class="label_title">註冊會員</label><br />
         <label class="label_input">帳號</label>
-    <asp:TextBox runat="server"    CssClass="text_field" ID="txtAcc" required placeholder="【帳號】輸入８～２０字元" ></asp:TextBox>
+    <asp:TextBox runat="server"    CssClass="text_field" ID="txtAcc"  placeholder="【帳號】輸入８～２０字元" ></asp:TextBox>
 
       <label class="label_input">密碼</label>
-    <asp:TextBox runat="server" CssClass="text_field" ID="txtPWD" required placeholder="【密碼】輸入８～２０字元" ></asp:TextBox>
+    <asp:TextBox runat="server" CssClass="text_field" ID="txtPWD"  placeholder="【密碼】輸入８～２０字元" ></asp:TextBox>
 
      <label class="label_input">信箱 </label>
-    <asp:TextBox runat="server" CssClass="text_field" ID="txtMail" required placeholder="【信箱】" ></asp:TextBox><br />
+    <asp:TextBox runat="server" CssClass="text_field" ID="txtMail"  placeholder="【信箱】" ></asp:TextBox><br />
 
 
 
