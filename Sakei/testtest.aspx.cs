@@ -1,4 +1,6 @@
 ﻿using Sakei.Helper;
+using SaKei.Manager;
+using SaKei.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +13,15 @@ namespace Sakei
 {
     public partial class testtest : System.Web.UI.Page
     {
+        AccountManager _mgr = new AccountManager();
+        AccountModel model = new AccountModel();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(HttpContext.Current.User.Identity.IsAuthenticated )
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 string userAccount = HttpContext.Current.User.Identity.Name;
                 var identity = HttpContext.Current.User.Identity as FormsIdentity;
-                this.ltl.Text ="您好"  + userAccount; 
+                this.ltl.Text = "您好" + userAccount;
 
             }
 
@@ -30,9 +34,19 @@ namespace Sakei
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            
-            LoginHelper.Login("Admin", "User001");
-            Response.Redirect("BackForm\\Index.aspx");
+            string acc = this.txtacc.Text.Trim();
+            string pwd = this.txtpwd.Text.Trim();
+            if (_mgr.TryLogin(acc, pwd))
+            {
+                AccountModel acc1 = _mgr.GetAccount(acc);
+                LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
+                Response.Redirect("AfterLogin\\Index.aspx");
+            }
+            else
+            {
+                this.ltl.Text = "帳號密碼錯誤";
+            }
+
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

@@ -3,6 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <asp:TextBox runat="server" ID="txtacc" >帳號</asp:TextBox>
+    <asp:TextBox runat="server" ID="txtpwd" >密碼</asp:TextBox>
     <asp:Literal runat="server" id="ltl"></asp:Literal>
     <asp:Button runat="server" ID="btnLogin" OnClick="btnLogin_Click"  Text="登入"/>
     <asp:Button runat="server" ID="btnLogout" OnClick="btnLogout_Click"  Text="登出"/>

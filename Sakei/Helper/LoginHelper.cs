@@ -13,7 +13,7 @@ namespace Sakei.Helper
 
         public static bool IsLogined()
         {
-            var loginCookie = HttpContext.Current.Request.Cookies["??"];
+            var loginCookie = HttpContext.Current.Request.Cookies["System"];
             if (loginCookie != null)
                 return true;
             else
@@ -25,7 +25,7 @@ namespace Sakei.Helper
 
         public static string GetAccount()
         {
-            var loginCookie = HttpContext.Current.Request.Cookies["??"];
+            var loginCookie = HttpContext.Current.Request.Cookies["System"];
             if (loginCookie == null)
                 return null;
 
@@ -35,7 +35,7 @@ namespace Sakei.Helper
 
         public static int? GetUserLevel()
         {
-            var loginCookie = HttpContext.Current.Request.Cookies["??"];
+            var loginCookie = HttpContext.Current.Request.Cookies["System"];
             if (loginCookie == null)
                 return null;
             var userLevel = loginCookie[Utility.UserStatusUtility.AdminCookie];
@@ -85,6 +85,7 @@ namespace Sakei.Helper
         public static void Logout()
         {
            FormsAuthentication.SignOut();
+            
         }
     }
 }
