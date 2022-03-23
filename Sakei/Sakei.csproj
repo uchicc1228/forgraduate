@@ -87,7 +87,7 @@
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="TestSystem\TestChallengeMode.aspx" />
-    <Content Include="TestSystem\TestReviewPage.aspx" />
+    <Content Include="TestSystem\TestReviewList.aspx" />
     <Content Include="testtest.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -178,12 +178,12 @@
     <Compile Include="TestSystem\TestChallengeMode.aspx.designer.cs">
       <DependentUpon>TestChallengeMode.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TestSystem\TestReviewPage.aspx.cs">
-      <DependentUpon>TestReviewPage.aspx</DependentUpon>
+    <Compile Include="TestSystem\TestReviewList.aspx.cs">
+      <DependentUpon>TestReviewList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TestSystem\TestReviewPage.aspx.designer.cs">
-      <DependentUpon>TestReviewPage.aspx</DependentUpon>
+    <Compile Include="TestSystem\TestReviewList.aspx.designer.cs">
+      <DependentUpon>TestReviewList.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestSystem\TestSystemMaster.Master.cs">
       <DependentUpon>TestSystemMaster.Master</DependentUpon>

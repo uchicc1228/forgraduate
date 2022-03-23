@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Sakei.TestSystem
 {
-    public partial class TestReviewPage : System.Web.UI.Page
+    public partial class TestReviewList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
