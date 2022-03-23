@@ -130,15 +130,6 @@ namespace Sakei
 
             //找到的cookies是Name來找 
             HttpCookie cookies = Request.Cookies["123456"];
-
-            //這是原本ㄉ 如果要改用這ㄍ記得把SALT改為可Null==
-            //if (this.txtcaptcha.Text.Trim() == cookies.Value)
-            //{
-            //    _mgr.CreateAccount(model);
-            //    Response.Write("<script>alert('註冊成功!!')</script>");
-
-            //}
-
             
             if (this.txtcaptcha.Text.Trim() == cookies.Value)
             {

@@ -15,18 +15,15 @@ namespace Sakei.AfterLogin
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //try
-            //{
-            //    //string acc = Request.QueryString["Q1"];
-            //    //Guid guid = Guid.Parse(acc);
-            //    //AccountModel model = _mgr.GetNickName(guid);
-            //    //string nickname = model.NickName;
-            //    //this.lblName.Text = nickname;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Response.Redirect("~/NoPage.aspx");
-            //}
+           
+            //string acc = Request.QueryString["Q1"];
+            //Guid guid = Guid.Parse(acc);
+
+
+            //AccountModel model = _mgr.GetNickName(guid);
+            //string nickname = model.NickName;
+            //this.lblName.Text = nickname;
+           
 
 
             //將query解密

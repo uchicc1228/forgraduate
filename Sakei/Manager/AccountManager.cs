@@ -185,18 +185,11 @@ namespace SaKei.Manager
                 isEmailRight = true;
 
             // 檢查帳號密碼是否正確
-            bool result = (isAccountRight && isEmailRight);
-
-            //// 信箱和帳號正確：把值寫入 Session
-            //if (result)
-            //{
-            //    HttpContext.Current.Session["MemberEmail"] = member;
-            //    HttpContext.Current.Session["MemberAccount"] = member;
-            //}
+            bool result = (isAccountRight && isEmailRight); 
 
             return result;
         }
-        //寄出認證信
+        //寄出認證信 忘記密碼
         public AccountModel SendEmail(Guid id, string mail)
         {
 

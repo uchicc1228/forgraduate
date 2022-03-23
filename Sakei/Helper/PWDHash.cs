@@ -19,10 +19,7 @@ namespace Sakei.Helper
            
             string orgText = pwd;
             string key = Convert.ToString(ID);
-            byte[] salt1 = Convert.FromBase64String(salt);
-           
-
-            byte[] securityBytes = GetHashPassword(orgText, key, salt1);
+            byte[] salt1 = Convert.FromBase64String(salt);              
             pwd =
                 string.Join(
                     "", salt1.Select(obj => obj.ToString("x"))
