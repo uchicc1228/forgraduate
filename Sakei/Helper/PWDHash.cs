@@ -14,14 +14,15 @@ namespace Sakei.Helper
     {
        
         //登入用hash
-        public static string LoginHash(string pwd, Guid ID, byte[] salt)
+        public static string LoginHash(string pwd, Guid ID, string salt)
         {
            
             string orgText = pwd;
             string key = Convert.ToString(ID);
-            
+            byte[] salt1 = Convert.FromBase64String(salt);
+           
 
-            byte[] securityBytes = GetHashPassword(orgText, key, salt);
+            byte[] securityBytes = GetHashPassword(orgText, key, salt1);
             pwd =
                 string.Join(
                     "", securityBytes.Select(obj => obj.ToString("x"))
@@ -29,11 +30,6 @@ namespace Sakei.Helper
             
             return pwd;
         }
-
-
-
-
-
 
 
 
@@ -53,7 +49,7 @@ namespace Sakei.Helper
             model.Salt = securityBytes;
             return model;
         }
-
+        #endregion
 
         public static byte[] BuildNewSalt()
         {
@@ -74,12 +70,15 @@ namespace Sakei.Helper
             byte[] pwdBytes = Encoding.UTF8.GetBytes(pwd);
             byte[] totalBytes = salt.Union(pwdBytes).ToArray();
 
+
+
+
             HMACSHA512 hmacsha512 = new HMACSHA512(keyByte);
             byte[] hashPwd = hmacsha512.ComputeHash(totalBytes);
             return hashPwd;
         }
 
-        #endregion
+       
     }
 
 }

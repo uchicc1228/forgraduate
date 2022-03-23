@@ -42,7 +42,7 @@ namespace SaKei.Manager
             string commandText =
                  @" SELECT *
                     FROM UserAccounts
-                    WHERE UserAccount = @account ";
+                    WHERE UserAccount = @account";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -61,7 +61,7 @@ namespace SaKei.Manager
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
                                 Mail = reader["UserEmail"] as string,
-                                Salt1 = reader["UserPasswordSalt"] as string,
+                                Salt_string = reader["UserPasswordSalt"] as string ,
                                 ID = (Guid)reader["UserID"],
                                
                             };
@@ -329,6 +329,8 @@ namespace SaKei.Manager
 
         public bool CreateAccounthash(AccountModel model)
         {
+            model.Salt_string = Convert.ToBase64String(model.Salt);
+
             // 1. 判斷資料庫是否有相同的 Account
             if (this.GetAccount(model.Account) != null)
 
@@ -359,10 +361,10 @@ namespace SaKei.Manager
                         command.Parameters.AddWithValue("@account", model.Account);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
                         command.Parameters.AddWithValue("@email", model.Mail);
-                        command.Parameters.AddWithValue("@salt", model.Salt);
+                        command.Parameters.AddWithValue("@salt", model.Salt_string);
                         command.Parameters.AddWithValue("@id1", model.ID);
                         command.Parameters.AddWithValue("@id", model.ID);
-
+                        
 
                         conn.Open();
                         command.ExecuteNonQuery();

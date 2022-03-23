@@ -14,7 +14,7 @@ namespace Sakei.AfterLogin
         AccountManager _mgr = new AccountManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             //try
             //{
             //    //string acc = Request.QueryString["Q1"];
