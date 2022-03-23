@@ -25,9 +25,9 @@ namespace Sakei.Helper
             byte[] securityBytes = GetHashPassword(orgText, key, salt1);
             pwd =
                 string.Join(
-                    "", securityBytes.Select(obj => obj.ToString("x"))
+                    "", salt1.Select(obj => obj.ToString("x"))
                     );
-            
+
             return pwd;
         }
 

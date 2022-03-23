@@ -6,7 +6,7 @@
         .wweebtn {
             font-size: 14px;
             font-family: 宋體;
-            width: 120px;
+            width: 80px;
             height: 28px;
             line-height: 28px;
             text-align: center;
@@ -15,7 +15,7 @@
             border-radius: 6px;
             border: 0;
             position: relative;
-            left: 100px;
+            left: 180px;
             margin: 5px;
         }
 
@@ -82,11 +82,11 @@
 
 
 
-   <div>
+   
     <asp:PlaceHolder runat="server" ID="plcLogin">
 
         <label  class="label_title">會員登入</label><br />
-        <label class="label_input">使用者名稱</label>
+        <label class="label_input">帳號</label>
         <asp:TextBox CssClass="text_field" ID="txtAccount" runat="server" placeholder="【帳號】："> </asp:TextBox><br />
         <label class="label_input">密碼</label>
         <asp:TextBox ID="txtPassword" CssClass="text_field" runat="server" TextMode="Password" placeholder="【密碼】："> </asp:TextBox><br />
@@ -95,13 +95,13 @@
 
 
         <asp:Button ID="btnLogin" CssClass="wweebtn" runat="server" Text="登入" OnClick="btnLogin_Click " />
-        <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />
+       <%-- <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />--%>
         <asp:Button ID="forgotpwd" CssClass="wweebtn" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br />
         <asp:Literal ID="ltlMessage" runat="server"></asp:Literal>
 
 
     </asp:PlaceHolder>
-       </div>
+       
 
 
 

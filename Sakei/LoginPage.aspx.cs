@@ -56,11 +56,11 @@ namespace SaKei
                 Response.Write("<script>alert('登入失敗，請檢查帳號密碼')</script>");
             }
         }
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-            LoginHelper.Logout();
-            Response.Redirect(Request.RawUrl);
-        }
+        //protected void btnLogout_Click(object sender, EventArgs e)
+        //{
+        //    LoginHelper.Logout();
+        //    Response.Redirect(Request.RawUrl);
+        //}
 
         protected void forgotpwd_Click(object sender, EventArgs e)
         {

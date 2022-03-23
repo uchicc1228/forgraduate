@@ -46,7 +46,7 @@
         }
 
         .label_title {
-            position: inherit ;
+            position: inherit;
             left: 120px;
             font-size: 20px;
             font-family: 宋體;

@@ -308,16 +308,7 @@ namespace SaKei.Manager
                 isPasswordRight = true;
 
             // 檢查帳號密碼是否正確
-            bool result = (isAccountRight && isPasswordRight);
-
-            ///帳密正確：把值寫入 cookies
-            //
-            //if (result)
-            //{
-
-            //    member.PWD = null;
-            //    HttpContext.Current.Session["MemberAccount"] = member;
-            //}
+            bool result = (isAccountRight && isPasswordRight);  
             return result;
         }
 

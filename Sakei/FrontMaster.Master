@@ -24,10 +24,15 @@
 
         .menu{
              text-align: center;
+             padding-top:10px;
+             border:0px;
         }
 
         .left{
             height : 500px;
+            border-left:0px;
+            border-bottom:0px;
+            border-top:0px;
            
         }
 
@@ -65,9 +70,10 @@
                    </asp:ContentPlaceHolder>
                 </div>
                 
-                <div class="col-4 sp">
-                    <div class="div1">
-                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+                <div class="col-4 sp" style="border:0px;">
+                    <div class="div1" style="border:0px;">
+
+                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"  >
 
                     </asp:ContentPlaceHolder>
                     </div>
