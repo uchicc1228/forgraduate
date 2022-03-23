@@ -11,8 +11,6 @@ namespace Sakei.Models.TestSystemModels
         public Guid TestID { get; set; }
         public Guid UserID { get; set; }
         public string MessageContent { get; set; }
-        public int MessageLike { get; set; }
-        public int MessageUnlike { get; set; }
         public DateTime CreateDate { get; set; }
 
     }
