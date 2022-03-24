@@ -36,17 +36,32 @@ namespace Sakei
                 return;
             }
 
-            model.PWD = this.txtPWD.Text.Trim();
-            //if (model.PWD.Length < 8 || model.PWD.Length > 20)
-            //{
-            //    Response.Write("<script>alert('請注意密碼長度，須為８～２０字元')</script>");
-            //    return;
-            //}
+
+            if (_mgr.GetAccount(model.Account) != null)
+            {
+                Response.Write("<script>alert('存在相同帳號!')</script>");
+                return;
+            }
+
+
+
+
+
+
+
+            model.PWD = this.txtPWD.Text.Trim();      
             if (!_mgr.isValidPWD(model.PWD))
             {
                 Response.Write("<script>alert('請注意密碼格式')</script>");
                 return;
             }
+
+
+
+
+
+
+
 
 
             model.Mail = this.txtMail.Text.Trim();
@@ -97,37 +112,15 @@ namespace Sakei
 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
+            //帳號
             model.Account = this.txtAcc.Text.Trim();
-            if (model.Account.Length < 8 || model.Account.Length > 20)
-            {
-                Response.Write("<script>alert('請注意帳號長度，須為８～２０字元')</script>");
-                return;
-            }
-
-            if (_mgr.GetAccount(model.Account) != null)
-            {
-                Response.Write("<script>alert('存在相同帳號!')</script>");
-                return;
-            }
            
-
             //密碼
             model.PWD = this.txtPWD.Text.Trim();
-            if (model.PWD.Length < 8 || model.PWD.Length > 20)
-            {
-                Response.Write("<script>alert('請注意密碼長度，須為８～２０字元')</script>");
-                return;
-            }
-
-
+           
             //信箱
             model.Mail = this.txtMail.Text.Trim();
-            if (!_mgr.isValidEmail(model.Mail))
-            {
-                Response.Write("<script>alert('請注意信箱格式')</script>");
-                return;
-            }
-
+           
             //找到的cookies是Name來找 
             HttpCookie cookies = Request.Cookies["123456"];
             
@@ -140,7 +133,7 @@ namespace Sakei
                 _mgr.CreateAccounthash(model1);
 
                 Response.Write("<script>alert('註冊成功!!')</script>");
-                Response.Redirect("~//AfterLogin//Index.aspx");
+                //Response.Redirect("~//AfterLogin//Index.aspx");
 
             }
             else
