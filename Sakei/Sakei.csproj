@@ -70,9 +70,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminLoginPage.aspx" />
+    <Content Include="AdminMainPage.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
+    <Content Include="EditAdmin.aspx" />
+    <Content Include="EditItemm.aspx" />
+    <Content Include="EditTest.aspx" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\back.jpg" />
@@ -92,6 +97,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminLoginPage.aspx.cs">
+      <DependentUpon>AdminLoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminLoginPage.aspx.designer.cs">
+      <DependentUpon>AdminLoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMainPage.aspx.cs">
+      <DependentUpon>AdminMainPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMainPage.aspx.designer.cs">
+      <DependentUpon>AdminMainPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AfterLogin\AfterLogin.Master.cs">
       <DependentUpon>AfterLogin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -108,6 +127,27 @@
     </Compile>
     <Compile Include="API\TestDataHandler.ashx.cs">
       <DependentUpon>TestDataHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="EditAdmin.aspx.cs">
+      <DependentUpon>EditAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditAdmin.aspx.designer.cs">
+      <DependentUpon>EditAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditItemm.aspx.cs">
+      <DependentUpon>EditItemm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditItemm.aspx.designer.cs">
+      <DependentUpon>EditItemm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditTest.aspx.cs">
+      <DependentUpon>EditTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditTest.aspx.designer.cs">
+      <DependentUpon>EditTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForgotPage.aspx.cs">
       <DependentUpon>ForgotPage.aspx</DependentUpon>
@@ -151,6 +191,8 @@
     <Compile Include="Manager\TestSystemManagers\TestDataManager.cs" />
     <Compile Include="Manager\TestSystemManagers\UserAnswerManager.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AdminAccountModel.cs" />
+    <Compile Include="Models\AdminLevelEnum.cs" />
     <Compile Include="Models\TestSystemModels\MessageBoardModel.cs" />
     <Compile Include="Models\TestSystemModels\PointsModel.cs" />
     <Compile Include="Models\TestSystemModels\TestDataModel.cs" />

@@ -7,11 +7,11 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace SaKei
+namespace Sakei
 {
 
 
-    public partial class LoginPage
+    public partial class AdminLoginPage
     {
 
         /// <summary>
