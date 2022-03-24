@@ -128,9 +128,9 @@ namespace Sakei
             {
 
 
-                AccountModel model1 = PWDHash.Hash(model);
+                 model = PWDHash.Hash(model);
 
-                _mgr.CreateAccounthash(model1);
+                _mgr.CreateAccounthash(model);
 
                 Response.Write("<script>alert('註冊成功!!')</script>");
                 //Response.Redirect("~//AfterLogin//Index.aspx");
