@@ -129,27 +129,4 @@
 
 
 
-
-
-
-
-
-    <script>
-        $("input[id*=btnInfoCh]").click(function () {
-            alert("123456")
-            disp_prompt();
-        })
-
-        function disp_prompt() {
-
-            var name = prompt("請輸入您的暱稱", "CC")
-
-        }
-
-    </script>
-
-
-
-
-
 </asp:Content>

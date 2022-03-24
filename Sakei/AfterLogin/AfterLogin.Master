@@ -55,8 +55,8 @@
                         <p>
                             <a href="dd" target="blank" class="pageLink">頁面一</a> |
                             <a href="dd" target="blank" class="pageLink">頁面二</a> |
-                            <a href="dd" target="blank" class="pageLink">頁面三</a>
-
+                            <a href="dd" target="blank" class="pageLink">頁面三</a>|
+                            <a href="../LoginPage.aspx" target="blank" class="pageLink" >登出</a>
 
                         </p>
 
@@ -74,32 +74,14 @@
                         <asp:ContentPlaceHolder ID="CP3" runat="server"></asp:ContentPlaceHolder>
                     </div>
 
-
                 </div>
-
-
-
-
-
-
-
-
-
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
     </form>
 </body>
+
+
+
+
 </html>
