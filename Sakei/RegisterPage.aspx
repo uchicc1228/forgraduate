@@ -59,6 +59,14 @@
         .Content2{
            background-color:red;
         }
+
+        
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+            padding-top: 20%;
+        }
     </style>  
      
         
@@ -68,7 +76,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
 
-    <img src="Images/下載.jpg" />
+   <img src="Images/page.jpg" style="margin: auto;" />
 
 </asp:Content>
 

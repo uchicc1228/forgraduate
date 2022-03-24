@@ -47,18 +47,24 @@
         }
 
         .label_title {
-            position: inherit ;
+            position: inherit;
             left: 120px;
             font-size: 20px;
             font-family: 宋體;
             text-align: center;
             color: black;
-            padding:20px;
-
+            padding: 20px;
         }
 
-        .Content2{
-           background-color:red;
+        .Content2 {
+            background-color: red;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+            padding-top: 20%;
         }
     </style>
 </asp:Content>
@@ -66,11 +72,15 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
+    
+        <img src="Images/page.jpg" style="margin: auto;" />
+    
 
-    <img src="Images/下載.jpg" />
+
+
 
 </asp:Content>
-        
+
 
 
 
@@ -79,33 +89,18 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-
-
-   
     <asp:PlaceHolder runat="server" ID="plcLogin">
 
-        <label  class="label_title">會員登入</label><br />
+        <label class="label_title">會員登入</label><br />
         <label class="label_input">帳號</label>
         <asp:TextBox CssClass="text_field" ID="txtAccount" runat="server" placeholder="【帳號】："> </asp:TextBox><br />
         <label class="label_input">密碼</label>
         <asp:TextBox ID="txtPassword" CssClass="text_field" runat="server" TextMode="Password" placeholder="【密碼】："> </asp:TextBox><br />
 
-
-
-
         <asp:Button ID="btnLogin" CssClass="wweebtn" runat="server" Text="登入" OnClick="btnLogin_Click " />
-       <%-- <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />--%>
+        <%-- <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />--%>
         <asp:Button ID="forgotpwd" CssClass="wweebtn" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br />
         <asp:Literal ID="ltlMessage" runat="server"></asp:Literal>
-
-
     </asp:PlaceHolder>
-       
-
-
-
-
-
 </asp:Content>
 

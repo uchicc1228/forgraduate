@@ -54,7 +54,12 @@
             padding:20px;
 
         }
-
+           img {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+            padding-top: 20%;
+        }
         .Content2{
            background-color:red;
         }

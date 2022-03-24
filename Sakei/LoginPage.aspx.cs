@@ -29,8 +29,18 @@ namespace SaKei
             string pwd = this.txtPassword.Text.Trim();
 
             //雜湊 卡在這 找不到salt 原因可能是型別問題
+            
             AccountModel acc = _mgr.GetAccount(account);
-            pwd = PWDHash.LoginHash(pwd, acc);
+            if(acc == null)
+            {
+                Response.Write("<script>帳號或密碼錯誤!</script>");
+                return;
+            }
+            else
+            {
+                pwd = PWDHash.LoginHash(pwd, acc);
+            }
+           
 
 
             if (this._mgr.TryLogin(account, pwd))

@@ -11,7 +11,7 @@
     <script src="JavaScript/jquery/jquery.js"></script>
     <style>
         body {
-            background-color: rgb(243, 229, 207);
+           
             margin: 0px;           
             background-repeat: no-repeat;
             background-size: 100%;
