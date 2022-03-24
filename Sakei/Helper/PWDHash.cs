@@ -29,7 +29,21 @@ namespace Sakei.Helper
             
             return model.PWD;
         }
+        public static string LoginHashAdmin(string pwd, AdminAccountModel model)
+        {
 
+
+            string orgText = pwd;
+            string key = Convert.ToString(model.ID);
+            byte[] salt = Convert.FromBase64String(model.Salt_string);
+            byte[] securityBytes = GetHashPassword(orgText, key, salt);
+            model.PWD =
+                string.Join(
+                    "", securityBytes.Select(obj => obj.ToString("x"))
+                    );
+
+            return model.PWD;
+        }
 
 
         #region "註冊的雜湊"
@@ -48,8 +62,27 @@ namespace Sakei.Helper
             model.Salt = salt;
             return model;
         }
+
         #endregion
 
+        #region "新增管理者的雜湊"
+        public static AdminAccountModel AdminHash(AdminAccountModel model)
+        {
+            model.ID = Guid.NewGuid();
+            string orgText = model.PWD;
+            string key = Convert.ToString(model.ID);
+            byte[] salt = BuildNewSalt();
+
+            byte[] securityBytes = GetHashPassword(orgText, key, salt);
+            model.PWD =
+                string.Join(
+                    "", securityBytes.Select(obj => obj.ToString("x"))
+                    );
+            model.Salt = salt;
+            return model;
+        }
+
+        #endregion
         public static byte[] BuildNewSalt()
         {
             byte[] randBytes = new byte[32];

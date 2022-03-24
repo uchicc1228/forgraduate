@@ -28,7 +28,7 @@ namespace Sakei
 
             //雜湊 卡在這 找不到salt 原因可能是型別問題
             AccountModel acc = _mgr.GetAccount(account);
-            pwd = PWDHash.LoginHash(pwd, acc.ID, acc.Salt_string);
+      //      pwd = PWDHash.LoginHash(pwd, acc.ID, acc.Salt_string);
 
 
             if (this._mgr.TryLogin(account, pwd))

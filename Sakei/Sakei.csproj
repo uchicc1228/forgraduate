@@ -187,6 +187,7 @@
       <DependentUpon>MailAuthentication.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AccountManager.cs" />
+    <Compile Include="Manager\AdminAccountManager.cs" />
     <Compile Include="Manager\TestSystemManagers\MessageBoardManager.cs" />
     <Compile Include="Manager\TestSystemManagers\PointsManager.cs" />
     <Compile Include="Manager\TestSystemManagers\TestDataManager.cs" />
