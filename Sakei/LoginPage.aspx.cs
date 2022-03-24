@@ -19,12 +19,7 @@ namespace SaKei
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-
-               
-
-            }
+           
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -38,15 +33,15 @@ namespace SaKei
             AccountModel acc = _mgr.GetAccount(account);
             if(acc == null)
             {
-                Response.Write("<script>帳號或密碼錯誤!</script>");
-                return;
+              
+               
             }
             else
             {
                 pwd = PWDHash.LoginHash(pwd, acc);
             }
-           
 
+           
 
             if (this._mgr.TryLogin(account, pwd))
             {
