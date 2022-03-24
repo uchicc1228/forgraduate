@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true" CodeBehind="MailAuthentication.aspx.cs" Inherits="Sakei.MailAuthentication" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-       <style>
+     <style>
         .wweebtn {
             font-size: 14px;
             font-family: 宋體;
@@ -13,7 +13,7 @@
             border-radius: 6px;
             border: 0;
             position: relative;
-            left: 230px;
+            left: 100px;
             margin: 5px;
         }
 
@@ -32,6 +32,7 @@
             text-align: center;
             color: black;
             background-color: white;
+            border: 1px solid black;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
@@ -41,11 +42,11 @@
             height: 28px;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            border: 0;
+             border: 1px solid black;
         }
 
         .label_title {
-            position: inherit ;
+            position: inherit;
             left: 120px;
             font-size: 20px;
             font-family: 宋體;
@@ -54,16 +55,17 @@
             padding:20px;
 
         }
-           img {
+
+        
+
+        
+        img {
             display: block;
             margin: 0 auto;
             width: 50%;
             padding-top: 20%;
         }
-        .Content2{
-           background-color:red;
-        }
-    </style>
+    </style>  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 

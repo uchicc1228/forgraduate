@@ -13,8 +13,8 @@
             background-color: black;
             border-radius: 6px;
             border: 0;
-            position: relative;
-            left: 230px;
+            float: right;
+            
             margin: 5px;
         }
 
@@ -33,6 +33,7 @@
             text-align: center;
             color: black;
             background-color: white;
+            border: 1px solid black;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
@@ -42,7 +43,7 @@
             height: 28px;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            border: 0;
+            border: 1px solid black;
         }
 
         .label_title {
@@ -55,6 +56,9 @@
             padding: 20px;
         }
 
+
+
+
         img {
             display: block;
             margin: 0 auto;
@@ -62,8 +66,9 @@
             padding-top: 20%;
         }
 
-        .Content2 {
-            background-color: red;
+        .btndiv {
+          padding-right:33px;
+            border:0px;
         }
     </style>
 </asp:Content>
@@ -71,15 +76,14 @@
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
 
-    <img src="Images/下載.jpg" />
+    <img src="Images/page.jpg" style="margin: auto;" />
 
 </asp:Content>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <title>Forget Page</title>
-    <%-- <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
-        <asp:ListItem runat="server" >忘記帳號</asp:ListItem>
-        <asp:ListItem  runat="server">忘記密碼</asp:ListItem>
-    </asp:RadioButtonList> <br />--%>
+   
+
     <asp:PlaceHolder runat="server" ID="plcForgat_acc">
 
         <label class="label_title">忘記密碼</label><br />
@@ -93,9 +97,13 @@
         <asp:TextBox ID="txtMail" CssClass="text_field" runat="server"></asp:TextBox>
 
 
+       <div class="btndiv">
+            <asp:Button ID="btnConfirm" CssClass="wweebtn" runat="server" Text="寄出認證信" OnClick="btnConfirm_Click" />
+            <asp:Label runat="server" ID="lbl"></asp:Label>
+       
+       </div>
+           
 
-        <asp:Button ID="btnConfirm" CssClass="wweebtn" runat="server" Text="寄出認證信" OnClick="btnConfirm_Click" />
-        <asp:Label runat="server" ID="lbl"></asp:Label>
     </asp:PlaceHolder>
 
 </asp:Content>

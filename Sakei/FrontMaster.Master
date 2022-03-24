@@ -71,6 +71,7 @@
                 </div>
                 
                 <div class="col-4 sp" style="border:0px;">
+
                     <div class="div1" style="border:0px;">
 
                          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"  >
