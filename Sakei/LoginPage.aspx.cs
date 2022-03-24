@@ -19,7 +19,12 @@ namespace SaKei
 
         protected void Page_Load(object sender, EventArgs e)
         {
-       
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+
+               
+
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
