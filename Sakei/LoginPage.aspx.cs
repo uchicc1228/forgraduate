@@ -13,35 +13,52 @@ namespace SaKei
     //寫Login 配合今天上課的glbol 在golbol上面做驗證登入
     public partial class LoginPage : System.Web.UI.Page
     {
-       
-            
+
+
         private AccountManager _mgr = new AccountManager();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            if (Request.UrlReferrer != null)
+            {
+                ViewState["prevUrl"] = Request.UrlReferrer.ToString();
+                string urll = ViewState["prevUrl"].ToString();
+                if (urll.Contains("/AfterLogin"))
+                {
+
+                    LoginHelper.Logout();
+                   
+                }
+            }
+            else
+            {
+                return;
+            }
+
+            
+
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
 
-            string account = this.txtAccount.Text.Trim();    
+            string account = this.txtAccount.Text.Trim();
             string pwd = this.txtPassword.Text.Trim();
 
             //雜湊 卡在這 找不到salt 原因可能是型別問題
-            
+
             AccountModel acc = _mgr.GetAccount(account);
-            if(acc == null)
+            if (acc == null)
             {
-              
-               
+
+
             }
             else
             {
                 pwd = PWDHash.LoginHash(pwd, acc);
             }
 
-           
+
 
             if (this._mgr.TryLogin(account, pwd))
             {
@@ -77,6 +94,6 @@ namespace SaKei
             Response.Redirect("ForgotPage.aspx");
         }
 
-       
+
     }
 }
