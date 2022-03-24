@@ -140,6 +140,7 @@ namespace Sakei
                 _mgr.CreateAccounthash(model1);
 
                 Response.Write("<script>alert('註冊成功!!')</script>");
+                Response.Redirect("~//AfterLogin//Index.aspx");
 
             }
             else

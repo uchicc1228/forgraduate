@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true" CodeBehind="RegisterPage.aspx.cs" Inherits="Sakei.RegisterPage" %>
+﻿<%@ Page Title="註冊頁面" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true" CodeBehind="RegisterPage.aspx.cs" Inherits="Sakei.RegisterPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
   <style>
@@ -33,6 +33,7 @@
             text-align: center;
             color: black;
             background-color: white;
+            border: 1px solid black;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
@@ -42,7 +43,7 @@
             height: 28px;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            border: 0;
+             border: 1px solid black;
         }
 
         .label_title {
@@ -56,9 +57,23 @@
 
         }
 
-        .Content2{
-           background-color:red;
+        
+
+        
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+            padding-top: 20%;
         }
+
+         .divbtn{
+            padding-right:33px;
+            border:0px;
+        }
+
+
+        
     </style>  
      
         
@@ -68,12 +83,14 @@
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
 
-    <img src="Images/下載.jpg" />
+   <img src="Images/page.jpg" style="margin: auto;" />
 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <label  class="label_title">註冊會員</label><br />
+
+    
+        <label  class="label_title">註冊會員</label><br />
         <label class="label_input">帳號</label>
     <asp:TextBox runat="server"    CssClass="text_field" ID="txtAcc"  placeholder="【帳號】輸入８～２０字元" ></asp:TextBox>
 
@@ -82,21 +99,28 @@
 
      <label class="label_input">信箱 </label>
     <asp:TextBox runat="server" CssClass="text_field" ID="txtMail"  placeholder="【信箱】" ></asp:TextBox><br />
+   
+    
 
 
-
-    <asp:PlaceHolder  runat="server" ID="plc1">
+    
+         <asp:PlaceHolder  runat="server" ID="plc1">
         <label class="label_input">認證密碼</label>
         <asp:TextBox runat="server" CssClass="text_field" ID="txtcaptcha" required Width="200px"></asp:TextBox><br />
         <asp:Button runat="server" CssClass="wweebtn" ID="btnConfirm" Text="確定" OnClick="btnConfirm_Click" />
     </asp:PlaceHolder>
+ 
+   
 
-    <asp:PlaceHolder runat="server" ID="plc2">
+   
+         <asp:PlaceHolder runat="server" ID="plc2">
     <asp:Literal runat="server" ID="ltlmsg"></asp:Literal>
     <asp:Button runat="server" CssClass="wweebtn" ID="btnSend" Text="發送驗證信" OnClick="btnSend_Click" />
     <asp:Button runat="server" CssClass="wweebtn" ID="btnCancel" Text="取消重填" OnClick="btnCancel_Click" />
     <asp:Literal ID="ltl1" runat="server"></asp:Literal>
     </asp:PlaceHolder>
+    
+   
     
 
 </asp:Content>
