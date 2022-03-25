@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Sakei.ShareControls
+namespace Sakei.ExamSystem
 {
-    public partial class ucTestListExtraWindows : System.Web.UI.UserControl
+    public partial class ExamChallengeMode1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -7,20 +7,29 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace Sakei.TestSystem
+namespace Sakei.ExamSystem
 {
 
 
-    public partial class TestReviewList
+    public partial class ExamReview
     {
 
         /// <summary>
-        /// Repeater1 控制項。
+        /// rptTestList 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.WebControls.Repeater rptTestList;
+
+        /// <summary>
+        /// plcEmpty 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plcEmpty;
     }
 }

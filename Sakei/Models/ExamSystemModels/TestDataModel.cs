@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Sakei.Models.TestSystemModels
+namespace Sakei.Models.ExamSystemModels
 {
     public class TestDataModel
     {
@@ -12,6 +12,10 @@ namespace Sakei.Models.TestSystemModels
         public int TestTypeID { get; set; }
         public string TypeContext { get; set; }
         public string TestContent { get; set; }
+        /// <summary>
+        /// 題目簡介
+        /// </summary>
+        public string TestContentShort { get => TestContent.Substring(0, 10); }
         public string OptionsA { get; set; }
         public string OptionsB { get; set; }
         public string OptionsC { get; set; }
@@ -19,5 +23,5 @@ namespace Sakei.Models.TestSystemModels
         public string TestAnswer { get; set; }
         public bool IsEnable { get; set; }
     }
-    
+
 }

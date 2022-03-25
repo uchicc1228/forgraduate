@@ -1,4 +1,4 @@
-﻿using Sakei.Models.TestSystemModels;
+﻿using Sakei.Models.ExamSystemModels;
 using SaKei.Helpers;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Sakei.Manager.TestSystemManagers
+namespace Sakei.Manager.ExamSystemManagers
 {
     public class PointsManager
     {

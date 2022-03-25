@@ -1,4 +1,4 @@
-﻿using Sakei.Models.TestSystemModels;
+﻿using Sakei.Models.ExamSystemModels;
 using SaKei.Helpers;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Sakei.Manager.TestSystemManagers
+namespace Sakei.Manager.ExamSystemManagers
 {
-    public class TestDataManager
+    public class ExamDataManager
     {
 
         ///<summary>抓取歷史回顧用題目資料(將資料從DB取出)</summary>
@@ -16,7 +16,7 @@ namespace Sakei.Manager.TestSystemManagers
         ///<param name="pageSize">每頁最大筆數</param>
         ///<param name="pageIndex">目前頁數</param>
         ///<param name="totalRows">每頁實際筆數</param>
-        public static List<TestDataModel> GetTestDataList(int testLevel, int pageSize, int pageIndex, out int totalRows)
+        public List<TestDataModel> GetTestDataList(int testLevel, int pageSize, int pageIndex, out int totalRows)
         {
             //計算跳頁數
             int skip = pageSize * (pageIndex - 1);
@@ -25,20 +25,20 @@ namespace Sakei.Manager.TestSystemManagers
 
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
-                                SELECT TOP (@pageSize)
+                                SELECT TOP ({pageSize})
                                     TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
 	                                OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
                                 FROM TestDatabases
                                 INNER JOIN TestTypes 
                                 ON TestDatabases.TestTypeID = TestTypes.TestTypeID
                                 WHERE IsEnable = 'true' AND
-                                      TestLevel = @TestLevel
+                                      TestLevel = {testLevel} AND
                                       TestID NOT IN(
-                                            SELECT TOP (@skip) TestID
+                                            SELECT TOP {skip} TestID
                                             FROM TestDatabases 
                                             WHERE 
                                                 IsEnable = 'true' AND
-                                                TestLevel = @TestLevel
+                                                TestLevel = {testLevel}
                                             ORDER BY CreatTime
                                       )
                                 ORDER BY CreatTime
@@ -48,7 +48,7 @@ namespace Sakei.Manager.TestSystemManagers
                     FROM TestDatabases
                     WHERE 
                         IsEnable = 'true' AND
-                        TestLevel = @TestLevel
+                        TestLevel = {testLevel}
                 ";
             try
             {
@@ -56,26 +56,22 @@ namespace Sakei.Manager.TestSystemManagers
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@TestLevel", testLevel);
-                        command.Parameters.AddWithValue("@pageSize", pageSize);
-                        command.Parameters.AddWithValue("@skip", skip);
-
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        List<TestDataModel> testDataList = new List<TestDataModel>();
+                        List<TestDataModel> examDataList = new List<TestDataModel>();
 
                         //將資料取出放到List中
                         while (reader.Read())
                         {
-                            TestDataModel info = BuildTestData(reader);
-                            testDataList.Add(info);
+                            TestDataModel info = BuildExamData(reader);
+                            examDataList.Add(info);
                         }
                         reader.Close();
                         //取得總筆數
                         command.CommandText = commandCountText;
 
                         totalRows = (int)command.ExecuteScalar();
-                        return testDataList;
+                        return examDataList;
                     }
                 }
             }
@@ -86,7 +82,7 @@ namespace Sakei.Manager.TestSystemManagers
             }
         }
         /// <summary> 抓取考試用資料 </summary>
-        public static List<TestDataModel> GetTestDataForTest(int testLevel)
+        public List<TestDataModel> GetTestDataForTest(int testLevel)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
@@ -112,15 +108,15 @@ namespace Sakei.Manager.TestSystemManagers
 
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        List<TestDataModel> testDataList = new List<TestDataModel>();
+                        List<TestDataModel> examDataList = new List<TestDataModel>();
 
                         //將資料取出放到List中
                         while (reader.Read())
                         {
-                            TestDataModel info = BuildTestData(reader);
-                            testDataList.Add(info);
+                            TestDataModel info = BuildExamData(reader);
+                            examDataList.Add(info);
                         }
-                        return testDataList;
+                        return examDataList;
                     }
                 }
             }
@@ -131,7 +127,7 @@ namespace Sakei.Manager.TestSystemManagers
             }
         }
 
-        private static TestDataModel BuildTestData(SqlDataReader reader)
+        private static TestDataModel BuildExamData(SqlDataReader reader)
         {
             return new TestDataModel
             {

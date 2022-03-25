@@ -1,12 +1,12 @@
-﻿using Sakei.Manager.TestSystemManagers;
+﻿using Sakei.Manager.ExamSystemManagers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Sakei.Helper.TestSystemHelpers
+namespace Sakei.Helper.ExamSystemHelpers
 {
-    public class ChoseTestLevelHelper
+    public class ChoseExamLevelHelper
     {
         /// <summary>
         /// 判斷使用者等級是否足夠
