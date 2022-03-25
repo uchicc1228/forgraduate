@@ -21,7 +21,10 @@ namespace Sakei.Helper
                 return false;
             }
         }
-
+        /// <summary>
+        /// 取得儲存於cookie中的使用者ID
+        /// </summary>
+        /// <returns></returns>
         public static Guid? GetUserID()
         {
             var identity = HttpContext.Current.User.Identity as FormsIdentity;
