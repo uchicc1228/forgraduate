@@ -91,7 +91,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
     <asp:PlaceHolder runat="server" ID="plcLogin">
-        <label class="label_title">會員登入</label><br />
+        <label class="label_title"><b>會員登入</b></label><br />
         <label class="label_input">帳號</label>
         <asp:TextBox CssClass="text_field" ID="txtAccount" runat="server" placeholder="【帳號】："> </asp:TextBox><br />
         <label class="label_input">密碼</label>

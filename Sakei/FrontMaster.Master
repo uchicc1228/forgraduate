@@ -19,13 +19,14 @@
             overflow-x: hidden;
         }
         div {
-            border: 1px solid black;
+            border: 0px solid black;
         }
 
         .menu{
              text-align: center;
              padding-top:10px;
              border:0px;
+            
         }
 
         .left{
@@ -34,15 +35,19 @@
             border-bottom:0px;
             border-top:0px;
            
+            
+           
         }
 
         .div1{         
            position:relative  ;
            padding: 10px;       
-           top: 160px;    
+           top: 100px;   
+           
         }
 
-        
+       a{ text-decoration:none} 
+       a:hover{ text-decoration:none}
        
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
@@ -53,10 +58,11 @@
             <div class="row">
                 <div class="menu col-12" >        
                      <p>
-                              <a href="LoginPage.aspx" target="blank" style="color:rgb(27, 27, 83)">登入頁面</a> |
+                              <a href="LoginPage.aspx" target="blank" style="color:rgb(27, 27, 83)" >登入頁面</a> |
                               <a href="ForgotPage.aspx"taget="blank"style="color:rgb(27, 27, 83)">忘記密碼</a> |
                               <a href="RegisterPage.aspx" taget="blank"style="color:rgb(27, 27, 83)">註冊帳號</a>           
                      </p> 
+                    <hr />
                 </div>
             </div>
 
@@ -70,9 +76,9 @@
                    </asp:ContentPlaceHolder>
                 </div>
                 
-                <div class="col-4 sp" style="border:0px;">
+                <div class="col-4 sp" >
 
-                    <div class="div1" style="border:0px;">
+                    <div class="div1" >
 
                          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"  >
 

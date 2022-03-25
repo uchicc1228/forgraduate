@@ -57,13 +57,6 @@ namespace Sakei
             }
 
 
-
-
-
-
-
-
-
             model.Mail = this.txtMail.Text.Trim();
             if (!_mgr.isValidEmail(model.Mail))
             {

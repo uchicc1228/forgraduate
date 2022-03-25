@@ -73,7 +73,6 @@ namespace Sakei.Helper
             HttpContext.Current.Response.Cookies.Add(loginCookie);
 
             //設定目前登入者至current user
-
             FormsIdentity identity = new FormsIdentity(ticket);
             GenericPrincipal gp = new GenericPrincipal(identity, new string[] { });
             HttpContext.Current.User = gp;

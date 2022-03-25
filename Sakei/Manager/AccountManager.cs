@@ -20,22 +20,8 @@ namespace SaKei.Manager
         LoginHelper _log = new LoginHelper();
 
 
-        private AccountModel BuildAccountModel(SqlDataReader reader)
-        {
-            AccountModel model = new AccountModel()
-            {
-                ID = (Guid)reader["ID"],
-                Account = reader["Account"] as string,
-                PWD = reader["PWD"] as string,
-                UserLevel = (UserLevelEnum)reader["UserLevel"]
-            };
-            return model;
-        }
-        public bool IsLogined()
-        {
-            AccountModel account = GetCurrentUser();
-            return (account != null);
-        }
+  
+     
         public AccountModel GetAccount(string account)
         {
             string connStr = ConfigHelper.GetConnectionString();
