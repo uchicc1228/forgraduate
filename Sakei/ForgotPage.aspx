@@ -86,7 +86,7 @@
 
     <asp:PlaceHolder runat="server" ID="plcForgat_acc">
 
-        <label class="label_title">忘記密碼</label><br />
+        <label class="label_title"><b>忘記密碼</b></label><br />
 
         <label class="label_input">帳號</label>
         <asp:TextBox ID="txtAcc" CssClass="text_field" runat="server"></asp:TextBox>

@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
         div {
-            border: 1px solid black;
+            border: 0px solid black;
         }
 
         .menu{
@@ -39,10 +39,11 @@
         .div1{         
            position:relative  ;
            padding: 10px;       
-           top: 160px;    
+           top: 100px;   
+           
         }
 
-        
+      
        
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
@@ -70,9 +71,9 @@
                    </asp:ContentPlaceHolder>
                 </div>
                 
-                <div class="col-4 sp" style="border:0px;">
+                <div class="col-4 sp" >
 
-                    <div class="div1" style="border:0px;">
+                    <div class="div1" >
 
                          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"  >
 

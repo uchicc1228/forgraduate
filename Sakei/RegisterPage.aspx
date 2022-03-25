@@ -90,7 +90,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     
-        <label  class="label_title">註冊會員</label><br />
+        <label  class="label_title"><b>註冊會員</b></label><br />
         <label class="label_input">帳號</label>
     <asp:TextBox runat="server"    CssClass="text_field" ID="txtAcc"  placeholder="【帳號】輸入８～２０字元" ></asp:TextBox>
 
