@@ -21,8 +21,24 @@ namespace Sakei.Helper
                 return false;
             }
         }
+        /// <summary>
+        /// 取得儲存於cookie中的使用者ID
+        /// </summary>
+        /// <returns></returns>
+        public static Guid? GetUserID()
+        {
+            var identity = HttpContext.Current.User.Identity as FormsIdentity;
+            var ticket = identity.Ticket;
 
-
+            if (Guid.TryParse(ticket.UserData, out var guid))
+            {
+                return guid;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public static string GetAccount()
         {
             var loginCookie = HttpContext.Current.Request.Cookies["System"];
@@ -45,7 +61,7 @@ namespace Sakei.Helper
                 return temp;
         }
 
-        public static void Login(string account , string UserID)
+        public static void Login(string account, string UserID)
         {
 
             bool isPersistence = false;
@@ -77,14 +93,14 @@ namespace Sakei.Helper
             GenericPrincipal gp = new GenericPrincipal(identity, new string[] { });
             HttpContext.Current.User = gp;
             HttpContext.Current.Response.Cookies.Add(loginCookie);
-            
+
         }
 
 
         public static void Logout()
         {
-           FormsAuthentication.SignOut();
-            
+            FormsAuthentication.SignOut();
+
         }
     }
 }
