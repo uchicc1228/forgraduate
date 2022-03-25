@@ -234,7 +234,6 @@
     <Compile Include="testtest.aspx.designer.cs">
       <DependentUpon>testtest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Utility\UserStatusUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FrontMaster.Master" />
@@ -251,6 +250,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

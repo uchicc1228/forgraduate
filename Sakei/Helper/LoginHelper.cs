@@ -10,17 +10,6 @@ namespace Sakei.Helper
 {
     public class LoginHelper
     {
-
-        public static bool IsLogined()
-        {
-            var loginCookie = HttpContext.Current.Request.Cookies["System"];
-            if (loginCookie != null)
-                return true;
-            else
-            {
-                return false;
-            }
-        }
         /// <summary>
         /// 取得儲存於cookie中的使用者ID
         /// </summary>
@@ -39,28 +28,7 @@ namespace Sakei.Helper
                 return null;
             }
         }
-        public static string GetAccount()
-        {
-            var loginCookie = HttpContext.Current.Request.Cookies["System"];
-            if (loginCookie == null)
-                return null;
-
-            var account = loginCookie[Utility.UserStatusUtility.NormalMemberCookie];
-            return account;
-        }
-
-        public static int? GetUserLevel()
-        {
-            var loginCookie = HttpContext.Current.Request.Cookies["System"];
-            if (loginCookie == null)
-                return null;
-            var userLevel = loginCookie[Utility.UserStatusUtility.AdminCookie];
-            if (!int.TryParse(userLevel, out var temp))
-                return null;
-            else
-                return temp;
-        }
-
+       
         public static void Login(string account, string UserID)
         {
 
