@@ -7,11 +7,11 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace Sakei.TestSystem
+namespace Sakei.ExamSystem
 {
 
 
-    public partial class TestChallengeMode
+    public partial class ExamChallengeMode1
     {
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Sakei.Models.TestSystemModels
+namespace Sakei.Models.ExamSystemModels
 {
     public class UserAnswerModel
     {

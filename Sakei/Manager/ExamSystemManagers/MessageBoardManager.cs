@@ -1,4 +1,4 @@
-﻿using Sakei.Models.TestSystemModels;
+﻿using Sakei.Models.ExamSystemModels;
 using SaKei.Helpers;
 using System;
 using System.Collections.Generic;
@@ -6,20 +6,28 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Sakei.Manager.TestSystemManagers
+namespace Sakei.Manager.ExamSystemManagers
 {
     public class MessageBoardManager
     {
         #region 增修查
         ///<summary>查詢單題留言板(將資料從DB取出)</summary>
-        public static List<MessageBoardModel> GetMessageBoardList(int testID)
+        public List<MessageBoardModel> GetMessageBoardList(Guid testID)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
-                                SELECT *
+                                SELECT 
+                                	MessageID,
+                                	TestID,
+                                	MessageBoards.UserID,
+                                	UserLevel,
+                                	MessageContent,
+                                	MessageBoards.CreateDate
                                 FROM MessageBoards
+                                INNER JOIN UserAccounts
+                                ON MessageBoards.UserID=UserAccounts.UserID
                                 WHERE TestID = @TestID
-                                ORDER BY CreateDate DESC
+                                ORDER BY MessageBoards.CreateDate DESC
                                 ";
             try
             {
@@ -38,6 +46,7 @@ namespace Sakei.Manager.TestSystemManagers
                             {
                                 MessageID=(Guid)reader["MessageID"],
                                 UserID = (Guid)reader["UserID"],
+                                UserLevel=(int)reader["UserLevel"],
                                 TestID = (Guid)reader["TestID"],
                                 MessageContent = reader["MessageContent"] as string,
                                 CreateDate = (DateTime)reader["CreateDate"]
@@ -56,7 +65,7 @@ namespace Sakei.Manager.TestSystemManagers
         }
 
         ///<summary>增加使用者留言</summary> 
-        public static void CreateMessage(MessageBoardModel model)
+        public void CreateMessage(MessageBoardModel model)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"

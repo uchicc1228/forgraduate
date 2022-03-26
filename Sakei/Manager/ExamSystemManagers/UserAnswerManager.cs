@@ -1,4 +1,4 @@
-﻿using Sakei.Models.TestSystemModels;
+﻿using Sakei.Models.ExamSystemModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +7,14 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using SaKei.Helpers;
 
-namespace Sakei.Manager.TestSystemManagers
+namespace Sakei.Manager.ExamSystemManagers
 {
     public class UserAnswerManager
     {
 
         #region 增修查
         ///<summary>查詢單使用者資料(將資料從DB取出)</summary>
-        public static UserAnswerModel GetUserAnswer(Guid userID, Guid testID)
+        public UserAnswerModel GetUserAnswer(Guid userID, Guid testID)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
@@ -55,7 +55,7 @@ namespace Sakei.Manager.TestSystemManagers
             }
         }
         ///<summary>儲存並判斷該更新或新增作答紀錄資料</summary>
-        public static void SaveUserAnswer(UserAnswerModel modelList)
+        public void SaveUserAnswer(UserAnswerModel modelList)
         {
             if (modelList.IsNew)
                 CreateUserAnswer(modelList);

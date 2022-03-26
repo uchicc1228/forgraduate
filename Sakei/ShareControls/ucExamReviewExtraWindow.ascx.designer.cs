@@ -11,25 +11,34 @@ namespace Sakei.ShareControls
 {
 
 
-    public partial class ucTestListExtraWindows
+    public partial class ucExamReviewExtraWindow
     {
 
         /// <summary>
-        /// rptNote 控制項。
+        /// rptNoteContent 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptNote;
+        protected global::System.Web.UI.WebControls.Repeater rptNoteContent;
 
         /// <summary>
-        /// rptMsgBoard 控制項。
+        /// Button1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptMsgBoard;
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// rptMessageContent 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptMessageContent;
     }
 }

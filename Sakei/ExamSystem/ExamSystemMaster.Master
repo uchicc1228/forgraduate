@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TestSystemMaster.master.cs" Inherits="Sakei.TestSystem.TestSystemMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ExamSystemMaster.master.cs" Inherits="Sakei.ExamSystem.ExamSystemMaster" %>
 
 <!DOCTYPE html>
 
@@ -7,7 +7,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>鮭魚日文</title>
     <link rel="stylesheet" href="../CSS/Bootstrap/bootstrap.min.css" />
-
     <style>
         canvas {
             background-color: pink;
@@ -41,7 +40,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
         <div class="divHeadArea">
             <div class="divTittleFont">
                 <h1>挑戰模式</h1>
@@ -53,6 +51,7 @@
         <div class="divBodyArea">
 
             <div class="divMain">
+
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
@@ -79,6 +78,5 @@
 
     <script src="../JavaScript/jquery/jquery.min.js"></script>
     <script src="../JavaScript/bootstrap/bootstrap.min.js"></script>
-
 </body>
 </html>
