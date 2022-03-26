@@ -485,7 +485,7 @@ namespace SaKei.Manager
                             AccountModel model = new AccountModel()
                             {
                                 Account = reader["UserAccount"] as string,
-                                NickName = reader["UserName"] as string, 
+                                UserName = reader["UserName"] as string, 
                                 ID = (Guid)reader["UserID"]
                             };
                             return model;
@@ -527,7 +527,7 @@ namespace SaKei.Manager
                             AccountModel model = new AccountModel()
                             {
                                
-                                NickName = reader["UserName"] as string,
+                                UserName = reader["UserName"] as string,
                                 ID = (Guid)reader["UserID"]
                             };
                             return model;
