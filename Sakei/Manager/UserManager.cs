@@ -11,20 +11,20 @@ namespace Sakei.Manager
     public class UserManager
     {
         #region "抓出帳號名字"
-        public AccountModel GetUserName(string acc)
+        public AccountModel GetUserName(string name)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                  @" SELECT *
                     FROM [User]
-                    WHERE UserAccount = @account ";
+                    WHERE UserName = @name ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@account", acc);
+                        command.Parameters.AddWithValue("@account", name);
 
                         conn.Open();
 
