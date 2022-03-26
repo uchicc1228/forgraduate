@@ -10,13 +10,17 @@ namespace SaKei.Models
         public Guid ID { get; set; }
         public string Account { get; set; }
         public string PWD { get; set; }
-        public UserLevelEnum UserLevel { get; set; }
-        public string Mail { get; set; }    
-        
+        public int UserLevel { get; set; }
+        public string Mail { get; set; }            
         public string Salt_string { get; set; }
         public byte[] Salt { get; set; }
-        public string NickName { get; set; }
-        public string UserName { get; set; }    
-   
+        public string UserName { get; set; }
+        /// <summary>
+        /// 使用者等級積分
+        /// </summary>
+        public int UserPoints { get; set; }
+        public int UserMoney { get; set; }
+
+
     }
 }
