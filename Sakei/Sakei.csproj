@@ -237,7 +237,6 @@
     <Compile Include="Models\ExamSystemModels\UserAnswerModel.cs" />
     <Compile Include="Models\AdminAccountModel.cs" />
     <Compile Include="Models\AdminLevelEnum.cs" />
-    <Compile Include="Models\UserLevelEnum.cs" />
     <Compile Include="NoPage.aspx.cs">
       <DependentUpon>NoPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
