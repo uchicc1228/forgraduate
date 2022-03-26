@@ -13,5 +13,10 @@ namespace Sakei
         {
 
         }
+
+        protected void btnConfirm_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

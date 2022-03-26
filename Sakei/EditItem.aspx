@@ -2,7 +2,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <label  class="label_title">新增題目</label><br />
+    <label  class="label_title">新增道具</label><br />
     
     <label class="label_input">道具名稱</label>
     <asp:TextBox runat="server"    CssClass="text_field" ID="txtItemName"  placeholder="道具名稱" ></asp:TextBox><br />
@@ -14,8 +14,6 @@
             <asp:ListItem Value="4">N4</asp:ListItem>
             <asp:ListItem Value="5">N5</asp:ListItem>
     </asp:DropDownList><br />
-      <label class="label_input">道具內容</label>
-    <asp:TextBox runat="server" CssClass="text_field" ID="txtItemContent"  placeholder="道具內容" ></asp:TextBox><br />
       <label class="label_input">道具價格 </label>
     <asp:TextBox runat="server" CssClass="text_field" ID="txtItemPrice"  placeholder="請輸入數字" ></asp:TextBox><br />
        <label class="label_input">道具圖片 </label>
