@@ -84,6 +84,7 @@
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="EditAdmin.aspx" />
+    <Content Include="EditItem.aspx" />
     <Content Include="EditItemm.aspx" />
     <Content Include="EditTest.aspx" />
     <Content Include="ForgotPage.aspx" />
@@ -144,6 +145,13 @@
     </Compile>
     <Compile Include="EditAdmin.aspx.designer.cs">
       <DependentUpon>EditAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditItem.aspx.cs">
+      <DependentUpon>EditItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditItem.aspx.designer.cs">
+      <DependentUpon>EditItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditItemm.aspx.cs">
       <DependentUpon>EditItemm.aspx</DependentUpon>
