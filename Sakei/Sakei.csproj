@@ -81,6 +81,9 @@
     <Content Include="AdminLoginPage.aspx" />
     <Content Include="AdminMainPage.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
+    <Content Include="AfterLogin\ItemChange.aspx" />
+    <Content Include="AfterLogin\UserNameChange.aspx" />
+    <Content Include="AfterLogin\UserPWDChange.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ExamSystem\ExamChallengeMode.aspx" />
@@ -99,6 +102,7 @@
     <Content Include="JavaScript\ExamSystem\ExamSystem.js" />
     <Content Include="LoginPage.aspx" />
     <Content Include="MailAuthentication.aspx" />
+    <Content Include="AfterLogin\MallPage.aspx" />
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="ShareControls\ucExamReviewExtraWindow.ascx" />
@@ -134,6 +138,27 @@
     </Compile>
     <Compile Include="AfterLogin\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterLogin\ItemChange.aspx.cs">
+      <DependentUpon>ItemChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\ItemChange.aspx.designer.cs">
+      <DependentUpon>ItemChange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterLogin\UserNameChange.aspx.cs">
+      <DependentUpon>UserNameChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\UserNameChange.aspx.designer.cs">
+      <DependentUpon>UserNameChange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterLogin\UserPWDChange.aspx.cs">
+      <DependentUpon>UserPWDChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\UserPWDChange.aspx.designer.cs">
+      <DependentUpon>UserPWDChange.aspx</DependentUpon>
     </Compile>
     <Compile Include="API\TestDataHandler.ashx.cs">
       <DependentUpon>TestDataHandler.ashx</DependentUpon>
@@ -216,6 +241,13 @@
     </Compile>
     <Compile Include="MailAuthentication.aspx.designer.cs">
       <DependentUpon>MailAuthentication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterLogin\MallPage.aspx.cs">
+      <DependentUpon>MallPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\MallPage.aspx.designer.cs">
+      <DependentUpon>MallPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AccountManager.cs" />
     <Compile Include="Manager\ExamSystemManagers\MessageBoardManager.cs" />
