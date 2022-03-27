@@ -77,11 +77,11 @@ namespace Sakei
                 try
                 {
                     HttpCookie cookies = new HttpCookie("Mycookies");
-                    cookies.Name = "123456"; //只能放英文跟數字 
+                    cookies.Name = "GOTCHA";
                     cookies.Value = cook;
                     cookies.Expires = DateTime.Now.AddDays(220);  // 過期時間 
-                    cookies.HttpOnly = true;  //只允許server端的程式碼做要求cookies的存取 不允許第三方程式
-                    cookies.Secure = true;  //只允許https 使用存取cookies (機密性資料
+                    cookies.HttpOnly = true;  
+                    cookies.Secure = true;  
                     Response.Cookies.Add(cookies);
 
                 }
@@ -115,18 +115,18 @@ namespace Sakei
             model.Mail = this.txtMail.Text.Trim();
            
             //找到的cookies是Name來找 
-            HttpCookie cookies = Request.Cookies["123456"];
+            HttpCookie cookies = Request.Cookies["GOTCHA"];
             
             if (this.txtcaptcha.Text.Trim() == cookies.Value)
             {
 
 
-                 model = PWDHash.Hash(model);
+                model = PWDHash.Hash(model);
 
                 _mgr.CreateAccounthash(model);
 
                 Response.Write("<script>alert('註冊成功!!')</script>");
-                //Response.Redirect("~//AfterLogin//Index.aspx");
+               
 
             }
             else

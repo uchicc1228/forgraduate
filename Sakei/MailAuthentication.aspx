@@ -12,9 +12,9 @@
             background-color: black;
             border-radius: 6px;
             border: 0;
-            position: relative;
-            left: 100px;
-            margin: 5px;
+            float:right;
+            margin: 15px;
+            margin-top : 5px;
         }
 
             .wweebtn:hover {
@@ -26,7 +26,7 @@
         .label_input {
             font-size: 14px;
             font-family: 宋體;
-            width: 70px;
+            width: 100px;
             height: 28px;
             line-height: 28px;
             text-align: center;
@@ -69,7 +69,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <label  class="label_title">驗證頁面</label><br />
+     <label  class="label_title"><b>驗證頁面</b></label><br />
 
     <label class="label_input">輸入新密碼</label>
     <asp:TextBox CssClass="text_field" runat="server" ID="txtpw1"></asp:TextBox> <br />
