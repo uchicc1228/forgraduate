@@ -49,7 +49,7 @@ namespace Sakei.Helper
         #region "註冊的雜湊"
         public static AccountModel Hash(AccountModel model)
         {
-            model.ID = Guid.NewGuid();
+            //model.ID = Guid.NewGuid();
             string orgText = model.PWD;
             string key = Convert.ToString(model.ID);
             byte[] salt = BuildNewSalt();

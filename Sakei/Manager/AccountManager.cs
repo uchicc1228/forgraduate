@@ -105,6 +105,7 @@ namespace SaKei.Manager
                 throw;
             }
         }
+
         /// <summary>
         /// 取得單筆使用者等級、等級積分、金錢
         /// </summary>
@@ -189,6 +190,45 @@ namespace SaKei.Manager
             {
                 Logger.WriteLog("", ex);
                 throw;
+            }
+        }
+
+        public string GetCaptcha(Guid id)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM Gotcha
+                    WHERE UserID = @UserID";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@UserID", id);
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            AccountModel model = new AccountModel()
+                            {
+                                CAPTCHA = reader["CAPTCHA"] as string,    
+                                ID = (Guid)reader["UserID"] 
+                            };
+                            
+
+                        }
+
+                        return model.CAPTCHA;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
             }
         }
         public AccountModel GetCurrentUser()
@@ -504,8 +544,43 @@ namespace SaKei.Manager
             }
         }
 
-      
-     
+        public bool CreatCapcha(AccountModel model)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                @" INSERT INTO Gotcha
+                        (UserID, EmailDate, CAPTCHA)
+                    VALUES
+                        (@UserID, @EmailDate , @CAPTCHA);";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+
+                        command.Parameters.AddWithValue("@UserID", model.ID);
+                        command.Parameters.AddWithValue("@EmailDate", model.EmailDate);
+                        command.Parameters.AddWithValue("@CAPTCHA", model.CAPTCHA);
+
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                return true;
+                
+                
+            }
+            catch (Exception ex)
+            {
+
+                Logger.WriteLog("CreateAccount", ex);
+                return false;
+            }
+        }
+
         #endregion
 
         #region "主頁面找暱稱"
