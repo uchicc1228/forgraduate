@@ -1,11 +1,16 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucExamReviewExtraWindow.ascx.cs" Inherits="Sakei.ShareControls.ucExamReviewExtraWindow" %>
 
+<style>
+    #divNoteWindow, #divNoteWindow div, #divMsgBordWindow, #divMsgBordWindow div {
+        border: 0px;
+    }
+</style>
+
 <%--筆記視窗--%>
 <div class="modal" id="divNoteWindow" tabindex="-1">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-
             </div>
             <div class="modal-body">
                 <asp:Repeater ID="rptNoteContent" runat="server">
@@ -37,7 +42,6 @@
             <div class="modal-body">
                 <asp:Repeater ID="rptMessageContent" runat="server">
                     <ItemTemplate>
-
                     </ItemTemplate>
                 </asp:Repeater>
             </div>

@@ -20,8 +20,8 @@ namespace SaKei.Manager
         LoginHelper _log = new LoginHelper();
 
 
-  
-     
+
+
         public AccountModel GetAccount(string account)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -47,9 +47,9 @@ namespace SaKei.Manager
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
                                 Mail = reader["UserEmail"] as string,
-                                Salt_string = reader["UserPasswordSalt"] as string ,
+                                Salt_string = reader["UserPasswordSalt"] as string,
                                 ID = (Guid)reader["UserID"],
-                               
+
                             };
                             return model;
 
@@ -105,6 +105,51 @@ namespace SaKei.Manager
                 throw;
             }
         }
+        /// <summary>
+        /// 取得單筆使用者等級、等級積分、金錢
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public AccountModel GetUserPointsAndMoney(Guid userID)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM UserAccounts
+                    WHERE UserID = @UserID";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@UserID", userID);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            AccountModel model = new AccountModel()
+                            {
+                                UserLevel = (int)reader["UserLevel"],
+                                UserPoints = (int)reader["UserPoints"],
+                                UserMoney = (int)reader["UserMoney"]
+                            };
+                            return model;
+
+                        }
+
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("SaKei.Manager.AccountManager.GetUserLevel", ex);
+                throw;
+            }
+        }
         public AccountModel GetPWD(string PWD)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -152,6 +197,7 @@ namespace SaKei.Manager
             return account;
         }
 
+
         #region "忘記密碼 信箱"
         //回傳布林直
         public bool ForgotEmail(string account, string email)
@@ -171,7 +217,7 @@ namespace SaKei.Manager
                 isEmailRight = true;
 
             // 檢查帳號密碼是否正確
-            bool result = (isAccountRight && isEmailRight); 
+            bool result = (isAccountRight && isEmailRight);
 
             return result;
         }
@@ -201,10 +247,10 @@ namespace SaKei.Manager
             return model;
 
         }
-        public bool SendEmail(string email , int captcha)
+        public bool SendEmail(string email, int captcha)
         {
-           
-            
+
+
             em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
             em.To.Add(new System.Net.Mail.MailAddress(email));    //收件者
             em.Subject = "鮭魚日文，註冊帳號驗證信";     //信件主題 
@@ -262,7 +308,7 @@ namespace SaKei.Manager
             }
         }
 
-       
+
 
 
 
@@ -287,7 +333,7 @@ namespace SaKei.Manager
                 isPasswordRight = true;
 
             // 檢查帳號密碼是否正確
-            bool result = (isAccountRight && isPasswordRight);  
+            bool result = (isAccountRight && isPasswordRight);
             return result;
         }
 
@@ -334,7 +380,7 @@ namespace SaKei.Manager
                         command.Parameters.AddWithValue("@salt", model.Salt_string);
                         command.Parameters.AddWithValue("@id1", model.ID);
                         command.Parameters.AddWithValue("@id", model.ID);
-                        
+
 
                         conn.Open();
                         command.ExecuteNonQuery();
@@ -485,7 +531,7 @@ namespace SaKei.Manager
                             AccountModel model = new AccountModel()
                             {
                                 Account = reader["UserAccount"] as string,
-                                UserName = reader["UserName"] as string, 
+                                UserName = reader["UserName"] as string,
                                 ID = (Guid)reader["UserID"]
                             };
                             return model;
@@ -526,7 +572,7 @@ namespace SaKei.Manager
                         {
                             AccountModel model = new AccountModel()
                             {
-                               
+
                                 UserName = reader["UserName"] as string,
                                 ID = (Guid)reader["UserID"]
                             };

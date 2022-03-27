@@ -12,8 +12,8 @@ namespace Sakei.ShareControls
     {
         private MessageBoardManager _msgBoardManager = new MessageBoardManager();
         private UserAnswerManager _noteManager = new UserAnswerManager();
-        private Guid _userID;
-        private Guid _testID;
+        public Guid UserID { get; set; }
+        public Guid TestID { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 

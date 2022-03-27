@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="ExamReview.aspx.cs" Inherits="Sakei.ExamSystem.ExamReview" %>
 
+<%@ Register Src="~/ShareControls/ucExamReviewExtraWindow.ascx" TagPrefix="uc1" TagName="ucExamReviewExtraWindow" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         #divTestLest {
@@ -9,6 +12,7 @@
         .accordion-item div {
             border: 0px;
         }
+        
     </style>
 </asp:Content>
 
@@ -22,7 +26,7 @@
     <%--清單顯示題目--%>
     <div class="accordion accordion-flush" id="divTestLest">
         <asp:Repeater ID="rptTestList" runat="server">
-            <ItemTemplate>
+            <itemtemplate>
 
                 <div class="accordion-item">
                     <%--簡略題目內容--%>
@@ -61,26 +65,27 @@
                             </ul>
                             <%--筆記留言板按鈕--%>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow">筆記</button>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow">留言板</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="">筆記</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow" onclick="">留言板</button>
                             </div>
-                            <uc1:ucTestListExtraWindows runat="server" id="ucTestListExtraWindows" />
 
                         </div>
                     </div>
                 </div>
 
 
-            </ItemTemplate>
+            </itemtemplate>
         </asp:Repeater>
 
     </div>
 
-    
+
 
     <%--空畫面，當使用者未做過任何題目時顯示--%>
     <asp:PlaceHolder ID="plcEmpty" runat="server" Visible="false">
         <p>尚未作答</p>
     </asp:PlaceHolder>
+    
+    <uc1:ucExamReviewExtraWindow runat="server" ID="ucExamReviewExtraWindow" />
 
 </asp:Content>

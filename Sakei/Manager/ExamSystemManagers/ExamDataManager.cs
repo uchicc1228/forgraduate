@@ -16,22 +16,34 @@ namespace Sakei.Manager.ExamSystemManagers
         ///<param name="pageSize">每頁最大筆數</param>
         ///<param name="pageIndex">目前頁數</param>
         ///<param name="totalRows">每頁實際筆數</param>
-        public List<TestDataModel> GetTestDataList(int testLevel, int pageSize, int pageIndex, out int totalRows)
+        public List<TestDataModel> GetTestDataList(int testLevel, int pageSize, int pageIndex, out int totalRows,out List<string> userAnswer)
         {
             //計算跳頁數
             int skip = pageSize * (pageIndex - 1);
             if (skip < 0)
                 skip = 0;
 
+            string commandExamText = $@"
+                                        SELECT 
+                                        TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
+	                                    OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
+									FROM TestDatabases
+									INNER JOIN TestTypes
+									ON TestDatabases.TestTypeID = TestTypes.TestTypeID
+									WHERE IsEnable='TRUE'
+                                        ";
+
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
-                                SELECT TOP ({pageSize})
-                                    TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
-	                                OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
-                                FROM TestDatabases
-                                INNER JOIN TestTypes 
-                                ON TestDatabases.TestTypeID = TestTypes.TestTypeID
-                                WHERE IsEnable = 'true' AND
+                                 SELECT TOP ({pageSize})
+                                    UserAnswers.TestID,TestLevel,TestTypeID,TypeContext,TestContent,
+	                                OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer,UserAnswer
+                                 FROM UserAnswers
+                                 INNER JOIN 
+                                 	({commandExamText})  AS Exam
+                                ON UserAnswers.TestID = Exam.TestID
+                                WHERE 
+                                      UserID = @UserID AND
                                       TestLevel = {testLevel} AND
                                       TestID NOT IN(
                                             SELECT TOP {skip} TestID
@@ -59,17 +71,19 @@ namespace Sakei.Manager.ExamSystemManagers
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
                         List<TestDataModel> examDataList = new List<TestDataModel>();
-
+                        List<string> userA = new List<string>();
                         //將資料取出放到List中
                         while (reader.Read())
                         {
                             TestDataModel info = BuildExamData(reader);
                             examDataList.Add(info);
+                            userA.Add(reader["UserAnswer"] as string);
                         }
                         reader.Close();
                         //取得總筆數
                         command.CommandText = commandCountText;
 
+                        userAnswer = userA;
                         totalRows = (int)command.ExecuteScalar();
                         return examDataList;
                     }
