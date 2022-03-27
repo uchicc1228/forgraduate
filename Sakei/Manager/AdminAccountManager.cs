@@ -167,6 +167,7 @@ namespace SaKei.Manager
             return account;
         }
 
+
         #region "忘記密碼 信箱"
         //回傳布林直
         public bool ForgotEmail(string account, string email)

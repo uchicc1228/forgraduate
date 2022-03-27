@@ -66,7 +66,7 @@ namespace Sakei
 
             //產生一組變數 帶到信封內 
             Random rnd = new Random();
-            int captcha = Convert.ToInt32(rnd.Next(1, 99999));
+            int captcha = Convert.ToInt32(rnd.Next(10000, 99999));
 
             if (_mgr.SendEmail(model.Mail, captcha))
             {
@@ -119,7 +119,6 @@ namespace Sakei
             
             if (this.txtcaptcha.Text.Trim() == cookies.Value)
             {
-
 
                 model = PWDHash.Hash(model);
                 _mgr.CreateAccounthash(model);

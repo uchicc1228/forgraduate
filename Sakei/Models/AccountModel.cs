@@ -14,6 +14,9 @@ namespace SaKei.Models
         public string Mail { get; set; }            
         public string Salt_string { get; set; }
         public byte[] Salt { get; set; }
+
+        public DateTime? EmailDate { get; set; }
+        public string CAPTCHA { get; set; }  
         public string UserName { get; set; }
         /// <summary>
         /// 使用者等級積分
