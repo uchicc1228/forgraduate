@@ -22,6 +22,7 @@ namespace Sakei.ExamSystem
         private int _testLevel;
         private Guid _userID;
         private List<Guid> _testIDList = new List<Guid>();
+        private List<UserAnswerModel> _userAnswerList;
         protected void Page_Load(object sender, EventArgs e)
         {
             //存入頁面要顯示的考題等級
@@ -50,12 +51,20 @@ namespace Sakei.ExamSystem
 
             int totalRows;
             //取得考題資料清單
-            var examList = this._mgrExamData.GetTestDataList(_testLevel, _pageSize, pageIndex, out totalRows);
+            var examList = this._mgrExamData.GetTestDataList(_userID, _testLevel, _pageSize, pageIndex, out totalRows);
+
+            //清空_testIDList
+            _testIDList.Clear();
+            //重新綁定_testIDList
             for (var i = 0; i < examList.Count; i++)
             {
-
+                _testIDList.Add(examList[i].TestID);
             }
-            var userAnswerList = _mgrUserAnswer.GetUserAnswerList(_userID, examList);
+            if (_testIDList != null || _testIDList.Count != 0)
+                //取得使用者作答資料
+                _userAnswerList = _mgrUserAnswer.GetUserAnswerList(_userID, _testIDList);
+
+
             if (examList.Count == 0)
             {
                 this.rptTestList.Visible = false;

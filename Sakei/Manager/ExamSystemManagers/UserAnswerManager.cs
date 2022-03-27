@@ -56,11 +56,15 @@ namespace Sakei.Manager.ExamSystemManagers
         }
         public List<UserAnswerModel> GetUserAnswerList(Guid userID, List<Guid> testIDs)
         {
+            //判斷有傳入ID
+            if (testIDs == null || testIDs.Count == 0)
+                throw new Exception("需指定 testIDs");
+
             //組合要搜尋的TestID資料
             List<string> param = new List<string>();
             for (var i = 0; i < testIDs.Count; i++)
             {
-                param.Add("@TestID");
+                param.Add("@TestID" + i);
             }
             string inSql = string.Join(", ", param);
 
@@ -80,14 +84,14 @@ namespace Sakei.Manager.ExamSystemManagers
                         command.Parameters.AddWithValue("@UserID", userID);
                         for (var i = 0; i < testIDs.Count; i++)
                         {
-                            command.Parameters.AddWithValue("@TestID", testIDs);
+                            command.Parameters.AddWithValue("@TestID" + i, testIDs[i]);
 
                         }
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
 
                         List<UserAnswerModel> userAnswer = new List<UserAnswerModel>();
-                        while(reader.Read())
+                        while (reader.Read())
                         {
                             UserAnswerModel model = new UserAnswerModel()
                             {
