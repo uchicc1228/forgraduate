@@ -63,6 +63,25 @@ namespace Sakei.Helper
             return model;
         }
 
+         
+        //更改密碼的雜湊 CC的MailAuthentication頁面用
+        public static AccountModel UpdateHash(AccountModel model)
+        {
+            
+            string orgText = model.PWD;
+            string key = Convert.ToString(model.ID);
+            byte[] salt = BuildNewSalt();
+
+            byte[] securityBytes = GetHashPassword(orgText, key, salt);
+            model.PWD =
+                string.Join(
+                    "", securityBytes.Select(obj => obj.ToString("x"))
+                    );
+            model.Salt = salt;
+            return model;
+        }
+
+
         #endregion
 
         #region "新增管理者的雜湊"

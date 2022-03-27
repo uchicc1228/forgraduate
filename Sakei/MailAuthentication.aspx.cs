@@ -52,9 +52,9 @@ namespace Sakei
             {
               
                 model.PWD = newpwd1;
-                model = PWDHash.Hash(model);                         
+                model = PWDHash.UpdateHash(model);                         
                 _mgr.UpdatePwd(model);
-                ////Response.Write("<script>alert('已變更成功!!')</script>");
+                Response.Write("<script>alert('已變更成功!!')</script>");
             }
             else
             {
