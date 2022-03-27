@@ -122,9 +122,7 @@ namespace Sakei
 
 
                 model = PWDHash.Hash(model);
-
                 _mgr.CreateAccounthash(model);
-
                 Response.Write("<script>alert('註冊成功!!')</script>");
                
 

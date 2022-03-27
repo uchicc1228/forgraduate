@@ -73,9 +73,10 @@
 
     <label class="label_input">輸入新密碼</label>
     <asp:TextBox CssClass="text_field" runat="server" ID="txtpw1"></asp:TextBox> <br />
-
      <label class="label_input">再輸入一次</label>
     <asp:TextBox CssClass="text_field" runat="server" ID="txtpw2"></asp:TextBox> <br />
+    <asp:Literal  ID="ltlmsg" Text="text" runat="server" />
     <asp:Button   CssClass="wweebtn" runat="server" ID="btnyes" TEXT="確定" OnClick="btnyes_Click" />
+    
 
 </asp:Content>

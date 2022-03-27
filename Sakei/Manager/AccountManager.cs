@@ -279,12 +279,15 @@ namespace SaKei.Manager
 
         public void UpdatePwd(AccountModel model)
         {
-            // 1. 編輯資料
+            model.Salt_string = Convert.ToBase64String(model.Salt);
+           
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                 @"  UPDATE UserAccounts
                     SET 
-                        UserPassword = @pwd
+                        UserPassword = @pwd,
+                        UserPasswordSalt = @salt
+
                     WHERE
                         UserID = @id ";
             try
@@ -295,7 +298,7 @@ namespace SaKei.Manager
                     {
                         command.Parameters.AddWithValue("@id", model.ID);
                         command.Parameters.AddWithValue("@pwd", model.PWD);
-
+                        command.Parameters.AddWithValue("@salt", model.Salt_string);
                         conn.Open();
                         command.ExecuteNonQuery();
                     }
@@ -447,7 +450,6 @@ namespace SaKei.Manager
                 return false;
             }
         }
-
         public bool CreateAdminAccounthash(AccountModel model)
         {
             model.Salt_string = Convert.ToBase64String(model.Salt);
@@ -502,7 +504,8 @@ namespace SaKei.Manager
             }
         }
 
-
+      
+     
         #endregion
 
         #region "主頁面找暱稱"
