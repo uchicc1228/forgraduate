@@ -265,6 +265,46 @@ namespace SaKei.Manager
             }
         }
 
+        public DateTime GetDate(string captcha)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT EmailDate
+                    FROM Gotcha
+                    WHERE CAPTCHA = @captcha ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@captcha", captcha);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            AccountModel model = new AccountModel()
+                            {
+                                EmailDate = (DateTime)reader["EmailDate"] 
+                               
+                            };
+                            return model.EmailDate;
+
+                        }
+
+                        return DateTime.Now;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
+
 
         #region "忘記密碼 信箱"
         //回傳布林直
@@ -324,7 +364,7 @@ namespace SaKei.Manager
                 em.To.Add(new System.Net.Mail.MailAddress(email));    //收件者
                 em.Subject = "鮭魚日文，註冊帳號驗證信";     //信件主題 
                 em.SubjectEncoding = System.Text.Encoding.UTF8;
-                em.Body = "您的驗證碼為: " + captcha;            //內容 
+                em.Body = "您的驗證碼為: " + captcha +"<br/> 時效為10分鐘，超過請重新申請帳號。";            //內容 
                 em.BodyEncoding = System.Text.Encoding.UTF8;
                 em.IsBodyHtml = true;     //信件內容是否使用HTML格式
 

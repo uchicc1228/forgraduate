@@ -16,7 +16,7 @@ namespace SaKei.Models
         public byte[] Salt { get; set; }
 
         public int IsActivition { get; set; }
-        public DateTime? EmailDate { get; set; }
+        public DateTime EmailDate { get; set; }
         public string CAPTCHA { get; set; }  
         public string UserName { get; set; }
         /// <summary>

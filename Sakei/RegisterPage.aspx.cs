@@ -107,8 +107,18 @@ namespace Sakei
 
             if (this.txtcaptcha.Text.Trim() == cpatcha)
             {
+                DateTime now = DateTime.Now;
+                DateTime now2 = _mgr.GetDate(cpatcha);
+
+                double result = new TimeSpan(now.Ticks - now2.Ticks).TotalMinutes;
+
+                if (result > 10 )
+                {
+                    Response.Write("<script>alert('驗證碼超過時效!!')</script>");
+                    return;
+                }
+
                 //激活
-                
                 if (_mgr.ActiveCapcha(acc) == true)
                 {
                     Response.Write("<script>alert('註冊成功!!')</script>");
