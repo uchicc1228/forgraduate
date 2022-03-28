@@ -17,10 +17,6 @@ namespace SaKei.Manager
     {
         AccountModel model = new AccountModel();
         System.Net.Mail.MailMessage em = new System.Net.Mail.MailMessage();
-        LoginHelper _log = new LoginHelper();
-
-
-
 
         public AccountModel GetAccount(string account)
         {
@@ -193,35 +189,35 @@ namespace SaKei.Manager
             }
         }
 
-        public string GetCaptcha(Guid id)
+        public string GetCaptcha(string acc)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                 @" SELECT *
-                    FROM Gotcha
-                    WHERE UserID = @UserID";
+                $@" SELECT TOP(1) Gotcha.CAPTCHA
+                   FROM UserAccounts
+                   INNER JOIN Gotcha ON UserAccounts.UserID  =  Gotcha.UserID
+                   WHERE UserAccount = @useracc
+                   ORDER BY Gotcha.EmailDate DESC; ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@UserID", id);
+                        AccountModel modelca = new AccountModel();
+                        command.Parameters.AddWithValue("@useracc", acc);
                         conn.Open();
 
                         SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
+                        if (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
-                            {
-                                CAPTCHA = reader["CAPTCHA"] as string,    
-                                ID = (Guid)reader["UserID"] 
-                            };
-                            
+
+                            modelca.CAPTCHA = reader["CAPTCHA"] as string;
+
 
                         }
 
-                        return model.CAPTCHA;
+                        return modelca.CAPTCHA;
                     }
                 }
             }
@@ -231,10 +227,42 @@ namespace SaKei.Manager
 
             }
         }
-        public AccountModel GetCurrentUser()
+
+        public int GetActiveorNot(string acc)
         {
-            AccountModel account = HttpContext.Current.Session["MemberAccount"] as AccountModel;
-            return account;
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                $@" SELECT IsActivation
+                    FROM [SakeTest].[dbo].[UserAccounts]
+                    WHERE UserAccount = @useracc;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        AccountModel modelca = new AccountModel();
+                        command.Parameters.AddWithValue("@useracc", acc);
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+
+                            modelca.IsActivition = (int)reader["IsActivation"];
+                            
+
+                        }
+
+                        return modelca.IsActivition;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+
+            }
         }
 
 
@@ -290,27 +318,33 @@ namespace SaKei.Manager
         public bool SendEmail(string email, int captcha)
         {
 
+            try
+            {
+                em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
+                em.To.Add(new System.Net.Mail.MailAddress(email));    //收件者
+                em.Subject = "鮭魚日文，註冊帳號驗證信";     //信件主題 
+                em.SubjectEncoding = System.Text.Encoding.UTF8;
+                em.Body = "您的驗證碼為: " + captcha;            //內容 
+                em.BodyEncoding = System.Text.Encoding.UTF8;
+                em.IsBodyHtml = true;     //信件內容是否使用HTML格式
 
-            em.From = new System.Net.Mail.MailAddress("sakei20220313@gmail.com", "鮭魚日文", System.Text.Encoding.UTF8);
-            em.To.Add(new System.Net.Mail.MailAddress(email));    //收件者
-            em.Subject = "鮭魚日文，註冊帳號驗證信";     //信件主題 
-            em.SubjectEncoding = System.Text.Encoding.UTF8;
-            em.Body = "您的驗證碼為: " + captcha;            //內容 
-            em.BodyEncoding = System.Text.Encoding.UTF8;
-            em.IsBodyHtml = true;     //信件內容是否使用HTML格式
+                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
+                //登入帳號認證  
+                smtp.Credentials = new System.Net.NetworkCredential("sakei20220313@gmail.com", "lhuohuxmqnepcvic");
+                //使用587 Port - google要設定
+                smtp.Port = 587;
+                smtp.EnableSsl = true;   //啟動SSL 
+                                         //end of google設定
+                smtp.Host = "smtp.gmail.com";   //SMTP伺服器
+                smtp.Send(em);            //寄出
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
 
-            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
-            //登入帳號認證  
-            smtp.Credentials = new System.Net.NetworkCredential("sakei20220313@gmail.com", "lhuohuxmqnepcvic");
-            //使用587 Port - google要設定
-            smtp.Port = 587;
-            smtp.EnableSsl = true;   //啟動SSL 
-            //end of google設定
-            smtp.Host = "smtp.gmail.com";   //SMTP伺服器
-            smtp.Send(em);            //寄出
-
-            return true;
-
+          
         }
 
         #endregion
@@ -320,7 +354,7 @@ namespace SaKei.Manager
         public void UpdatePwd(AccountModel model)
         {
             model.Salt_string = Convert.ToBase64String(model.Salt);
-           
+
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                 @"  UPDATE UserAccounts
@@ -570,8 +604,8 @@ namespace SaKei.Manager
                 }
 
                 return true;
-                
-                
+
+
             }
             catch (Exception ex)
             {
@@ -580,6 +614,40 @@ namespace SaKei.Manager
                 return false;
             }
         }
+
+        public bool ActiveCapcha(string acc)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                @"  UPDATE UserAccounts
+                    SET 
+                        IsActivation = 1  
+                    WHERE
+                        UserAccounts.UserAccount = @acc";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@acc", acc);
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("UpdatePwd", ex);
+                return false;
+            }
+
+        }
+
+
+
 
         #endregion
 
@@ -698,8 +766,40 @@ namespace SaKei.Manager
         }
         #endregion
 
+        #region "用帳號刪除"
+        public void DeleteAcc(string acc)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                $@"  Delete from UserAccounts
+                     where UserAccount = @useracc; ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        AccountModel modelca = new AccountModel();
+                        command.Parameters.AddWithValue("@useracc", acc);
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+
+                            modelca.Account = reader["UserAccount"] as string;
+
+                        }
 
 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        #endregion
 
     }
 

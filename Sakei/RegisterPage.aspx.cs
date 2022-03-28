@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Threading;
 
 namespace Sakei
 {
@@ -19,26 +20,13 @@ namespace Sakei
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
             if (!Page.IsPostBack)
             {
+
                 this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大寫及小寫字元<br/>" + "2.含至少一位數字<br/>" + "3.長度至少八碼，最長20碼 <br/>" + "4.可含特殊字元(#?!@$%^&*-) <br/>";
                 this.plc1.Visible = false;
                 this.plc2.Visible = true;
             }
-
-
-            if (!Page.IsPostBack)
-            {
-                if (plc1.Visible == false)
-                {
-                    this.plc1.Visible = true;
-                    this.plc2.Visible = false;
-
-                }
-            }
-
-          
 
         }
 
@@ -72,7 +60,7 @@ namespace Sakei
                 return;
             }
 
-            //產生一組變數 帶到信封內  順便先註冊帳號 但尚未激活
+
             Random rnd = new Random();
             int _captcha = Convert.ToInt32(rnd.Next(10000, 99999));
 
@@ -80,19 +68,29 @@ namespace Sakei
             if (_mgr.SendEmail(model.Mail, _captcha))
             {
                 Response.Write("<script>alert('已發送驗證信!!')</script>");
-                this.plc1.Visible = true;
-                this.plc2.Visible = false;
+
                 string captcha = Convert.ToString(_captcha);
                 model.CAPTCHA = captcha;
                 model.ID = Guid.NewGuid();
                 model.EmailDate = DateTime.Now;
+                string QQ = "RegisterPage.aspx?Q1=" + model.ID;
+                this.plc1.Visible = true;
+                this.plc2.Visible = false;
+
+
                 if (_mgr.CreatCapcha(model))
                 {
+
                     model = PWDHash.Hash(model);
                     _mgr.CreateAccounthash(model);
-                   
+
+
+
                 }
+
             }
+
+
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -102,24 +100,35 @@ namespace Sakei
 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
-    
-           
-            if (this.txtcaptcha.Text.Trim() == _mgr.GetCaptcha(model.ID))
+            string acc = this.txtAcc.Text;
+            string cpatcha = _mgr.GetCaptcha(acc).Trim();
+            
+
+
+            if (this.txtcaptcha.Text.Trim() == cpatcha)
             {
-                Response.Write("weee");
-                //model = PWDHash.Hash(model);
-                //_mgr.CreateAccounthash(model);
-                //Response.Write("<script>alert('註冊成功!!')</script>");
+                //激活
+                
+                if (_mgr.ActiveCapcha(acc) == true)
+                {
+                    Response.Write("<script>alert('註冊成功!!')</script>");
+                    AccountModel acc1 = _mgr.GetAccount(acc);
+                    LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
+                    Thread.Sleep(3000);
 
 
+                    Response.Redirect("AfterLogin\\Index.aspx");
+
+                }
             }
-            else
+            else 
             {
-                Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
+
+                Response.Write($"<script>alert('錯誤的驗證碼!!)</script>");
+                
             }
 
-
-
+            
 
         }
 

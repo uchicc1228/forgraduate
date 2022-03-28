@@ -38,13 +38,24 @@ namespace SaKei
         protected void btnLogin_Click(object sender, EventArgs e)
         {
 
+
+
+
+
             string account = this.txtAccount.Text.Trim();
             string pwd = this.txtPassword.Text.Trim();
+            int activestatue = (_mgr.GetActiveorNot(account));
+            if (activestatue != 1)
+            {
+                Response.Write("<script>alert('登入失敗，請檢查帳號密碼')</script>");
+                return;
+            }
 
             AccountModel acc = _mgr.GetAccount(account);
             if (acc == null)
             {
-
+                Response.Write("<script>alert('登入失敗，請檢查帳號密碼')</script>");
+                return;
             }
             else
             {
