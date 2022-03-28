@@ -19,7 +19,6 @@
             color: black;
             background-color: rgb(243, 229, 207);
             border-radius: 3px;
-            border: 1px solid black;
             position: relative;
             left: 70px;
             margin: 5px;

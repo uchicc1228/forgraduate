@@ -255,6 +255,7 @@
     <Compile Include="Manager\ExamSystemManagers\ExamDataManager.cs" />
     <Compile Include="Manager\ExamSystemManagers\UserAnswerManager.cs" />
     <Compile Include="Manager\AdminAccountManager.cs" />
+    <Compile Include="Manager\MallManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ExamSystemModels\MessageBoardModel.cs" />
