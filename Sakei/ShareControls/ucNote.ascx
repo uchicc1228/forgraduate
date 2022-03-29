@@ -1,16 +1,12 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucExamReviewExtraWindow.ascx.cs" Inherits="Sakei.ShareControls.ucExamReviewExtraWindow" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucNote.ascx.cs" Inherits="Sakei.ShareControls.ucNote" %>
 
 <style>
-    #divNoteWindow, #divNoteWindow div, #divMsgBordWindow, #divMsgBordWindow div {
+    #divNoteWindow, #divNoteWindow div{
         border: 0px;
     }
 </style>
 
-
-
-<div id="<%= this.ClientID%>">
-
-    <%--筆記視窗--%>
+ <%--筆記視窗--%>
     <div class="modal" id="divNoteWindow" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
@@ -29,7 +25,3 @@
             </div>
         </div>
     </div>
-
-    
-
-</div>

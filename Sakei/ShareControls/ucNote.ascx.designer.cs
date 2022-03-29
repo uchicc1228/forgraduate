@@ -11,7 +11,7 @@ namespace Sakei.ShareControls
 {
 
 
-    public partial class ucExamReviewExtraWindow
+    public partial class ucNote
     {
 
         /// <summary>

@@ -106,6 +106,8 @@
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="ShareControls\ucExamReviewExtraWindow.ascx" />
+    <Content Include="ShareControls\ucMsgBoard.ascx" />
+    <Content Include="ShareControls\ucNote.ascx" />
     <Content Include="StartPage.aspx" />
     <Content Include="testtest.aspx" />
     <Content Include="Web.config" />
@@ -159,9 +161,6 @@
     </Compile>
     <Compile Include="AfterLogin\UserPWDChange.aspx.designer.cs">
       <DependentUpon>UserPWDChange.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="API\TestDataHandler.ashx.cs">
-      <DependentUpon>TestDataHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="ExamSystem\ExamChallengeMode.aspx.cs">
       <DependentUpon>ExamChallengeMode.aspx</DependentUpon>
@@ -300,6 +299,20 @@
     <Compile Include="ShareControls\ucExamReviewExtraWindow.ascx.designer.cs">
       <DependentUpon>ucExamReviewExtraWindow.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ShareControls\ucMsgBoard.ascx.cs">
+      <DependentUpon>ucMsgBoard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShareControls\ucMsgBoard.ascx.designer.cs">
+      <DependentUpon>ucMsgBoard.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShareControls\ucNote.ascx.cs">
+      <DependentUpon>ucNote.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShareControls\ucNote.ascx.designer.cs">
+      <DependentUpon>ucNote.ascx</DependentUpon>
+    </Compile>
     <Compile Include="StartPage.aspx.cs">
       <DependentUpon>StartPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,7 +330,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FrontMaster.Master" />
-    <Content Include="API\TestDataHandler.ashx" />
     <Content Include="AfterLogin\AfterLogin.Master" />
     <Content Include="ExamSystem\ExamSystemMaster.Master" />
     <None Include="packages.config" />
@@ -329,6 +341,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="API\" />
     <Folder Include="App_Data\" />
     <Folder Include="Utility\" />
   </ItemGroup>
