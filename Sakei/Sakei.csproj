@@ -105,8 +105,7 @@
     <Content Include="AfterLogin\MallPage.aspx" />
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
-    <Content Include="ShareControls\ucMsgBoard.ascx" />
-    <Content Include="ShareControls\ucNote.ascx" />
+    <Content Include="ShareControls\ucNoteAndMsgWindow.ascx" />
     <Content Include="StartPage.aspx" />
     <Content Include="testtest.aspx" />
     <Content Include="Web.config" />
@@ -291,19 +290,12 @@
     <Compile Include="RegisterPage.aspx.designer.cs">
       <DependentUpon>RegisterPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ShareControls\ucMsgBoard.ascx.cs">
-      <DependentUpon>ucMsgBoard.ascx</DependentUpon>
+    <Compile Include="ShareControls\ucNoteAndMsgWindow.ascx.cs">
+      <DependentUpon>ucNoteAndMsgWindow.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShareControls\ucMsgBoard.ascx.designer.cs">
-      <DependentUpon>ucMsgBoard.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="ShareControls\ucNote.ascx.cs">
-      <DependentUpon>ucNote.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ShareControls\ucNote.ascx.designer.cs">
-      <DependentUpon>ucNote.ascx</DependentUpon>
+    <Compile Include="ShareControls\ucNoteAndMsgWindow.ascx.designer.cs">
+      <DependentUpon>ucNoteAndMsgWindow.ascx</DependentUpon>
     </Compile>
     <Compile Include="StartPage.aspx.cs">
       <DependentUpon>StartPage.aspx</DependentUpon>

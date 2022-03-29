@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Sakei.ShareControls
 {
-    public partial class ucNote : System.Web.UI.UserControl
+    public partial class ucNoteAndMsgWindow : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

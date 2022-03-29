@@ -6,6 +6,7 @@ using SaKei.Manager;
 using SaKei.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -60,10 +61,12 @@ namespace Sakei.ExamSystem
             {
                 _testIDList.Add(examList[i].TestID);
             }
-            if (_testIDList != null || _testIDList.Count != 0)
-                //取得使用者作答資料
-                _userAnswerList = _mgrUserAnswer.GetUserAnswerList(_userID, _testIDList);
 
+            //取得使用者作答資料
+            if (_testIDList != null || _testIDList.Count != 0)
+            {
+                _userAnswerList = _mgrUserAnswer.GetUserAnswerList(_userID, _testIDList);
+            }
 
             if (examList.Count == 0)
             {
@@ -78,10 +81,12 @@ namespace Sakei.ExamSystem
                 this.rptTestList.DataSource = examList;
                 this.rptTestList.DataBind();
 
-                this.ucExamReviewExtraWindow.UserID = _userID;
+               
             }
 
 
         }
+
+        
     }
 }

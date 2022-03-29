@@ -1,10 +1,35 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucMsgBoard.ascx.cs" Inherits="Sakei.ShareControls.ucMsgBoard" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucNoteAndMsgWindow.ascx.cs" Inherits="Sakei.ShareControls.ucNoteAndMsgWindow" %>
 
 <style>
-    #divMsgBordWindow, #divMsgBordWindow div {
+    #divNoteWindow, #divNoteWindow div,#divMsgBordWindow, #divMsgBordWindow div {
         border: 0px;
     }
 </style>
+
+<%--筆記視窗--%>
+<div class="modal" id="divNoteWindow" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <asp:Repeater ID="rptNote" runat="server">
+                    <ItemTemplate>
+
+                        <asp:TextBox ID="txtNote" runat="server" TextMode="MultiLine" Text="<%#Eval("UserNote") %>"></asp:TextBox>
+
+                    </ItemTemplate>
+                </asp:Repeater>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                <asp:Button ID="btnSave" runat="server" Text="儲存" />
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <%--留言視窗--%>
     <div class="modal" id="divMsgBordWindow" tabindex="-1">
