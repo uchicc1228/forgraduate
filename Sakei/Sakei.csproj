@@ -105,7 +105,6 @@
     <Content Include="AfterLogin\MallPage.aspx" />
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
-    <Content Include="ShareControls\ucExamReviewExtraWindow.ascx" />
     <Content Include="ShareControls\ucMsgBoard.ascx" />
     <Content Include="ShareControls\ucNote.ascx" />
     <Content Include="StartPage.aspx" />
@@ -291,13 +290,6 @@
     </Compile>
     <Compile Include="RegisterPage.aspx.designer.cs">
       <DependentUpon>RegisterPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ShareControls\ucExamReviewExtraWindow.ascx.cs">
-      <DependentUpon>ucExamReviewExtraWindow.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ShareControls\ucExamReviewExtraWindow.ascx.designer.cs">
-      <DependentUpon>ucExamReviewExtraWindow.ascx</DependentUpon>
     </Compile>
     <Compile Include="ShareControls\ucMsgBoard.ascx.cs">
       <DependentUpon>ucMsgBoard.ascx</DependentUpon>
