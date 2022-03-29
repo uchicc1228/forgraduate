@@ -1,4 +1,7 @@
-﻿using SaKei.Manager;
+﻿using Sakei.Helper;
+using Sakei.Manager;
+using Sakei.Models;
+using SaKei.Manager;
 using SaKei.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +15,8 @@ namespace Sakei.AfterLogin
     public partial class Index : System.Web.UI.Page
     {
         AccountManager _mgr = new AccountManager();
+        UserManager _umgr = new UserManager();
+        private Guid _userID;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -20,6 +25,9 @@ namespace Sakei.AfterLogin
             {
                 Response.Write($"<script>alert('{q1}')</script>");
             }
+          
+            
+
         }
 
         protected void btnInfoCh_Click(object sender, EventArgs e)
