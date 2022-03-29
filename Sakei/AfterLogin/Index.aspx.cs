@@ -14,8 +14,13 @@ namespace Sakei.AfterLogin
         AccountManager _mgr = new AccountManager();
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             string q1 = Request.QueryString["msg"];
-            Response.Write($"<script>alert('{q1}')</script>");
+            if(!String.IsNullOrEmpty(q1))
+            {
+                Response.Write($"<script>alert('{q1}')</script>");
+            }
+          
             
 
         }
