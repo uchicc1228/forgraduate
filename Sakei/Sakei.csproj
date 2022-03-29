@@ -175,6 +175,9 @@
     <Compile Include="AfterLogin\UserPWDChange.aspx.designer.cs">
       <DependentUpon>UserPWDChange.aspx</DependentUpon>
     </Compile>
+    <Compile Include="API\ExamReviewHandler.ashx.cs">
+      <DependentUpon>ExamReviewHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ExamSystem\ExamChallengeMode.aspx.cs">
       <DependentUpon>ExamChallengeMode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -269,7 +272,6 @@
     <Compile Include="Manager\AdminAccountManager.cs" />
     <Compile Include="Manager\FileManager.cs" />
     <Compile Include="Manager\TestManager.cs" />
-    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Manager\MallManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -334,6 +336,7 @@
     <Content Include="AfterLogin\AfterLogin.Master" />
     <Content Include="ExamSystem\ExamSystemMaster.Master" />
     <Content Include="Admin\Admin.Master" />
+    <Content Include="API\ExamReviewHandler.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -343,7 +346,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="API\" />
     <Folder Include="App_Data\" />
     <Folder Include="Utility\" />
   </ItemGroup>
