@@ -269,7 +269,6 @@
     <Compile Include="Manager\AdminAccountManager.cs" />
     <Compile Include="Manager\FileManager.cs" />
     <Compile Include="Manager\TestManager.cs" />
-    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Manager\MallManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
     <Compile Include="Models\UserModel.cs" />

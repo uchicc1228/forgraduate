@@ -1,4 +1,5 @@
-﻿using Sakei.Manager;
+﻿using Sakei.Helper;
+using Sakei.Manager;
 using Sakei.Models;
 using SaKei.Manager;
 using SaKei.Models;
@@ -15,6 +16,7 @@ namespace Sakei.AfterLogin
     {
         AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
+        private Guid _userID;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -24,8 +26,9 @@ namespace Sakei.AfterLogin
                 Response.Write($"<script>alert('{q1}')</script>");
             }
 
-            string name="";
-            UserModel model = _umgr.GetUserName(name);
+            _userID = (Guid)LoginHelper.GetUserID();
+
+            UserModel model = _umgr.GetUserName(_userID);
             this.lblName.Text = model.UserName;
 
             this.lblRank.Text = "000";
