@@ -16,38 +16,51 @@ namespace Sakei.Manager.ExamSystemManagers
         ///<param name="pageSize">每頁最大筆數</param>
         ///<param name="pageIndex">目前頁數</param>
         ///<param name="totalRows">每頁實際筆數</param>
-        public List<TestDataModel> GetTestDataList(int testLevel, int pageSize, int pageIndex, out int totalRows)
+        public List<TestDataModel> GetTestDataList(Guid userID,int testLevel, int pageSize, int pageIndex, out int totalRows)
         {
             //計算跳頁數
             int skip = pageSize * (pageIndex - 1);
             if (skip < 0)
                 skip = 0;
 
+            string commandExamText = $@"
+                                        SELECT 
+                                        TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
+	                                    OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
+									FROM TestDatabases
+									INNER JOIN TestTypes
+									ON TestDatabases.TestTypeID = TestTypes.TestTypeID
+									WHERE IsEnable='TRUE'
+                                        ";
+
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
-                                SELECT TOP ({pageSize})
-                                    TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
+                                 SELECT TOP ({pageSize})
+                                    UserAnswers.TestID,TestLevel,TestTypeID,TypeContext,TestContent,
 	                                OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
-                                FROM TestDatabases
-                                INNER JOIN TestTypes 
-                                ON TestDatabases.TestTypeID = TestTypes.TestTypeID
-                                WHERE IsEnable = 'true' AND
+                                 FROM UserAnswers
+                                 INNER JOIN 
+                                 	({commandExamText})  AS Exam
+                                ON UserAnswers.TestID = Exam.TestID
+                                WHERE 
+                                      UserID = @UserID AND
                                       TestLevel = {testLevel} AND
-                                      TestID NOT IN(
+                                      UserAnswers.TestID NOT IN(
                                             SELECT TOP {skip} TestID
-                                            FROM TestDatabases 
+                                            FROM UserAnswers 
                                             WHERE 
-                                                IsEnable = 'true' AND
                                                 TestLevel = {testLevel}
-                                            ORDER BY CreatTime
+                                            ORDER BY CreateDate
                                       )
-                                ORDER BY CreatTime
+                                ORDER BY CreateDate
                                 ";
             string commandCountText =
-                $@" SELECT COUNT(TestID)
-                    FROM TestDatabases
+                $@" SELECT COUNT(UserAnswers.TestID)
+                    FROM UserAnswers
+                    INNER JOIN TestDatabases
+                    ON UserAnswers.TestID = TestDatabases.TestID
                     WHERE 
-                        IsEnable = 'true' AND
+                        UserID = @UserID AND
                         TestLevel = {testLevel}
                 ";
             try
@@ -56,10 +69,10 @@ namespace Sakei.Manager.ExamSystemManagers
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
+                        command.Parameters.AddWithValue("@UserID", userID);
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
                         List<TestDataModel> examDataList = new List<TestDataModel>();
-
                         //將資料取出放到List中
                         while (reader.Read())
                         {

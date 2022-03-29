@@ -14,7 +14,7 @@ namespace Sakei
     public partial class testtest : System.Web.UI.Page
     {
         AccountManager _mgr = new AccountManager();
-        AccountModel model = new AccountModel();
+        UserModel model = new UserModel();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -37,7 +37,7 @@ namespace Sakei
             string pwd = this.txtpwd.Text.Trim();
             if (_mgr.TryLogin(acc, pwd))
             {
-                AccountModel acc1 = _mgr.GetAccount(acc);
+                UserModel acc1 = _mgr.GetAccount(acc);
                 LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
                 Response.Redirect("AfterLogin\\Index.aspx");
             }

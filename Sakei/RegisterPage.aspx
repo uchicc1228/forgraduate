@@ -120,7 +120,7 @@
     <asp:Literal ID="ltl1" runat="server"></asp:Literal>
     </asp:PlaceHolder>
     
-   
+   <asp:HiddenField runat="server" ID="hd1" />
     
 
 </asp:Content>

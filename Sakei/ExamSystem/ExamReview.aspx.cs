@@ -1,7 +1,12 @@
-﻿using Sakei.Manager.ExamSystemManagers;
+﻿using Sakei.Helper;
+using Sakei.Manager.ExamSystemManagers;
+using Sakei.Models.ExamSystemModels;
 using SaKei.Helpers;
+using SaKei.Manager;
+using SaKei.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,24 +16,30 @@ namespace Sakei.ExamSystem
 {
     public partial class ExamReview : System.Web.UI.Page
     {
-        private ExamDataManager _mgr = new ExamDataManager();
+        private ExamDataManager _mgrExamData = new ExamDataManager();
+        private UserAnswerManager _mgrUserAnswer = new UserAnswerManager();
+        private AccountManager _mgrAccount = new AccountManager();
         private const int _pageSize = 10;
         private int _testLevel;
+        private Guid _userID;
+        private List<Guid> _testIDList = new List<Guid>();
+        private List<UserAnswerModel> _userAnswerList;
         protected void Page_Load(object sender, EventArgs e)
         {
             //存入頁面要顯示的考題等級
             string testReviewLevelText = this.Request.QueryString["Level"];
             try
             {
+                _userID = (Guid)LoginHelper.GetUserID();
+                //取得等級
                 if (string.IsNullOrWhiteSpace(testReviewLevelText) || !int.TryParse(testReviewLevelText, out _testLevel))
-                    //_testLevel = (int)LoginHelper.GetUserLevel();
-                    _testLevel = 1;
+                    _testLevel = _mgrAccount.GetUserPointsAndMoney(_userID).UserLevel;
                 else
                     _testLevel = Convert.ToInt32(testReviewLevelText);
             }
             catch (Exception ex)
             {
-                Logger.WriteLog("存取不到使用者等級", ex);
+                Logger.WriteLog("存取不到使用者資料", ex);
                 throw;
             }
             int pageIndex;
@@ -40,10 +51,24 @@ namespace Sakei.ExamSystem
                 pageIndex = Convert.ToInt32(pageIndexText);
 
             int totalRows;
+            //取得考題資料清單
+            var examList = this._mgrExamData.GetTestDataList(_userID, _testLevel, _pageSize, pageIndex, out totalRows);
 
-            var list = this._mgr.GetTestDataList(_testLevel, _pageSize, pageIndex, out totalRows);
+            //清空_testIDList
+            _testIDList.Clear();
+            //重新綁定_testIDList
+            for (var i = 0; i < examList.Count; i++)
+            {
+                _testIDList.Add(examList[i].TestID);
+            }
 
-            if (list.Count == 0)
+            //取得使用者作答資料
+            if (_testIDList != null || _testIDList.Count != 0)
+            {
+                _userAnswerList = _mgrUserAnswer.GetUserAnswerList(_userID, _testIDList);
+            }
+
+            if (examList.Count == 0)
             {
                 this.rptTestList.Visible = false;
                 this.plcEmpty.Visible = true;
@@ -53,11 +78,15 @@ namespace Sakei.ExamSystem
                 this.rptTestList.Visible = true;
                 this.plcEmpty.Visible = false;
 
-                this.rptTestList.DataSource = list;
+                this.rptTestList.DataSource = examList;
                 this.rptTestList.DataBind();
+
+               
             }
 
 
         }
+
+        
     }
 }

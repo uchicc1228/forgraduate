@@ -13,5 +13,30 @@ namespace Sakei
         {
 
         }
+
+        protected void btnLV1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnLV2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnLV3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnLV4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnLV5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

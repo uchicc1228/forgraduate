@@ -15,7 +15,6 @@
             border-radius: 6px;
             border: 0;
             float: right;
-            
             margin: 5px;
         }
 
@@ -37,7 +36,6 @@
             border: 1px solid black;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
-           
         }
 
         .text_field {
@@ -69,9 +67,9 @@
         }
 
 
-        .divbtn{
-            padding-right:33px;
-            border:0px;
+        .divbtn {
+            padding-right: 33px;
+            border: 0px;
         }
     </style>
 </asp:Content>
@@ -89,7 +87,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-   
+
     <asp:PlaceHolder runat="server" ID="plcLogin">
         <label class="label_title"><b>會員登入</b></label><br />
         <label class="label_input">帳號</label>
@@ -98,12 +96,12 @@
         <asp:TextBox ID="txtPassword" CssClass="text_field" runat="server" TextMode="Password" placeholder="【密碼】："> </asp:TextBox><br />
 
         <div class="divbtn">
-             <asp:Button ID="btnLogin" CssClass="wweebtn" runat="server" Text="登入" OnClick="btnLogin_Click " />
-        <%-- <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />--%>
-        <asp:Button ID="forgotpwd" CssClass="wweebtn" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br />
-        <asp:Literal ID="ltlMessage" runat="server"></asp:Literal>
+            <asp:Button ID="btnLogin" CssClass="wweebtn" runat="server" Text="登入" OnClick="btnLogin_Click " />
+            <%-- <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />--%>
+            <asp:Button ID="forgotpwd" CssClass="wweebtn" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br />
+            <asp:Literal ID="ltlMessage" runat="server"></asp:Literal>
         </div>
-       
+
     </asp:PlaceHolder>
 </asp:Content>
 

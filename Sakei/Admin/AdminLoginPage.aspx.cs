@@ -27,7 +27,7 @@ namespace Sakei
             string pwd = this.txtPassword.Text.Trim();
 
             //雜湊 卡在這 找不到salt 原因可能是型別問題
-            AccountModel acc = _mgr.GetAccount(account);
+            UserModel acc = _mgr.GetAccount(account);
       //      pwd = PWDHash.LoginHash(pwd, acc.ID, acc.Salt_string);
 
 
@@ -37,7 +37,7 @@ namespace Sakei
 
                 //票券cookies維持登入狀態 
                 //todo: 一個登出紐 寫在usercontrol
-                AccountModel acc1 = _mgr.GetAccount(account);
+                UserModel acc1 = _mgr.GetAccount(account);
                 LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
                 Response.Redirect("AfterLogin\\Index.aspx");
 

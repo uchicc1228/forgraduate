@@ -53,9 +53,9 @@
                 <div class="row">
                     <div class="menu col-12">
                         <p>
-                            <a href="dd" target="blank" class="pageLink">頁面一</a> |
+                            <a href="Index.aspx" target="blank" class="pageLink">首頁</a> |
                             <a href="dd" target="blank" class="pageLink">頁面二</a> |
-                            <a href="dd" target="blank" class="pageLink">頁面三</a>|
+                            <a href="MallPage.aspx" target="blank" class="pageLink">商城</a>|
                             <a href="../LoginPage.aspx" target="blank" class="pageLink" >登出</a>
 
                         </p>

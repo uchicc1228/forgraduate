@@ -33,8 +33,67 @@ namespace Sakei.Manager.ExamSystemManagers
                         command.Parameters.AddWithValue("@TestID", testID);
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
-                        
-                            UserAnswerModel userAnswer = new UserAnswerModel
+
+                        UserAnswerModel userAnswer = new UserAnswerModel
+                        {
+                            UserID = userID,
+                            TestID = (Guid)reader["TestID"],
+                            UserAnswer = reader["UserAnswer"] as string,
+                            UserNote = reader["UserNote"] as string,
+                            CreateDate = (DateTime)reader["CreateDate"],
+                            IsNew = false
+                        };
+
+                        return userAnswer;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("Sakei.Manager.TestSystemManagers.UserAnswerManager.GetUserAnswer", ex);
+                throw;
+            }
+        }
+        public List<UserAnswerModel> GetUserAnswerList(Guid userID, List<Guid> testIDs)
+        {
+            //判斷有傳入ID
+            if (testIDs == null || testIDs.Count == 0)
+                throw new Exception("需指定 testIDs");
+
+            //組合要搜尋的TestID資料
+            List<string> param = new List<string>();
+            for (var i = 0; i < testIDs.Count; i++)
+            {
+                param.Add("@TestID" + i);
+            }
+            string inSql = string.Join(", ", param);
+
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText = $@"
+                                SELECT *
+                                FROM UserAnswers
+                                WHERE UserID = @UserID AND
+                                      TestID IN ({inSql})
+                                ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@UserID", userID);
+                        for (var i = 0; i < testIDs.Count; i++)
+                        {
+                            command.Parameters.AddWithValue("@TestID" + i, testIDs[i]);
+
+                        }
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        List<UserAnswerModel> userAnswer = new List<UserAnswerModel>();
+                        while (reader.Read())
+                        {
+                            UserAnswerModel model = new UserAnswerModel()
                             {
                                 UserID = userID,
                                 TestID = (Guid)reader["TestID"],
@@ -43,14 +102,16 @@ namespace Sakei.Manager.ExamSystemManagers
                                 CreateDate = (DateTime)reader["CreateDate"],
                                 IsNew = false
                             };
-                            
+                            userAnswer.Add(model);
+                        };
+
                         return userAnswer;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logger.WriteLog("Sakei.Manager.TestSystemManagers.UserAnswerManager.GetUserAnswer", ex);
+                Logger.WriteLog("Sakei.Manager.TestSystemManagers.UserAnswerManager.GetUserAnswerList", ex);
                 throw;
             }
         }

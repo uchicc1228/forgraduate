@@ -1,4 +1,6 @@
-﻿using SaKei.Manager;
+﻿using Sakei.Manager;
+using Sakei.Models;
+using SaKei.Manager;
 using SaKei.Models;
 using System;
 using System.Collections.Generic;
@@ -12,40 +14,30 @@ namespace Sakei.AfterLogin
     public partial class Index : System.Web.UI.Page
     {
         AccountManager _mgr = new AccountManager();
+        UserManager _umgr = new UserManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-        
+            
+            string q1 = Request.QueryString["msg"];
+            if(!String.IsNullOrEmpty(q1))
+            {
+                Response.Write($"<script>alert('{q1}')</script>");
+            }
+
+            string name="";
+            UserModel model = _umgr.GetUserName(name);
+            this.lblName.Text = model.UserName;
+
+            this.lblRank.Text = "000";
+            this.lblLevel.Text = "000";
+            this.lblMoney.Text = "000";
 
         }
 
         protected void btnInfoCh_Click(object sender, EventArgs e)
         {
-            this.plcPWDChanger.Visible = true;
+            this.Response.Redirect("UserPWDChange.aspx");
         }
-
-        protected void btnPWDyes_Click(object sender, EventArgs e)
-        {
-            //先去確認第一個原密碼對不對 再來比對新密碼跟原密碼是否相同
-            string oldpwd = this.txtpwdOld.Text.Trim();
-            string newpwd  =this.txtpwdNew.Text.Trim();
-            string newpwd2 = this.txtpwdNewx2.Text.Trim();
-            AccountModel model  =   _mgr.GetPWD(oldpwd);
-            if(model.PWD == oldpwd  || newpwd2 == newpwd)
-            {
-                model.PWD = newpwd2;
-                _mgr.UpdatePwd(model);
-                Response.Write("<script>alert('已變更成功!!')</script>");
-            }
-            else
-            {
-                Response.Write("<script>alert('原密碼錯誤，請再確認一次!!')</script>");
-            }
-
-        }
-
-        protected void btnNICKyes_Click(object sender, EventArgs e)
-        {
-
-        }
+   
     }
 }

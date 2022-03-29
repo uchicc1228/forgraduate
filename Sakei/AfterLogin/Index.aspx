@@ -95,38 +95,24 @@
         <br />
 
         <label class="lblfield">積分</label>
-        <asp:Label runat="server" ID="lblRank" />100/500
+        <asp:Label runat="server" ID="lblRank" />pt
         <br />
 
         <label class="lblfield">等級</label>
-        <asp:Label runat="server" ID="lblLevel" />N1
+        <asp:Label runat="server" ID="lblLevel" />lv
         <br />
 
         <label class="lblfield">金幣</label>
-        <asp:Label runat="server" ID="lblMoney" />100$
+        $<asp:Label runat="server" ID="lblMoney" />
         <br />
 
 
-        <asp:Button runat="server" ID="btnInfoCh" Text="變更使用者資料" CssClass="btnInfoCh"  OnClick="btnInfoCh_Click" />
+
     </div>
-   
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
 
-    <asp:PlaceHolder runat="server" ID="plcPWDChanger" Visible="false">
-        <h1><b>變更使用者資料</b></h1>
-        <div class="divPWDChanger">
-            <label class="lblfield">原密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwdOld"></asp:TextBox><br />
-            <label class="lblfield">新密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwdNew"></asp:TextBox><br />
-            <label class="lblfield">再次輸入新密碼</label><asp:TextBox runat="server" CssClass="text_field" ID="txtpwdNewx2"></asp:TextBox><br />
-             <asp:Button runat="server" ID="btnPWDyes" Text="確定變更" CssClass="btnyes"  OnClick="btnPWDyes_Click" />
-            <hr />
-            <label class="lblfield">暱稱　</label> <asp:TextBox runat="server" CssClass="text_field" ID="txtnick"></asp:TextBox><br />            
-            <asp:Button runat="server" ID="btnNICKyes" Text="確定變更" CssClass="btnyes" OnClick="btnNICKyes_Click" />
-        </div>
-    </asp:PlaceHolder>
-
-
-
+    <asp:Button runat="server" ID="btnInfoCh" Text="變更使用者資料" CssClass="btnInfoCh" OnClick="btnInfoCh_Click" />
 
 </asp:Content>
