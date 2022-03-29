@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true"  CodeBehind="EditItem.aspx.cs" Inherits="Sakei.EditItem" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true"   CodeBehind="EditItem.aspx.cs" Inherits="Sakei.EditItem" %>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -16,9 +16,10 @@
     </asp:DropDownList><br />
       <label class="label_input">道具價格 </label>
     <asp:TextBox runat="server" CssClass="text_field" ID="txtItemPrice"  placeholder="請輸入數字" ></asp:TextBox><br />
-       <label class="label_input">道具圖片 </label>
-
-    <asp:FileUpload runat="server" ID="ItemPicUpload" /><br/>
+      
+    <label class="label_input">道具圖片 </label>
+    <asp:FileUpload runat="server" ID="ItemPicUpload"  /><br/>
+   
     <label class="label_input">道具狀態 </label>
         <asp:DropDownList ID="intEnable" runat="server" AutoPostBack="True">
             <asp:ListItem Value="0">停用</asp:ListItem>
