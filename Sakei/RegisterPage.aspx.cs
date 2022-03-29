@@ -121,13 +121,12 @@ namespace Sakei
                 //激活
                 if (_mgr.ActiveCapcha(acc) == true)
                 {
-                    Response.Write("<script>alert('註冊成功!!')</script>");
+                   
                     AccountModel acc1 = _mgr.GetAccount(acc);
                     LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
                     Thread.Sleep(3000);
-
-
-                    Response.Redirect("AfterLogin\\Index.aspx");
+                    Response.Redirect("AfterLogin\\Index.aspx?msg=註冊成功desu");
+                    
 
                 }
             }

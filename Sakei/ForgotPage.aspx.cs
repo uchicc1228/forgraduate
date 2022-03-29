@@ -34,8 +34,6 @@ namespace Sakei
             }
 
 
-
-
             if (this._mgr.ForgotEmail(account, email))
             {
                 try
