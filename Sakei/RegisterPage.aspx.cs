@@ -42,21 +42,21 @@ namespace Sakei
 
             if (_mgr.GetAccount(model.Account) != null)
             {
-                Response.Write("<script>alert('存在相同帳號!')</script>");
+                Response.Write("<script>alert('存在相同帳號！')</script>");
                 return;
             }
             model.PWD = this.txtPWD.Text.Trim();
 
             if (!_mgr.isValidPWD(model.PWD))
             {
-                Response.Write("<script>alert('請注意密碼格式')</script>");
+                Response.Write("<script>alert('請注意密碼格式！')</script>");
                 return;
             }
             model.Mail = this.txtMail.Text.Trim();
 
             if (!_mgr.isValidEmail(model.Mail))
             {
-                Response.Write("<script>alert('請注意信箱格式')</script>");
+                Response.Write("<script>alert('請注意信箱格式！')</script>");
                 return;
             }
 
@@ -124,14 +124,14 @@ namespace Sakei
                    
                     AccountModel acc1 = _mgr.GetAccount(acc);
                     LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));      
-                    Response.Redirect("AfterLogin\\Index.aspx?msg=註冊成功!幫您移至主畫面。");
+                    Response.Redirect("AfterLogin\\Index.aspx?msg=註冊成功！幫您移至主畫面。");
                     
 
                 }
             }
             else 
             {
-                Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
+                Response.Write("<script>alert('錯誤的驗證碼！')</script>");
                 
             }
 

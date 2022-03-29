@@ -20,9 +20,6 @@ namespace Sakei.AfterLogin
             {
                 Response.Write($"<script>alert('{q1}')</script>");
             }
-          
-            
-
         }
 
         protected void btnInfoCh_Click(object sender, EventArgs e)
