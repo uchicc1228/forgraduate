@@ -16,7 +16,8 @@ namespace Sakei.AfterLogin
         {
             string q1 = Request.QueryString["msg"];
             Response.Write($"<script>alert('{q1}')</script>");
-            Response.Write("<script>alert('驗證碼超過時效!!')</script>");
+            
+
         }
 
         protected void btnInfoCh_Click(object sender, EventArgs e)

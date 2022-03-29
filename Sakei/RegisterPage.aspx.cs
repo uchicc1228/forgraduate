@@ -123,17 +123,15 @@ namespace Sakei
                 {
                    
                     AccountModel acc1 = _mgr.GetAccount(acc);
-                    LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
-                    Thread.Sleep(3000);
-                    Response.Redirect("AfterLogin\\Index.aspx?msg=註冊成功desu");
+                    LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));      
+                    Response.Redirect("AfterLogin\\Index.aspx?msg=註冊成功!幫您移至主畫面。");
                     
 
                 }
             }
             else 
             {
-
-                Response.Write($"<script>alert('錯誤的驗證碼!!)</script>");
+                Response.Write("<script>alert('錯誤的驗證碼!!')</script>");
                 
             }
 
