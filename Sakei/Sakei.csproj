@@ -78,8 +78,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdminLoginPage.aspx" />
-    <Content Include="AdminMainPage.aspx" />
+    <Content Include="Admin\AdminLoginPage.aspx" />
+    <Content Include="Admin\AdminMainPage.aspx" />
+    <Content Include="Admin\WebForm1.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
     <Content Include="AfterLogin\ItemChange.aspx" />
     <Content Include="AfterLogin\UserNameChange.aspx" />
@@ -88,9 +89,9 @@
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ExamSystem\ExamChallengeMode.aspx" />
     <Content Include="ExamSystem\ExamReview.aspx" />
-    <Content Include="EditAdmin.aspx" />
-    <Content Include="EditItem.aspx" />
-    <Content Include="EditTest.aspx" />
+    <Content Include="Admin\EditAdmin.aspx" />
+    <Content Include="Admin\EditItem.aspx" />
+    <Content Include="Admin\EditTest.aspx" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\back.jpg" />
@@ -111,19 +112,33 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminLoginPage.aspx.cs">
+    <Compile Include="Admin\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminLoginPage.aspx.cs">
       <DependentUpon>AdminLoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminLoginPage.aspx.designer.cs">
+    <Compile Include="Admin\AdminLoginPage.aspx.designer.cs">
       <DependentUpon>AdminLoginPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminMainPage.aspx.cs">
+    <Compile Include="Admin\AdminMainPage.aspx.cs">
       <DependentUpon>AdminMainPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminMainPage.aspx.designer.cs">
+    <Compile Include="Admin\AdminMainPage.aspx.designer.cs">
       <DependentUpon>AdminMainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="AfterLogin\AfterLogin.Master.cs">
       <DependentUpon>AfterLogin.Master</DependentUpon>
@@ -160,6 +175,9 @@
     <Compile Include="AfterLogin\UserPWDChange.aspx.designer.cs">
       <DependentUpon>UserPWDChange.aspx</DependentUpon>
     </Compile>
+    <Compile Include="API\ExamReviewHandler.ashx.cs">
+      <DependentUpon>ExamReviewHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ExamSystem\ExamChallengeMode.aspx.cs">
       <DependentUpon>ExamChallengeMode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -181,25 +199,25 @@
     <Compile Include="ExamSystem\ExamSystemMaster.Master.designer.cs">
       <DependentUpon>ExamSystemMaster.Master</DependentUpon>
     </Compile>
-    <Compile Include="EditAdmin.aspx.cs">
+    <Compile Include="Admin\EditAdmin.aspx.cs">
       <DependentUpon>EditAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EditAdmin.aspx.designer.cs">
+    <Compile Include="Admin\EditAdmin.aspx.designer.cs">
       <DependentUpon>EditAdmin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EditItem.aspx.cs">
+    <Compile Include="Admin\EditItem.aspx.cs">
       <DependentUpon>EditItem.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EditItem.aspx.designer.cs">
+    <Compile Include="Admin\EditItem.aspx.designer.cs">
       <DependentUpon>EditItem.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EditTest.aspx.cs">
+    <Compile Include="Admin\EditTest.aspx.cs">
       <DependentUpon>EditTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EditTest.aspx.designer.cs">
+    <Compile Include="Admin\EditTest.aspx.designer.cs">
       <DependentUpon>EditTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForgotPage.aspx.cs">
@@ -252,9 +270,11 @@
     <Compile Include="Manager\ExamSystemManagers\ExamDataManager.cs" />
     <Compile Include="Manager\ExamSystemManagers\UserAnswerManager.cs" />
     <Compile Include="Manager\AdminAccountManager.cs" />
+    <Compile Include="Manager\FileManager.cs" />
+    <Compile Include="Manager\TestManager.cs" />
     <Compile Include="Manager\MallManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
-    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ExamSystemModels\MessageBoardModel.cs" />
     <Compile Include="Models\ExamSystemModels\PointsModel.cs" />
     <Compile Include="Models\ExamSystemModels\TestDataModel.cs" />
@@ -263,7 +283,6 @@
     <Compile Include="Models\AdminLevelEnum.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\TestModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="NoPage.aspx.cs">
       <DependentUpon>NoPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,6 +335,8 @@
     <Content Include="FrontMaster.Master" />
     <Content Include="AfterLogin\AfterLogin.Master" />
     <Content Include="ExamSystem\ExamSystemMaster.Master" />
+    <Content Include="Admin\Admin.Master" />
+    <Content Include="API\ExamReviewHandler.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -325,7 +346,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="API\" />
     <Folder Include="App_Data\" />
     <Folder Include="Utility\" />
   </ItemGroup>

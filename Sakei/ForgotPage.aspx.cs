@@ -38,7 +38,7 @@ namespace Sakei
             {
                 try
                 {
-                    AccountModel id = _mgr.GetAccount(account);
+                    UserModel id = _mgr.GetAccount(account);
                     Response.Write("<script>alert('已發送驗證信!!')</script>");
                     _mgr.SendEmail(id.ID,id.Mail);
                     

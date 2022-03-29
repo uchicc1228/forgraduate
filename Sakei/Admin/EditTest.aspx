@@ -10,14 +10,7 @@
             <asp:ListItem Value="4">N4</asp:ListItem>
             <asp:ListItem Value="5">N5</asp:ListItem>
     </asp:DropDownList><br />
-    <label class="label_input">題目類型</label>
-    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True">
-            <asp:ListItem Value="1">次の言葉の読み方として最もよいものを、A・B・C・Dから一つ選びなさい。</asp:ListItem>
-            <asp:ListItem Value="2">次の文の（ ）に入れるのに最もよいものを、A・B・C・Dから一つ 選びなさい。</asp:ListItem>
-            <asp:ListItem Value="3">次の言葉の意味が最も近いものを、A・B・C・Dから一つ選びなさい。</asp:ListItem>
-            <asp:ListItem Value="4">次の言葉の使い方として最もよいものを、A・B・C・Dから一つ選びなさい。</asp:ListItem>
-            <asp:ListItem Value="5">次の文の ★ に入る最もよいものを、A・B・C・Dから一つ選びなさい。</asp:ListItem>
-         </asp:DropDownList><br />
+    <label class="label_input">題目類型</label>&nbsp; <br />
       <label class="label_input">題目內容 </label>
     <asp:TextBox runat="server" CssClass="text_field" ID="txtTextContent"  placeholder="請輸入內容" ></asp:TextBox><br />
     <label class="label_input">選項A </label>

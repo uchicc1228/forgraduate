@@ -13,7 +13,7 @@ namespace Sakei
 {
     public partial class MailAuthentication : System.Web.UI.Page
     {
-        AccountModel model = new AccountModel();
+        UserModel model = new UserModel();
         AccountManager _mgr = new AccountManager();
 
 
@@ -31,7 +31,7 @@ namespace Sakei
 
         protected void btnyes_Click(object sender, EventArgs e)
         {
-            AccountModel model = new AccountModel();
+            UserModel model = new UserModel();
             NameValueCollection collection = this.Request.QueryString;
             model.ID = Guid.Parse(collection[0]);
             

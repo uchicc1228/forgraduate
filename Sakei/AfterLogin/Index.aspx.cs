@@ -25,8 +25,15 @@ namespace Sakei.AfterLogin
             {
                 Response.Write($"<script>alert('{q1}')</script>");
             }
-          
-            
+
+            _userID = (Guid)LoginHelper.GetUserID();
+
+            UserModel model = _umgr.GetUserName(_userID);
+            this.lblName.Text = model.UserName;
+
+            this.lblRank.Text = "000";
+            this.lblLevel.Text = "000";
+            this.lblMoney.Text = "000";
 
         }
 

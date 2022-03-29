@@ -95,15 +95,15 @@
         <br />
 
         <label class="lblfield">積分</label>
-        <asp:Label runat="server" ID="lblRank" />100/500
+        <asp:Label runat="server" ID="lblRank" />pt
         <br />
 
         <label class="lblfield">等級</label>
-        <asp:Label runat="server" ID="lblLevel" />N1
+        <asp:Label runat="server" ID="lblLevel" />lv
         <br />
 
         <label class="lblfield">金幣</label>
-        <asp:Label runat="server" ID="lblMoney" />100$
+        $<asp:Label runat="server" ID="lblMoney" />
         <br />
 
 

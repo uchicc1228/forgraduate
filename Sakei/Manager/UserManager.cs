@@ -11,55 +11,20 @@ namespace Sakei.Manager
     public class UserManager
     {
         #region "抓出帳號名字"
-        public AccountModel GetUserName(string name)
+        public UserModel GetUserName(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                 @" SELECT *
-                    FROM [User]
-                    WHERE UserName = @name ";
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    using (SqlCommand command = new SqlCommand(commandText, conn))
-                    {
-                        command.Parameters.AddWithValue("@account", name);
-
-                        conn.Open();
-
-                        SqlDataReader reader = command.ExecuteReader();
-                        if (reader.Read())
-                        {
-                            AccountModel model = new AccountModel()
-                            {
-                                Account = reader["UserAccount"] as string,
-                                UserName = reader["UserName"] as string,
-                                ID = (Guid)reader["UserID"]
-                            };
-                            return model;
-
-                        }
-
-                        return null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLog("", ex);
-                throw;
-            }
-        }
-
-
-        public AccountModel GetUserName(Guid id)
-        {
-            string connStr = ConfigHelper.GetConnectionString();
-            string commandText =
-                 @" SELECT *
-                    FROM [User]
-                    WHERE UserID = @id ";
+                 @" SELECT 
+	                        [UserAccounts].UserID
+                           ,[UserName]
+                           ,[Character]
+                           ,[UserLevel] 
+                           ,[UserPoints]
+                           ,[UserMoney]
+                        FROM [UserAccounts]
+                        INNER JOIN [User]
+                        ON [UserAccounts].UserID=[User].UserID ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -73,9 +38,12 @@ namespace Sakei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
-
+                                UserMoney = (int)reader["UserMoney"],
+                                UserPoints = (int)reader["UserPoints"],
+                                UserLevel = (int)reader["UserLevel"],
+                                Character = reader["Character"] as string,
                                 UserName = reader["UserName"] as string,
                                 ID = (Guid)reader["UserID"]
                             };

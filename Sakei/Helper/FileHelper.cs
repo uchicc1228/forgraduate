@@ -4,23 +4,20 @@ using System.Linq;
 using System.Web;
 using System.IO;
 
-namespace DeliciousMap.Helpers
+namespace SaKei.Helpers
 {
     public class FileHelper
     {
-        private static string[] _imageFileExtArr =
-        {
-             ".png"
-        };
+        private static string _imageFileExt   =".png" ;
 
         private static int _uploadMB = 10;
         private static int _uploadBytes = _uploadMB * 1024 * 1024;
 
-        public static string[] ImageFileExtArr
+        public static string ImageFileExtArr
         {
             get
             {
-                return _imageFileExtArr;
+                return _imageFileExt;
             }
         }
 
@@ -32,19 +29,19 @@ namespace DeliciousMap.Helpers
             }
         }
 
-        /// <summary> 檢查檔案副檔名是否為圖片 </summary>
+        /// <summary> 檢查檔案副檔名是否為.png </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
         public static bool ValidImageExtension(string fileName)
         {
-            return ValidFileExtension(fileName, _imageFileExtArr);
+            return ValidFileExtension(fileName, _imageFileExt);
         }
 
         /// <summary> 檢查檔案副檔名是否在允許清單中 </summary>
         /// <param name="fileName"></param>
         /// <param name="avaiExts"></param>
         /// <returns></returns>
-        public static bool ValidFileExtension(string fileName, params string[] avaiExts)
+        public static bool ValidFileExtension(string fileName, string avaiExts)
         {
             if (string.IsNullOrWhiteSpace(fileName))
                 return false;

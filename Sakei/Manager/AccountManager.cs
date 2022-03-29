@@ -15,10 +15,10 @@ namespace SaKei.Manager
 {
     public class AccountManager
     {
-        AccountModel model = new AccountModel();
+        UserModel model = new UserModel();
         System.Net.Mail.MailMessage em = new System.Net.Mail.MailMessage();
 
-        public AccountModel GetAccount(string account)
+        public UserModel GetAccount(string account)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -38,7 +38,7 @@ namespace SaKei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
@@ -61,7 +61,7 @@ namespace SaKei.Manager
                 throw;
             }
         }
-        public AccountModel GetAccount(Guid id)
+        public UserModel GetAccount(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -81,7 +81,7 @@ namespace SaKei.Manager
 
                         if (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
                                 ID = (Guid)reader["UserID"],
                                 Account = reader["UserAccount"] as string,
@@ -107,7 +107,7 @@ namespace SaKei.Manager
         /// </summary>
         /// <param name="userID"></param>
         /// <returns></returns>
-        public AccountModel GetUserPointsAndMoney(Guid userID)
+        public UserModel GetUserPointsAndMoney(Guid userID)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -127,7 +127,7 @@ namespace SaKei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
                                 UserLevel = (int)reader["UserLevel"],
                                 UserPoints = (int)reader["UserPoints"],
@@ -147,7 +147,7 @@ namespace SaKei.Manager
                 throw;
             }
         }
-        public AccountModel GetPWD(string PWD)
+        public UserModel GetPWD(string PWD)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -167,7 +167,7 @@ namespace SaKei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
@@ -204,7 +204,7 @@ namespace SaKei.Manager
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        AccountModel modelca = new AccountModel();
+                        UserModel modelca = new UserModel();
                         command.Parameters.AddWithValue("@useracc", acc);
                         conn.Open();
 
@@ -241,7 +241,7 @@ namespace SaKei.Manager
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        AccountModel modelca = new AccountModel();
+                        UserModel modelca = new UserModel();
                         command.Parameters.AddWithValue("@useracc", acc);
                         conn.Open();
 
@@ -285,7 +285,7 @@ namespace SaKei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
                                 EmailDate = (DateTime)reader["EmailDate"] 
                                
@@ -313,7 +313,7 @@ namespace SaKei.Manager
             bool isAccountRight = false;
             bool isEmailRight = false;
 
-            AccountModel member = this.GetAccount(account);
+            UserModel member = this.GetAccount(account);
 
             if (member == null) // 找不到
                 return false;
@@ -330,7 +330,7 @@ namespace SaKei.Manager
             return result;
         }
         //寄出認證信 忘記密碼
-        public AccountModel SendEmail(Guid id, string mail)
+        public UserModel SendEmail(Guid id, string mail)
         {
 
             string mail1 = "http://localhost:8974/MailAuthentication.aspx";
@@ -391,7 +391,7 @@ namespace SaKei.Manager
 
         #region "一般會員忘記密碼後更改自己密碼" 
 
-        public void UpdatePwd(AccountModel model)
+        public void UpdatePwd(UserModel model)
         {
             model.Salt_string = Convert.ToBase64String(model.Salt);
 
@@ -438,7 +438,7 @@ namespace SaKei.Manager
             bool isAccountRight = false;
             bool isPasswordRight = false;
 
-            AccountModel member = this.GetAccount(account);
+            UserModel member = this.GetAccount(account);
 
             if (member == null) // 找不到就代表登入失敗
                 return false;
@@ -460,7 +460,7 @@ namespace SaKei.Manager
 
         #region "註冊"
 
-        public bool CreateAccounthash(AccountModel model)
+        public bool CreateAccounthash(UserModel model)
         {
             model.Salt_string = Convert.ToBase64String(model.Salt);
 
@@ -513,7 +513,7 @@ namespace SaKei.Manager
                 return false;
             }
         }
-        public bool CreateAccount(AccountModel model)
+        public bool CreateAccount(UserModel model)
         {
             // 1. 判斷資料庫是否有相同的 Account
             if (this.GetAccount(model.Account) != null)
@@ -564,7 +564,7 @@ namespace SaKei.Manager
                 return false;
             }
         }
-        public bool CreateAdminAccounthash(AccountModel model)
+        public bool CreateAdminAccounthash(UserModel model)
         {
             model.Salt_string = Convert.ToBase64String(model.Salt);
 
@@ -618,7 +618,7 @@ namespace SaKei.Manager
             }
         }
 
-        public bool CreatCapcha(AccountModel model)
+        public bool CreatCapcha(UserModel model)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -694,7 +694,7 @@ namespace SaKei.Manager
         #region "主頁面找暱稱"
 
         //暫時用不到
-        public AccountModel GetNickName(string acc)
+        public UserModel GetNickName(string acc)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -714,7 +714,7 @@ namespace SaKei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
                                 Account = reader["UserAccount"] as string,
                                 UserName = reader["UserName"] as string,
@@ -736,7 +736,7 @@ namespace SaKei.Manager
         }
 
 
-        public AccountModel GetNickName(Guid id)
+        public UserModel GetNickName(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -756,7 +756,7 @@ namespace SaKei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
 
                                 UserName = reader["UserName"] as string,
@@ -819,7 +819,7 @@ namespace SaKei.Manager
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        AccountModel modelca = new AccountModel();
+                        UserModel modelca = new UserModel();
                         command.Parameters.AddWithValue("@useracc", acc);
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
