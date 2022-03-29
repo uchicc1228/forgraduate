@@ -14,7 +14,7 @@ namespace Sakei.Helper
     {
        
         //登入用hash
-        public static string LoginHash(string pwd, AccountModel model)
+        public static string LoginHash(string pwd, UserModel model)
         {
 
          
@@ -47,7 +47,7 @@ namespace Sakei.Helper
 
 
         #region "註冊的雜湊"
-        public static AccountModel Hash(AccountModel model)
+        public static UserModel Hash(UserModel model)
         {
             //model.ID = Guid.NewGuid();
             string orgText = model.PWD;
@@ -65,7 +65,7 @@ namespace Sakei.Helper
 
          
         //更改密碼的雜湊 CC的MailAuthentication頁面用
-        public static AccountModel UpdateHash(AccountModel model)
+        public static UserModel UpdateHash(UserModel model)
         {
             
             string orgText = model.PWD;

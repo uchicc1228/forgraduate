@@ -1,4 +1,6 @@
-﻿using SaKei.Manager;
+﻿using Sakei.Manager;
+using Sakei.Models;
+using SaKei.Manager;
 using SaKei.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace Sakei.AfterLogin
     public partial class Index : System.Web.UI.Page
     {
         AccountManager _mgr = new AccountManager();
+        UserManager _umgr = new UserManager();
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -20,8 +23,14 @@ namespace Sakei.AfterLogin
             {
                 Response.Write($"<script>alert('{q1}')</script>");
             }
-          
-            
+
+            string name="";
+            UserModel model = _umgr.GetUserName(name);
+            this.lblName.Text = model.UserName;
+
+            this.lblRank.Text = "000";
+            this.lblLevel.Text = "000";
+            this.lblMoney.Text = "000";
 
         }
 

@@ -254,7 +254,7 @@
     <Compile Include="Manager\AdminAccountManager.cs" />
     <Compile Include="Manager\MallManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
-    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ExamSystemModels\MessageBoardModel.cs" />
     <Compile Include="Models\ExamSystemModels\PointsModel.cs" />
     <Compile Include="Models\ExamSystemModels\TestDataModel.cs" />
@@ -263,7 +263,6 @@
     <Compile Include="Models\AdminLevelEnum.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\TestModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="NoPage.aspx.cs">
       <DependentUpon>NoPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

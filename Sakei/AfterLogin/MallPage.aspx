@@ -49,11 +49,11 @@
     </div>
 
     <div class="Level" align="center">
-        <asp:Button ID="btnLV1" runat="server" Text="等級一" /><br />
-        <asp:Button ID="btnLV2" runat="server" Text="等級二" /><br />
-        <asp:Button ID="btnLV3" runat="server" Text="等級三" /><br />
-        <asp:Button ID="btnLV4" runat="server" Text="等級四" /><br />
-        <asp:Button ID="btnLV5" runat="server" Text="等級五" />
+        <asp:Button ID="btnLV1" runat="server" Text="等級一" OnClick="btnLV1_Click" /><br />
+        <asp:Button ID="btnLV2" runat="server" Text="等級二" OnClick="btnLV2_Click" /><br />
+        <asp:Button ID="btnLV3" runat="server" Text="等級三" OnClick="btnLV3_Click" /><br />
+        <asp:Button ID="btnLV4" runat="server" Text="等級四" OnClick="btnLV4_Click" /><br />
+        <asp:Button ID="btnLV5" runat="server" Text="等級五" OnClick="btnLV5_Click" />
     </div>
 
 </asp:Content>

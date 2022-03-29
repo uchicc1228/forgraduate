@@ -51,7 +51,7 @@ namespace SaKei
                 return;
             }
 
-            AccountModel acc = _mgr.GetAccount(account);
+            UserModel acc = _mgr.GetAccount(account);
             if (acc == null)
             {
                 Response.Write("<script>alert('登入失敗，請檢查帳號密碼')</script>");
@@ -64,7 +64,7 @@ namespace SaKei
 
             if (this._mgr.TryLogin(account, pwd))
             {    
-                AccountModel acc1 = _mgr.GetAccount(account);
+                UserModel acc1 = _mgr.GetAccount(account);
                 LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));
                 Response.Redirect("AfterLogin\\Index.aspx");
             }

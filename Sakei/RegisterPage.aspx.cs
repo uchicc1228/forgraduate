@@ -14,7 +14,7 @@ namespace Sakei
 {
     public partial class RegisterPage : System.Web.UI.Page
     {
-        AccountModel model = new AccountModel();
+        UserModel model = new UserModel();
         AccountManager _mgr = new AccountManager();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -122,7 +122,7 @@ namespace Sakei
                 if (_mgr.ActiveCapcha(acc) == true)
                 {
                    
-                    AccountModel acc1 = _mgr.GetAccount(acc);
+                    UserModel acc1 = _mgr.GetAccount(acc);
                     LoginHelper.Login(acc1.Account, Convert.ToString(acc1.ID));      
                     Response.Redirect("AfterLogin\\Index.aspx?msg=註冊成功!幫您移至主畫面。");
                     

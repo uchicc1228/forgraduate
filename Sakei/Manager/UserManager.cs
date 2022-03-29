@@ -11,7 +11,7 @@ namespace Sakei.Manager
     public class UserManager
     {
         #region "抓出帳號名字"
-        public AccountModel GetUserName(string name)
+        public UserModel GetUserName(string name)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -24,14 +24,14 @@ namespace Sakei.Manager
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@account", name);
+                        command.Parameters.AddWithValue("@name", name);
 
                         conn.Open();
 
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
                                 Account = reader["UserAccount"] as string,
                                 UserName = reader["UserName"] as string,
@@ -53,7 +53,7 @@ namespace Sakei.Manager
         }
 
 
-        public AccountModel GetUserName(Guid id)
+        public UserModel GetUserName(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -73,7 +73,7 @@ namespace Sakei.Manager
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.Read())
                         {
-                            AccountModel model = new AccountModel()
+                            UserModel model = new UserModel()
                             {
 
                                 UserName = reader["UserName"] as string,

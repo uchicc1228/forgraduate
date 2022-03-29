@@ -22,7 +22,7 @@ namespace Sakei.AfterLogin
             string oldpwd = this.txtpwdOld.Text.Trim();
             string newpwd = this.txtpwdNew.Text.Trim();
             string newpwd2 = this.txtpwdNewx2.Text.Trim();
-            AccountModel model = _mgr.GetPWD(oldpwd);
+            UserModel model = _mgr.GetPWD(oldpwd);
             if (model.PWD == oldpwd || newpwd2 == newpwd)
             {
                 model.PWD = newpwd2;
