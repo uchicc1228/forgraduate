@@ -77,5 +77,10 @@ namespace Sakei.AfterLogin
         {
             this.Response.Redirect("UserPWDChange.aspx");
         }
+
+        protected void btnChCharacter_Click(object sender, EventArgs e)
+        {
+            this.Response.Redirect("UserCharacterChange.aspx");
+        }
     }
 }
