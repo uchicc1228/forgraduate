@@ -81,7 +81,7 @@
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="btnNote_Click('<%# Eval("TestID") %>','<%#Eval("TestContent") %>')">
                                     筆記
                                 </button>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow" onclick="btnMsgBoard_Click('<%# Eval("TestID") %>')">留言板</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow" onclick="btnMsgBoard_Click('<%# Eval("TestID") %>','<%#Eval("TestContent") %>')">留言板</button>
                             </div>
 
                         </div>
@@ -120,17 +120,10 @@
     <div class="modal" id="divMsgBordWindow" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-
-                <div class="modal-header">
-
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" id="divMsgTitle">
                 </div>
-                <div class="modal-body">
-
-                    <div class="card" style="width: 18rem;" id="msgBoard">
-                    </div>
-
+                <div class="modal-body" id="msgBoard">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">留言</button>
@@ -175,28 +168,44 @@
 
         }
 
-        function BulidMsgBoard(objDataList) {
+        function BulidMsgBoard(objDataList, testContent) {
+            var msgTitle =
+                `<h5> Q : ${testContent}</h5>
+                `;
             var msgContent = "";
             for (var item of objDataList) {
+                var msgDate = new Date(item.CreateDate);
+                msgDate = msgDate.toLocaleString();
                 msgContent +=
                     `
-                       <li class="list-group-item">${item.MessageContent}</li>
-
+                    <div class="card">
+                      <div class="card-header">
+                        ${item.UserName}(Lv.N${item.UserLevel})
+                      </div>
+                      <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                          <p>${item.MessageContent}</p>
+                          <footer class="blockquote-footer">${msgDate}</cite></footer>
+                        </blockquote>
+                      </div>
+                    </div>
                     `;
             }
             $("#msgBoard").empty();
             $("#msgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
 
+            $("#divMsgTitle").empty();
+            $("#divMsgTitle").append(msgTitle);
         }
 
-        function btnMsgBoard_Click(testID) {
+        function btnMsgBoard_Click(testID, testContent) {
             $.ajax({
                 url: "../API/ExamReviewHandler.ashx?Action=MsgBoard",
                 method: "POST",
-                data: {"testID" : testID},
+                data: { "testID": testID },
                 dataType: "JSON",
                 success: function (objDataList) {
-                    BulidMsgBoard(objDataList);
+                    BulidMsgBoard(objDataList, testContent);
                 },
                 error: function (msg) {
                     console.log(msg);
