@@ -34,17 +34,23 @@ namespace Sakei.Manager.ExamSystemManagers
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
 
-                        UserAnswerModel userAnswer = new UserAnswerModel
+                        if (reader.Read())
                         {
-                            UserID = userID,
-                            TestID = (Guid)reader["TestID"],
-                            UserAnswer = reader["UserAnswer"] as string,
-                            UserNote = reader["UserNote"] as string,
-                            CreateDate = (DateTime)reader["CreateDate"],
-                            IsNew = false
-                        };
+                            UserAnswerModel userAnswer = new UserAnswerModel()
+                            {
+                                UserID = userID,
+                                TestID = testID,
+                                UserAnswer = reader["UserAnswer"] as string,
+                                UserNote = reader["UserNote"] as string,
+                                CreateDate = (DateTime)reader["CreateDate"],
+                                IsNew = false
+                            };
+                            return userAnswer;
 
-                        return userAnswer;
+                        }
+
+
+                        return null;
                     }
                 }
             }

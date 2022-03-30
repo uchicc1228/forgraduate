@@ -21,7 +21,7 @@ namespace Sakei.ExamSystem
         private AccountManager _mgrAccount = new AccountManager();
         private const int _pageSize = 10;
         private int _testLevel;
-        private Guid _userID;
+        public Guid UserID;
         private List<Guid> _testIDList = new List<Guid>();
         private List<UserAnswerModel> _userAnswerList;
         protected void Page_Load(object sender, EventArgs e)
@@ -30,10 +30,10 @@ namespace Sakei.ExamSystem
             string testReviewLevelText = this.Request.QueryString["Level"];
             try
             {
-                _userID = (Guid)LoginHelper.GetUserID();
+                UserID = (Guid)LoginHelper.GetUserID();
                 //取得等級
                 if (string.IsNullOrWhiteSpace(testReviewLevelText) || !int.TryParse(testReviewLevelText, out _testLevel))
-                    _testLevel = _mgrAccount.GetUserPointsAndMoney(_userID).UserLevel;
+                    _testLevel = _mgrAccount.GetUserPointsAndMoney(UserID).UserLevel;
                 else
                     _testLevel = Convert.ToInt32(testReviewLevelText);
             }
@@ -52,7 +52,7 @@ namespace Sakei.ExamSystem
 
             int totalRows;
             //取得考題資料清單
-            var examList = this._mgrExamData.GetTestDataList(_userID, _testLevel, _pageSize, pageIndex, out totalRows);
+            var examList = this._mgrExamData.GetTestDataList(UserID, _testLevel, _pageSize, pageIndex, out totalRows);
 
             //清空_testIDList
             _testIDList.Clear();
@@ -63,9 +63,9 @@ namespace Sakei.ExamSystem
             }
 
             //取得使用者作答資料
-            if (_testIDList != null || _testIDList.Count != 0)
+            if (_testIDList != null && _testIDList.Count != 0)
             {
-                _userAnswerList = _mgrUserAnswer.GetUserAnswerList(_userID, _testIDList);
+                _userAnswerList = _mgrUserAnswer.GetUserAnswerList(UserID, _testIDList);
             }
 
             if (examList.Count == 0)
@@ -81,12 +81,13 @@ namespace Sakei.ExamSystem
                 this.rptTestList.DataSource = examList;
                 this.rptTestList.DataBind();
 
-               
+                //this.ucNoteAndMsgWindow.userAnswerList = _userAnswerList;
+                //this.ucNoteAndMsgWindow.userID = UserID;
             }
 
 
         }
 
-        
+       
     }
 }

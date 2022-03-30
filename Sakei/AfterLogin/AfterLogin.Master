@@ -18,7 +18,7 @@
 
 
     <style>
-        div {
+        .masterPage {
             border: 1px solid black;
         }
 
@@ -49,8 +49,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <div class="container">
-                <div class="row">
+            <div class="container masterPage">
+                <div class="row masterPage">
                     <div class="menu col-12">
                         <p>
                             <a href="Index.aspx" target="blank" class="pageLink">首頁</a> |
@@ -66,11 +66,11 @@
 
 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-3 masterPage">
                         <asp:ContentPlaceHolder ID="CP2" runat="server"></asp:ContentPlaceHolder>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-9 masterPage">
                         <asp:ContentPlaceHolder ID="CP3" runat="server"></asp:ContentPlaceHolder>
                     </div>
 
