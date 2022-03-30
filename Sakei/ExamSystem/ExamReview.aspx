@@ -73,12 +73,12 @@
                                     <p>正確答案為 : <%# Eval("TestAnswer") %></p>
                                 </li>
                                 <li class="nav-item">
-                                    <p>您的答案為 : <%# Eval("TestAnswer") %></p>
+                                    <p>您的答案為 : <%# Eval("UserAnswer") %></p>
                                 </li>
                             </ul>
                             <%--筆記留言板按鈕--%>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="btnNote_Click('<%# Eval("TestID") %>')">
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="btnNote_Click('<%# Eval("TestID") %>','<%#Eval("TestContent") %>')">
                                     筆記
                                 </button>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow" onclick="btnMsgBoard_Click('<%# Eval("TestID") %>')">留言板</button>
@@ -99,17 +99,13 @@
     <asp:PlaceHolder ID="plcEmpty" runat="server" Visible="false">
         <p>尚未作答</p>
     </asp:PlaceHolder>
-    <%--<uc1:ucNoteAndMsgWindow runat="server" ID="ucNoteAndMsgWindow" />--%>
-
+    <%--筆記視窗--%>
     <div class="modal" id="divNoteWindow" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" id="divNoteTitle">
                 </div>
                 <div class="modal-body" id="divNote">
-
-                    
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
@@ -119,37 +115,57 @@
             </div>
         </div>
     </div>
+
+    <%--留言視窗--%>
+    <div class="modal" id="divMsgBordWindow" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="card" style="width: 18rem;" id="msgBoard">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">留言</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
     <script>
 
-        function BulidNote(objData) {
-            var rowsText = "";
-            if (objData) {
-                rowsText =
-                    `
-                       <textarea name="Note" rows="10" cols="50">${objData.UserNote}</textarea>
-                           
-                    `;
-            }
-            alert("bulid");
-            $("#divNote").empty();
-            $("#divNote").append(rowsText);
+        function BulidNote(objData, testContent) {
+            var noteTitle = `<h6> Q : ${testContent}</h6>`
+            var noteContent = ` <textarea name="Note" rows="10" cols="50">${objData.UserNote}</textarea>`;
 
+            $("#divNote").empty();
+            $("#divNote").append(noteContent);
+
+            $("#divNoteTitle").empty();
+            $("#divNoteTitle").append(noteTitle);
         };
 
-        function btnNote_Click(testID) {
-            alert("btnNote");
+        function btnNote_Click(testID, testContent) {
             var postData = {
                 "userID":'<%=this.UserID%>',
                 "testID": testID
             }
             $.ajax({
-                url: "../API/ExamReviewHandler.ashx",
+                url: "../API/ExamReviewHandler.ashx?Action=Note",
                 method: "POST",
                 data: postData,
                 dataType: "JSON",
                 success: function (objData) {
-                    alert("sucess");
-                    BulidNote(objData);
+                    BulidNote(objData, testContent);
                 },
                 error: function (msg) {
                     console.log(msg);
@@ -159,11 +175,34 @@
 
         }
 
-        function btnMsgBoard_Click(testID) {
-           <%-- var ucExtraWindowID = "<%= this.ucNoteAndMsgWindow.ClientID %>";
-            alert(ucExtraWindowID);
-            document.getElementById(ucExtraWindowID).setAttribute("testID", testID)--%>
+        function BulidMsgBoard(objDataList) {
+            var msgContent = "";
+            for (var item of objDataList) {
+                msgContent +=
+                    `
+                       <li class="list-group-item">${item.MessageContent}</li>
 
+                    `;
+            }
+            $("#msgBoard").empty();
+            $("#msgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
+
+        }
+
+        function btnMsgBoard_Click(testID) {
+            $.ajax({
+                url: "../API/ExamReviewHandler.ashx?Action=MsgBoard",
+                method: "POST",
+                data: {"testID" : testID},
+                dataType: "JSON",
+                success: function (objDataList) {
+                    BulidMsgBoard(objDataList);
+                },
+                error: function (msg) {
+                    console.log(msg);
+                    alert("通訊失敗，請聯絡管理員。");
+                }
+            });
         }
     </script>
 </asp:Content>
