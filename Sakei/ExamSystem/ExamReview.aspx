@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="ExamReview.aspx.cs" Inherits="Sakei.ExamSystem.ExamReview" %>
 
+<%@ Register Src="~/ShareControls/ucNoteAndMsgWindow.ascx" TagPrefix="uc1" TagName="ucNoteAndMsgWindow" %>
+
+
 
 
 
@@ -7,14 +10,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        #divTestLest {
+        #divTestLest, #extraWindow, #extraWindow div {
             border: 0px;
         }
 
         .accordion-item div {
             border: 0px;
         }
-        
     </style>
 </asp:Content>
 
@@ -33,8 +35,7 @@
                 <div class="accordion-item">
                     <%--簡略題目內容--%>
                     <h2 class="accordion-header bg-warning" id="test-title">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#divTestContent<%# Eval("TestID") %>" aria-expanded="false" aria-controls="flush-collapseOne" onclick="">
-
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#divTestContent<%# Eval("TestID") %>" aria-expanded="false" aria-controls="flush-collapseOne">
                             <div runat="server" class="spTestListTitle">
                                 <%# Eval("TestContentShort") %>
                             </div>
@@ -77,11 +78,12 @@
                             </ul>
                             <%--筆記留言板按鈕--%>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="btnNote_Click('<%# Eval("TestID") %>')">筆記</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="btnNote_Click('<%# Eval("TestID") %>')">
+                                    筆記
+                                </button>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow" onclick="btnMsgBoard_Click('<%# Eval("TestID") %>')">留言板</button>
                             </div>
-                            <uc1:ucNote runat="server" id="ucNote" />
+
                         </div>
                     </div>
                 </div>
@@ -93,44 +95,75 @@
     </div>
 
 
-
     <%--空畫面，當使用者未做過任何題目時顯示--%>
     <asp:PlaceHolder ID="plcEmpty" runat="server" Visible="false">
         <p>尚未作答</p>
     </asp:PlaceHolder>
+    <%--<uc1:ucNoteAndMsgWindow runat="server" ID="ucNoteAndMsgWindow" />--%>
 
-    
+    <div class="modal" id="divNoteWindow" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body" id="divNote">
+
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <asp:Button ID="btnSave" runat="server" Text="儲存" />
+                </div>
+
+            </div>
+        </div>
+    </div>
     <script>
-       
-        <%--function btnNote_Click(testID) {
-            var ucExtraWindowID = "<%= this.ucExamReviewExtraWindow.ClientID %>";
-            alert(ucExtraWindowID);
-            var ucExtraWindow = document.getElementById(ucExtraWindowID);
-            ucExtraWindow.setAttribute('TestID', testID);
 
+        function BulidNote(objData) {
+            var rowsText = "";
+            if (objData) {
+                rowsText =
+                    `
+                       <textarea name="Note" rows="10" cols="50">${objData.UserNote}</textarea>
+                           
+                    `;
+            }
+            alert("bulid");
+            $("#divNote").empty();
+            $("#divNote").append(rowsText);
+
+        };
+
+        function btnNote_Click(testID) {
+            alert("btnNote");
+            var postData = {
+                "userID":'<%=this.UserID%>',
+                "testID": testID
+            }
             $.ajax({
-                url: ".././API/ExamReviewHandler.ashx",
-                method: "GET",
-                data: {},
+                url: "../API/ExamReviewHandler.ashx",
+                method: "POST",
+                data: postData,
                 dataType: "JSON",
                 success: function (objData) {
-                    alert("yaa0");
-
+                    alert("sucess");
+                    BulidNote(objData);
                 },
                 error: function (msg) {
                     console.log(msg);
                     alert("通訊失敗，請聯絡管理員。");
                 }
             });
-            
+
         }
 
         function btnMsgBoard_Click(testID) {
-            var ucExtraWindowID = "<%= this.ucExamReviewExtraWindow.ClientID %>";
+           <%-- var ucExtraWindowID = "<%= this.ucNoteAndMsgWindow.ClientID %>";
             alert(ucExtraWindowID);
-            var ucExtraWindow = document.getElementById(ucExtraWindowID);
-            ucExtraWindow.setAttribute('TestID', testID);
+            document.getElementById(ucExtraWindowID).setAttribute("testID", testID)--%>
 
-        }--%>
+        }
     </script>
 </asp:Content>
