@@ -87,7 +87,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="CP2" runat="server">
 
 
-    <asp:Image ID="picCharacter" runat="server" ImageUrl="~/Images/下載.jpg" Width="200px" Height="250px" CssClass="picCharacter" />
+    <asp:Image ID="picCharacter" runat="server" Width="200px" Height="250px" CssClass="picCharacter" />
 
     <div class="info">
         <label class="lblfield">名稱</label>
@@ -95,15 +95,15 @@
         <br />
 
         <label class="lblfield">積分</label>
-        <asp:Label runat="server" ID="lblRank" />pt
+        <asp:Label runat="server" ID="lblRank" /> pt
         <br />
 
         <label class="lblfield">等級</label>
-        <asp:Label runat="server" ID="lblLevel" />lv
+        <asp:Label runat="server" ID="lblLevel" /> lv
         <br />
 
         <label class="lblfield">金幣</label>
-        $<asp:Label runat="server" ID="lblMoney" />
+        $ <asp:Label runat="server" ID="lblMoney" />
         <br />
 
 
