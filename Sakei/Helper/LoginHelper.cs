@@ -16,6 +16,7 @@ namespace Sakei.Helper
         /// <returns></returns>
         public static Guid? GetUserID()
         {
+                           
             var identity = HttpContext.Current.User.Identity as FormsIdentity;
             var ticket = identity.Ticket;
 

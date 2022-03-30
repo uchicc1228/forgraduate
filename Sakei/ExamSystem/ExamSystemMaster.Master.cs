@@ -9,14 +9,19 @@ namespace Sakei.ExamSystem
 {
     public partial class ExamSystemMaster : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             //判斷是否已登入
             if (!HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~//LoginPage.aspx");
-            }
 
+                Response.Redirect("~//LoginPage.aspx");
+
+            }
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            
             //判斷等級是否符合
 
 
