@@ -28,7 +28,7 @@ namespace Sakei.AfterLogin
             }
             #endregion
 
-
+            #region "RYU"
             _userID = (Guid)LoginHelper.GetUserID();
 
             _model = _umgr.GetUserName(_userID);
@@ -38,6 +38,7 @@ namespace Sakei.AfterLogin
             this.lblLevel.Text = _model.UserLevel.ToString();
             this.lblMoney.Text = _model.UserMoney.ToString();
             this.picCharacter.ImageUrl = _model.Character;
+            #endregion
         }
 
         protected void btnInfoCh_Click(object sender, EventArgs e)

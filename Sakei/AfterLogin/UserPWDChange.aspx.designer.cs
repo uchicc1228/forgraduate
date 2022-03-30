@@ -15,6 +15,60 @@ namespace Sakei.AfterLogin
     {
 
         /// <summary>
+        /// picCharacter 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image picCharacter;
+
+        /// <summary>
+        /// lblName 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblName;
+
+        /// <summary>
+        /// lblRank 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRank;
+
+        /// <summary>
+        /// lblLevel 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLevel;
+
+        /// <summary>
+        /// lblMoney 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMoney;
+
+        /// <summary>
+        /// btnInfoCh 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInfoCh;
+
+        /// <summary>
         /// plcPWDChanger 控制項。
         /// </summary>
         /// <remarks>
@@ -60,13 +114,13 @@ namespace Sakei.AfterLogin
         protected global::System.Web.UI.WebControls.Button btnPWDyes;
 
         /// <summary>
-        /// txtnick 控制項。
+        /// txtname 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtnick;
+        protected global::System.Web.UI.WebControls.TextBox txtname;
 
         /// <summary>
         /// btnNICKyes 控制項。

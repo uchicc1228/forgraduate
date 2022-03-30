@@ -165,7 +165,7 @@ namespace SaKei.Manager
                         conn.Open();
 
                         SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
+                        if (reader.Read())
                         {
                             UserModel model = new UserModel()
                             {
