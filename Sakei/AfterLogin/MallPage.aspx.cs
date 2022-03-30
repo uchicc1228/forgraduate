@@ -15,8 +15,11 @@ namespace Sakei
     {
         AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
+        MallManager _mmgr = new MallManager();
         private Guid _userID;
         private UserModel _model;
+        private int level;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             _userID = (Guid)LoginHelper.GetUserID();
@@ -28,29 +31,14 @@ namespace Sakei
             this.lblLevel.Text = _model.UserLevel.ToString();
             this.lblMoney.Text = _model.UserMoney.ToString();
             this.picCharacter.ImageUrl = _model.Character;
+
+            level = 5;
+            List<ItemModel> items = _mmgr.GetItem(level);
+            this.rptItems.DataSource = items;
+            this.rptItems.DataBind();
         }
 
-        protected void btnLV1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnLV2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnLV3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnLV4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnLV5_Click(object sender, EventArgs e)
+        protected void btnLV_Click(object sender, EventArgs e)
         {
 
         }

@@ -79,6 +79,13 @@
             margin: 5px
         }
 
+        .items {
+            float: left;
+            width: 200px;
+            height: 400px;
+            background-color: black;
+        }
+
         h1 {
             text-align: center;
             font-family: 宋體;
@@ -113,51 +120,68 @@
     </div>
 
     <div class="Level" align="center">
-        <asp:Button ID="btnLV1" runat="server" Text="等級一" OnClick="btnLV1_Click" /><br />
-        <asp:Button ID="btnLV2" runat="server" Text="等級二" OnClick="btnLV2_Click" /><br />
-        <asp:Button ID="btnLV3" runat="server" Text="等級三" OnClick="btnLV3_Click" /><br />
-        <asp:Button ID="btnLV4" runat="server" Text="等級四" OnClick="btnLV4_Click" /><br />
-        <asp:Button ID="btnLV5" runat="server" Text="等級五" OnClick="btnLV5_Click" />
+        <asp:Button ID="btnLV1" runat="server" Text="等級一" OnClick="btnLV_Click" /><br />
+        <asp:Button ID="btnLV2" runat="server" Text="等級二" OnClick="btnLV_Click" /><br />
+        <asp:Button ID="btnLV3" runat="server" Text="等級三" OnClick="btnLV_Click" /><br />
+        <asp:Button ID="btnLV4" runat="server" Text="等級四" OnClick="btnLV_Click" /><br />
+        <asp:Button ID="btnLV5" runat="server" Text="等級五" OnClick="btnLV_Click" /><br />
+        <asp:Button ID="Button1" runat="server" Text="全部" OnClick="btnLV_Click" />
     </div>
 
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
-    <td id="main" valign="top">
-        <table width="800">
-            <tr>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC1.jpg" width="260">
-                    裝備一</td>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC2.jpg" width="260">
-                    裝備二</td>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC8.jpg" width="260">
-                    裝備三</td>
-            </tr>
-            <tr>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC5.jpg" width="260">
-                    裝備四</td>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC6.jpg" width="260">
-                    裝備五</td>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC7.jpg" width="260">
-                    裝備六</td>
-            </tr>
-            <tr>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC4.jpg" width="260">
-                    裝備七</td>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC3.jpg" width="260">
-                    裝備八</td>
-                <td align="center" valign="bottom">
-                    <img src="images/PIC9.jpg" width="260">
-                    裝備九</td>
-            </tr>
-        </table>
-    </td>
+    <asp:Repeater ID="rptItems" runat="server">
+        <ItemTemplate>
+            <div class="items">
+                <%# Eval("Content") %>
+            </div>
+        </ItemTemplate>
+    </asp:Repeater>
+
+
+
+
+
+
+
+
+    <table width="800">
+        <tr>
+            <td align="center" valign="bottom"><a>
+                <a href="https://www.glaciel.jp/">
+                    <img src="images/GB.jpg" width="100"></a>
+                <p align="center" valign="bottom">GLACIEL</p>
+            </td>
+            <td align="center" valign="bottom">
+                <img src="JPTShirt.png" width="260">
+                裝備二</td>
+            <td align="center" valign="bottom">
+                <img src="~/Images/StyleDefault.png" width="260">
+                裝備三</td>
+        </tr>
+        <tr>
+            <td align="center" valign="bottom">
+                <img src="images/PIC5.jpg" width="260">
+                裝備四</td>
+            <td align="center" valign="bottom">
+                <img src="images/PIC6.jpg" width="260">
+                裝備五</td>
+            <td align="center" valign="bottom">
+                <img src="images/PIC7.jpg" width="260">
+                裝備六</td>
+        </tr>
+        <tr>
+            <td align="center" valign="bottom">
+                <img src="images/PIC4.jpg" width="260">
+                裝備七</td>
+            <td align="center" valign="bottom">
+                <img src="images/PIC3.jpg" width="260">
+                裝備八</td>
+            <td align="center" valign="bottom">
+                <img src="images/PIC9.jpg" width="260">
+                裝備九</td>
+        </tr>
+    </table>
+
 </asp:Content>
