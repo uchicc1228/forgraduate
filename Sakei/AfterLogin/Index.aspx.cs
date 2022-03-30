@@ -17,6 +17,7 @@ namespace Sakei.AfterLogin
         AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
         private Guid _userID;
+        private UserModel _model;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -28,13 +29,13 @@ namespace Sakei.AfterLogin
 
             _userID = (Guid)LoginHelper.GetUserID();
 
-            UserModel model = _umgr.GetUserName(_userID);
-            this.lblName.Text = model.UserName;
+            _model = _umgr.GetUserName(_userID);
+            this.lblName.Text = _model.UserName;
 
-            this.lblRank.Text = "000";
-            this.lblLevel.Text = "000";
-            this.lblMoney.Text = "000";
-
+            this.lblRank.Text = _model.UserPoints.ToString();
+            this.lblLevel.Text = _model.UserLevel.ToString();
+            this.lblMoney.Text = _model.UserMoney.ToString();
+            this.picCharacter.ImageUrl = _model.Character;
         }
 
         protected void btnInfoCh_Click(object sender, EventArgs e)
