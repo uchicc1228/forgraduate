@@ -22,7 +22,7 @@ namespace Sakei.AfterLogin
         {
             #region "cc"
             string q1 = Request.QueryString["msg"];
-            if(!String.IsNullOrEmpty(q1))
+            if (!String.IsNullOrEmpty(q1))
             {
                 Response.Write($"<script>alert('{q1}')</script>");
             }
@@ -41,10 +41,14 @@ namespace Sakei.AfterLogin
             #endregion
         }
 
+        protected void btnChCharacter_Click(object sender, EventArgs e)
+        {
+            this.Response.Redirect("UserCharacterChange.aspx");
+        }
+
         protected void btnInfoCh_Click(object sender, EventArgs e)
         {
             this.Response.Redirect("UserPWDChange.aspx");
         }
-   
     }
 }

@@ -84,6 +84,7 @@
     <Content Include="AfterLogin\Index.aspx" />
     <Content Include="AfterLogin\ItemChange.aspx" />
     <Content Include="AfterLogin\ShoppingList.aspx" />
+    <Content Include="AfterLogin\UserCharacterChange.aspx" />
     <Content Include="AfterLogin\UserPWDChange.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
@@ -167,6 +168,13 @@
     </Compile>
     <Compile Include="AfterLogin\ShoppingList.aspx.designer.cs">
       <DependentUpon>ShoppingList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterLogin\UserCharacterChange.aspx.cs">
+      <DependentUpon>UserCharacterChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\UserCharacterChange.aspx.designer.cs">
+      <DependentUpon>UserCharacterChange.aspx</DependentUpon>
     </Compile>
     <Compile Include="AfterLogin\UserPWDChange.aspx.cs">
       <DependentUpon>UserPWDChange.aspx</DependentUpon>
