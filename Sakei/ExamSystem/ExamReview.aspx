@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="ExamReview.aspx.cs" Inherits="Sakei.ExamSystem.ExamReview" %>
 
 <%@ Register Src="~/ShareControls/ucLevelChange.ascx" TagPrefix="uc1" TagName="ucLevelChange" %>
+<%@ Register Src="~/ShareControls/ucPageChange.ascx" TagPrefix="uc1" TagName="ucPageChange" %>
+
 
 
 
@@ -18,8 +20,8 @@
 
 <%--左側占比3--%>
 <asp:Content ID="Content2" ContentPlaceHolderID="CP2" runat="server">
-    
-    <uc1:ucLevelChange runat="server" id="ucLevelChange" />
+
+    <uc1:ucLevelChange runat="server" ID="ucLevelChange" />
 
 </asp:Content>
 
@@ -93,11 +95,14 @@
 
     </div>
 
-
     <%--空畫面，當使用者未做過任何題目時顯示--%>
     <asp:PlaceHolder ID="plcEmpty" runat="server" Visible="false">
         <p>尚未作答</p>
     </asp:PlaceHolder>
+
+    <%--切換頁數--%>
+    <uc1:ucPageChange runat="server" ID="ucPageChange" />
+
     <%--筆記視窗--%>
     <div class="modal" id="divNoteWindow" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable">
