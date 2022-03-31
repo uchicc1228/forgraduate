@@ -1,12 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="ExamReview.aspx.cs" Inherits="Sakei.ExamSystem.ExamReview" %>
 
-<%@ Register Src="~/ShareControls/ucNoteAndMsgWindow.ascx" TagPrefix="uc1" TagName="ucNoteAndMsgWindow" %>
-
-
-
-
-
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -109,7 +102,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                    <asp:Button ID="btnSave" runat="server" Text="儲存" />
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" id="btnNoteSave">儲存</button>
                 </div>
 
             </div>
@@ -123,10 +116,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-header" id="divMsgTitle">
                 </div>
-                <div class="modal-body" id="msgBoard">
+                <div class="modal-body" id="divMsgBoard">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">留言</button>
+                    <textarea name="txtMsgBoard" rows="4" cols="50"></textarea>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" id="btnMsgWrite">留言</button>
                 </div>
 
 
@@ -135,7 +129,8 @@
     </div>
 
     <script>
-
+        var testID = "";
+        //筆記
         function BulidNote(objData, testContent) {
             var noteTitle = `<h6> Q : ${testContent}</h6>`
             var noteContent = ` <textarea name="Note" rows="10" cols="50">${objData.UserNote}</textarea>`;
@@ -147,7 +142,8 @@
             $("#divNoteTitle").append(noteTitle);
         };
 
-        function btnNote_Click(testID, testContent) {
+        function btnNote_Click(id, testContent) {
+            testID = id;
             var postData = {
                 "userID":'<%=this.UserID%>',
                 "testID": testID
@@ -168,6 +164,7 @@
 
         }
 
+        //留言板
         function BulidMsgBoard(objDataList, testContent) {
             var msgTitle =
                 `<h5> Q : ${testContent}</h5>
@@ -180,7 +177,7 @@
                     `
                     <div class="card">
                       <div class="card-header">
-                        ${item.UserName}(Lv.N${item.UserLevel})
+                        <p>${item.UserName}( N${item.UserLevel} )</p>
                       </div>
                       <div class="card-body">
                         <blockquote class="blockquote mb-0">
@@ -191,14 +188,15 @@
                     </div>
                     `;
             }
-            $("#msgBoard").empty();
-            $("#msgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
+            $("#divMsgBoard").empty();
+            $("#divMsgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
 
             $("#divMsgTitle").empty();
             $("#divMsgTitle").append(msgTitle);
         }
 
-        function btnMsgBoard_Click(testID, testContent) {
+        function btnMsgBoard_Click(id, testContent) {
+            testID = id;
             $.ajax({
                 url: "../API/ExamReviewHandler.ashx?Action=MsgBoard",
                 method: "POST",
@@ -213,5 +211,27 @@
                 }
             });
         }
+
+        $("#btnMsgWrite").click(function () {
+            var msgWriteContent = document.getElementsByName("txtMsgBoard").values;
+            var postData = {
+                "userID": '<%=this.UserID%>',
+                "testID": testID,
+                "msg": msgWriteContent
+            };
+            $.ajax({
+                url: "../API/ExamReviewHandler.ashx?Action=MsgWrite",
+                method: "POST",
+                data: postData,
+                dataType: "JSON",
+                success: function (objDataList) {
+                    BulidMsgBoard(objDataList, testContent);
+                },
+                error: function (msg) {
+                    console.log(msg);
+                    alert("通訊失敗，請聯絡管理員。");
+                }
+            });
+        });
     </script>
 </asp:Content>

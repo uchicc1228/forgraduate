@@ -41,6 +41,27 @@ namespace Sakei.API
                 context.Response.Write(jsonText);
                 return;
             }
+
+            //使用者留言
+            if (string.Compare("POST", context.Request.HttpMethod, true) == 0 &&
+                string.Compare("MsgWrite", context.Request.QueryString["Action"], true) == 0)
+            {
+                Guid userID = Guid.Parse(context.Request.Form["userID"]);
+                Guid testID = Guid.Parse(context.Request.Form["testID"]);
+                string msgContent = context.Request.Form["msg"];
+
+                MessageBoardModel model = new MessageBoardModel()
+                {
+                    UserID = userID,
+                    TestID = testID,
+                    MessageContent = msgContent
+                };
+
+
+
+
+            }
+
         }
 
         public bool IsReusable
