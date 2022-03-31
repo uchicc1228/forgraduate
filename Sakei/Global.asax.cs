@@ -25,6 +25,10 @@ namespace Sakei
             var request = HttpContext.Current.Request;
             var response = HttpContext.Current.Response;
             
+         
+
+ 
+ 
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -34,7 +38,7 @@ namespace Sakei
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
+            Response.Redirect("NoPage.aspx");
         }
 
         protected void Session_End(object sender, EventArgs e)

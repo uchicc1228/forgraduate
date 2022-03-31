@@ -30,7 +30,6 @@ namespace Sakei.AfterLogin
 
             #region "RYU"
             _userID = (Guid)LoginHelper.GetUserID();
-
             _model = _umgr.GetUserName(_userID);
             this.lblName.Text = _model.UserName;
 
