@@ -37,24 +37,27 @@ namespace Sakei.AfterLogin
             string newpwd2 = this.txtpwdNew2.Text.Trim();
 
             //舊的密碼套用方法使其雜湊化
-            oldpwd = PWDHash.LoginHash(oldpwd, _model);
-
-
-
-
+            UserModel id = _mgr.GetAccount(_userID);
+            oldpwd = PWDHash.LoginHash(oldpwd, id);
 
             //用此密碼查庫        
             //查得到的話將新密碼雜湊後丟入改密碼
             _model = _mgr.GetPWD(oldpwd);
-            if (_model.PWD == oldpwd || newpwd == newpwd2)
+
+            if (!_mgr.isValidPWD(newpwd))
             {
-                newpwd = PWDHash.LoginHash(newpwd, _model);
+                Response.Write("<script>alert('請注意密碼格式！')</script>");
+            }
+            else if (_model.PWD == oldpwd && newpwd == newpwd2)
+            {
+                _model.PWD = newpwd;
+                _model = PWDHash.UpdateHash(_model);
                 _mgr.UpdatePwd(_model);
                 Response.Write("<script>alert('已變更成功!!')</script>");
             }
             else if (newpwd != newpwd2)
             {
-                Response.Write("<script>alert('確認新密碼錯誤，請再確認一次!!')</script>");
+                Response.Write("<script>alert('確認新密碼不相同，請再確認一次!!')</script>");
             }
             else
             {
