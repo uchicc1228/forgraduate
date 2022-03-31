@@ -10,7 +10,7 @@ namespace Sakei.AfterLogin
 {
     public partial class AfterLogin : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             if (!HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -18,6 +18,10 @@ namespace Sakei.AfterLogin
                 Response.Redirect("~//LoginPage.aspx");
 
             }
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

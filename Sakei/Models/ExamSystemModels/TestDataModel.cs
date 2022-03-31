@@ -22,6 +22,7 @@ namespace Sakei.Models.ExamSystemModels
         public string OptionsD { get; set; }
         public string TestAnswer { get; set; }
         public bool IsEnable { get; set; }
+        public string UserAnswer { get; set; }
     }
 
 }

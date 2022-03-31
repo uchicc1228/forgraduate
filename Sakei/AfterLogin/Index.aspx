@@ -11,6 +11,8 @@
         }
 
         .info {
+            position: relative;
+            left: 45px;
             margin: 5px;
             border: 1px;
         }
@@ -95,24 +97,28 @@
         <br />
 
         <label class="lblfield">積分</label>
-        <asp:Label runat="server" ID="lblRank" /> pt
+        <asp:Label runat="server" ID="lblRank" />
+        pt
         <br />
 
         <label class="lblfield">等級</label>
-        <asp:Label runat="server" ID="lblLevel" /> lv
+        <asp:Label runat="server" ID="lblLevel" />
+        lv
         <br />
 
         <label class="lblfield">金幣</label>
-        $ <asp:Label runat="server" ID="lblMoney" />
+        $
+        <asp:Label runat="server" ID="lblMoney" />
         <br />
-
-
 
     </div>
 
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
-
+    <asp:Button runat="server" ID="btnChCharacter" Text="鮭魚穿新衣" CssClass="btnInfoCh" OnClick="btnChCharacter_Click" />
+    <br />
     <asp:Button runat="server" ID="btnInfoCh" Text="變更使用者資料" CssClass="btnInfoCh" OnClick="btnInfoCh_Click" />
 
+
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
 </asp:Content>

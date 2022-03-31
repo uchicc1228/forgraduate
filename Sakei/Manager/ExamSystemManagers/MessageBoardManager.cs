@@ -20,12 +20,15 @@ namespace Sakei.Manager.ExamSystemManagers
                                 	MessageID,
                                 	TestID,
                                 	MessageBoards.UserID,
+                                	UserName,
                                 	UserLevel,
                                 	MessageContent,
                                 	MessageBoards.CreateDate
-                                FROM MessageBoards
-                                INNER JOIN UserAccounts
-                                ON MessageBoards.UserID=UserAccounts.UserID
+                                FROM (MessageBoards
+                                INNER JOIN [UserAccounts] 
+                                ON MessageBoards.UserID=UserAccounts.UserID)
+                                INNER JOIN [User]
+                                ON MessageBoards.UserID=[User].UserID
                                 WHERE TestID = @TestID
                                 ORDER BY MessageBoards.CreateDate DESC
                                 ";
@@ -46,6 +49,7 @@ namespace Sakei.Manager.ExamSystemManagers
                             {
                                 MessageID=(Guid)reader["MessageID"],
                                 UserID = (Guid)reader["UserID"],
+                                UserName=reader["UserName"] as string,
                                 UserLevel=(int)reader["UserLevel"],
                                 TestID = (Guid)reader["TestID"],
                                 MessageContent = reader["MessageContent"] as string,

@@ -1,6 +1,5 @@
 ﻿using Sakei.Helper;
 using Sakei.Manager;
-using Sakei.Models;
 using SaKei.Manager;
 using SaKei.Models;
 using System;
@@ -12,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace Sakei.AfterLogin
 {
-    public partial class Index : System.Web.UI.Page
+    public partial class UserCharacterChange : System.Web.UI.Page
     {
         AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
@@ -20,16 +19,8 @@ namespace Sakei.AfterLogin
         private UserModel _model;
         protected void Page_Load(object sender, EventArgs e)
         {
-            #region "cc"
-            string q1 = Request.QueryString["msg"];
-            if (!String.IsNullOrEmpty(q1))
-            {
-                Response.Write($"<script>alert('{q1}')</script>");
-            }
-            #endregion
-
-            #region "RYU"
             _userID = (Guid)LoginHelper.GetUserID();
+
             _model = _umgr.GetUserName(_userID);
             this.lblName.Text = _model.UserName;
 
@@ -37,7 +28,7 @@ namespace Sakei.AfterLogin
             this.lblLevel.Text = _model.UserLevel.ToString();
             this.lblMoney.Text = _model.UserMoney.ToString();
             this.picCharacter.ImageUrl = _model.Character;
-            #endregion
+            this.picCharacterChange.ImageUrl = _model.Character;
         }
 
         protected void btnChCharacter_Click(object sender, EventArgs e)
@@ -48,6 +39,11 @@ namespace Sakei.AfterLogin
         protected void btnInfoCh_Click(object sender, EventArgs e)
         {
             this.Response.Redirect("UserPWDChange.aspx");
+        }
+
+        protected void btnCharacteryes_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

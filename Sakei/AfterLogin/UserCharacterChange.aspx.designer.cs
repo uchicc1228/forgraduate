@@ -11,7 +11,7 @@ namespace Sakei.AfterLogin
 {
 
 
-    public partial class UserPWDChange
+    public partial class UserCharacterChange
     {
 
         /// <summary>
@@ -78,66 +78,30 @@ namespace Sakei.AfterLogin
         protected global::System.Web.UI.WebControls.Button btnInfoCh;
 
         /// <summary>
-        /// plcPWDChanger 控制項。
+        /// plcCharacterChanger 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder plcPWDChanger;
+        protected global::System.Web.UI.WebControls.PlaceHolder plcCharacterChanger;
 
         /// <summary>
-        /// txtpwdOld 控制項。
+        /// picCharacterChange 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpwdOld;
+        protected global::System.Web.UI.WebControls.Image picCharacterChange;
 
         /// <summary>
-        /// txtpwdNew 控制項。
+        /// btnCharacteryes 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpwdNew;
-
-        /// <summary>
-        /// txtpwdNew2 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpwdNew2;
-
-        /// <summary>
-        /// btnPWDyes 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPWDyes;
-
-        /// <summary>
-        /// txtname 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtname;
-
-        /// <summary>
-        /// btnNICKyes 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNICKyes;
+        protected global::System.Web.UI.WebControls.Button btnCharacteryes;
     }
 }

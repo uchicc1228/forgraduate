@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="MallPage.aspx.cs" Inherits="Sakei.MallPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="UserCharacterChange.aspx.cs" Inherits="Sakei.AfterLogin.UserCharacterChange" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -47,7 +47,7 @@
             margin: 5px;
         }
 
-        .divPWDChanger {
+        .plcCharacterChanger {
             position: relative;
             left: 250px;
             top: 160px;
@@ -79,22 +79,13 @@
             margin: 5px
         }
 
-        .items {
-            float: left;
-            width: 200px;
-            height: 400px;
-            background-color: black;
-        }
-
         h1 {
             text-align: center;
             font-family: 宋體;
         }
     </style>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="CP2" runat="server">
-
     <asp:Image ID="picCharacter" runat="server" Width="200px" Height="250px" CssClass="picCharacter" />
 
     <div class="info">
@@ -118,70 +109,17 @@
         <br />
 
     </div>
-
-    <div class="Level" align="center">
-        <asp:Button ID="btnLV1" runat="server" Text="等級一" OnClick="btnLV_Click" /><br />
-        <asp:Button ID="btnLV2" runat="server" Text="等級二" OnClick="btnLV_Click" /><br />
-        <asp:Button ID="btnLV3" runat="server" Text="等級三" OnClick="btnLV_Click" /><br />
-        <asp:Button ID="btnLV4" runat="server" Text="等級四" OnClick="btnLV_Click" /><br />
-        <asp:Button ID="btnLV5" runat="server" Text="等級五" OnClick="btnLV_Click" /><br />
-        <asp:Button ID="btnLV" runat="server" Text="全部" OnClick="btnLV_Click" />
-    </div>
-
+    <asp:Button runat="server" ID="btnChCharacter" Text="鮭魚穿新衣" CssClass="btnInfoCh" OnClick="btnChCharacter_Click" />
+    <br />
+    <asp:Button runat="server" ID="btnInfoCh" Text="變更使用者資料" CssClass="btnInfoCh" OnClick="btnInfoCh_Click" />
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
-    <asp:Repeater ID="rptItems" runat="server">
-        <ItemTemplate>
-            <div class="items">
-                <%# Eval("Content") %>
-            </div>
-        </ItemTemplate>
-    </asp:Repeater>
+    <asp:PlaceHolder runat="server" ID="plcCharacterChanger">
+        <h1><b>鮭魚換新衣</b></h1>
+        <div class="divCharacterChanger">
+            <asp:Image ID="picCharacterChange" runat="server" Width="200px" Height="250px" CssClass="picCharacter" />
 
-
-
-
-
-
-
-
-    <table width="800">
-        <tr>
-            <td align="center" valign="bottom"><a>
-                <a href="https://www.glaciel.jp/">
-                    <img src="images/GB.jpg" width="100"></a>
-                <p align="center" valign="bottom">GLACIEL</p>
-            </td>
-            <td align="center" valign="bottom">
-                <img src="JPTShirt.png" width="260">
-                裝備二</td>
-            <td align="center" valign="bottom">
-                <img src="~/Images/StyleDefault.png" width="260">
-                裝備三</td>
-        </tr>
-        <tr>
-            <td align="center" valign="bottom">
-                <img src="images/PIC5.jpg" width="260">
-                裝備四</td>
-            <td align="center" valign="bottom">
-                <img src="images/PIC6.jpg" width="260">
-                裝備五</td>
-            <td align="center" valign="bottom">
-                <img src="images/PIC7.jpg" width="260">
-                裝備六</td>
-        </tr>
-        <tr>
-            <td align="center" valign="bottom">
-                <img src="images/PIC4.jpg" width="260">
-                裝備七</td>
-            <td align="center" valign="bottom">
-                <img src="images/PIC3.jpg" width="260">
-                裝備八</td>
-            <td align="center" valign="bottom">
-                <img src="images/PIC9.jpg" width="260">
-                裝備九</td>
-        </tr>
-    </table>
-
+            <asp:Button runat="server" ID="btnCharacteryes" Text="確定變更" CssClass="btnyes" OnClick="btnCharacteryes_Click" />
+        </div>
+    </asp:PlaceHolder>
 </asp:Content>

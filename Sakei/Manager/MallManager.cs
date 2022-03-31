@@ -12,13 +12,22 @@ namespace Sakei.Manager
     public class MallManager
     {
         #region "抓出道具等級"
-        public ItemModel GetItemLevel(int level)
+        /// <summary>
+        /// 0=全開
+        /// 12345=
+        /// </summary>
+        public void GetItem()
+        {
+
+        }
+        public List<ItemModel> GetItem(int level)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                  @" SELECT *
                     FROM [Malls]
-                    WHERE ItemLevel = @level ";
+                    WHERE ItemLevel = @level AND
+                    IsEnable='true'";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -26,6 +35,48 @@ namespace Sakei.Manager
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
                         command.Parameters.AddWithValue("@level", level);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<ItemModel> items = new List<ItemModel>();
+                        while (reader.Read())
+                        {
+                            ItemModel model = new ItemModel()
+                            {
+                                ID = (Guid)reader["ItemID"],
+                                Level = (int)reader["ItemLevel"],
+                                Name = reader["ItemName"] as string,
+                                Content = reader["ItemContent"] as string,
+                                Price = (int)reader["ItemPrice"]
+                            };
+                            items.Add(model);
+                        }
+                        return items;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
+        #endregion
+        public ItemModel GetItem(Guid id)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM [ShoppingLists]
+                    WHERE UserID = @id ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
 
                         conn.Open();
 
@@ -54,6 +105,5 @@ namespace Sakei.Manager
                 throw;
             }
         }
-        #endregion
     }
 }

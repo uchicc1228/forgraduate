@@ -165,13 +165,53 @@ namespace SaKei.Manager
                         conn.Open();
 
                         SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
+                        if (reader.Read())
                         {
                             UserModel model = new UserModel()
                             {
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
                                 Mail = reader["UserEmail"] as string,
+                                ID = (Guid)reader["UserID"]
+                            };
+                            return model;
+
+                        }
+
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
+
+        public UserModel GetSaltString(Guid id)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM UserAccounts
+                    WHERE UserID = @id ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            UserModel model = new UserModel()
+                            {
+                                Salt_string = reader["UserPasswordSalt"] as string,                                
                                 ID = (Guid)reader["UserID"]
                             };
                             return model;

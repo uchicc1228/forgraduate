@@ -12,7 +12,7 @@ namespace Sakei
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
+             
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -22,8 +22,12 @@ namespace Sakei
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            var request = HttpContext.Current.Request;
+            var response = HttpContext.Current.Response;
+            
          
 
+ 
  
         }
 

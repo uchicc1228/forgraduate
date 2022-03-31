@@ -37,7 +37,7 @@ namespace Sakei.Manager.ExamSystemManagers
             string commandText = $@"
                                  SELECT TOP ({pageSize})
                                     UserAnswers.TestID,TestLevel,TestTypeID,TypeContext,TestContent,
-	                                OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
+	                                OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer,UserAnswer
                                  FROM UserAnswers
                                  INNER JOIN 
                                  	({commandExamText})  AS Exam
@@ -77,6 +77,7 @@ namespace Sakei.Manager.ExamSystemManagers
                         while (reader.Read())
                         {
                             TestDataModel info = BuildExamData(reader);
+                            info.UserAnswer = reader["UserAnswer"] as string;
                             examDataList.Add(info);
                         }
                         reader.Close();
