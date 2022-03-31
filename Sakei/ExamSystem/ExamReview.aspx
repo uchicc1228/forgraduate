@@ -15,6 +15,13 @@
         .accordion-item div {
             border: 0px;
         }
+        .spSubTitle{
+            font-size:8pt;
+            width:30%;
+        }
+        .spTitle{
+            width:70%;
+        }
     </style>
 </asp:Content>
 
@@ -37,14 +44,9 @@
                     <%--簡略題目內容--%>
                     <h2 class="accordion-header bg-warning" id="test-title">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#divTestContent<%# Eval("TestID") %>" aria-expanded="false" aria-controls="flush-collapseOne">
-                            <div runat="server" class="spTestListTitle">
-                                <%# Eval("TestContentShort") %>
-                            </div>
 
-                            <div runat="server" class="spTypeContext" style="display: none;">
-                                <%# Eval("TypeContext") %>
-                            </div>
-
+                            <span class="spTitle"><%# Eval("TestContentShort") %></span>
+                            <span class="spSubTitle"><%# Eval("TypeContext") %></span><br />
                         </button>
                     </h2>
                     <%--完整題目內容--%>
@@ -141,9 +143,11 @@
     </div>
 
     <script>
+
         var testID = "";
         var userAnswer = "";
-        var userID ="<%=this.UserID%>";
+        var userID = "<%=this.UserID%>";
+
         //筆記
         function BulidNote(testID, testContent) {
             var postData = {
@@ -158,7 +162,7 @@
                 success: function (objData) {
 
                     var noteTitle = `<h6> Q : <span id="noteTestContent">${testContent}</span></h6>`
-                    var noteContent = ` <textarea id="Note" rows="10" cols="50">${objData.UserNote}</textarea>`;
+                    var noteContent = ` <textarea id="Note" rows="10" cols="50" style="resize: none;">${objData.UserNote}</textarea>`;
 
                     $("#divNote").empty();
                     $("#divNote").append(noteContent);
@@ -239,7 +243,7 @@
                     }
 
                     var msgWrite =
-                        `<textarea id="txtMsgBoard" rows="4" cols="50"></textarea>`;
+                        `<textarea id="txtMsgBoard" rows="4" cols="50" style="resize: none;"></textarea>`;
 
                     $("#divMsgBoard").empty();
                     $("#divMsgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
