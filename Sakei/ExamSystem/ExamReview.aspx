@@ -118,9 +118,10 @@
                 </div>
                 <div class="modal-body" id="divMsgBoard">
                 </div>
-                <div class="modal-footer">
-                    <textarea name="txtMsgBoard" rows="4" cols="50"></textarea>
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" id="btnMsgWrite">留言</button>
+                <div class="modal-footer" id="divMsgFooter">
+                    <div id="divMsgWriteContent">
+                    </div>
+                    <button type="button" class="btn btn-warning" id="btnMsgWrite">留言</button>
                 </div>
 
 
@@ -165,16 +166,23 @@
         }
 
         //留言板
-        function BulidMsgBoard(objDataList, testContent) {
-            var msgTitle =
-                `<h5> Q : ${testContent}</h5>
+        function BulidMsgBoard(testID, testContent) {
+            $.ajax({
+                url: "../API/ExamReviewHandler.ashx?Action=MsgBoard",
+                method: "POST",
+                data: { "testID": testID },
+                dataType: "JSON",
+                success: function (objDataList) {
+
+                    var msgTitle =
+                        `<h5> Q : <span id="msgTestContent">${testContent}</span></h5>
                 `;
-            var msgContent = "";
-            for (var item of objDataList) {
-                var msgDate = new Date(item.CreateDate);
-                msgDate = msgDate.toLocaleString();
-                msgContent +=
-                    `
+                    var msgContent = "";
+                    for (var item of objDataList) {
+                        var msgDate = new Date(item.CreateDate);
+                        msgDate = msgDate.toLocaleString();
+                        msgContent +=
+                            `
                     <div class="card">
                       <div class="card-header">
                         <p>${item.UserName}( N${item.UserLevel} )</p>
@@ -187,33 +195,41 @@
                       </div>
                     </div>
                     `;
-            }
-            $("#divMsgBoard").empty();
-            $("#divMsgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
+                    }
 
-            $("#divMsgTitle").empty();
-            $("#divMsgTitle").append(msgTitle);
-        }
+                    var msgWrite =
+                        `<textarea id="txtMsgBoard" rows="4" cols="50"></textarea>`;
 
-        function btnMsgBoard_Click(id, testContent) {
-            testID = id;
-            $.ajax({
-                url: "../API/ExamReviewHandler.ashx?Action=MsgBoard",
-                method: "POST",
-                data: { "testID": testID },
-                dataType: "JSON",
-                success: function (objDataList) {
-                    BulidMsgBoard(objDataList, testContent);
+                    $("#divMsgBoard").empty();
+                    $("#divMsgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
+
+                    $("#divMsgTitle").empty();
+                    $("#divMsgTitle").append(msgTitle);
+
+                    $("#divMsgWriteContent").empty();
+                    $("#divMsgWriteContent").append(msgWrite);
+
                 },
                 error: function (msg) {
                     console.log(msg);
                     alert("通訊失敗，請聯絡管理員。");
                 }
             });
+
+        }
+
+        function btnMsgBoard_Click(id, testContent) {
+            testID = id;
+            BulidMsgBoard(testID, testContent);
+
+
         }
 
         $("#btnMsgWrite").click(function () {
-            var msgWriteContent = document.getElementsByName("txtMsgBoard").values;
+            var msgWriteContent = document.getElementById("txtMsgBoard").value;
+            var testContent = document.getElementById("msgTestContent").innerText;
+            alert(msgWriteContent);
+            alert(testContent);
             var postData = {
                 "userID": '<%=this.UserID%>',
                 "testID": testID,
@@ -223,9 +239,10 @@
                 url: "../API/ExamReviewHandler.ashx?Action=MsgWrite",
                 method: "POST",
                 data: postData,
-                dataType: "JSON",
-                success: function (objDataList) {
-                    BulidMsgBoard(objDataList, testContent);
+                success: function (txtMsg) {
+                    if (txtMsg == "OK") {
+                        BulidMsgBoard(testID, testContent);
+                    }
                 },
                 error: function (msg) {
                     console.log(msg);

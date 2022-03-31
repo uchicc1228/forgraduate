@@ -57,7 +57,11 @@ namespace Sakei.API
                     MessageContent = msgContent
                 };
 
+                _msgBoardMgr.CreateMessage(model);
 
+                context.Response.ContentType = "text/plain";
+                context.Response.Write("OK");
+                return;
 
 
             }
