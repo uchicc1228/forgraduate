@@ -33,6 +33,7 @@ namespace Sakei
             this.lblMoney.Text = _model.UserMoney.ToString();
             this.picCharacter.ImageUrl = _model.Character;
 
+            #region "商城道具"
             string query = Request.QueryString["key"];
             if (!int.TryParse(query, out level))
             {
@@ -42,6 +43,7 @@ namespace Sakei
             List<ItemModel> items = _mmgr.GetItem(level);
             this.rptItems.DataSource = items;
             this.rptItems.DataBind();
+            #endregion
         }
 
         protected void btnLV_Click(object sender, EventArgs e)

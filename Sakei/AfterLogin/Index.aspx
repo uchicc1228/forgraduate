@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .picCharacter {
+       .picCharacter {
             position: relative;
             left: 45px;
             border: solid 1px black;
@@ -47,7 +47,7 @@
             margin: 5px;
         }
 
-        .divPWDChanger {
+        .plcCharacterChanger {
             position: relative;
             left: 250px;
             top: 160px;

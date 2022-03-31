@@ -54,6 +54,10 @@ namespace Sakei.AfterLogin
                 _model = PWDHash.UpdateHash(_model);
                 _mgr.UpdatePwd(_model);
                 Response.Write("<script>alert('已變更成功!!')</script>");
+
+                this.txtpwdOld.Text = string.Empty;
+                this.txtpwdNew.Text = string.Empty;
+                this.txtpwdNew2.Text = string.Empty;
             }
             else if (newpwd != newpwd2)
             {

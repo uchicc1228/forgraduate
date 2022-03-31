@@ -47,7 +47,7 @@
             margin: 5px;
         }
 
-        .plcPWDChanger {
+        .plcCharacterChanger {
             position: relative;
             left: 250px;
             top: 160px;
