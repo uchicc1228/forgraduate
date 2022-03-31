@@ -34,13 +34,27 @@ namespace Sakei.AfterLogin
             //先去確認第一個原密碼對不對 再來比對新密碼跟原密碼是否相同
             string oldpwd = this.txtpwdOld.Text.Trim();
             string newpwd = this.txtpwdNew.Text.Trim();
-            string newpwd2 = this.txtpwdNewx2.Text.Trim();
-            UserModel model = _mgr.GetPWD(oldpwd);
-            if (model.PWD == oldpwd || newpwd2 == newpwd)
+            string newpwd2 = this.txtpwdNew2.Text.Trim();
+
+            //舊的密碼套用方法使其雜湊化
+            oldpwd = PWDHash.LoginHash(oldpwd, _model);
+
+
+
+
+
+            //用此密碼查庫        
+            //查得到的話將新密碼雜湊後丟入改密碼
+            _model = _mgr.GetPWD(oldpwd);
+            if (_model.PWD == oldpwd || newpwd == newpwd2)
             {
-                model.PWD = newpwd2;
-                _mgr.UpdatePwd(model);
+                newpwd = PWDHash.LoginHash(newpwd, _model);
+                _mgr.UpdatePwd(_model);
                 Response.Write("<script>alert('已變更成功!!')</script>");
+            }
+            else if (newpwd != newpwd2)
+            {
+                Response.Write("<script>alert('確認新密碼錯誤，請再確認一次!!')</script>");
             }
             else
             {
@@ -58,7 +72,6 @@ namespace Sakei.AfterLogin
                 _model.UserName = newName;
                 _umgr.UpdateUserName(_model);
                 Response.Write("<script>alert('更新成功!!')</script>");
-                //Response.Redirect("Index.aspx");
                 this.lblName.Text = newName;
                 this.txtname.Text = string.Empty;
             }

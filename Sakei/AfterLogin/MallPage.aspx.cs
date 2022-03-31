@@ -1,5 +1,6 @@
 ﻿using Sakei.Helper;
 using Sakei.Manager;
+using SaKei.Helpers;
 using SaKei.Manager;
 using SaKei.Models;
 using System;
@@ -32,7 +33,12 @@ namespace Sakei
             this.lblMoney.Text = _model.UserMoney.ToString();
             this.picCharacter.ImageUrl = _model.Character;
 
-            level = 5;
+            string query = Request.QueryString["key"];
+            if (!int.TryParse(query, out level))
+            {
+                level = 5;
+            }
+
             List<ItemModel> items = _mmgr.GetItem(level);
             this.rptItems.DataSource = items;
             this.rptItems.DataBind();
@@ -40,7 +46,30 @@ namespace Sakei
 
         protected void btnLV_Click(object sender, EventArgs e)
         {
-
+            if (sender == this.btnLV1)
+            {
+                Response.Redirect("MallPage.aspx?key=1");
+            }
+            else if (sender == this.btnLV2)
+            {
+                Response.Redirect("MallPage.aspx?key=2");
+            }
+            else if (sender == this.btnLV3)
+            {
+                Response.Redirect("MallPage.aspx?key=3");
+            }
+            else if (sender == this.btnLV4)
+            {
+                Response.Redirect("MallPage.aspx?key=4");
+            }
+            else if (sender == this.btnLV5)
+            {
+                Response.Redirect("MallPage.aspx?key=5");
+            }
+            else if (sender == this.btnLV)
+            {
+                Response.Redirect("MallPage.aspx?key=0");
+            }
         }
     }
 }

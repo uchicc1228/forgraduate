@@ -125,7 +125,7 @@
         <asp:Button ID="btnLV3" runat="server" Text="等級三" OnClick="btnLV_Click" /><br />
         <asp:Button ID="btnLV4" runat="server" Text="等級四" OnClick="btnLV_Click" /><br />
         <asp:Button ID="btnLV5" runat="server" Text="等級五" OnClick="btnLV_Click" /><br />
-        <asp:Button ID="Button1" runat="server" Text="全部" OnClick="btnLV_Click" />
+        <asp:Button ID="btnLV" runat="server" Text="全部" OnClick="btnLV_Click" />
     </div>
 
 </asp:Content>
