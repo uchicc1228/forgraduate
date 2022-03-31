@@ -25,7 +25,7 @@ namespace Sakei.ExamSystem
         protected void Page_Load(object sender, EventArgs e)
         {
             //存入頁面要顯示的考題等級
-            string testReviewLevelText = this.Request.QueryString["Level"];
+            string testReviewLevelText = this.Request.QueryString["key"];
             try
             {
                 UserID = (Guid)LoginHelper.GetUserID();

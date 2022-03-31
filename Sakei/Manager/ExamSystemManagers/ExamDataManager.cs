@@ -18,10 +18,19 @@ namespace Sakei.Manager.ExamSystemManagers
         ///<param name="totalRows">每頁實際筆數</param>
         public List<TestDataModel> GetTestDataList(Guid userID,int testLevel, int pageSize, int pageIndex, out int totalRows)
         {
+            string levelWhereText="";
+            string andLevelText = "";
             //計算跳頁數
             int skip = pageSize * (pageIndex - 1);
             if (skip < 0)
                 skip = 0;
+
+            //如果testLevel，則尋找全等級
+            if (testLevel != 0)
+            {
+                levelWhereText = $"WHERE TestLevel = {testLevel}";
+                andLevelText = $"AND TestLevel = {testLevel}";
+            }
 
             string commandExamText = $@"
                                         SELECT 
@@ -43,13 +52,11 @@ namespace Sakei.Manager.ExamSystemManagers
                                  	({commandExamText})  AS Exam
                                 ON UserAnswers.TestID = Exam.TestID
                                 WHERE 
-                                      UserID = @UserID AND
-                                      TestLevel = {testLevel} AND
+                                      UserID = @UserID {andLevelText} AND
                                       UserAnswers.TestID NOT IN(
                                             SELECT TOP {skip} TestID
                                             FROM UserAnswers 
-                                            WHERE 
-                                                TestLevel = {testLevel}
+                                            {levelWhereText}
                                             ORDER BY CreateDate
                                       )
                                 ORDER BY CreateDate
@@ -60,8 +67,7 @@ namespace Sakei.Manager.ExamSystemManagers
                     INNER JOIN TestDatabases
                     ON UserAnswers.TestID = TestDatabases.TestID
                     WHERE 
-                        UserID = @UserID AND
-                        TestLevel = {testLevel}
+                        UserID = @UserID {andLevelText}
                 ";
             try
             {

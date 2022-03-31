@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="ExamReview.aspx.cs" Inherits="Sakei.ExamSystem.ExamReview" %>
 
+<%@ Register Src="~/ShareControls/ucLevelChange.ascx" TagPrefix="uc1" TagName="ucLevelChange" %>
+
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -15,6 +18,9 @@
 
 <%--左側占比3--%>
 <asp:Content ID="Content2" ContentPlaceHolderID="CP2" runat="server">
+    
+    <uc1:ucLevelChange runat="server" id="ucLevelChange" />
+
 </asp:Content>
 
 <%--右側占比9--%>
