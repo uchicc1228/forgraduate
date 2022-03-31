@@ -52,9 +52,11 @@ namespace Sakei.ExamSystem
             //取得考題資料清單
             var examList = this._mgrExamData.GetTestDataList(UserID, _testLevel, _pageSize, pageIndex, out totalRows);
 
-            
-            
-            
+            this.ucPageChange.TotalRows = totalRows;
+            this.ucPageChange.PageIndex = pageIndex;
+            this.ucPageChange.Bind("key", _testLevel);
+
+
 
             if (examList.Count == 0)
             {
