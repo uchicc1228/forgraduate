@@ -71,7 +71,7 @@
                             </ul>
                             <%--筆記留言板按鈕--%>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="btnNote_Click('<%# Eval("TestID") %>','<%#Eval("TestContent") %>')">
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divNoteWindow" onclick="btnNote_Click('<%# Eval("TestID") %>','<%#Eval("TestContent") %>','<%# Eval("UserAnswer") %>')">
                                     筆記
                                 </button>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow" onclick="btnMsgBoard_Click('<%# Eval("TestID") %>','<%#Eval("TestContent") %>')">留言板</button>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" id="btnNoteSave">儲存</button>
+                    <button type="button" class="btn btn-warning" id="btnNoteSave">儲存</button>
                 </div>
 
             </div>
@@ -131,22 +131,12 @@
 
     <script>
         var testID = "";
+        var userAnswer = "";
+        var userID ="<%=this.UserID%>";
         //筆記
-        function BulidNote(objData, testContent) {
-            var noteTitle = `<h6> Q : ${testContent}</h6>`
-            var noteContent = ` <textarea name="Note" rows="10" cols="50">${objData.UserNote}</textarea>`;
-
-            $("#divNote").empty();
-            $("#divNote").append(noteContent);
-
-            $("#divNoteTitle").empty();
-            $("#divNoteTitle").append(noteTitle);
-        };
-
-        function btnNote_Click(id, testContent) {
-            testID = id;
+        function BulidNote(testID, testContent) {
             var postData = {
-                "userID":'<%=this.UserID%>',
+                "userID": userID,
                 "testID": testID
             }
             $.ajax({
@@ -155,7 +145,16 @@
                 data: postData,
                 dataType: "JSON",
                 success: function (objData) {
-                    BulidNote(objData, testContent);
+
+                    var noteTitle = `<h6> Q : <span id="noteTestContent">${testContent}</span></h6>`
+                    var noteContent = ` <textarea id="Note" rows="10" cols="50">${objData.UserNote}</textarea>`;
+
+                    $("#divNote").empty();
+                    $("#divNote").append(noteContent);
+
+                    $("#divNoteTitle").empty();
+                    $("#divNoteTitle").append(noteTitle);
+
                 },
                 error: function (msg) {
                     console.log(msg);
@@ -163,7 +162,38 @@
                 }
             });
 
+        };
+
+        function btnNote_Click(id, testContent, userAns) {
+            testID = id;
+            userAnswer = userAns;
+            BulidNote(testID, testContent);
+
         }
+        $("#btnNoteSave").click(function () {
+            var noteContent = document.getElementById("Note").value;
+            var testContent = document.getElementById("noteTestContent").innerText;
+            var postData = {
+                "userID": userID,
+                "testID": testID,
+                "UserNote": noteContent,
+                "UserAnswer": userAnswer
+            };
+            $.ajax({
+                url: "../API/ExamReviewHandler.ashx?Action=NoteWrite",
+                method: "POST",
+                data: postData,
+                success: function () {
+                    alert("筆記已儲存");
+                    BulidNote(testID, testContent);
+
+                },
+                error: function (msg) {
+                    console.log(msg);
+                    alert("通訊失敗，請聯絡管理員。");
+                }
+            });
+        });
 
         //留言板
         function BulidMsgBoard(testID, testContent) {
@@ -228,10 +258,8 @@
         $("#btnMsgWrite").click(function () {
             var msgWriteContent = document.getElementById("txtMsgBoard").value;
             var testContent = document.getElementById("msgTestContent").innerText;
-            alert(msgWriteContent);
-            alert(testContent);
             var postData = {
-                "userID": '<%=this.UserID%>',
+                "userID": userID,
                 "testID": testID,
                 "msg": msgWriteContent
             };
@@ -240,9 +268,8 @@
                 method: "POST",
                 data: postData,
                 success: function (txtMsg) {
-                    if (txtMsg == "OK") {
-                        BulidMsgBoard(testID, testContent);
-                    }
+                    BulidMsgBoard(testID, testContent);
+
                 },
                 error: function (msg) {
                     console.log(msg);

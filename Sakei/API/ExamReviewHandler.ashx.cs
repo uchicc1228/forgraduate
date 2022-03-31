@@ -29,6 +29,25 @@ namespace Sakei.API
                 context.Response.Write(jsonText);
                 return;
             }
+            //紀錄筆記
+            if (string.Compare("POST", context.Request.HttpMethod, true) == 0 &&
+                string.Compare("NoteWrite", context.Request.QueryString["Action"], true) == 0)
+            {
+
+                UserAnswerModel model = new UserAnswerModel()
+                {
+                    UserID = Guid.Parse(context.Request.Form["userID"]),
+                    TestID = Guid.Parse(context.Request.Form["testID"]),
+                    UserAnswer = context.Request.Form["UserAnswer"],
+                    UserNote = context.Request.Form["UserNote"],
+                    IsNew = false
+                };
+                this._userAnsMgr.SaveUserAnswer(model);
+
+                return;
+            }
+
+
             //輸出單題留言版資料
             if (string.Compare("POST", context.Request.HttpMethod, true) == 0 &&
                 string.Compare("MsgBoard", context.Request.QueryString["Action"], true) == 0)
@@ -56,11 +75,19 @@ namespace Sakei.API
                     TestID = testID,
                     MessageContent = msgContent
                 };
+                if (!string.IsNullOrWhiteSpace(model.MessageContent))
+                {
+                    _msgBoardMgr.CreateMessage(model);
 
-                _msgBoardMgr.CreateMessage(model);
+                    context.Response.ContentType = "text/plain";
+                    context.Response.Write("OK");
+                }
+                else
+                {
+                    context.Response.ContentType = "text/plain";
+                    context.Response.Write("NULL");
+                }
 
-                context.Response.ContentType = "text/plain";
-                context.Response.Write("OK");
                 return;
 
 

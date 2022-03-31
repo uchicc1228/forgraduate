@@ -122,12 +122,12 @@ namespace Sakei.Manager.ExamSystemManagers
             }
         }
         ///<summary>儲存並判斷該更新或新增作答紀錄資料</summary>
-        public void SaveUserAnswer(UserAnswerModel modelList)
+        public void SaveUserAnswer(UserAnswerModel model)
         {
-            if (modelList.IsNew)
-                CreateUserAnswer(modelList);
+            if (model.IsNew)
+                CreateUserAnswer(model);
             else
-                UpdateUserAnswer(modelList);
+                UpdateUserAnswer(model);
         }
         ///<summary>增加單使用者作答紀錄資料</summary> 
         private static void CreateUserAnswer(UserAnswerModel model)
