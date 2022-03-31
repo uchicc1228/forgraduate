@@ -22,8 +22,7 @@ namespace Sakei
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            var request = HttpContext.Current.Request;
-            var response = HttpContext.Current.Response;
+         
 
  
         }
