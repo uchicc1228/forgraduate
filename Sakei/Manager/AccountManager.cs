@@ -83,9 +83,11 @@ namespace SaKei.Manager
                         {
                             UserModel model = new UserModel()
                             {
-                                ID = (Guid)reader["UserID"],
                                 Account = reader["UserAccount"] as string,
                                 PWD = reader["UserPassword"] as string,
+                                Mail = reader["UserEmail"] as string,
+                                Salt_string = reader["UserPasswordSalt"] as string,
+                                ID = (Guid)reader["UserID"],
 
                             };
                             return model;
