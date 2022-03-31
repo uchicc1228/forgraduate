@@ -1,23 +1,19 @@
 ﻿using Sakei.Helper;
 using Sakei.Manager.ExamSystemManagers;
-using Sakei.Models.ExamSystemModels;
 using SaKei.Helpers;
 using SaKei.Manager;
-using SaKei.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Sakei.ExamSystem
+namespace Sakei.AfterLogin
 {
     public partial class ExamReview : System.Web.UI.Page
     {
         private ExamDataManager _mgrExamData = new ExamDataManager();
-        private UserAnswerManager _mgrUserAnswer = new UserAnswerManager();
         private AccountManager _mgrAccount = new AccountManager();
         private const int _pageSize = 10;
         private int _testLevel;
@@ -75,7 +71,5 @@ namespace Sakei.ExamSystem
 
 
         }
-
-
     }
 }

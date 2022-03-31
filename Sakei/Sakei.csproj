@@ -81,6 +81,7 @@
     <Content Include="Admin\AdminLoginPage.aspx" />
     <Content Include="Admin\AdminMainPage.aspx" />
     <Content Include="Admin\WebForm1.aspx" />
+    <Content Include="AfterLogin\ExamReview.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
     <Content Include="AfterLogin\ItemChange.aspx" />
     <Content Include="AfterLogin\ShoppingList.aspx" />
@@ -89,7 +90,6 @@
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ExamSystem\ExamChallengeMode.aspx" />
-    <Content Include="ExamSystem\ExamReview.aspx" />
     <Content Include="Admin\EditAdmin.aspx" />
     <Content Include="Admin\EditItem.aspx" />
     <Content Include="Admin\EditTest.aspx" />
@@ -149,6 +149,13 @@
     <Compile Include="AfterLogin\AfterLogin.Master.designer.cs">
       <DependentUpon>AfterLogin.Master</DependentUpon>
     </Compile>
+    <Compile Include="AfterLogin\ExamReview.aspx.cs">
+      <DependentUpon>ExamReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterLogin\ExamReview.aspx.designer.cs">
+      <DependentUpon>ExamReview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AfterLogin\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,13 +200,6 @@
     </Compile>
     <Compile Include="ExamSystem\ExamChallengeMode.aspx.designer.cs">
       <DependentUpon>ExamChallengeMode.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ExamSystem\ExamReview.aspx.cs">
-      <DependentUpon>ExamReview.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ExamSystem\ExamReview.aspx.designer.cs">
-      <DependentUpon>ExamReview.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExamSystem\ExamSystemMaster.Master.cs">
       <DependentUpon>ExamSystemMaster.Master</DependentUpon>

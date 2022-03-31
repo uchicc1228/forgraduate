@@ -54,7 +54,7 @@
                     <div class="menu col-12">
                         <p>
                             <a href="Index.aspx" target="blank" class="pageLink">首頁</a> |
-                            <a href="dd" target="blank" class="pageLink">頁面二</a> |
+                            <a href="ExamReview.aspx" target="blank" class="pageLink">考題回顧</a> |
                             <a href="MallPage.aspx" target="blank" class="pageLink">商城</a>|
                             <a href="../LoginPage.aspx" target="blank" class="pageLink" >登出</a>
 
