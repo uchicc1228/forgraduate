@@ -54,6 +54,46 @@ namespace Sakei.Manager
                 throw;
             }
         }
+        public List<ShoppingListModel> GetShoppingList(Guid UserID)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM [ShoppingLists]
+                    WHERE UserID = @UserID";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@UserID", UserID);
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<ShoppingListModel> items = new List<ShoppingListModel>();
+                        while (reader.Read())
+                        {
+                            ShoppingListModel model = new ShoppingListModel()
+                            {
+                                ID = (Guid)reader["ShoppingID"],
+                                UserID = (Guid)reader["UserID"],
+                                ItemID = (Guid)reader["ItemID"],
+                                Content = reader["ItemContent"] as string,
+                                CreateDate = (DateTime)reader["CreateDate"],
+                            };
+                            items.Add(model);
+                        }
+                        return items;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
         public List<ShoppingListModel> GetShoppingList(Guid userID, List<Guid> shoppingID)
         {
             //判斷有傳入ID

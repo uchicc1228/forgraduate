@@ -1,5 +1,6 @@
 ﻿using Sakei.Helper;
 using Sakei.Manager;
+using Sakei.Models;
 using SaKei.Manager;
 using SaKei.Models;
 using System;
@@ -16,6 +17,7 @@ namespace Sakei.AfterLogin
         AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
         MallManager _mmgr = new MallManager();
+        ShoppingListManager _smgr=new ShoppingListManager();
         private Guid _userID;
         private UserModel _model;
         protected void Page_Load(object sender, EventArgs e)
@@ -31,7 +33,7 @@ namespace Sakei.AfterLogin
             this.picCharacter.ImageUrl = _model.Character;
 
             #region "鮭鮭換新衣"
-            List<ItemModel> items= _mmgr.GetItem();
+            List<ShoppingListModel> items= _smgr.GetShoppingList(_userID);
             foreach (var item in items)
             {
                 item.Content = item.Content.Replace("~", "..");
