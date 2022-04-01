@@ -154,21 +154,21 @@
                 $("#divOption").empty();
                 $("#divOption").append(optText);
 
-                //var postData = {};
-                //$.ajax({
-                //    url: "../API/",
-                //    method: "POST",
-                //    data: postData,
-                //    dataType: "JSON",
-                //    success: function (objData) {
+                var postData = {};
+                $.ajax({
+                    url: "../API/",
+                    method: "POST",
+                    data: postData,
+                    dataType: "JSON",
+                    success: function (objData) {
 
                         
-                //    },
-                //    error: function (msg) {
-                //        console.log(msg);
-                //        alert("連線失敗，請聯絡管理員。");
-                //    }
-                //});
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("連線失敗，請聯絡管理員。");
+                    }
+                });
             };
             //從考題切換為解答
             function BuildAnswer() {

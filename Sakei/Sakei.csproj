@@ -194,6 +194,9 @@
     <Compile Include="API\ExamReviewHandler.ashx.cs">
       <DependentUpon>ExamReviewHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="API\ExamSystemHandler.ashx.cs">
+      <DependentUpon>ExamSystemHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="API\MallHandler.ashx.cs">
       <DependentUpon>MallHandler.ashx</DependentUpon>
     </Compile>
@@ -359,6 +362,7 @@
     <Content Include="Admin\Admin.Master" />
     <Content Include="API\ExamReviewHandler.ashx" />
     <Content Include="API\MallHandler.ashx" />
+    <Content Include="API\ExamSystemHandler.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
