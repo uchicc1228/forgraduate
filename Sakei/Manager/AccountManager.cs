@@ -191,46 +191,6 @@ namespace SaKei.Manager
             }
         }
 
-        public UserModel GetSaltString(Guid id)
-        {
-            string connStr = ConfigHelper.GetConnectionString();
-            string commandText =
-                 @" SELECT *
-                    FROM UserAccounts
-                    WHERE UserID = @id ";
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    using (SqlCommand command = new SqlCommand(commandText, conn))
-                    {
-                        command.Parameters.AddWithValue("@id", id);
-
-                        conn.Open();
-
-                        SqlDataReader reader = command.ExecuteReader();
-                        if (reader.Read())
-                        {
-                            UserModel model = new UserModel()
-                            {
-                                Salt_string = reader["UserPasswordSalt"] as string,                                
-                                ID = (Guid)reader["UserID"]
-                            };
-                            return model;
-
-                        }
-
-                        return null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLog("", ex);
-                throw;
-            }
-        }
-
         public string GetCaptcha(string acc)
         {
             string connStr = ConfigHelper.GetConnectionString();

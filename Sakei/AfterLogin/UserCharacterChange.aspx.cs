@@ -15,6 +15,7 @@ namespace Sakei.AfterLogin
     {
         AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
+        MallManager _mmgr = new MallManager();
         private Guid _userID;
         private UserModel _model;
         protected void Page_Load(object sender, EventArgs e)
@@ -28,7 +29,16 @@ namespace Sakei.AfterLogin
             this.lblLevel.Text = _model.UserLevel.ToString();
             this.lblMoney.Text = _model.UserMoney.ToString();
             this.picCharacter.ImageUrl = _model.Character;
-            this.picCharacterChange.ImageUrl = _model.Character;
+
+            #region "鮭鮭換新衣"
+            List<ItemModel> items= _mmgr.GetItem();
+            foreach (var item in items)
+            {
+                item.Content = item.Content.Replace("~", "..");
+            }
+            this.rptItems.DataSource = items;
+            this.rptItems.DataBind();
+            #endregion
         }
 
         protected void btnChCharacter_Click(object sender, EventArgs e)

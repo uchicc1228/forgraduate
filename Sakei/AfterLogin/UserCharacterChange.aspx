@@ -65,8 +65,7 @@
             background-color: rgb(243, 229, 207);
             border-radius: 3px;
             border: 1px solid black;
-            position: relative;
-            left: 220px;
+            position: fixed;
             margin: 5px;
         }
 
@@ -77,6 +76,13 @@
             border-bottom-right-radius: 5px;
             border: 0;
             margin: 5px
+        }
+
+        .items {
+            margin: 5px;
+            width: 200px;
+            height: 200px;
+            float: left;
         }
 
         h1 {
@@ -117,7 +123,16 @@
     <asp:PlaceHolder runat="server" ID="plcCharacterChanger">
         <h1><b>鮭魚換新衣</b></h1>
         <div class="divCharacterChanger">
-            <asp:Image ID="picCharacterChange" runat="server" Width="200px" Height="250px" CssClass="picCharacter" />
+
+            <asp:Repeater ID="rptItems" runat="server">
+                <ItemTemplate>
+                    <div class="items">
+                        <a href="/NoPage.aspx">
+                            <image src="<%#Eval("Content") %>"></image>
+                        </a>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
 
             <asp:Button runat="server" ID="btnCharacteryes" Text="確定變更" CssClass="btnyes" OnClick="btnCharacteryes_Click" />
         </div>

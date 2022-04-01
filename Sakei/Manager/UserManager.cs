@@ -10,8 +10,6 @@ namespace Sakei.Manager
 {
     public class UserManager
     {
-        UserModel model = new UserModel();
-
         #region "抓出帳號名字"
         public UserModel GetUserName(Guid id)
         {

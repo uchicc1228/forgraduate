@@ -40,9 +40,67 @@ namespace Sakei
                 level = 5;
             }
 
-            List<ItemModel> items = _mmgr.GetItem(level);
+            List<ItemModel> items;
+
+            if (level != 0)
+            {
+                items = _mmgr.GetItem(level);
+            }
+            else
+            {
+                items = _mmgr.GetItem();
+            }
+            foreach (var item in items)
+            {
+                item.Content = item.Content.Replace("~", "..");
+            }
+
             this.rptItems.DataSource = items;
             this.rptItems.DataBind();
+            #endregion
+            
+            #region "等級鎖定"
+
+            //if (_model.UserLevel == 1)
+            //{
+            //    this.btnLV1.Enabled = true;
+            //    this.btnLV2.Enabled = true;
+            //    this.btnLV3.Enabled = true;
+            //    this.btnLV4.Enabled = true;
+            //    this.btnLV5.Enabled = true;
+            //}
+            //if (_model.UserLevel == 2)
+            //{
+            //    this.btnLV1.Enabled = false;
+            //    this.btnLV2.Enabled = true;
+            //    this.btnLV3.Enabled = true;
+            //    this.btnLV4.Enabled = true;
+            //    this.btnLV5.Enabled = true;
+            //}
+            //if (_model.UserLevel == 3)
+            //{
+            //    this.btnLV1.Enabled = false;
+            //    this.btnLV2.Enabled = false;
+            //    this.btnLV3.Enabled = true;
+            //    this.btnLV4.Enabled = true;
+            //    this.btnLV5.Enabled = true;
+            //}
+            //if (_model.UserLevel == 4)
+            //{
+            //    this.btnLV1.Enabled = false;
+            //    this.btnLV2.Enabled = false;
+            //    this.btnLV3.Enabled = false;
+            //    this.btnLV4.Enabled = true;
+            //    this.btnLV5.Enabled = true;
+            //}
+            //if (_model.UserLevel == 5)
+            //{
+            //    this.btnLV1.Enabled = false;
+            //    this.btnLV2.Enabled = false;
+            //    this.btnLV3.Enabled = false;
+            //    this.btnLV4.Enabled = false;
+            //    this.btnLV5.Enabled = true;
+            //}
             #endregion
         }
 

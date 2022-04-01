@@ -280,9 +280,11 @@
     <Compile Include="Manager\ExamSystemManagers\UserAnswerManager.cs" />
     <Compile Include="Manager\AdminAccountManager.cs" />
     <Compile Include="Manager\FileManager.cs" />
+    <Compile Include="Manager\ShoppingListManager.cs" />
     <Compile Include="Manager\TestManager.cs" />
     <Compile Include="Manager\MallManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
+    <Compile Include="Models\ShoppingListModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ExamSystemModels\MessageBoardModel.cs" />
     <Compile Include="Models\ExamSystemModels\PointsModel.cs" />

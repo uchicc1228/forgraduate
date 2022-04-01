@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="MallPage.aspx.cs" Inherits="Sakei.MallPage" %>
 
+<%@ Register Src="~/ShareControls/ucLevelChange.ascx" TagPrefix="uc1" TagName="ucLevelChange" %>
+<%@ Register Src="~/ShareControls/ucPageChange.ascx" TagPrefix="uc1" TagName="ucPageChange" %>
+
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .picCharacter {
@@ -78,8 +83,8 @@
             margin: 5px
         }
 
-        .picItems{
-            border: 1px solid #000000;
+        .items {
+            margin: 5px;
             width: 200px;
             height: 200px;
             float: left;
@@ -118,6 +123,7 @@
 
     </div>
 
+        <uc1:ucLevelChange runat="server" ID="ucLevelChange" />
     <div class="Level">
         <asp:Button ID="btnLV1" runat="server" Text="等級一" CssClass="btnLevel" OnClick="btnLV_Click" /><br />
         <asp:Button ID="btnLV2" runat="server" Text="等級二" CssClass="btnLevel" OnClick="btnLV_Click" /><br />
@@ -126,16 +132,20 @@
         <asp:Button ID="btnLV5" runat="server" Text="等級五" CssClass="btnLevel" OnClick="btnLV_Click" /><br />
         <asp:Button ID="btnLV" runat="server" Text="全部" CssClass="btnLevel" OnClick="btnLV_Click" />
     </div>
-
+    <uc1:ucPageChange runat="server" ID="ucPageChange" />
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
 
+    <h1>
+    <asp:Literal ID="ltlTitle" runat="server"></asp:Literal>
+    </h1>
     <div class="picItems">
         <asp:Repeater ID="rptItems" runat="server">
             <ItemTemplate>
                 <div class="items">
-                    <image src="<%#Eval("Content") %>"></image>
+                    <a href="/NoPage.aspx">
+                    <image src="<%#Eval("Content") %>"></image></a>
                 </div>
             </ItemTemplate>
         </asp:Repeater>

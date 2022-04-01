@@ -16,10 +16,6 @@ namespace Sakei.Manager
         /// 0=全開
         /// 12345=
         /// </summary>
-        public void GetItem()
-        {
-
-        }
         public List<ItemModel> GetItem(int level)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -36,6 +32,45 @@ namespace Sakei.Manager
                     {
                         command.Parameters.AddWithValue("@level", level);
 
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<ItemModel> items = new List<ItemModel>();
+                        while (reader.Read())
+                        {
+                            ItemModel model = new ItemModel()
+                            {
+                                ID = (Guid)reader["ItemID"],
+                                Level = (int)reader["ItemLevel"],
+                                Name = reader["ItemName"] as string,
+                                Content = reader["ItemContent"] as string,
+                                Price = (int)reader["ItemPrice"]
+                            };
+                            items.Add(model);
+                        }
+                        return items;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
+        public List<ItemModel> GetItem()
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT *
+                    FROM [Malls]
+                    WHERE IsEnable='true'";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
                         conn.Open();
 
                         SqlDataReader reader = command.ExecuteReader();
