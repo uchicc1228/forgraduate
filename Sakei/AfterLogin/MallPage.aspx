@@ -123,7 +123,6 @@
 
     </div>
 
-        <uc1:ucLevelChange runat="server" ID="ucLevelChange" />
     <div class="Level">
         <asp:Button ID="btnLV1" runat="server" Text="等級一" CssClass="btnLevel" OnClick="btnLV_Click" /><br />
         <asp:Button ID="btnLV2" runat="server" Text="等級二" CssClass="btnLevel" OnClick="btnLV_Click" /><br />
@@ -132,7 +131,7 @@
         <asp:Button ID="btnLV5" runat="server" Text="等級五" CssClass="btnLevel" OnClick="btnLV_Click" /><br />
         <asp:Button ID="btnLV" runat="server" Text="全部" CssClass="btnLevel" OnClick="btnLV_Click" />
     </div>
-    <uc1:ucPageChange runat="server" ID="ucPageChange" />
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
@@ -150,7 +149,6 @@
             </ItemTemplate>
         </asp:Repeater>
     </div>
-
 
 
 </asp:Content>

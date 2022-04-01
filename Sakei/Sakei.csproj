@@ -194,6 +194,9 @@
     <Compile Include="API\ExamReviewHandler.ashx.cs">
       <DependentUpon>ExamReviewHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="API\MallHandler.ashx.cs">
+      <DependentUpon>MallHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ExamSystem\ExamChallengeMode.aspx.cs">
       <DependentUpon>ExamChallengeMode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -355,6 +358,7 @@
     <Content Include="ExamSystem\ExamSystemMaster.Master" />
     <Content Include="Admin\Admin.Master" />
     <Content Include="API\ExamReviewHandler.ashx" />
+    <Content Include="API\MallHandler.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

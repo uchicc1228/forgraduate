@@ -17,6 +17,17 @@
             border: 1px;
         }
 
+        .lblPWDfield{
+            font-size: 14px;
+            font-family: 宋體;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            color: black;
+            border: 1px solid black;
+            margin: 5px;
+            border: 0px;
+        }
 
         .lblfield {
             font-size: 14px;
@@ -120,18 +131,18 @@
     <asp:PlaceHolder runat="server" ID="plcPWDChanger">
         <h1><b>變更使用者資料</b></h1>
         <div class="divPWDChanger">
-            <label class="lblfield">原密碼</label><br />
+            <label class="lblPWDfield">原密碼</label><br />
             <asp:TextBox runat="server" CssClass="text_field" ID="txtpwdOld"></asp:TextBox><br />
 
-            <label class="lblfield">新密碼</label><br />
+            <label class="lblPWDfield">新密碼</label><br />
             <asp:TextBox runat="server" CssClass="text_field" ID="txtpwdNew"></asp:TextBox><br />
 
-            <label class="lblfield">再次輸入新密碼</label><br />
+            <label class="lblPWDfield">再次輸入新密碼</label><br />
             <asp:TextBox runat="server" CssClass="text_field" ID="txtpwdNew2"></asp:TextBox><br />
 
             <asp:Button runat="server" ID="btnPWDyes" Text="確定變更" CssClass="btnyes" OnClick="btnPWDyes_Click" />
             <hr />
-            <label class="lblfield">暱稱</label><br />
+            <label class="lblPWDfield">暱稱</label><br />
             <asp:TextBox runat="server" CssClass="text_field" ID="txtname"></asp:TextBox><br />
 
             <asp:Button runat="server" ID="btnNICKyes" Text="確定變更" CssClass="btnyes" OnClick="btnNICKyes_Click" />
