@@ -19,6 +19,16 @@
             text-align: center left;
         }
 
+            .divHeadArea > div {
+                margin: 0px auto;
+                width: 1080px;
+            }
+
+            .divHeadArea div {
+                height: 50px;
+                display: flex;
+            }
+
         .divTittleFont {
             float: left;
             width: 80%;
@@ -29,24 +39,35 @@
             width: 20%;
         }
 
+            .divHeadToolArea > button {
+                
+                margin-right:0px;
+                margin-left:auto;
+            }
+
         .divMain {
             width: 1080px;
-            height: 80%;
-            margin: 0px auto;
+            height: 720px;
+            margin: 10px auto;
+            background-color: pink;
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script src="../JavaScript/jquery/jquery.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="divHeadArea">
-            <div class="divTittleFont">
-                <h1>挑戰模式</h1>
+            <div>
+                <div class="divTittleFont">
+                    <h1>挑戰模式</h1>
+                </div>
+                <div class="divHeadToolArea">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#divMsgWindow">放棄</button>
+                </div>
             </div>
-            <div class="divHeadToolArea">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#divMsgWindow">放棄</button>
-            </div>
+
         </div>
         <div class="divBodyArea">
 
@@ -58,6 +79,9 @@
 
             </div>
         </div>
+
+
+
 
         <%--警告視窗--%>
         <div class="modal" id="divMsgWindow" tabindex="-1">
@@ -76,7 +100,6 @@
 
     </form>
 
-    <script src="../JavaScript/jquery/jquery.min.js"></script>
     <script src="../JavaScript/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>

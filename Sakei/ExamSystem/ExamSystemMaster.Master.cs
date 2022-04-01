@@ -9,6 +9,7 @@ namespace Sakei.ExamSystem
 {
     public partial class ExamSystemMaster : System.Web.UI.MasterPage
     {
+       
         protected void Page_Init(object sender, EventArgs e)
         {
             //判斷是否已登入
@@ -18,11 +19,13 @@ namespace Sakei.ExamSystem
                 Response.Redirect("~//LoginPage.aspx");
 
             }
+
+
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             
-            //判斷等級是否符合
+           
 
 
         }
