@@ -127,14 +127,23 @@
             <asp:Repeater ID="rptItems" runat="server">
                 <ItemTemplate>
                     <div class="items">
-                        <a href="/NoPage.aspx">
+                        <a href="UserCharacterChange.aspx?item=<%#Eval("ItemID")%>&content=<%#Eval("Content") %>">
                             <image src="<%#Eval("Content") %>"></image>
                         </a>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
 
-            <asp:Button runat="server" ID="btnCharacteryes" Text="確定變更" CssClass="btnyes" OnClick="btnCharacteryes_Click" />
+            <%--<asp:Button runat="server" ID="btnCharacteryes" Text="確定變更" CssClass="btnyes" OnClick="btnCharacteryes_Click" />--%>
         </div>
     </asp:PlaceHolder>
+
+    <script>
+        function img_Click(imgContent) {
+            var CharacterID = "<%=this.picCharacter.ClientID%>";/*找到頭像的ID*/
+            var Character = document.getElementById(CharacterID);/*用找到的ID去找圖片在哪*/
+            Character = imgContent; <%--imgContent="<%#Eval("Content") %>"--%>
+        }
+    </script>
+
 </asp:Content>

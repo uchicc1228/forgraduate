@@ -102,7 +102,7 @@ namespace Sakei.Manager
         }
         #endregion
 
-        #region "更新名字"
+        #region "更新名字、頭像"
         public void UpdateUserName(UserModel model)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -129,6 +129,38 @@ namespace Sakei.Manager
             catch (Exception ex)
             {
                 Logger.WriteLog("UpdateUserName", ex);
+                throw;
+            }
+        }
+        public void UpdateCharacter(Guid userID,Guid itemID)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                @"  UPDATE [User]
+                    SET 
+                        [Character]=(SELECT [StyleContent]
+                        FROM Malls
+                        WHERE ItemID=@itemID),
+                    	ItemID=@itemID
+                    WHERE
+                        UserID = @id ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", userID);
+                        command.Parameters.AddWithValue("@itemID", itemID);
+
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("UpdateCharacter", ex);
                 throw;
             }
         }

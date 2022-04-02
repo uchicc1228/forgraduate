@@ -84,6 +84,7 @@
         }
 
         .items {
+            margin-top: 30px;
             margin: 5px;
             width: 200px;
             height: 200px;
@@ -95,6 +96,7 @@
             font-family: 宋體;
         }
     </style>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="CP2" runat="server">
@@ -137,18 +139,38 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
 
     <h1>
-    <asp:Literal ID="ltlTitle" runat="server"></asp:Literal>
+        <asp:Literal ID="ltlTitle" runat="server"></asp:Literal>
     </h1>
     <div class="picItems">
-        <asp:Repeater ID="rptItems" runat="server">
+        <asp:Repeater ID="rptItems" runat="server" OnItemCommand="rptItems_ItemCommand">
             <ItemTemplate>
                 <div class="items">
-                    <a href="/NoPage.aspx">
-                    <image src="<%#Eval("Content") %>"></image></a>
+                    <image src="<%#Eval("Content") %>"></image>
+                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") %>' OnClick="Buy_Click" />
                 </div>
             </ItemTemplate>
         </asp:Repeater>
     </div>
 
+    <script>function getData() {
+            console.log("換衣服");
+            $.ajax({
+                url: "../API/MallHandler.ashx?Action=Mall",
+                dataType: "json",
+                success: function (jsonObj) {
+                    // 成功。JSON物件處理作業
+
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // 錯誤。錯誤訊息處理
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+
+        }
+    </script>
 
 </asp:Content>

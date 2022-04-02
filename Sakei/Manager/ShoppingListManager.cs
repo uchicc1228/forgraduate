@@ -154,26 +154,25 @@ namespace Sakei.Manager
                 throw;
             }
         }       
-        ///<summary>增加單使用者作答紀錄資料</summary> 
-        private static void CreateShoppingList(ShoppingListModel model)
+        ///<summary>增加使用者購買衣服資料</summary> 
+        public void CreateShoppingList(ShoppingListModel model)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
                                 INSERT INTO ShoppingLists
-                                ( UserID, ShoppingID, ItemID, ItemContent, CreateDate)
+                                ( UserID, ItemID, ItemContent)
                                 VALUES
-                                ( @UserID, @ShoppingID, @ItemID, @ItemContent ,@CreateDate)";
+                                ( @UserID, @ItemID, @ItemContent)";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@ShoppingID", model.ID);
+
                         command.Parameters.AddWithValue("@UserID", model.UserID);
                         command.Parameters.AddWithValue("@ItemID", model.ItemID);
                         command.Parameters.AddWithValue("@ItemContent", model.Content);
-                        command.Parameters.AddWithValue("@CreateDate", model.CreateDate);
 
                         conn.Open();
                         command.ExecuteNonQuery();

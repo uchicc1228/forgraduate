@@ -11,6 +11,7 @@ namespace SaKei.Models
         public string Name { get; set; }
         public int Level { get; set; }
         public string Content { get; set; }
+        public string StyleContent { get; set; }
         public int Price { get; set; }
         public int IsEnable { get; set; }
     }

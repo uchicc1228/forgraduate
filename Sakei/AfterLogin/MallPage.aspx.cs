@@ -1,5 +1,6 @@
 ﻿using Sakei.Helper;
 using Sakei.Manager;
+using Sakei.Models;
 using SaKei.Helpers;
 using SaKei.Manager;
 using SaKei.Models;
@@ -17,91 +18,52 @@ namespace Sakei
         AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
         MallManager _mmgr = new MallManager();
-        private Guid _userID;
+        ShoppingListManager _smgr = new ShoppingListManager();
+        private Guid _userID = (Guid)LoginHelper.GetUserID();
         private UserModel _model;
         private int level;
-
+        ShoppingListModel shoppingModel = new ShoppingListModel();
         protected void Page_Load(object sender, EventArgs e)
         {
-            _userID = (Guid)LoginHelper.GetUserID();
-
-            _model = _umgr.GetUserName(_userID);
-            this.lblName.Text = _model.UserName;
-
-            this.lblRank.Text = _model.UserPoints.ToString();
-            this.lblLevel.Text = _model.UserLevel.ToString();
-            this.lblMoney.Text = _model.UserMoney.ToString();
-            this.picCharacter.ImageUrl = _model.Character;
-
-            #region "商城道具"
-            string query = Request.QueryString["key"];
-            if (!int.TryParse(query, out level))
+            if (!IsPostBack)
             {
-                level = 5;
+                _model = _umgr.GetUserName(_userID);
+                this.lblName.Text = _model.UserName;
+
+                this.lblRank.Text = _model.UserPoints.ToString();
+                this.lblLevel.Text = _model.UserLevel.ToString();
+                this.lblMoney.Text = _model.UserMoney.ToString();
+                this.picCharacter.ImageUrl = _model.Character;
+
+                #region "商城道具"
+                string query = Request.QueryString["key"];
+                if (!int.TryParse(query, out level))
+                {
+                    level = 5;
+                }
+
+                List<ItemModel> items;
+
+                if (level != 0)
+                {
+                    items = _mmgr.GetItem(level);
+                }
+                else
+                {
+                    items = _mmgr.GetItem();
+                }
+                foreach (var item in items)
+                {
+                    item.Content = item.Content.Replace("~", "..");
+                }
+
+                this.rptItems.DataSource = items;
+                this.rptItems.DataBind();
+
+                #endregion
+
             }
 
-            List<ItemModel> items;
-
-            if (level != 0)
-            {
-                items = _mmgr.GetItem(level);
-            }
-            else
-            {
-                items = _mmgr.GetItem();
-            }
-            foreach (var item in items)
-            {
-                item.Content = item.Content.Replace("~", "..");
-            }
-
-            this.rptItems.DataSource = items;
-            this.rptItems.DataBind();
-            #endregion
-            
-            #region "等級鎖定"
-
-            //if (_model.UserLevel == 1)
-            //{
-            //    this.btnLV1.Enabled = true;
-            //    this.btnLV2.Enabled = true;
-            //    this.btnLV3.Enabled = true;
-            //    this.btnLV4.Enabled = true;
-            //    this.btnLV5.Enabled = true;
-            //}
-            //if (_model.UserLevel == 2)
-            //{
-            //    this.btnLV1.Enabled = false;
-            //    this.btnLV2.Enabled = true;
-            //    this.btnLV3.Enabled = true;
-            //    this.btnLV4.Enabled = true;
-            //    this.btnLV5.Enabled = true;
-            //}
-            //if (_model.UserLevel == 3)
-            //{
-            //    this.btnLV1.Enabled = false;
-            //    this.btnLV2.Enabled = false;
-            //    this.btnLV3.Enabled = true;
-            //    this.btnLV4.Enabled = true;
-            //    this.btnLV5.Enabled = true;
-            //}
-            //if (_model.UserLevel == 4)
-            //{
-            //    this.btnLV1.Enabled = false;
-            //    this.btnLV2.Enabled = false;
-            //    this.btnLV3.Enabled = false;
-            //    this.btnLV4.Enabled = true;
-            //    this.btnLV5.Enabled = true;
-            //}
-            //if (_model.UserLevel == 5)
-            //{
-            //    this.btnLV1.Enabled = false;
-            //    this.btnLV2.Enabled = false;
-            //    this.btnLV3.Enabled = false;
-            //    this.btnLV4.Enabled = false;
-            //    this.btnLV5.Enabled = true;
-            //}
-            #endregion
         }
 
         protected void btnLV_Click(object sender, EventArgs e)
@@ -130,6 +92,32 @@ namespace Sakei
             {
                 Response.Redirect("MallPage.aspx?key=0");
             }
+        }
+
+        protected void rptItems_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "BuyButton":
+                    string[] arr = e.CommandArgument.ToString().Split(',');
+                    shoppingModel.UserID = _userID;
+                    Guid id;
+                    Guid.TryParse(arr[0],out id);
+                    shoppingModel.ItemID = id;
+                    shoppingModel.Content = arr[1];
+                    _smgr.CreateShoppingList(shoppingModel);
+
+                    Response.Redirect(this.Request.RawUrl);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        protected void Buy_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }
