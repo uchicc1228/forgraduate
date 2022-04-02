@@ -4,12 +4,12 @@
     <style>
         #divQuestion {
             padding: 30px;
-            height: 50%;
+            height: 40%;
         }
 
         #divOption {
             padding: 30px;
-            height: 30%;
+            height: 40%;
         }
 
             #divOption p {
@@ -67,6 +67,7 @@
     <script>
         var userID ='<%=this.UserID%>';
         var userPoint =<%=this.User.UserPoints %>;
+        var TestCount = 10;
         var TestLevel = 0;
         var userLevel =<%=this.User.UserLevel%>;
         $(document).ready(function () {
@@ -83,12 +84,13 @@
             if (userPoint >= 100 && userLevel != 1) {
                 TestLevel += userLevel;
                 scheddule = -1;
+                StartExam();
                 LevelUpMsg();
             } else {
                 TestLevel = userLevel;
                 scheddule = 0;
                 IsExam = true;
-                NextQuestion();
+                StartExam();
             }
 
 
@@ -107,7 +109,7 @@
             //點擊下一步
             $("#btnSure").click(function () {
 
-                if (IsExam === false && scheddule > 2) {
+                if (IsExam === false && scheddule > TestCount - 2) {
                     //判斷看完解答&作完所有題目
 
                 } else if (IsExam === false) {
@@ -123,28 +125,51 @@
                 }
 
             });
+
+            //正式進入考試畫面，獲取資料
+            function StartExam() {
+                var postData = {
+                    "TestLevel": TestLevel,
+                    "TestCount": TestCount
+                };
+                $.ajax({
+                    url: "../API/ExamSystemHandler.ashx?Exam=Start",
+                    method: "POST",
+                    data: postData,
+                    dataType: "JSON",
+                    success: function (objDataList) {
+                        examDataList = objDataList;
+                        NextQuestion();
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("連線失敗，請聯絡管理員。");
+                    }
+                });
+            }
+
             //從解答、升級提示切換為考題
             function NextQuestion() {
-
+                var examData = examDataList[scheddule];
                 var qusText =
                     `
-                                <h4>----題型----</h4>
-                                <h2>----題目${scheddule}----</h2>
+                                <h4>${examData.TypeContext}</h4>
+                                <h2>${examData.TestContent}</h2>
                             `;
                 var optText =
                     `
                                 <ul class="nav justify-content-center">
                                     <li class="nav-item">
-                                        <p class="nav-link disabled">A.ans1</p>
+                                        <p id="A" class="nav-link disabled">A.${examData.OptionsA}</p>
                                     </li>
                                     <li class="nav-item">
-                                        <p class="nav-link disabled">B.ans2</p>
+                                        <p id="B" class="nav-link disabled">B.${examData.OptionsB}</p>
                                     </li>
                                     <li class="nav-item">
-                                        <p class="nav-link disabled">C.ans3</p>
+                                        <p id="C" class="nav-link disabled">C.${examData.OptionsC}</p>
                                     </li>
                                     <li class="nav-item">
-                                        <p class="nav-link disabled">D.ans4</p>
+                                        <p id="D" class="nav-link disabled">D.${examData.OptionsD}</p>
                                     </li>
                                 </ul>
                             `;
@@ -154,24 +179,13 @@
                 $("#divOption").empty();
                 $("#divOption").append(optText);
 
-                var postData = {};
-                $.ajax({
-                    url: "../API/",
-                    method: "POST",
-                    data: postData,
-                    dataType: "JSON",
-                    success: function (objData) {
 
-                        
-                    },
-                    error: function (msg) {
-                        console.log(msg);
-                        alert("連線失敗，請聯絡管理員。");
-                    }
-                });
             };
             //從考題切換為解答
             function BuildAnswer() {
+                var examData = examDataList[scheddule];
+                //帶入文正解文字資訊
+                var examAnswer = document.getElementById(`${examData.TestAnswer.trim()}`).textContent;
                 //正確/錯誤
                 var ansText = "正確";
                 //判斷使用者答案正確與否
@@ -179,15 +193,15 @@
                 //編輯顯示字串
                 var qusText =
                     `
-                                <h4>----題型----</h4>
-                                <h2>----題目${scheddule}----</h2>
+                                <h4>${examData.TypeContext}</h4>
+                                <h2>${examData.TestContent}</h2>
                             `;
                 var optText =
                     `
                                 <ul class="nav justify-content-center">
-
+                                    
                                     <li class="nav-item">
-                                        <p class="nav-link disabled">正確答案 : </p>
+                                        <p class="nav-link disabled">正確答案為 : ${examAnswer}</p>
                                     </li>
                                     <li class="nav-item">
                                         <p class="nav-link disabled">選擇的答案 : </p>
@@ -202,7 +216,7 @@
                 $("#divOption").empty();
                 $("#divOption").append(optText);
 
-            }
+            };
 
         })
     </script>
