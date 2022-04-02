@@ -55,6 +55,7 @@ namespace Sakei
                 foreach (var item in items)
                 {
                     item.Content = item.Content.Replace("~", "..");
+                    item.StyleContent = item.StyleContent.Replace("~", "..");
                 }
 
                 this.rptItems.DataSource = items;
@@ -102,22 +103,19 @@ namespace Sakei
                     string[] arr = e.CommandArgument.ToString().Split(',');
                     shoppingModel.UserID = _userID;
                     Guid id;
-                    Guid.TryParse(arr[0],out id);
+                    Guid.TryParse(arr[0], out id);
                     shoppingModel.ItemID = id;
                     shoppingModel.Content = arr[1];
                     _smgr.CreateShoppingList(shoppingModel);
 
                     Response.Redirect(this.Request.RawUrl);
+
                     break;
 
                 default:
                     break;
             }
-        }
 
-        protected void Buy_Click(object sender, EventArgs e)
-        {
-           
         }
     }
 }

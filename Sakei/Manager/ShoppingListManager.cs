@@ -58,9 +58,15 @@ namespace Sakei.Manager
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                 @" SELECT *
-                    FROM [ShoppingLists]
-                    WHERE UserID = @UserID";
+                 @" SELECT  [ShoppingLists].UserID
+	                       ,[ShoppingLists].ItemID
+	                       ,[ShoppingLists].ItemContent
+	                       ,[ShoppingLists].ShoppingID 
+	                       ,ItemLevel
+                        FROM [ShoppingLists]
+                        INNER JOIN [Malls]
+                        ON [ShoppingLists].ItemID=[Malls].ItemID
+	                    ORDER BY ItemLevel DESC";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -79,8 +85,8 @@ namespace Sakei.Manager
                                 ID = (Guid)reader["ShoppingID"],
                                 UserID = (Guid)reader["UserID"],
                                 ItemID = (Guid)reader["ItemID"],
+                                ItemLevel=(int)reader["ItemLevel"],
                                 Content = reader["ItemContent"] as string,
-                                CreateDate = (DateTime)reader["CreateDate"],
                             };
                             items.Add(model);
                         }

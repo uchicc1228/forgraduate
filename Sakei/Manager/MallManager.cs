@@ -44,7 +44,7 @@ namespace Sakei.Manager
                                 Level = (int)reader["ItemLevel"],
                                 Name = reader["ItemName"] as string,
                                 Content = reader["ItemContent"] as string,
-                                StyleContent = reader["ItemContent"] as string,
+                                StyleContent = reader["StyleContent"] as string,
                                 Price = (int)reader["ItemPrice"]
                             };
                             items.Add(model);
@@ -84,7 +84,7 @@ namespace Sakei.Manager
                                 Level = (int)reader["ItemLevel"],
                                 Name = reader["ItemName"] as string,
                                 Content = reader["ItemContent"] as string,
-                                StyleContent = reader["ItemContent"] as string,
+                                StyleContent = reader["StyleContent"] as string,
                                 Price = (int)reader["ItemPrice"]
                             };
                             items.Add(model);
