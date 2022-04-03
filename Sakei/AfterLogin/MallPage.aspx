@@ -146,7 +146,7 @@
             <ItemTemplate>
                 <div class="items">
                     <image src="<%#Eval("Content") %>"></image>
-                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") %>' OnClick="Buy_Click" />
+                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") %>' />
                 </div>
             </ItemTemplate>
         </asp:Repeater>

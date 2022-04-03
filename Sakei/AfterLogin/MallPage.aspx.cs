@@ -15,13 +15,14 @@ namespace Sakei
 {
     public partial class MallPage : System.Web.UI.Page
     {
-        AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
         MallManager _mmgr = new MallManager();
         ShoppingListManager _smgr = new ShoppingListManager();
         private Guid _userID = (Guid)LoginHelper.GetUserID();
         private UserModel _model;
+        private ShoppingListModel _shoppingModel;
         private int level;
+        ItemModel itemModel = new ItemModel();
         ShoppingListModel shoppingModel = new ShoppingListModel();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,6 +56,7 @@ namespace Sakei
                 foreach (var item in items)
                 {
                     item.Content = item.Content.Replace("~", "..");
+                    item.StyleContent = item.StyleContent.Replace("~", "..");
                 }
 
                 this.rptItems.DataSource = items;
@@ -100,24 +102,32 @@ namespace Sakei
             {
                 case "BuyButton":
                     string[] arr = e.CommandArgument.ToString().Split(',');
-                    shoppingModel.UserID = _userID;
-                    Guid id;
-                    Guid.TryParse(arr[0],out id);
-                    shoppingModel.ItemID = id;
-                    shoppingModel.Content = arr[1];
-                    _smgr.CreateShoppingList(shoppingModel);
 
+                    Guid id;
+                    Guid.TryParse(arr[0], out id);
+
+                    _shoppingModel = _smgr.GetShoppingList_itemID(_userID);
+
+                    if (_shoppingModel.ItemID == id)
+                    {
+                        Response.Write("<script>alert('無法購買相同的衣服!!')</script>");
+                        return;
+                    }
+                    else
+                    {
+                        shoppingModel.UserID = _userID;
+                        shoppingModel.ItemID = id;
+                        shoppingModel.Content = arr[1];
+                        _smgr.CreateShoppingList(shoppingModel);
+                    }
                     Response.Redirect(this.Request.RawUrl);
+
                     break;
 
                 default:
                     break;
             }
-        }
 
-        protected void Buy_Click(object sender, EventArgs e)
-        {
-           
         }
     }
 }

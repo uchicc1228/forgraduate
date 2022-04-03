@@ -10,7 +10,9 @@ namespace Sakei.Models
         public Guid ID { get; set; }
         public Guid UserID { get; set; }
         public Guid ItemID { get; set; }
+        public int ItemLevel { get; set; }
         public string Content { get; set; }
         public DateTime CreateDate { get; set; }
+        public bool IsHave { get; set; }
     }
 }

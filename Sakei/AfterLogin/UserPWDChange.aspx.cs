@@ -85,11 +85,12 @@ namespace Sakei.AfterLogin
             else if (_model.UserName == newName)
             {
                 Response.Write("<script>alert('暱稱相同，請重新輸入!!')</script>");
+                return;
             }
             else
             {
                 Response.Write("<script>alert('暱稱空白，請重新輸入!!')</script>");
-
+                return;
             }
         }
 

@@ -15,7 +15,20 @@ namespace Sakei.Models.ExamSystemModels
         /// <summary>
         /// 題目簡介
         /// </summary>
-        public string TestContentShort { get => TestContent.Substring(0, 10) + "..."; }
+        public string TestContentShort
+        {
+            get
+            {
+                if (TestContent.Length > 10)
+                {
+                    return TestContent.Substring(0, 10) + "...";
+                }
+                else
+                {
+                    return TestContent;
+                }
+            }
+        }
         public string OptionsA { get; set; }
         public string OptionsB { get; set; }
         public string OptionsC { get; set; }
