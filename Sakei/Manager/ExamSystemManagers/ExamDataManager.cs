@@ -102,14 +102,14 @@ namespace Sakei.Manager.ExamSystemManagers
             }
         }
         /// <summary> 抓取考試用資料 </summary>
-        public List<TestDataModel> GetTestDataForTest(int testLevel)
+        public List<TestDataModel> GetTestDataForTest(int testLevel,int testCount)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
                                 SELECT TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
 	                                   OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
                                 FROM(
-                                SELECT TOP (10) *
+                                SELECT TOP (@TestCount) *
                                 FROM TestDatabases
                                 WHERE IsEnable = 'true' AND
                                       TestLevel = @TestLevel
@@ -125,6 +125,7 @@ namespace Sakei.Manager.ExamSystemManagers
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
                         command.Parameters.AddWithValue("@TestLevel", testLevel);
+                        command.Parameters.AddWithValue("@TestCount", testCount);
 
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
