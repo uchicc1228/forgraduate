@@ -7,7 +7,7 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace Sakei
+namespace Sakei.Admin
 {
 
 
@@ -42,15 +42,6 @@ namespace Sakei
         protected global::System.Web.UI.WebControls.TextBox txtItemPrice;
 
         /// <summary>
-        /// ItemPicUpload 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ItemPicUpload;
-
-        /// <summary>
         /// intEnable 控制項。
         /// </summary>
         /// <remarks>
@@ -58,6 +49,42 @@ namespace Sakei
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList intEnable;
+
+        /// <summary>
+        /// picMainlbl 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label picMainlbl;
+
+        /// <summary>
+        /// ItemPicUploadMain 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ItemPicUploadMain;
+
+        /// <summary>
+        /// picClotheslbl 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label picClotheslbl;
+
+        /// <summary>
+        /// ItemPicUploadClothes 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ItemPicUploadClothes;
 
         /// <summary>
         /// ltlmsg 控制項。

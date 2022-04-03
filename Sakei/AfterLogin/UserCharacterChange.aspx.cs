@@ -36,8 +36,6 @@ namespace Sakei.AfterLogin
             this.lblRank.Text = _model.UserPoints.ToString();
             this.lblLevel.Text = _model.UserLevel.ToString();
             this.lblMoney.Text = _model.UserMoney.ToString();
-
-
             this.picCharacter.ImageUrl = _model.Character;
 
             #region "鮭鮭換新衣"

@@ -26,6 +26,7 @@ namespace SaKei.Manager
                 ID = (Guid)reader["ID"],
                 Name = reader["Name"] as string,
                 Content = reader["Content"] as string,
+                StyleContent = reader["StyleContent"] as string,
                 Level = (int)reader["Level"],
                 Price = (int)reader["Level"] ,
                 IsEnable = (int)reader["Level"]
@@ -57,6 +58,7 @@ namespace SaKei.Manager
                             {
                                 Name = reader["ItemName"] as string,
                                 Content = reader["ItemContent"] as string,
+                                StyleContent = reader["StyleContent"] as string,
                                 Price = (int)reader["Price"],
                                 ID = (Guid)reader["ItemID"],
                                 Level = (int)reader["ItemLevel"],
@@ -135,9 +137,9 @@ namespace SaKei.Manager
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                @" INSERT INTO Malls
-                        (ItemID, ItemLevel, ItemName ,ItemContent, ItemPrice,IsEnable)
+                        (ItemID, ItemLevel, ItemName ,ItemContent,StyleContent,ItemPrice,IsEnable)
                     VALUES
-                        (@id, @level , @name, @Content, @Price,@IsEnable);";
+                        (@id, @level , @name, @Content,@StyleContent, @Price,@IsEnable);";
 
 
 
@@ -153,6 +155,7 @@ namespace SaKei.Manager
                         command.Parameters.AddWithValue("@level", model.Level);
                         command.Parameters.AddWithValue("@name", model.Name);
                         command.Parameters.AddWithValue("@Content", model.Content);
+                        command.Parameters.AddWithValue("@StyleContent", model.StyleContent);
                         command.Parameters.AddWithValue("@Price", model.Price);
                         command.Parameters.AddWithValue("@IsEnable", model.IsEnable);
                         conn.Open();
@@ -185,7 +188,7 @@ namespace SaKei.Manager
 
             return fileNaame;
         }
-        public bool ValidFileUpload(System.Web.UI.WebControls.FileUpload fileUpload, out List<string> errorMsgList)
+        public static bool ValidFileUpload(System.Web.UI.WebControls.FileUpload fileUpload, out List<string> errorMsgList)
         {
             List<string> msgList = new List<string>();
 

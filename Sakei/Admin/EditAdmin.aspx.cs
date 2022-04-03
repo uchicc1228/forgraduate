@@ -63,7 +63,7 @@ namespace Sakei
                 return;
             }
 
-            
+             
             //信箱
             modelAdmin.Mail = this.txtMail.Text.Trim();
             if (!_mgr_Admin.isValidEmail(modelAdmin.Mail))
