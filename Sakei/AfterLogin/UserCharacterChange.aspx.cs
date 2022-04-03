@@ -14,7 +14,6 @@ namespace Sakei.AfterLogin
 {
     public partial class UserCharacterChange : System.Web.UI.Page
     {
-        AccountManager _mgr = new AccountManager();
         UserManager _umgr = new UserManager();
         MallManager _mmgr = new MallManager();
         ShoppingListManager _smgr=new ShoppingListManager();

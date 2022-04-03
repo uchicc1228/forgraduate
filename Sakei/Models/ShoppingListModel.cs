@@ -13,5 +13,6 @@ namespace Sakei.Models
         public int ItemLevel { get; set; }
         public string Content { get; set; }
         public DateTime CreateDate { get; set; }
+        public bool IsHave { get; set; }
     }
 }
