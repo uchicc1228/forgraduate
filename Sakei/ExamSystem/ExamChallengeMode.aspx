@@ -122,7 +122,7 @@
     <script>
         var userID ='<%=this.UserID%>';
         var userPoint =<%=this.UserData.UserPoints %>;
-        var TestCount = 2;
+        var TestCount = 10;
         var TestLevel = 0;
         var userLevel =<%=this.UserData.UserLevel%>;
         var IsChalleng = true;
