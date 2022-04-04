@@ -9,8 +9,7 @@ namespace Sakei.Models
     {
         public Guid ID { get; set; }
         public int Level { get; set; }
-        public string Type { get; set; }
-        
+        public int Type { get; set; }
         public string Content { get; set; }
         public string OptionsA { get; set; }
         public string OptionsB { get; set; }
@@ -19,7 +18,7 @@ namespace Sakei.Models
         public string Answer { get; set; }
         public DateTime CreatTime { get; set; }
         public int IsEnable { get; set; }
-
+        public string TestAnswer { get; set; }
 
     }
 }
