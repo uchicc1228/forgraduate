@@ -34,7 +34,7 @@ namespace Sakei.Models.ExamSystemModels
         public string OptionsC { get; set; }
         public string OptionsD { get; set; }
         public string TestAnswer { get; set; }
-        public bool IsEnable { get; set; }
+        public int IsEnable { get; set; }
         public string UserAnswer { get; set; }
     }
 

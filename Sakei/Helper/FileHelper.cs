@@ -8,16 +8,21 @@ namespace SaKei.Helpers
 {
     public class FileHelper
     {
-        private static string _imageFileExt   =".png" ;
+    
+        private static string[] _imageFileExtArr =
+       {
+             ".png",".jpg"
+        };
+
 
         private static int _uploadMB = 10;
         private static int _uploadBytes = _uploadMB * 1024 * 1024;
 
-        public static string ImageFileExtArr
+        public static string[] ImageFileExtArr
         {
             get
             {
-                return _imageFileExt;
+                return _imageFileExtArr;
             }
         }
 
@@ -34,14 +39,14 @@ namespace SaKei.Helpers
         /// <returns></returns>
         public static bool ValidImageExtension(string fileName)
         {
-            return ValidFileExtension(fileName, _imageFileExt);
+            return ValidFileExtension(fileName, _imageFileExtArr);
         }
 
         /// <summary> 檢查檔案副檔名是否在允許清單中 </summary>
         /// <param name="fileName"></param>
         /// <param name="avaiExts"></param>
         /// <returns></returns>
-        public static bool ValidFileExtension(string fileName, string avaiExts)
+        public static bool ValidFileExtension(string fileName, params string[] avaiExts)
         {
             if (string.IsNullOrWhiteSpace(fileName))
                 return false;

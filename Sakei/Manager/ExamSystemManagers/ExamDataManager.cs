@@ -16,9 +16,9 @@ namespace Sakei.Manager.ExamSystemManagers
         ///<param name="pageSize">每頁最大筆數</param>
         ///<param name="pageIndex">目前頁數</param>
         ///<param name="totalRows">每頁實際筆數</param>
-        public List<TestDataModel> GetTestDataList(Guid userID,int testLevel, int pageSize, int pageIndex, out int totalRows)
+        public List<TestDataModel> GetTestDataList(Guid userID, int testLevel, int pageSize, int pageIndex, out int totalRows)
         {
-            string levelWhereText="";
+            string levelWhereText = "";
             string andLevelText = "";
             //計算跳頁數
             int skip = pageSize * (pageIndex - 1);
@@ -83,7 +83,6 @@ namespace Sakei.Manager.ExamSystemManagers
                         while (reader.Read())
                         {
                             TestDataModel info = BuildExamData(reader);
-                            info.UserAnswer = reader["UserAnswer"] as string;
                             examDataList.Add(info);
                         }
                         reader.Close();
@@ -102,28 +101,39 @@ namespace Sakei.Manager.ExamSystemManagers
             }
         }
         /// <summary> 抓取考試用資料 </summary>
-        public List<TestDataModel> GetTestDataForTest(int testLevel,int testCount)
+        public List<TestDataModel> GetTestDataForTest(int testLevel, int testCount, Guid userID, bool isChalleng)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
-                                SELECT TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
-	                                   OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
-                                FROM(
-                                SELECT TOP (@TestCount) *
-                                FROM TestDatabases
-                                WHERE IsEnable = 'true' AND
-                                      TestLevel = @TestLevel
+                                SELECT TOP(@TestCount) 
+                                	TestDatabases.TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
+                                	OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer,UserAnswer
+                                FROM(TestDatabases
+                                INNER JOIN TestTypes
+                                ON TestDatabases.TestTypeID=TestTypes.TestTypeID)
+                                LEFT JOIN UserAnswers
+                                ON TestDatabases.TestID=UserAnswers.TestID
+                                WHERE
+	                                TestDatabases.TestLevel = @TestLevel AND
+	                                IsEnable='true' AND
+	                                ( UserID = @UserID OR UserID IS NULL )
                                 ORDER BY NEWID()
-                                )AS OutputData
-                                INNER JOIN TestTypes 
-                                ON OutputData.TestTypeID=TestTypes.TestTypeID
                                 ";
+            string commandTextInsert = $@" 
+                                        UPDATE UserAccounts
+                                        SET UserPoints -= 10
+                                        WHERE UserID = @UserID ";
+            if (isChalleng)
+            {
+                commandText += commandTextInsert;
+            }
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
+                        command.Parameters.AddWithValue("@UserID", userID);
                         command.Parameters.AddWithValue("@TestLevel", testLevel);
                         command.Parameters.AddWithValue("@TestCount", testCount);
 
@@ -137,6 +147,7 @@ namespace Sakei.Manager.ExamSystemManagers
                             TestDataModel info = BuildExamData(reader);
                             examDataList.Add(info);
                         }
+
                         return examDataList;
                     }
                 }
@@ -161,7 +172,9 @@ namespace Sakei.Manager.ExamSystemManagers
                 OptionsB = reader["OptionsB"] as string,
                 OptionsC = reader["OptionsC"] as string,
                 OptionsD = reader["OptionsD"] as string,
-                TestAnswer = reader["TestAnswer"] as string
+                TestAnswer = reader["TestAnswer"] as string,
+                UserAnswer = reader["UserAnswer"] as string
+
             };
         }
     }

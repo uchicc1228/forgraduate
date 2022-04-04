@@ -162,7 +162,7 @@
                 success: function (objData) {
 
                     var noteTitle = `<h6> Q : <span id="noteTestContent">${testContent}</span></h6>`
-                    var noteContent = ` <textarea id="Note" rows="10" cols="50" style="resize: none;">${objData.UserNote}</textarea>`;
+                    var noteContent = ` <textarea id="Note" rows="10" cols="50" style="resize: none;" placeholder="記錄自己的想法吧!">${objData.UserNote}</textarea>`;
 
                     $("#divNote").empty();
                     $("#divNote").append(noteContent);
@@ -243,7 +243,7 @@
                     }
 
                     var msgWrite =
-                        `<textarea id="txtMsgBoard" rows="4" cols="50" style="resize: none;"></textarea>`;
+                        `<textarea id="txtMsgBoard" rows="4" cols="50" style="resize: none;" placeholder="留言分享自己的看法吧!"></textarea>`;
 
                     $("#divMsgBoard").empty();
                     $("#divMsgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");

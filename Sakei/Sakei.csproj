@@ -80,6 +80,7 @@
   <ItemGroup>
     <Content Include="Admin\AdminLoginPage.aspx" />
     <Content Include="Admin\AdminMainPage.aspx" />
+    <Content Include="Admin\EditItem.aspx" />
     <Content Include="Admin\WebForm1.aspx" />
     <Content Include="AfterLogin\ExamReview.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
@@ -91,7 +92,6 @@
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="ExamSystem\ExamChallengeMode.aspx" />
     <Content Include="Admin\EditAdmin.aspx" />
-    <Content Include="Admin\EditItem.aspx" />
     <Content Include="Admin\EditTest.aspx" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
@@ -108,6 +108,7 @@
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="ShareControls\ucLevelChange.ascx" />
+    <Content Include="ShareControls\ucNoteAndMsgBoard.ascx" />
     <Content Include="ShareControls\ucPageChange.ascx" />
     <Content Include="StartPage.aspx" />
     <Content Include="testtest.aspx" />
@@ -134,6 +135,13 @@
     </Compile>
     <Compile Include="Admin\AdminMainPage.aspx.designer.cs">
       <DependentUpon>AdminMainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EditItem.aspx.cs">
+      <DependentUpon>EditItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditItem.aspx.designer.cs">
+      <DependentUpon>EditItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -220,13 +228,6 @@
     </Compile>
     <Compile Include="Admin\EditAdmin.aspx.designer.cs">
       <DependentUpon>EditAdmin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\EditItem.aspx.cs">
-      <DependentUpon>EditItem.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EditItem.aspx.designer.cs">
-      <DependentUpon>EditItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EditTest.aspx.cs">
       <DependentUpon>EditTest.aspx</DependentUpon>
@@ -332,6 +333,13 @@
     </Compile>
     <Compile Include="ShareControls\ucLevelChange.ascx.designer.cs">
       <DependentUpon>ucLevelChange.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShareControls\ucNoteAndMsgBoard.ascx.cs">
+      <DependentUpon>ucNoteAndMsgBoard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShareControls\ucNoteAndMsgBoard.ascx.designer.cs">
+      <DependentUpon>ucNoteAndMsgBoard.ascx</DependentUpon>
     </Compile>
     <Compile Include="ShareControls\ucPageChange.ascx.cs">
       <DependentUpon>ucPageChange.ascx</DependentUpon>

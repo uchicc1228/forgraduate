@@ -80,6 +80,7 @@ namespace SaKei.Manager
                 throw;
             }
         }
+        //透過id取得帳號資訊
         public AdminAccountModel GetAccount(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -120,6 +121,7 @@ namespace SaKei.Manager
                 throw;
             }
         }
+        //取得密碼
         public AdminAccountModel GetPWD(string PWD)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -312,112 +314,6 @@ namespace SaKei.Manager
         #endregion
 
         #region "註冊"
-
-        public bool CreateAccounthash(AdminAccountModel model)
-        {
-            model.Salt_string = Convert.ToBase64String(model.Salt);
-
-            // 1. 判斷資料庫是否有相同的 Account
-            if (this.GetAccount(model.Account) != null)
-
-                throw new Exception("已存在相同的帳號");
-
-            // 2. 新增資料
-            string connStr = ConfigHelper.GetConnectionString();
-            string commandText =
-                @" INSERT INTO AdminAccounts
-                        (AdminAccount, AdminPassword, AdminEmail ,AdminID, AdminPasswordSalt)
-                    VALUES
-                        (@account, @pwd , @email, @id1, @salt);" +
-                @"INSERT INTO[User]
-                        (AdminID)
-                    VALUES
-                        (@id)";
-
-
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    using (SqlCommand command = new SqlCommand(commandText, conn))
-                    {
-
-                        //model.ID = Guid.NewGuid();
-                        command.Parameters.AddWithValue("@account", model.Account);
-                        command.Parameters.AddWithValue("@pwd", model.PWD);
-                        command.Parameters.AddWithValue("@email", model.Mail);
-                        command.Parameters.AddWithValue("@salt", model.Salt_string);
-                        command.Parameters.AddWithValue("@id1", model.ID);
-                        command.Parameters.AddWithValue("@id", model.ID);
-
-
-                        conn.Open();
-                        command.ExecuteNonQuery();
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-
-                Logger.WriteLog("CreateAccount", ex);
-                return false;
-            }
-        }
-        public bool CreateAccount(AdminAccountModel model)
-        {
-            // 1. 判斷資料庫是否有相同的 Account
-            if (this.GetAccount(model.Account) != null)
-
-                throw new Exception("已存在相同的帳號");
-
-            // 2. 新增資料
-            string connStr = ConfigHelper.GetConnectionString();
-            string commandText =
-                @" INSERT INTO AdminAccounts
-                        (AdminAccount, AdminPassword, AdminEmail ,AdminID)
-                    VALUES
-                        (@account, @pwd , @email, @id1);" +
-                @"INSERT INTO[User]
-                        (AdminID)
-                    VALUES
-                        (@id)";
-
-
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    using (SqlCommand command = new SqlCommand(commandText, conn))
-                    {
-
-                        model.ID = Guid.NewGuid();
-                        command.Parameters.AddWithValue("@account", model.Account);
-                        command.Parameters.AddWithValue("@pwd", model.PWD);
-                        command.Parameters.AddWithValue("@email", model.Mail);
-
-                        command.Parameters.AddWithValue("@id1", model.ID);
-                        command.Parameters.AddWithValue("@id", model.ID);
-
-
-                        conn.Open();
-                        command.ExecuteNonQuery();
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-
-                Logger.WriteLog("CreateAccount", ex);
-                return false;
-            }
-        }
-
 
         public bool CreateAdminAccounthash(AdminAccountModel model)
         {
