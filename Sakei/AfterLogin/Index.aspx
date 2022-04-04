@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-       .picCharacter {
+        .picCharacter {
             position: relative;
             left: 45px;
             border: solid 1px black;
@@ -83,6 +83,22 @@
             text-align: center;
             font-family: 宋體;
         }
+
+        #divMainChoiseTab {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .btnChangePage > .btnInfoCh {
+            font-size: 28px;
+            width: 240px;
+            height: 56px;
+            line-height: 56px;
+            left: 0px;
+        }
     </style>
 
 </asp:Content>
@@ -121,4 +137,15 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CP3" runat="server">
+    <div id="divMainChoiseTab" class="row">
+        <span><a class="btnChangePage" href="../ExamSystem/ExamChallengeMode.aspx">
+            <input type="button" class="btnInfoCh" value="挑戰模式" /></a></span><br />
+        <span><a class="btnChangePage" href="../ExamSystem/ExamNormalMode.aspx">
+            <input type="button" class="btnInfoCh" value="練習模式" /></a></span><br />
+        <span><a class="btnChangePage" href="ExamReview.aspx">
+            <input type="button" class="btnInfoCh" value="考題回顧" /></a></span><br />
+        <span><a class="btnChangePage" href="MallPage.aspx">
+            <input type="button" class="btnInfoCh" value="商城" /></a></span>
+    </div>
+
 </asp:Content>
