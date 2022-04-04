@@ -42,7 +42,7 @@ namespace Sakei.API
                     UserNote = context.Request.Form["UserNote"],
                     IsNew = false
                 };
-                this._userAnsMgr.SaveUserAnswer(model);
+                this._userAnsMgr.UpdateUserNote(model);
 
                 return;
             }
