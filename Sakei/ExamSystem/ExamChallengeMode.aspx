@@ -121,10 +121,10 @@
 
     <script>
         var userID ='<%=this.UserID%>';
-        var userPoint =<%=this.User.UserPoints %>;
-        var TestCount = 10;
+        var userPoint =<%=this.UserData.UserPoints %>;
+        var TestCount = 2;
         var TestLevel = 0;
-        var userLevel =<%=this.User.UserLevel%>;
+        var userLevel =<%=this.UserData.UserLevel%>;
         var IsChalleng = true;
         $(document).ready(function () {
             //正確數
@@ -143,7 +143,7 @@
 
             //確定考題等級
             if (userPoint >= 100 && userLevel != 1) {
-                TestLevel += userLevel;
+                TestLevel = userLevel - 1;
                 scheddule = -1;
                 LevelUpMsg();
             } else {
@@ -171,12 +171,14 @@
                 var note = document.getElementById("btnNote");
                 var msgBoard = document.getElementById("btnMsgBoard");
 
-                if (IsExam === false && scheddule > TestCount - 2) {
+                if (scheddule > TestCount - 1) {
+                    window.location.href = "../AfterLogin/Index.aspx";
+                } else if (IsExam === false && scheddule > TestCount - 2) {
                     //判斷看完解答&作完所有題目
-
                     Settlement();
                     note.style.visibility = "hidden";
                     msgBoard.style.visibility = "hidden";
+                    scheddule += 1;
                 } else if (IsExam === false && scheddule === -1) {
                     //升級提示
                     scheddule += 1;
@@ -350,16 +352,23 @@
                     method: "POST",
                     data: postData,
                     success: function (objDataList) {
-
+                        var qusTextInDiv = "";
+                        if (userLevel > 1 && userPoint >= 90 && point > 10) {
+                            qusTextInDiv = `升級挑戰成功 ! 從今天起就是 N${userLevel - 1} 級的鮭魚了!`;
+                        } else if (userLevel > 1 && userPoint >= 90 && point < 10) {
+                            qusTextInDiv = `升級挑戰失敗!`;
+                        } else {
+                            qusTextInDiv = "挑戰結束!";
+                        }
                         var qusText =
                             `<div style="height:100%; text-align:center; line-height:300px; font-size:30pt;">
-                                挑戰結束!
+                                ${qusTextInDiv}
                              </div>`;
 
                         var optText =
                             `<div style="text-align:center;">
                                  <p>答對題數 : ${right} / ${TestCount} 題</p>
-                                 <p>獲得積分 : ${point} 分</P>
+                                 <p>獲得積分 : ${point - 10} 分</P>
                                  <p>獲得金幣 : ${money} 個</P>
                               </div>
                              `;

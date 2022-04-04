@@ -63,10 +63,14 @@ namespace Sakei.API
                 //判斷是否達等級提升標準、是否成功升級
                 if (userLevel > 1 && UserPoints >= 90 && Point > 10)
                 {
-                    userLevel += 1;
+                    userLevel -= 1;
                     UserPoints = 0;
                 }
-                else if (UserPoints < 90)
+                else if (UserPoints + Point < 0)
+                {
+                    UserPoints = 0;
+                }
+                else
                 {
                     UserPoints += Point;
                 }
