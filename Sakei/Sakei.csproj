@@ -93,6 +93,8 @@
     <Content Include="ExamSystem\ExamChallengeMode.aspx" />
     <Content Include="Admin\EditAdmin.aspx" />
     <Content Include="Admin\EditTest.aspx" />
+    <Content Include="ExamSystem\ExamLevelCheckMode.aspx" />
+    <Content Include="ExamSystem\ExamNormalMode.aspx" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\back.jpg" />
@@ -214,6 +216,20 @@
     </Compile>
     <Compile Include="ExamSystem\ExamChallengeMode.aspx.designer.cs">
       <DependentUpon>ExamChallengeMode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExamSystem\ExamLevelCheckMode.aspx.cs">
+      <DependentUpon>ExamLevelCheckMode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExamSystem\ExamLevelCheckMode.aspx.designer.cs">
+      <DependentUpon>ExamLevelCheckMode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExamSystem\ExamNormalMode.aspx.cs">
+      <DependentUpon>ExamNormalMode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExamSystem\ExamNormalMode.aspx.designer.cs">
+      <DependentUpon>ExamNormalMode.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExamSystem\ExamSystemMaster.Master.cs">
       <DependentUpon>ExamSystemMaster.Master</DependentUpon>
