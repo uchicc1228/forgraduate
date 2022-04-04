@@ -12,14 +12,17 @@ namespace Sakei.Manager.ExamSystemManagers
     {
        
         ///<summary>增加使用者積分紀錄</summary> 
-        public void CreatePoints(Guid userID,int corrent)
+        public void CreatePoints(Guid userID,int corrent,int userLevel,int userPoints,int money)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
                                 INSERT INTO PointsLists
                                 ( UserID, Correct)
                                 VALUES
-                                ( @UserID, @Correct)";
+                                ( @UserID, @Correct)
+                                UPDATE UserAccounts
+                                SET UserLevel = @UserLevel, UserPoints = @UserPoints, UserMoney += @Money
+                                WHERE UserID= @UserID";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -28,6 +31,9 @@ namespace Sakei.Manager.ExamSystemManagers
                     {
                         command.Parameters.AddWithValue("@UserID", userID);
                         command.Parameters.AddWithValue("@Correct", corrent);
+                        command.Parameters.AddWithValue("@UserLevel", userLevel);
+                        command.Parameters.AddWithValue("@UserPoints", userPoints);
+                        command.Parameters.AddWithValue("@Money", money);
                         conn.Open();
                         command.ExecuteNonQuery();
 

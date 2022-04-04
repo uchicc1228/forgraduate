@@ -108,6 +108,7 @@
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="ShareControls\ucLevelChange.ascx" />
+    <Content Include="ShareControls\ucNoteAndMsgBoard.ascx" />
     <Content Include="ShareControls\ucPageChange.ascx" />
     <Content Include="StartPage.aspx" />
     <Content Include="testtest.aspx" />
@@ -332,6 +333,13 @@
     </Compile>
     <Compile Include="ShareControls\ucLevelChange.ascx.designer.cs">
       <DependentUpon>ucLevelChange.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShareControls\ucNoteAndMsgBoard.ascx.cs">
+      <DependentUpon>ucNoteAndMsgBoard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShareControls\ucNoteAndMsgBoard.ascx.designer.cs">
+      <DependentUpon>ucNoteAndMsgBoard.ascx</DependentUpon>
     </Compile>
     <Compile Include="ShareControls\ucPageChange.ascx.cs">
       <DependentUpon>ucPageChange.ascx</DependentUpon>

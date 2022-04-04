@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ExamSystem/ExamSystemMaster.Master" AutoEventWireup="true" CodeBehind="ExamChallengeMode.aspx.cs" Inherits="Sakei.ExamSystem.ExamChallengeMode1" %>
 
+<%@ Register Src="~/ShareControls/ucNoteAndMsgBoard.ascx" TagPrefix="uc1" TagName="ucNoteAndMsgBoard" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         #divQuestion {
@@ -90,7 +93,7 @@
             border: 0px;
             color: #18454C;
             cursor: pointer;
-            font-size:24px;
+            font-size: 24px;
         }
 
             #divOption .btnOption:hover {
@@ -106,14 +109,15 @@
     <%--確認、筆記、留言板按鈕--%>
     <div id="divBtnArea">
         <div class=" row align-items-center gap-2">
-            <button type="button" id="btnNote" class="col btn btn-secondary btn-lg" style="visibility: hidden;">筆記</button>
+            <button type="button" id="btnNote" class="col btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#divNoteWindow" style="visibility: hidden;">筆記</button>
             <button type="button" id="btnSure" class="col btn btn-primary btn-lg">確定</button>
-            <button type="button" id="btnMsgBoard" class="col btn btn-secondary btn-lg" style="visibility: hidden;">留言板</button>
+            <button type="button" id="btnMsgBoard" class="col btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#divMsgBordWindow" style="visibility: hidden;">留言板</button>
         </div>
 
     </div>
 
-
+    <%--筆記、留言板視窗--%>
+    <uc1:ucNoteAndMsgBoard runat="server" ID="ucNoteAndMsgBoard" />
 
     <script>
         var userID ='<%=this.UserID%>';
@@ -121,6 +125,7 @@
         var TestCount = 10;
         var TestLevel = 0;
         var userLevel =<%=this.User.UserLevel%>;
+        var IsChalleng = true;
         $(document).ready(function () {
             //正確數
             var right = 0;
@@ -134,6 +139,7 @@
             var userAnswer = "";
             //正確答案
             var examAnswer = "";
+
 
             //確定考題等級
             if (userPoint >= 100 && userLevel != 1) {
@@ -162,11 +168,17 @@
 
             //點擊下一步
             $("#btnSure").click(function () {
-               
+                var note = document.getElementById("btnNote");
+                var msgBoard = document.getElementById("btnMsgBoard");
+
                 if (IsExam === false && scheddule > TestCount - 2) {
                     //判斷看完解答&作完所有題目
 
+                    Settlement();
+                    note.style.visibility = "hidden";
+                    msgBoard.style.visibility = "hidden";
                 } else if (IsExam === false && scheddule === -1) {
+                    //升級提示
                     scheddule += 1;
                     IsExam = true;
                     StartExam();
@@ -176,6 +188,8 @@
                     scheddule += 1;
                     IsExam = true;
                     NextQuestion();
+                    note.style.visibility = "hidden";
+                    msgBoard.style.visibility = "hidden";
                 } else {
                     //做完這一題
                     IsExam = false;
@@ -183,11 +197,12 @@
                     examAnswer = examDataList[scheddule].TestAnswer.trim();
                     if (userAnswer === examAnswer) {
                         right += 1;
-                        alert(right);
                     }
                     SaveAnswer();
+                    note.style.visibility = "visible";
+                    msgBoard.style.visibility = "visible";
                 }
-                
+
 
             });
 
@@ -196,7 +211,8 @@
                 var postData = {
                     "TestLevel": TestLevel,
                     "TestCount": TestCount,
-                    "UserID":userID
+                    "UserID": userID,
+                    "IsChalleng": IsChalleng
                 };
                 $.ajax({
                     url: "../API/ExamSystemHandler.ashx?Exam=Start",
@@ -315,6 +331,198 @@
                 $("#divOption").append(optText);
 
             };
+
+            //成果結算畫面
+            function Settlement() {
+                var point = right * 2;
+                var money = right * 3;
+
+                var postData = {
+                    "UserID": userID,
+                    "Correct": right,
+                    "UserLevel": userLevel,
+                    "Point": point,
+                    "UserPoints": userPoint,
+                    "Money": money
+                };
+                $.ajax({
+                    url: "../API/ExamSystemHandler.ashx?Exam=Settlement",
+                    method: "POST",
+                    data: postData,
+                    success: function (objDataList) {
+
+                        var qusText =
+                            `<div style="height:100%; text-align:center; line-height:300px; font-size:30pt;">
+                                挑戰結束!
+                             </div>`;
+
+                        var optText =
+                            `<div style="text-align:center;">
+                                 <p>答對題數 : ${right} / ${TestCount} 題</p>
+                                 <p>獲得積分 : ${point} 分</P>
+                                 <p>獲得金幣 : ${money} 個</P>
+                              </div>
+                             `;
+
+                        $("#divQuestion").empty();
+                        $("#divQuestion").append(qusText);
+
+                        $("#divOption").empty();
+                        $("#divOption").append(optText);
+
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("連線失敗，請聯絡管理員。");
+                    }
+                });
+
+            }
+
+
+            //筆記
+            function BulidNote(testID, testContent) {
+                var postData = {
+                    "userID": userID,
+                    "testID": testID
+                }
+                $.ajax({
+                    url: "../API/ExamReviewHandler.ashx?Action=Note",
+                    method: "POST",
+                    data: postData,
+                    dataType: "JSON",
+                    success: function (objData) {
+
+                        var noteTitle = `<h6> Q : <span id="noteTestContent">${testContent}</span></h6>`
+                        var noteContent = ` <textarea id="Note" rows="10" cols="50" style="resize: none;" placeholder="記錄自己的想法吧!">${objData.UserNote}</textarea>`;
+
+                        $("#divNote").empty();
+                        $("#divNote").append(noteContent);
+
+                        $("#divNoteTitle").empty();
+                        $("#divNoteTitle").append(noteTitle);
+
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("通訊失敗，請聯絡管理員。");
+                    }
+                });
+
+            };
+
+            $("#btnNote").click(function () {
+                var testID = examDataList[scheddule].TestID;
+                var testContent = examDataList[scheddule].TestContent;
+                BulidNote(testID, testContent);
+
+            });
+            $("#btnNoteSave").click(function () {
+                var noteContent = document.getElementById("Note").value;
+                var testContent = document.getElementById("noteTestContent").innerText;
+                var postData = {
+                    "userID": userID,
+                    "testID": examDataList[scheddule].TestID,
+                    "UserNote": noteContent,
+                    "UserAnswer": userAnswer
+                };
+                $.ajax({
+                    url: "../API/ExamReviewHandler.ashx?Action=NoteWrite",
+                    method: "POST",
+                    data: postData,
+                    success: function () {
+                        alert("筆記已儲存");
+                        BulidNote(testID, testContent);
+
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("通訊失敗，請聯絡管理員。");
+                    }
+                });
+            });
+
+            //留言板
+            function BulidMsgBoard(testID, testContent) {
+                $.ajax({
+                    url: "../API/ExamReviewHandler.ashx?Action=MsgBoard",
+                    method: "POST",
+                    data: { "testID": testID },
+                    dataType: "JSON",
+                    success: function (objDataList) {
+
+                        var msgTitle =
+                            `<h5> Q : <span id="msgTestContent">${testContent}</span></h5>
+                `;
+                        var msgContent = "";
+                        for (var item of objDataList) {
+                            var msgDate = new Date(item.CreateDate);
+                            msgDate = msgDate.toLocaleString();
+                            msgContent +=
+                                `
+                    <div class="card">
+                      <div class="card-header">
+                        <p>${item.UserName}( N${item.UserLevel} )</p>
+                      </div>
+                      <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                          <p>${item.MessageContent}</p>
+                          <footer class="blockquote-footer">${msgDate}</cite></footer>
+                        </blockquote>
+                      </div>
+                    </div>
+                    `;
+                        }
+
+                        var msgWrite =
+                            `<textarea id="txtMsgBoard" rows="4" cols="50" style="resize: none;" placeholder="留言分享自己的看法吧!"></textarea>`;
+
+                        $("#divMsgBoard").empty();
+                        $("#divMsgBoard").append(`<ul class="list - group list - group - flush">` + msgContent + "</ul >");
+
+                        $("#divMsgTitle").empty();
+                        $("#divMsgTitle").append(msgTitle);
+
+                        $("#divMsgWriteContent").empty();
+                        $("#divMsgWriteContent").append(msgWrite);
+
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("通訊失敗，請聯絡管理員。");
+                    }
+                });
+
+            }
+
+            $("#btnMsgBoard").click(function () {
+                var testID = examDataList[scheddule].TestID;
+                var testContent = examDataList[scheddule].TestContent;
+                BulidMsgBoard(testID, testContent);
+            });
+
+            $("#btnMsgWrite").click(function () {
+                var msgWriteContent = document.getElementById("txtMsgBoard").value;
+                var testContent = document.getElementById("msgTestContent").innerText;
+                var postData = {
+                    "userID": userID,
+                    "testID": examDataList[scheddule].TestID,
+                    "msg": msgWriteContent
+                };
+                $.ajax({
+                    url: "../API/ExamReviewHandler.ashx?Action=MsgWrite",
+                    method: "POST",
+                    data: postData,
+                    success: function (txtMsg) {
+                        BulidMsgBoard(testID, testContent);
+
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("通訊失敗，請聯絡管理員。");
+                    }
+                });
+            });
 
         })
     </script>
