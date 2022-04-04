@@ -61,20 +61,21 @@ namespace Sakei.Manager
                 throw;
             }
         }
-        public UserModel GetUserName(string name)
+        public UserModel GetUserMoney(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                 @" SELECT *
-                    FROM [User]
-                    WHERE UserName = @name ";
+                 @" SELECT [UserMoney]
+                    FROM [UserAccounts]    
+                    WHERE UserID=@id                  
+                     ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@name", name);
+                        command.Parameters.AddWithValue("@id", id);
 
                         conn.Open();
 
@@ -82,9 +83,8 @@ namespace Sakei.Manager
                         if (reader.Read())
                         {
                             UserModel model = new UserModel()
-                            {                               
-                                UserName = reader["UserName"] as string,
-                                ID = (Guid)reader["UserID"]
+                            {
+                                UserMoney = (int)reader["UserMoney"],
                             };
                             return model;
 
@@ -163,7 +163,7 @@ namespace Sakei.Manager
                 Logger.WriteLog("UpdateCharacter", ex);
                 throw;
             }
-        }
+        }        
         #endregion
     }
 }

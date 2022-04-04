@@ -146,31 +146,13 @@
             <ItemTemplate>
                 <div class="items">
                     <image src="<%#Eval("Content") %>"></image>
-                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") %>' />
+                    <asp:Literal ID="ltlName" runat="server" Text='<%#"名稱："+ Eval("Name") +"<br/>" %>'></asp:Literal>
+                    <asp:Literal ID="ltlMoney" runat="server" Text='<%#"價錢："+ Eval("Price") +"<br/>" %>'></asp:Literal>
+                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") +","+ Eval("Price") %>' />
                 </div>
             </ItemTemplate>
         </asp:Repeater>
     </div>
 
-    <script>function getData() {
-            console.log("換衣服");
-            $.ajax({
-                url: "../API/MallHandler.ashx?Action=Mall",
-                dataType: "json",
-                success: function (jsonObj) {
-                    // 成功。JSON物件處理作業
-
-
-
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    // 錯誤。錯誤訊息處理
-                    alert(xhr.status);
-                    alert(thrownError);
-                }
-            });
-
-        }
-    </script>
 
 </asp:Content>

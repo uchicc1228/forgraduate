@@ -58,7 +58,8 @@ namespace Sakei.Manager
                 Logger.WriteLog("", ex);
                 throw;
             }
-        }
+        }       
+        #endregion
         public List<ItemModel> GetItem()
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -99,7 +100,40 @@ namespace Sakei.Manager
                 throw;
             }
         }
-        #endregion
-        
+        public void UpdateUserMoney(Guid userID,Guid itemID)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" UPDATE [UserAccounts]
+                    SET 
+                        [UserMoney]=(SELECT [UserMoney]
+                        FROM UserAccounts
+                        WHERE UserID = @userID)-
+                    	(SELECT [ItemPrice]
+                        FROM [Malls]
+                        WHERE ItemID = @itemID)
+                    WHERE
+                        UserID = @userID                                    
+                     ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", userID);
+                        command.Parameters.AddWithValue("@itemID", itemID);
+
+                        conn.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("UpdateCharacter", ex);
+                throw;
+            }
+        }
     }
 }

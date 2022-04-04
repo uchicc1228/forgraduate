@@ -13,6 +13,7 @@ namespace Sakei.Models
         public int ItemLevel { get; set; }
         public string Content { get; set; }
         public DateTime CreateDate { get; set; }
+        /// <summary> 判斷是否已存在資料庫，不存入資料庫 </summary>
         public bool IsHave { get; set; }
     }
 }
