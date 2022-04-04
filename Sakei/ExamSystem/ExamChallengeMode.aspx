@@ -7,6 +7,14 @@
             height: 40%;
         }
 
+            #divQuestion > h4 {
+                color: #4C6D8E;
+            }
+
+            #divQuestion > h2 {
+                color: #18454C;
+            }
+
         #divOption {
             padding: 30px;
             height: 40%;
@@ -29,6 +37,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%--題目--%>
     <div id="divQuestion">
 
         <h4>----題型----</h4>
@@ -36,23 +45,65 @@
         <h2>----題目----</h2>
 
     </div>
+    <%--答案選項--%>
     <div id="divOption" class="row align-items-center">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <p class="nav-link disabled">A.ans1</p>
+                <label>
+                    <input type="radio" name="option" value="A" checked="checked" /><span class="round btnOption">A.ans1</span>
+                </label>
             </li>
             <li class="nav-item">
-                <p class="nav-link disabled">B.ans2</p>
+                <label>
+                    <input type="radio" name="option" value="B" checked="checked" /><span class="round btnOption">B.ans2</span>
+                </label>
             </li>
             <li class="nav-item">
-                <p class="nav-link disabled">C.ans3</p>
+                <label>
+                    <input type="radio" name="option" value="C" checked="checked" /><span class="round btnOption">C.ans3</span>
+                </label>
             </li>
             <li class="nav-item">
-                <p class="nav-link disabled">D.ans4</p>
+                <label>
+                    <input type="radio" name="option" value="D" checked="checked" /><span class="round btnOption">D.ans4</span>
+                </label>
             </li>
         </ul>
-    </div>
 
+    </div>
+    <style>
+        #divOption input[type="radio"] {
+            display: none;
+        }
+
+        #divOption input:checked + .btnOption {
+            background: #0067E2;
+            color: #FFE6D2;
+            cursor: default;
+        }
+
+        #divOption .btnOption {
+            display: inline-block;
+            margin: 0px 10px;
+            padding: 5px 10px;
+            background: none;
+            border: 0px;
+            color: #18454C;
+            cursor: pointer;
+            font-size:24px;
+        }
+
+            #divOption .btnOption:hover {
+                background: #BDDBF4;
+                color: #385B77;
+            }
+
+        #divOption .round {
+            border-radius: 5px;
+        }
+    </style>
+
+    <%--確認、筆記、留言板按鈕--%>
     <div id="divBtnArea">
         <div class=" row align-items-center gap-2">
             <button type="button" id="btnNote" class="col btn btn-secondary btn-lg" style="visibility: hidden;">筆記</button>
@@ -79,12 +130,15 @@
             var IsExam = false;
             //題目資料
             var examDataList;
+            //使用者答案
+            var userAnswer = "";
+            //正確答案
+            var examAnswer = "";
 
             //確定考題等級
             if (userPoint >= 100 && userLevel != 1) {
                 TestLevel += userLevel;
                 scheddule = -1;
-                StartExam();
                 LevelUpMsg();
             } else {
                 TestLevel = userLevel;
@@ -108,21 +162,32 @@
 
             //點擊下一步
             $("#btnSure").click(function () {
-
+               
                 if (IsExam === false && scheddule > TestCount - 2) {
                     //判斷看完解答&作完所有題目
 
-                } else if (IsExam === false) {
+                } else if (IsExam === false && scheddule === -1) {
+                    scheddule += 1;
+                    IsExam = true;
+                    StartExam();
+                }
+                else if (IsExam === false) {
                     //看完解答、升級挑戰提示
                     scheddule += 1;
                     IsExam = true;
                     NextQuestion();
-
                 } else {
                     //做完這一題
                     IsExam = false;
-                    BuildAnswer();
+                    userAnswer = $("[name='option']:checked").val();
+                    examAnswer = examDataList[scheddule].TestAnswer.trim();
+                    if (userAnswer === examAnswer) {
+                        right += 1;
+                        alert(right);
+                    }
+                    SaveAnswer();
                 }
+                
 
             });
 
@@ -130,7 +195,8 @@
             function StartExam() {
                 var postData = {
                     "TestLevel": TestLevel,
-                    "TestCount": TestCount
+                    "TestCount": TestCount,
+                    "UserID":userID
                 };
                 $.ajax({
                     url: "../API/ExamSystemHandler.ashx?Exam=Start",
@@ -140,6 +206,29 @@
                     success: function (objDataList) {
                         examDataList = objDataList;
                         NextQuestion();
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("連線失敗，請聯絡管理員。");
+                    }
+                });
+            }
+            //將使用者答案存入資料庫
+            function SaveAnswer() {
+                var examData = examDataList[scheddule];
+                var postData = {
+                    "UserID": userID,
+                    "TestID": examData.TestID,
+                    "UserAnswer": userAnswer,
+                    "UserNote": examData.UserNote,
+                    "IsNew": ((examData.UserAnswer != null) ? false : true)
+                };
+                $.ajax({
+                    url: "../API/ExamSystemHandler.ashx?Exam=SaveAnswer",
+                    method: "POST",
+                    data: postData,
+                    success: function (objDataList) {
+                        BuildAnswer();
                     },
                     error: function (msg) {
                         console.log(msg);
@@ -160,16 +249,24 @@
                     `
                                 <ul class="nav justify-content-center">
                                     <li class="nav-item">
-                                        <p id="A" class="nav-link disabled">A.${examData.OptionsA}</p>
+                                        <label>
+                                            <input type="radio" name="option" value="A" checked="checked" /><span id="A" class="round btnOption">A.${examData.OptionsA}</span>
+                                        </label>
                                     </li>
                                     <li class="nav-item">
-                                        <p id="B" class="nav-link disabled">B.${examData.OptionsB}</p>
+                                        <label>
+                                            <input type="radio" name="option" value="B" checked="checked" /><span id="B" class="round btnOption">B.${examData.OptionsB}</span>
+                                        </label>
                                     </li>
                                     <li class="nav-item">
-                                        <p id="C" class="nav-link disabled">C.${examData.OptionsC}</p>
+                                        <label>
+                                            <input type="radio" name="option" value="C" checked="checked" /><span id="C" class="round btnOption">C.${examData.OptionsC}</span>
+                                        </label>
                                     </li>
                                     <li class="nav-item">
-                                        <p id="D" class="nav-link disabled">D.${examData.OptionsD}</p>
+                                        <label>
+                                            <input type="radio" name="option" value="D" checked="checked" /><span id="D" class="round btnOption">D.${examData.OptionsD}</span>
+                                        </label>
                                     </li>
                                 </ul>
                             `;
@@ -185,7 +282,8 @@
             function BuildAnswer() {
                 var examData = examDataList[scheddule];
                 //帶入文正解文字資訊
-                var examAnswer = document.getElementById(`${examData.TestAnswer.trim()}`).textContent;
+                var examAnswerText = document.getElementById(`${examAnswer}`).textContent;
+                var userAnswerText = document.getElementById(`${userAnswer}`).textContent;
                 //正確/錯誤
                 var ansText = "正確";
                 //判斷使用者答案正確與否
@@ -201,10 +299,10 @@
                                 <ul class="nav justify-content-center">
                                     
                                     <li class="nav-item">
-                                        <p class="nav-link disabled">正確答案為 : ${examAnswer}</p>
+                                        <p class="nav-link disabled">正確答案為 : ${examAnswerText}</p>
                                     </li>
                                     <li class="nav-item">
-                                        <p class="nav-link disabled">選擇的答案 : </p>
+                                        <p class="nav-link disabled">選擇答案為 : ${userAnswerText}</p>
                                     </li>
                                    
                                 </ul>
@@ -220,5 +318,4 @@
 
         })
     </script>
-
 </asp:Content>

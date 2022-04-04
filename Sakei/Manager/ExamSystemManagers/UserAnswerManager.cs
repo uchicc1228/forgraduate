@@ -135,9 +135,9 @@ namespace Sakei.Manager.ExamSystemManagers
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
                                 INSERT INTO UserAnswers
-                                ( UserID, TestID, UserAnswer, UserNote)
+                                ( UserID, TestID, UserAnswer)
                                 VALUES
-                                ( @UserID, @TestID, @UserAnswer, @UserNote)";
+                                ( @UserID, @TestID, @UserAnswer)";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -146,8 +146,9 @@ namespace Sakei.Manager.ExamSystemManagers
                     {
                         command.Parameters.AddWithValue("@UserID", model.UserID);
                         command.Parameters.AddWithValue("@TestID", model.TestID);
-                        command.Parameters.AddWithValue("@UserNote", model.UserNote);
                         command.Parameters.AddWithValue("@UserAnswer", model.UserAnswer);
+                        
+                       
 
                         conn.Open();
                         command.ExecuteNonQuery();
@@ -163,6 +164,43 @@ namespace Sakei.Manager.ExamSystemManagers
         }
         ///<summary>修改單使用者作答紀錄資料</summary> 
         private static void UpdateUserAnswer(UserAnswerModel model)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText = $@"
+                                UPDATE UserAnswers
+                                SET
+                                    UserAnswer = @UserAnswer
+                                WHERE 
+                                    UserID = @UserID AND
+                                    TestID = @TestID
+                                ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@UserID", model.UserID);
+                        command.Parameters.AddWithValue("@TestID", model.TestID);
+                        command.Parameters.AddWithValue("@UserAnswer", model.UserAnswer);
+
+                        conn.Open();
+                        command.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("Sakei.Manager.TestSystemManagers.UserAnswerManager.UpdateUserAnswer", ex);
+                throw;
+            }
+        }
+        /// <summary>
+        /// 更新使用者筆記
+        /// </summary>
+        /// <param name="model"></param>
+        public void UpdateUserNote(UserAnswerModel model)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
@@ -193,7 +231,7 @@ namespace Sakei.Manager.ExamSystemManagers
             }
             catch (Exception ex)
             {
-                Logger.WriteLog("Sakei.Manager.TestSystemManagers.UserAnswerManager.UpdateUserAnswer", ex);
+                Logger.WriteLog("Sakei.Manager.TestSystemManagers.UserAnswerManager.UpdateUserNote", ex);
                 throw;
             }
         }
