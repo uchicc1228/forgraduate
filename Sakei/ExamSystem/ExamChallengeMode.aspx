@@ -469,18 +469,21 @@
                             msgDate = msgDate.toLocaleString();
                             msgContent +=
                                 `
-                    <div class="card">
-                      <div class="card-header">
-                        <p>${item.UserName}( N${item.UserLevel} )</p>
-                      </div>
-                      <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                          <p>${item.MessageContent}</p>
-                          <footer class="blockquote-footer">${msgDate}</cite></footer>
-                        </blockquote>
-                      </div>
-                    </div>
-                    `;
+                                <div class="card mb-3" style="max-width: 540px;">
+                                  <div class="row g-0">
+                                    <div class="col-md-4">
+                                      <img src="${item.Character}" class="img-fluid rounded-start" alt="失蹤的鮭魚...">
+                                    </div>
+                                    <div class="col-md-8">
+                                      <div class="card-body">
+                                        <h5 class="card-title">${item.UserName}<span style="font-size:8pt;">( N${item.UserLevel} )</span></h5>
+                                        <p class="card-text">${item.MessageContent}</p>
+                                        <p class="card-text"><small class="text-muted">${msgDate}</small></p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                 `;
                         }
 
                         var msgWrite =
@@ -523,7 +526,7 @@
                     method: "POST",
                     data: postData,
                     success: function (txtMsg) {
-                        BulidMsgBoard(testID, testContent);
+                        BulidMsgBoard(examDataList[scheddule].TestID, testContent);
 
                     },
                     error: function (msg) {

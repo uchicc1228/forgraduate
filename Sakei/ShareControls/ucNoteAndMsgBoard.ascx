@@ -19,7 +19,7 @@
 
     <%--留言視窗--%>
     <div class="modal" id="divMsgBordWindow" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-header" id="divMsgTitle">

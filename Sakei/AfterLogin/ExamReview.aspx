@@ -124,7 +124,7 @@
 
     <%--留言視窗--%>
     <div class="modal" id="divMsgBordWindow" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-header" id="divMsgTitle">
@@ -137,7 +137,7 @@
                     <button type="button" class="btn btn-warning" id="btnMsgWrite">留言</button>
                 </div>
 
-
+                
             </div>
         </div>
     </div>
@@ -220,26 +220,28 @@
                 success: function (objDataList) {
 
                     var msgTitle =
-                        `<h5> Q : <span id="msgTestContent">${testContent}</span></h5>
-                `;
+                        `<h5> Q : <span id="msgTestContent">${testContent}</span></h5>`;
                     var msgContent = "";
                     for (var item of objDataList) {
                         var msgDate = new Date(item.CreateDate);
                         msgDate = msgDate.toLocaleString();
                         msgContent +=
                             `
-                    <div class="card">
-                      <div class="card-header">
-                        <p>${item.UserName}( N${item.UserLevel} )</p>
-                      </div>
-                      <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                          <p>${item.MessageContent}</p>
-                          <footer class="blockquote-footer">${msgDate}</cite></footer>
-                        </blockquote>
-                      </div>
-                    </div>
-                    `;
+                            <div class="card mb-3" style="max-width: 540px;">
+                              <div class="row g-0">
+                                <div class="col-md-4">
+                                  <img src="${item.Character}" class="img-fluid rounded-start" alt="失蹤的鮭魚...">
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="card-body">
+                                    <h5 class="card-title">${item.UserName}<span style="font-size:8pt;">( N${item.UserLevel} )</span></h5>
+                                    <p class="card-text">${item.MessageContent}</p>
+                                    <p class="card-text"><small class="text-muted">${msgDate}</small></p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                             `;
                     }
 
                     var msgWrite =

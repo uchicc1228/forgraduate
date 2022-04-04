@@ -23,7 +23,8 @@ namespace Sakei.Manager.ExamSystemManagers
                                 	UserName,
                                 	UserLevel,
                                 	MessageContent,
-                                	MessageBoards.CreateDate
+                                	MessageBoards.CreateDate,
+	                                [Character]
                                 FROM (MessageBoards
                                 INNER JOIN [UserAccounts] 
                                 ON MessageBoards.UserID=UserAccounts.UserID)
@@ -53,7 +54,8 @@ namespace Sakei.Manager.ExamSystemManagers
                                 UserLevel=(int)reader["UserLevel"],
                                 TestID = (Guid)reader["TestID"],
                                 MessageContent = reader["MessageContent"] as string,
-                                CreateDate = (DateTime)reader["CreateDate"]
+                                CreateDate = (DateTime)reader["CreateDate"],
+                                Character=(reader["Character"]as string).Replace("~","..")
                             };
                             messageBoardList.Add(info);
                         }
