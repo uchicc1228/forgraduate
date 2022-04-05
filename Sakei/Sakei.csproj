@@ -85,7 +85,6 @@
     <Content Include="Admin\WebForm1.aspx" />
     <Content Include="AfterLogin\ExamReview.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
-    <Content Include="AfterLogin\ItemChange.aspx" />
     <Content Include="AfterLogin\ShoppingList.aspx" />
     <Content Include="AfterLogin\UserCharacterChange.aspx" />
     <Content Include="AfterLogin\UserPWDChange.aspx" />
@@ -181,13 +180,6 @@
     </Compile>
     <Compile Include="AfterLogin\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AfterLogin\ItemChange.aspx.cs">
-      <DependentUpon>ItemChange.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AfterLogin\ItemChange.aspx.designer.cs">
-      <DependentUpon>ItemChange.aspx</DependentUpon>
     </Compile>
     <Compile Include="AfterLogin\ShoppingList.aspx.cs">
       <DependentUpon>ShoppingList.aspx</DependentUpon>

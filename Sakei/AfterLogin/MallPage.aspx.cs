@@ -135,11 +135,9 @@ namespace Sakei
                         shoppingModel.Content = arr[1];
                         _mmgr.UpdateUserMoney(_model, _userID, id);
                         _smgr.CreateShoppingList(shoppingModel);
+                        Response.Write("<script>alert('購買成功，來去換新衣ㄅ!!');location.href='Index.aspx';</script>");
                     }
-                    Response.Redirect(this.Request.RawUrl);
-
                     break;
-
                 default:
                     break;
             }

@@ -95,6 +95,23 @@
             text-align: center;
             font-family: 宋體;
         }
+
+        #buySucces {
+            position: absolute;
+            background-color: rgb(0,0,0,0.5);
+            width: 70%;
+            height: 70%;
+        }
+
+            #buySucces > div {
+                background-color: rgb(243, 229, 207);
+                width: 30%;
+                height: 30%;
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%)
+            }
     </style>
 
 </asp:Content>
@@ -148,10 +165,18 @@
                     <image src="<%#Eval("Content") %>"></image>
                     <asp:Literal ID="ltlName" runat="server" Text='<%#"名稱："+ Eval("Name") +"<br/>" %>'></asp:Literal>
                     <asp:Literal ID="ltlMoney" runat="server" Text='<%#"價錢："+ Eval("Price") +"<br/>" %>'></asp:Literal>
-                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") +","+ Eval("Price") +","+ Eval("Level") %>' />
+                    <asp:Button runat="server" ID="buyItem" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") +","+ Eval("Price") +","+ Eval("Level") %>' />
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+        <asp:PlaceHolder ID="PlcSucces" runat="server" Visible="false">
+            <div id="buySucces">
+                <div>
+                    <p>購買成功，來去換新衣吧!!</p>
+                    <asp:Button ID="btnConfirm" runat="server" Text="確認" />
+                </div>
+            </div>
+        </asp:PlaceHolder>
     </div>
 
 
