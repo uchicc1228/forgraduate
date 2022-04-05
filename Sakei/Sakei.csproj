@@ -94,6 +94,8 @@
     <Content Include="ExamSystem\ExamChallengeMode.aspx" />
     <Content Include="Admin\EditAdmin.aspx" />
     <Content Include="Admin\EditTest.aspx" />
+    <Content Include="ExamSystem\ExamLevelCheckMode.aspx" />
+    <Content Include="ExamSystem\ExamNormalMode.aspx" />
     <Content Include="ForgotPage.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\back.jpg" />
@@ -109,6 +111,7 @@
     <Content Include="NoPage.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="ShareControls\ucLevelChange.ascx" />
+    <Content Include="ShareControls\ucNoteAndMsgBoard.ascx" />
     <Content Include="ShareControls\ucPageChange.ascx" />
     <Content Include="StartPage.aspx" />
     <Content Include="testtest.aspx" />
@@ -221,6 +224,20 @@
     </Compile>
     <Compile Include="ExamSystem\ExamChallengeMode.aspx.designer.cs">
       <DependentUpon>ExamChallengeMode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExamSystem\ExamLevelCheckMode.aspx.cs">
+      <DependentUpon>ExamLevelCheckMode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExamSystem\ExamLevelCheckMode.aspx.designer.cs">
+      <DependentUpon>ExamLevelCheckMode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExamSystem\ExamNormalMode.aspx.cs">
+      <DependentUpon>ExamNormalMode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExamSystem\ExamNormalMode.aspx.designer.cs">
+      <DependentUpon>ExamNormalMode.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExamSystem\ExamSystemMaster.Master.cs">
       <DependentUpon>ExamSystemMaster.Master</DependentUpon>
@@ -341,6 +358,13 @@
     </Compile>
     <Compile Include="ShareControls\ucLevelChange.ascx.designer.cs">
       <DependentUpon>ucLevelChange.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShareControls\ucNoteAndMsgBoard.ascx.cs">
+      <DependentUpon>ucNoteAndMsgBoard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShareControls\ucNoteAndMsgBoard.ascx.designer.cs">
+      <DependentUpon>ucNoteAndMsgBoard.ascx</DependentUpon>
     </Compile>
     <Compile Include="ShareControls\ucPageChange.ascx.cs">
       <DependentUpon>ucPageChange.ascx</DependentUpon>

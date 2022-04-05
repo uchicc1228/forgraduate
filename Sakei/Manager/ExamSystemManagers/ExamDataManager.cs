@@ -101,7 +101,7 @@ namespace Sakei.Manager.ExamSystemManagers
             }
         }
         /// <summary> 抓取考試用資料 </summary>
-        public List<TestDataModel> GetTestDataForTest(int testLevel, int testCount, Guid userID)
+        public List<TestDataModel> GetTestDataForTest(int testLevel, int testCount, Guid userID, bool isChalleng)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
@@ -119,6 +119,14 @@ namespace Sakei.Manager.ExamSystemManagers
 	                                ( UserID = @UserID OR UserID IS NULL )
                                 ORDER BY NEWID()
                                 ";
+            string commandTextInsert = $@" 
+                                        UPDATE UserAccounts
+                                        SET UserPoints -= 10
+                                        WHERE UserID = @UserID ";
+            if (isChalleng)
+            {
+                commandText += commandTextInsert;
+            }
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -139,6 +147,7 @@ namespace Sakei.Manager.ExamSystemManagers
                             TestDataModel info = BuildExamData(reader);
                             examDataList.Add(info);
                         }
+
                         return examDataList;
                     }
                 }

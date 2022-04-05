@@ -20,6 +20,7 @@ namespace Sakei
         ShoppingListManager _smgr = new ShoppingListManager();
         private Guid _userID = (Guid)LoginHelper.GetUserID();
         private UserModel _model;
+        private ItemModel _itemModel;
         private ShoppingListModel _shoppingModel;
         private int level;
         ItemModel itemModel = new ItemModel();
@@ -105,12 +106,20 @@ namespace Sakei
 
                     Guid id;
                     Guid.TryParse(arr[0], out id);
+                    int price;
+                    int.TryParse(arr[2], out price);
 
-                    _shoppingModel = _smgr.GetShoppingList_itemID(_userID);
+                    _model = _umgr.GetUserName(_userID);
+                    _shoppingModel = _smgr.GetShoppingList_shoppingID(_userID);
 
-                    if (_shoppingModel.ItemID == id)
+                    if (!_shoppingModel.IsHave)
                     {
                         Response.Write("<script>alert('無法購買相同的衣服!!')</script>");
+                        return;
+                    }
+                    else if (_model.UserMoney < price)
+                    {
+                        Response.Write("<script>alert('金幣不足無法購買衣服!!')</script>");
                         return;
                     }
                     else
@@ -118,6 +127,7 @@ namespace Sakei
                         shoppingModel.UserID = _userID;
                         shoppingModel.ItemID = id;
                         shoppingModel.Content = arr[1];
+                        _mmgr.UpdateUserMoney(_userID, id);
                         _smgr.CreateShoppingList(shoppingModel);
                     }
                     Response.Redirect(this.Request.RawUrl);

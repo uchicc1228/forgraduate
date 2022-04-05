@@ -14,13 +14,14 @@ namespace Sakei.ExamSystem
     {
         private AccountManager _accMgr = new AccountManager();
 
-        public  UserModel User;
+        public  UserModel UserData;
         public Guid UserID;
         protected void Page_Load(object sender, EventArgs e)
         {
             UserID = (Guid)LoginHelper.GetUserID();
             //取得使用者等級
-            User = _accMgr.GetUserPointsAndMoney(UserID);
+            UserData = _accMgr.GetUserPointsAndMoney(UserID);
+
 
 
             

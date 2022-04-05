@@ -53,45 +53,7 @@ namespace Sakei.Manager
                 Logger.WriteLog("Sakei.Manager.TestSystemManagers.ShoppingListManager.GetShoppingList", ex);
                 throw;
             }
-        }
-        public ShoppingListModel GetShoppingList_itemID(Guid userID)
-        {
-            string connStr = ConfigHelper.GetConnectionString();
-            string commandText = $@"
-                                SELECT Malls.ItemID
-                                FROM [ShoppingLists]
-                                LEFT JOIN [Malls]
-                                ON Malls.ItemID=ShoppingLists.ItemID                               
-                                                                    ";
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    using (SqlCommand command = new SqlCommand(commandText, conn))
-                    {
-                        command.Parameters.AddWithValue("@UserID", userID);
-                        conn.Open();
-                        SqlDataReader reader = command.ExecuteReader();
-
-                        if (reader.Read())
-                        {
-                            ShoppingListModel itemID = new ShoppingListModel()
-                            {
-                                UserID = userID,
-                                ItemID = (Guid)reader["ItemID"],
-                            };
-                            return itemID;
-                        }
-                        return null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLog("Sakei.Manager.TestSystemManagers.ShoppingListManager.GetShoppingList_shoppingID", ex);
-                throw;
-            }
-        }
+        }       
         /// <summary>查詢資料庫，以已經購買的商品等級排序</summary>
         public List<ShoppingListModel> GetShoppingList(Guid UserID)
         {
@@ -139,57 +101,35 @@ namespace Sakei.Manager
                 throw;
             }
         }
-        public List<ShoppingListModel> GetShoppingList(Guid userID, List<Guid> shoppingID)
+        public ShoppingListModel GetShoppingList_shoppingID(Guid userID)
         {
-            //判斷有傳入ID
-            if (shoppingID == null || shoppingID.Count == 0)
-                throw new Exception("沒有 ShoppingID");
-
-            //組合要搜尋的ShoppingID資料
-            List<string> param = new List<string>();
-            for (var i = 0; i < shoppingID.Count; i++)
-            {
-                param.Add("@ShoppingID" + i);
-            }
-            string inSql = string.Join(", ", param);
-
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
-                                SELECT *
-                                FROM ShoppingLists
-                                WHERE UserID = @UserID AND
-                                      ShoppingID IN ({inSql})
+                                SELECT ShoppingID
+                                FROM [ShoppingLists]
+                                LEFT JOIN [Malls]
+                                ON Malls.ItemID=ShoppingLists.ItemID
                                 ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
-                    {
-                        command.Parameters.AddWithValue("@UserID", userID);
-                        for (var i = 0; i < shoppingID.Count; i++)
-                        {
-                            command.Parameters.AddWithValue("@ShoppingID" + i, shoppingID[i]);
-
-                        }
+                    {                        
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
 
-                        List<ShoppingListModel> shoppingList = new List<ShoppingListModel>();
-                        while (reader.Read())
+                        if (reader.Read())
                         {
-                            ShoppingListModel model = new ShoppingListModel()
+                            ShoppingListModel shoppingID = new ShoppingListModel()
                             {
                                 ID = (Guid)reader["ShoppingID"],
-                                UserID = userID,
-                                ItemID = (Guid)reader["ItemID"],
-                                Content = reader["ItemContent"] as string,
-                                CreateDate = (DateTime)reader["CreateDate"],
+                                IsHave = true,
                             };
-                            shoppingList.Add(model);
+                            return shoppingID;
                         };
 
-                        return shoppingList;
+                        return null;
                     }
                 }
             }
@@ -230,7 +170,7 @@ namespace Sakei.Manager
                 Logger.WriteLog("Sakei.Manager.TestSystemManagers.ShoppingListManager.CreateShoppingList", ex);
                 throw;
             }
-        }
+        }       
         #endregion
     }
 }
