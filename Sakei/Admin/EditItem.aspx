@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true"   CodeBehind="EditItem.aspx.cs" Inherits="Sakei.Admin.EditItem" %>
 
+<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
+
+
+    <img src="..\Images/page.jpg" style="margin: auto;" />
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <label  class="label_title">新增道具</label><br />
@@ -42,5 +47,5 @@
    <br />
      <a   href="#"   onclick="javascript:history.back();">返回前一頁</a>
      
-
+    
 </asp:Content>

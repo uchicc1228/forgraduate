@@ -1,4 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true"   CodeBehind="EditTest.aspx.cs" Inherits="Sakei.EditTest" %>
+﻿<%@ Page Title="" Language="C#"   AutoEventWireup="true"  MasterPageFile="~/Admin/Admin.Master"  CodeBehind="EditTest.aspx.cs" Inherits="Sakei.Admin.EditTest" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
+
+
+    <img src="..\Images/page.jpg" style="margin: auto;" />
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <label  class="label_title">新增題目</label><br />
     

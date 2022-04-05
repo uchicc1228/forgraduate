@@ -1,11 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true"  CodeBehind="AdminLoginPage.aspx.cs" Inherits="Sakei.AdminLoginPage" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master"  AutoEventWireup="true"  CodeBehind="AdminLoginPage.aspx.cs" Inherits="Sakei.AdminLoginPage" %>
+
+   <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <style>
         .wweebtn {
             font-size: 14px;
             font-family: 宋體;
-            width: 80px;
+            width: 120px;
             height: 28px;
             line-height: 28px;
             text-align: center;
@@ -13,8 +14,7 @@
             background-color: black;
             border-radius: 6px;
             border: 0;
-            position: relative;
-            left: 180px;
+           
             margin: 5px;
         }
 
@@ -33,6 +33,7 @@
             text-align: center;
             color: black;
             background-color: white;
+            border: 1px solid black;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
@@ -42,23 +43,35 @@
             height: 28px;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            border: 0;
+            border: 1px solid black;
         }
 
         .label_title {
-            position: inherit ;
+            position: inherit;
             left: 120px;
             font-size: 20px;
             font-family: 宋體;
             text-align: center;
             color: black;
-            padding:20px;
-
+            padding: 20px;
         }
 
-        .Content2{
-           background-color:red;
+
+
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+            padding-top: 20%;
         }
+
+
+        .divbtn {
+            padding-right: 33px;
+            border: 0px;
+        }
+        
     </style>
 </asp:Content>
 
@@ -66,10 +79,12 @@
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
 
-    <img src="Images/下載.jpg" />
+    <img src="..\Images/page.jpg" style="margin: auto;" />
+
+
 
 </asp:Content>
-        
+     
 
 
 
@@ -89,14 +104,10 @@
         <asp:TextBox CssClass="text_field" ID="txtAccount" runat="server" placeholder="【帳號】："> </asp:TextBox><br />
         <label class="label_input">密碼</label>
         <asp:TextBox ID="txtPassword" CssClass="text_field" runat="server" TextMode="Password" placeholder="【密碼】："> </asp:TextBox><br />
-
-
-
-
         <asp:Button ID="btnLogin" CssClass="wweebtn" runat="server" Text="登入" OnClick="btnLogin_Click " />
        <%-- <asp:Button ID="btnLogout" CssClass="wweebtn" runat="server" Text="登出" OnClick="btnLogout_Click" />--%>
-        <asp:Button ID="forgotpwd" CssClass="wweebtn" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br />
-        <asp:Literal ID="ltlMessage" runat="server"></asp:Literal>
+        <%-- <asp:Button ID="forgotpwd" CssClass="wweebtn" runat="server" Text="忘記密碼" OnClick="forgotpwd_Click" /><br /> --%>
+        <asp:Literal ID="ltlMessage" runat="server"></asp:Literal> 
 
 
     </asp:PlaceHolder>

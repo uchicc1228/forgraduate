@@ -1,5 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FrontMaster.Master" AutoEventWireup="true" CodeBehind ="EditAdmin.aspx.cs" Inherits="Sakei.EditAdmin" %>
+﻿<%@ Page Title="" Language="C#"   AutoEventWireup="true" CodeBehind ="EditAdmin.aspx.cs" MasterPageFile="~/Admin/Admin.Master" Inherits="Sakei.Admin.EditAdmin" %>
+<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
+
+    <img src="..\Images/page.jpg" style="margin: auto;" />
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
  
@@ -40,4 +44,12 @@
     <a   href="#"   onclick="javascript:history.back();">返回前一頁</a>
 
 
+
+    
 </asp:Content>
+
+
+
+
+
+
