@@ -13,7 +13,6 @@
             border-radius: 3px;
             border: 1px solid black;
             position: relative;
-            left: 70px;
             margin: 5px;
         }
 </style>
