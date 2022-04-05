@@ -302,10 +302,7 @@
                 //帶入文正解文字資訊
                 var examAnswerText = document.getElementById(`${examAnswer}`).textContent;
                 var userAnswerText = document.getElementById(`${userAnswer}`).textContent;
-                //正確/錯誤
-                var ansText = "正確";
-                //判斷使用者答案正確與否
-
+                
                 //編輯顯示字串
                 var qusText =
                     `
