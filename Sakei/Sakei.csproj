@@ -81,6 +81,7 @@
     <Content Include="Admin\AdminLoginPage.aspx" />
     <Content Include="Admin\AdminMainPage.aspx" />
     <Content Include="Admin\EditItem.aspx" />
+    <Content Include="Admin\NoPage.aspx" />
     <Content Include="Admin\WebForm1.aspx" />
     <Content Include="AfterLogin\ExamReview.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
@@ -144,6 +145,13 @@
     </Compile>
     <Compile Include="Admin\EditItem.aspx.designer.cs">
       <DependentUpon>EditItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\NoPage.aspx.cs">
+      <DependentUpon>NoPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\NoPage.aspx.designer.cs">
+      <DependentUpon>NoPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -297,6 +305,7 @@
       <DependentUpon>MallPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AccountManager.cs" />
+    <Compile Include="Manager\AdminManager.cs" />
     <Compile Include="Manager\ExamSystemManagers\MessageBoardManager.cs" />
     <Compile Include="Manager\ExamSystemManagers\PointsManager.cs" />
     <Compile Include="Manager\ExamSystemManagers\ExamDataManager.cs" />

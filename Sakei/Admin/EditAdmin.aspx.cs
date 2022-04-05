@@ -1,4 +1,6 @@
 ﻿using Sakei.Helper;
+using Sakei.Manager;
+using Sakei.Models;
 using SaKei.Manager;
 using SaKei.Models;
 using System;
@@ -14,17 +16,34 @@ namespace Sakei
     {
         AdminAccountModel modelAdmin = new AdminAccountModel();
         AdminAccountManager _mgr_Admin = new AdminAccountManager();
-        
+        AdminManager _umgr = new AdminManager();
+        private Guid _userID;
+        private AdminAccountModel _model;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
+            if (!Page.IsPostBack)
             {
-                this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大寫及小寫字元<br/>" + "2.含至少一位數字<br/>" + "3.長度至少八碼，最長20碼 <br/>"  + "4.可含特殊字元(#?!@$%^&*-) <br/>";
+                this.ltlmsg.Text = "<b>密碼設定原則，須包含以下四點<br/>" + "1.含英文大寫及小寫字元<br/>" + "2.含至少一位數字<br/>" + "3.長度至少八碼，最長20碼 <br/>" + "4.可含特殊字元(#?!@$%^&*-) <br/>";
+
 
             }
-            
-        }
+            _userID = (Guid)LoginHelper.GetUserID();
+            _model = _umgr.GetAccount(_userID);
+            int Level = Convert.ToInt32(_model.Level);
 
+
+
+            if (Level == (int)AdminLevelEnum.employee)
+            {
+                this.Response.Redirect("AdminMainPage.aspx");
+            }
+            if (Level == (int)AdminLevelEnum.manager)
+            {
+                this.intLevel.Items.Clear();
+                this.intLevel.Items.Insert(0, new ListItem("員工", "2"));
+            }
+        }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
@@ -77,10 +96,19 @@ namespace Sakei
            modelAdmin.Level= Convert.ToInt32(this.intLevel.SelectedValue);
            //使用者姓名
            modelAdmin.Name= this.txtName.Text.Trim();
+            //是否啟用帳號
+            modelAdmin.IsEnable = Convert.ToInt32(this.intIsEnable.SelectedValue);
             //存入資料庫
-            _mgr_Admin.CreateAdminAccounthash(modelAdmin);
+            
+            if (!_mgr_Admin.CreateAdminAccounthash(modelAdmin))
+            {
+                ltl1.Text = "上傳失敗";
+                return;
+            }
 
-                Response.Write("<script>alert('新增成功!!')</script>");
+            Response.Write("<script>alert('新增成功!!')</script>");
+
+
 
         }
 

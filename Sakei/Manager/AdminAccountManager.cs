@@ -64,7 +64,7 @@ namespace SaKei.Manager
                                 Mail = reader["AdminEmail"] as string,
                                 Salt_string = reader["AdminPasswordSalt"] as string,
                                 ID = (Guid)reader["AdminID"],
-
+                                IsEnableBool = (bool)reader["IsEnable"]
                             };
                             return model;
 
@@ -328,9 +328,9 @@ namespace SaKei.Manager
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                 @" INSERT INTO AdminAccounts
-                        (AdminID,AdminName, AdminAccount, AdminPassword, AdminPasswordSalt, AdminEmail , AdminLevel)
+                        (AdminID,AdminName, AdminAccount, AdminPassword, AdminPasswordSalt, AdminEmail , AdminLevel,IsEnable)
                     VALUES
-                        (@id,  @name, @account, @pwd , @salt, @email, @level );";
+                        (@id,  @name, @account, @pwd , @salt, @email, @level,@isenable );";
 
 
 
@@ -348,7 +348,7 @@ namespace SaKei.Manager
                         command.Parameters.AddWithValue("@salt", model.Salt_string);
                         command.Parameters.AddWithValue("@email", model.Mail);
                         command.Parameters.AddWithValue("@level", model.Level);
-
+                        command.Parameters.AddWithValue("@isenable", model.IsEnable);
                         conn.Open();
                         command.ExecuteNonQuery();
                     }
@@ -364,8 +364,8 @@ namespace SaKei.Manager
             }
         }
 
-
         #endregion
+
 
 
         #region "各式防呆和驗證"
@@ -394,7 +394,41 @@ namespace SaKei.Manager
                 return (false);
         }
         #endregion
+        //檢驗帳號密碼
+        public bool GetActiveorNot(string acc)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                $@" SELECT IsEnable
+                    FROM [SakeTest].[dbo].[AdminAccounts]
+                    WHERE AdminAccount = @adminacc;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        AdminAccountModel modelca = new AdminAccountModel();
+                        command.Parameters.AddWithValue("@adminacc", acc);
+                        conn.Open();
 
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            modelca.IsEnableBool = (bool)reader["IsEnable"];
+                           
+                        }
+
+                        return modelca.IsEnableBool;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+
+            }
+        }
 
 
 
