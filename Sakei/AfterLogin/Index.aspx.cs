@@ -30,8 +30,11 @@ namespace Sakei.AfterLogin
 
             #region "RYU"
             _userID = (Guid)LoginHelper.GetUserID();
-            _model = _umgr.GetUserData(_userID);
-            
+            _model = _umgr.GetUserData(_userID,out bool isFirstLogin);
+            if (isFirstLogin)
+            {
+                Response.Redirect("../ExamSystem/ExamLevelCheckMode.aspx");
+            }
             this.lblName.Text = _model.UserName;
 
             this.lblRank.Text = _model.UserPoints.ToString();

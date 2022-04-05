@@ -111,7 +111,7 @@ namespace Sakei.Manager
                                 ID = (Guid)reader["UserID"]
                             };
                             //判斷是不是初次使用本系統
-                            if ((Guid)reader["PointsID"] == null)
+                            if (Guid.TryParse(reader["PointsID"] as string,out Guid guid))
                             {
                                 havePointRecord = false;
                             }else
