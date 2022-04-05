@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Sakei
+namespace Sakei.Admin
 {
     public partial class EditAdmin : System.Web.UI.Page
     {

@@ -16,20 +16,20 @@ namespace Sakei.Helper
         /// <returns></returns>
         public static Guid? GetUserID()
         {
-                           
-            var identity = HttpContext.Current.User.Identity as FormsIdentity;
-            var ticket = identity.Ticket;
+              
+                var identity = HttpContext.Current.User.Identity as FormsIdentity;
+                var ticket = identity.Ticket;
 
-            if (Guid.TryParse(ticket.UserData, out var guid))
-            {
-                return guid;
-            }
-            else
-            {
-                return null;
-            }
+                if (Guid.TryParse(ticket.UserData, out var guid))
+                {
+                    return guid;
+                }
+                else
+                {
+                    return null;
+                }
         }
-       
+
         public static void Login(string account, string UserID)
         {
 

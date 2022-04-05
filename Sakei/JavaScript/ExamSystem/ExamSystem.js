@@ -24,6 +24,8 @@
         IsExam = true;
         StartExam();
     } else {
+
+        scheddule = -1;
         ChoiseLevel();
     }
 
@@ -38,8 +40,36 @@
         $("#divOption").empty();
 
     }
-
+    //使用者自選等級
     function ChoiseLevel() {
+        var lvOpt = "";
+        for (var i = userLevel; i <6; i++) {
+            lvOpt += `<li>
+                        <label>
+                            <input type="radio" name="option" value="${i}" checked="checked" /><span class="round btnOption">N ${i}</span>
+                        </label>
+                    </li>`;
+        }
+        var qusText =
+            `
+            
+            `;
+        var optText =
+            `<div id="divChoiseLevel">
+            <ul>
+                <li>
+                    <label>
+                        <h2>請選擇想練習的等級</h2>
+                    </label>
+                </li>
+                ${lvOpt}
+            </ul>
+            </div>`;
+        $("#divQuestion").empty();
+        $("#divQuestion").append(qusText);
+
+        $("#divOption").empty();
+        $("#divOption").append(optText);
 
     }
 
@@ -52,14 +82,22 @@
             window.location.href = "../AfterLogin/Index.aspx";
         } else if (IsExam === false && scheddule > TestCount - 2) {
             //判斷看完解答&作完所有題目
-            Settlement();
+            if (IsChalleng) {
+                Settlement();
+            } else {
+                SettlementNoRecord();
+            }
             note.style.visibility = "hidden";
             msgBoard.style.visibility = "hidden";
             scheddule += 1;
         } else if (IsExam === false && scheddule === -1) {
-            //升級提示
+            //升級提示or選擇等級(練習模式)
             scheddule += 1;
             IsExam = true;
+            if (IsChalleng === false) {
+                var choisedLevel = $("[name='option']:checked").val();
+                TestLevel = choisedLevel;
+            }
             StartExam();
         }
         else if (IsExam === false) {
@@ -264,7 +302,27 @@
         });
 
     }
+    //不計分成果結算畫面
+    function SettlementNoRecord() {
 
+        var qusText =
+            `<div style="height:100%; text-align:center; line-height:300px; font-size:30pt;">
+                N ${TestLevel} 考題練習<br/>
+                練習結束!
+            </div>`;
+
+        var optText =
+            `<div style="text-align:center;">
+                <p>答對題數 : ${right} / ${TestCount} 題</p>
+             </div>
+            `;
+
+        $("#divQuestion").empty();
+        $("#divQuestion").append(qusText);
+
+        $("#divOption").empty();
+        $("#divOption").append(optText);
+    }
 
     //筆記
     function BulidNote(testID, testContent) {

@@ -60,7 +60,9 @@
         <div class="divHeadArea">
             <div>
                 <div class="divTittleFont">
-                    <h1>挑戰模式</h1>
+                    
+                    <h1><asp:ContentPlaceHolder ID="ExamModeTitle" runat="server">
+                </asp:ContentPlaceHolder></h1>
                 </div>
                 <div class="divHeadToolArea">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#divMsgWindow">放棄</button>
