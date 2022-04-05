@@ -428,7 +428,7 @@
     //初次試驗成果結算畫面
     function TheFirstExamSettlement() {
         var point = 0;
-        var money = 0;
+        var money = right;
 
         var postData = {
             "UserID": userID,
