@@ -67,7 +67,7 @@ namespace Sakei.Manager
                         FROM [ShoppingLists]
                         INNER JOIN [Malls]
                         ON [ShoppingLists].ItemID=[Malls].ItemID
-	                    ORDER BY ItemLevel DESC";
+	                    ORDER BY ItemLevel";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))

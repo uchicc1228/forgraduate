@@ -66,7 +66,8 @@ namespace Sakei.Manager
             string commandText =
                  @" SELECT *
                     FROM [Malls]
-                    WHERE IsEnable='true'";
+                    WHERE IsEnable='true'
+                    ORDER BY ItemLevel DESC";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
