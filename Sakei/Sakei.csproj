@@ -90,6 +90,7 @@
     <Content Include="AfterLogin\UserPWDChange.aspx" />
     <Content Include="CSS\Bootstrap\bootstrap.css" />
     <Content Include="CSS\Bootstrap\bootstrap.min.css" />
+    <Content Include="CSS\ExamSystemCSS.css" />
     <Content Include="ExamSystem\ExamChallengeMode.aspx" />
     <Content Include="Admin\EditAdmin.aspx" />
     <Content Include="Admin\EditTest.aspx" />
