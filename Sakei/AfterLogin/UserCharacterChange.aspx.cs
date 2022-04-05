@@ -29,7 +29,7 @@ namespace Sakei.AfterLogin
                 _umgr.UpdateCharacter(_userID, itemID);
             }
 
-            _model = _umgr.GetUserName(_userID);
+            _model = _umgr.GetUserData(_userID);
             this.lblName.Text = _model.UserName;
 
             this.lblRank.Text = _model.UserPoints.ToString();

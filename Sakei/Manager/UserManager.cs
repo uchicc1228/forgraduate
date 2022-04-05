@@ -11,20 +11,22 @@ namespace Sakei.Manager
     public class UserManager
     {
         #region "抓出帳號名字"
-        public UserModel GetUserName(Guid id)
+        public UserModel GetUserData(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
                  @" SELECT 
-	                        [UserAccounts].UserID
-                           ,[UserName]
-                           ,[Character]
-                           ,[UserLevel] 
-                           ,[UserPoints]
-                           ,[UserMoney]
-                        FROM [UserAccounts]
-                        INNER JOIN [User]
-                        ON [UserAccounts].UserID=[User].UserID ";
+                        [UserAccounts].UserID
+                       ,[UserName]
+                       ,[Character]
+                       ,[UserLevel] 
+                       ,[UserPoints]
+                       ,[UserMoney]
+                    FROM [UserAccounts]
+                    INNER JOIN [User]
+                    ON [UserAccounts].UserID=[User].UserID
+                    WHERE [UserAccounts].UserID=@id";
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -47,10 +49,10 @@ namespace Sakei.Manager
                                 UserName = reader["UserName"] as string,
                                 ID = (Guid)reader["UserID"]
                             };
+                            
                             return model;
 
                         }
-
                         return null;
                     }
                 }

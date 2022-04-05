@@ -28,7 +28,7 @@ namespace Sakei
         {
             if (!IsPostBack)
             {
-                _model = _umgr.GetUserName(_userID);
+                _model = _umgr.GetUserData(_userID);
                 this.lblName.Text = _model.UserName;
 
                 this.lblRank.Text = _model.UserPoints.ToString();
@@ -110,7 +110,7 @@ namespace Sakei
                     int level;
                     int.TryParse(arr[3], out level);
 
-                    _model = _umgr.GetUserName(_userID);
+                    _model = _umgr.GetUserData(_userID);
                     _shoppingModel = _smgr.GetShoppingList_shoppingID(_userID, id);
 
                     if (_model.UserLevel > level)
