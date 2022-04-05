@@ -42,6 +42,7 @@
         var TestLevel = 0;
         var userLevel =<%=this.UserData.UserLevel%>;
         var IsChalleng = false;
+        var IsTheFirstExam = true;
     </script>
 
     <script src="../JavaScript/ExamSystem/ExamSystem.js"></script>

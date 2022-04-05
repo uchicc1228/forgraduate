@@ -14,35 +14,12 @@
     <%--題目--%>
     <div id="divQuestion">
 
-        <h4>----題型----</h4>
-
-        <h2>----題目----</h2>
+        
 
     </div>
     <%--答案選項--%>
     <div id="divOption" class="row align-items-center">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <label>
-                    <input type="radio" name="option" value="A" checked="checked" /><span class="round btnOption">A.ans1</span>
-                </label>
-            </li>
-            <li class="nav-item">
-                <label>
-                    <input type="radio" name="option" value="B" checked="checked" /><span class="round btnOption">B.ans2</span>
-                </label>
-            </li>
-            <li class="nav-item">
-                <label>
-                    <input type="radio" name="option" value="C" checked="checked" /><span class="round btnOption">C.ans3</span>
-                </label>
-            </li>
-            <li class="nav-item">
-                <label>
-                    <input type="radio" name="option" value="D" checked="checked" /><span class="round btnOption">D.ans4</span>
-                </label>
-            </li>
-        </ul>
+        
 
     </div>
    
@@ -67,7 +44,8 @@
         var TestLevel = 0;
         var userLevel =<%=this.UserData.UserLevel%>;
         var IsChalleng = true;
-       
+        var IsTheFirstExam = false;
+
     </script>
     <script src="../JavaScript/ExamSystem/ExamSystem.js"></script>
 </asp:Content>

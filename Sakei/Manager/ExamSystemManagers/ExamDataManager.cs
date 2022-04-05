@@ -163,7 +163,81 @@ namespace Sakei.Manager.ExamSystemManagers
                 throw;
             }
         }
+        /// <summary>
+        /// 初次測驗抓取考試資料(N1～N5)
+        /// </summary>
+        /// <param name="testCount">考題長度</param>
+        /// <param name="userID">使用者ID</param>
+        /// <returns></returns>
+        public List<TestDataModel> GetTestDataForTest(int testCount,Guid userID)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText = $@"
+                               SELECT TOP(@TestCount) 
+                                	TestDatabases.TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
+                                	OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer,UserAnswer
+                                FROM(TestDatabases
+                                INNER JOIN TestTypes
+                                ON TestDatabases.TestTypeID=TestTypes.TestTypeID)
+                                LEFT JOIN UserAnswers
+                                ON TestDatabases.TestID=UserAnswers.TestID
+                                WHERE
+	                                TestDatabases.TestLevel = 1 AND
+	                                IsEnable='true' AND
+	                                ( UserID = @UserID OR UserID IS NULL )
+                                
+                                ";
+            string unionText = "";
+            for (var i = 2; i < 6; i++)
+            {
+                unionText += $@"
+                            UNION
+                            SELECT TOP(@TestCount) 
+                            	TestDatabases.TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
+                            	OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer,UserAnswer
+                            FROM(TestDatabases
+                            INNER JOIN TestTypes
+                            ON TestDatabases.TestTypeID=TestTypes.TestTypeID)
+                            LEFT JOIN UserAnswers
+                            ON TestDatabases.TestID=UserAnswers.TestID
+                            WHERE
+                                TestDatabases.TestLevel = {i} AND
+                                IsEnable='true' AND
+                                ( UserID = @UserID OR UserID IS NULL )";
+            }
+            string orderText = "ORDER BY TestLevel";
+            commandText = commandText+ unionText + orderText;
+           
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@UserID", userID);
+                        command.Parameters.AddWithValue("@TestCount", testCount);
 
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<TestDataModel> examDataList = new List<TestDataModel>();
+
+                        //將資料取出放到List中
+                        while (reader.Read())
+                        {
+                            TestDataModel info = BuildExamData(reader);
+                            examDataList.Add(info);
+                        }
+
+                        return examDataList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("Sakei.Manager.TestSystemManagers.TestDataManager.GetTestDataForTest", ex);
+                throw;
+            }
+        }
         private static TestDataModel BuildExamData(SqlDataReader reader)
         {
             return new TestDataModel
