@@ -8,6 +8,11 @@
 
 </asp:Content>
 
+<%--考試模式標題--%>
+<asp:Content ID="Content3" ContentPlaceHolderID="ExamModeTitle" runat="server">
+    練習模式
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
      <%--題目--%>

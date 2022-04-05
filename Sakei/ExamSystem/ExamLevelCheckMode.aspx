@@ -8,17 +8,19 @@
     <link href="../CSS/ExamSystemCSS.css" rel="stylesheet" />
 
 </asp:Content>
+<%--考試模式標題--%>
+<asp:Content ID="Content3" ContentPlaceHolderID="ExamModeTitle" runat="server">
+    等級決定試驗
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <%--題目--%>
     <div id="divQuestion">
-
     </div>
     <%--答案選項--%>
     <div id="divOption" class="row align-items-center">
-       
     </div>
-    
+
     <%--確認、筆記、留言板按鈕--%>
     <div id="divBtnArea">
         <div class=" row align-items-center gap-2">
@@ -41,6 +43,6 @@
         var userLevel =<%=this.UserData.UserLevel%>;
         var IsChalleng = false;
     </script>
-   
+
     <script src="../JavaScript/ExamSystem/ExamSystem.js"></script>
 </asp:Content>
