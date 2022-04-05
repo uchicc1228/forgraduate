@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Sakei.AfterLogin.Index" %>
+﻿<%@ Page Title="主頁面" Language="C#" MasterPageFile="~/AfterLogin/AfterLogin.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Sakei.AfterLogin.Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
