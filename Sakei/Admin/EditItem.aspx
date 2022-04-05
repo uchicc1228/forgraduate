@@ -39,7 +39,8 @@
       <asp:Button runat="server"  ID="btnConfirm" Text="確定" OnClick="btnConfirm_Click" />
 
     <asp:Literal ID="ltl1" runat="server"></asp:Literal>
-   
+   <br />
+     <a   href="#"   onclick="javascript:history.back();">返回前一頁</a>
      
 
 </asp:Content>

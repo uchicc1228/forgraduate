@@ -14,7 +14,8 @@ namespace SaKei.Models
         public string Mail { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
-
+        public int IsEnable { get; set; }
+        public bool IsEnableBool { get; set; }
 
     }
 }

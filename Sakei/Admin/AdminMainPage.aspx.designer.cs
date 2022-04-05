@@ -42,6 +42,15 @@ namespace Sakei
         protected global::System.Web.UI.WebControls.Label lblAdminWelcome;
 
         /// <summary>
+        /// lblAdminLevel 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAdminLevel;
+
+        /// <summary>
         /// lblEditAdmin 控制項。
         /// </summary>
         /// <remarks>
@@ -51,48 +60,48 @@ namespace Sakei
         protected global::System.Web.UI.WebControls.Label lblEditAdmin;
 
         /// <summary>
-        /// Button1 控制項。
+        /// btnAdmin 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnAdmin;
 
         /// <summary>
-        /// Label3 控制項。
+        /// lblEditTest 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label lblEditTest;
 
         /// <summary>
-        /// Button2 控制項。
+        /// btnTest 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnTest;
 
         /// <summary>
-        /// Label4 控制項。
+        /// lblEditItem 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label lblEditItem;
 
         /// <summary>
-        /// Button3 控制項。
+        /// btnItem 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button btnItem;
     }
 }

@@ -5,12 +5,14 @@ using System.Web;
 
 namespace Sakei.Models
 {
-    
-        public enum AdminLevelEnum
-        {
-            //管理者
-            admin = 1,
-            //一般權限
-            user = 2
-        }
+
+    public enum AdminLevelEnum :int
+    {
+        //管理者
+        admin = 0,
+        //主管
+        manager = 1,
+        //員工
+        employee = 2
+    }
 }
