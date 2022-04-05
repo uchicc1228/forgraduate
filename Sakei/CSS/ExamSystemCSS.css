@@ -1,0 +1,62 @@
+﻿#divQuestion {
+    padding: 30px;
+    height: 40%;
+}
+
+    #divQuestion > h4 {
+        color: #4C6D8E;
+    }
+
+    #divQuestion > h2 {
+        color: #18454C;
+    }
+
+#divOption {
+    padding: 30px;
+    height: 40%;
+}
+
+    #divOption p {
+        font-size: 24px;
+    }
+
+#divBtnArea {
+    height: 20%;
+}
+
+    #divBtnArea > div {
+        width: 50%;
+        height: 100%;
+        margin: auto;
+    }
+
+/*    選單按鈕*/
+#divOption input[type="radio"] {
+    display: none;
+}
+
+#divOption input:checked + .btnOption {
+    background: #0067E2;
+    color: #FFE6D2;
+    cursor: default;
+}
+
+#divOption .btnOption {
+    display: inline-block;
+    margin: 0px 10px;
+    padding: 5px 10px;
+    background: none;
+    border: 0px;
+    color: #18454C;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+    #divOption .btnOption:hover {
+        background: #BDDBF4;
+        color: #385B77;
+    }
+
+#divOption .round {
+    border-radius: 5px;
+}

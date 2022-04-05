@@ -122,7 +122,12 @@ namespace Sakei.Manager.ExamSystemManagers
             string commandTextInsert = $@" 
                                         UPDATE UserAccounts
                                         SET UserPoints -= 10
-                                        WHERE UserID = @UserID ";
+                                        WHERE UserID = @UserID
+                                        
+                                        IF(SELECT UserPoints FROM UserAccounts WHERE UserID = @UserID) < 0
+                                        UPDATE UserAccounts
+                                        SET UserPoints = 0
+                                        WHERE UserID = @UserID;";
             if (isChalleng)
             {
                 commandText += commandTextInsert;
