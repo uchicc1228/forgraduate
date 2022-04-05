@@ -63,6 +63,76 @@ namespace Sakei.Manager
                 throw;
             }
         }
+        /// <summary>
+        /// 取得使用者資料且判斷是否為初次登入的使用者
+        /// </summary>
+        /// <param name="id">使用者ID</param>
+        /// <param name="havePointRecord">布林值，判斷是否為初次登入</param>
+        /// <returns></returns>
+        public UserModel GetUserData(Guid id,out bool havePointRecord)
+        {
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                 @" SELECT 
+                        [UserAccounts].UserID
+                       ,[UserName]
+                       ,[Character]
+                       ,[UserLevel] 
+                       ,[UserPoints]
+                       ,[UserMoney]
+                       ,PointsID
+                    FROM ([UserAccounts]
+                    INNER JOIN [User]
+                    ON [UserAccounts].UserID=[User].UserID)
+                    LEFT JOIN PointsLists
+                    ON [UserAccounts].UserID=PointsLists.UserID
+                    WHERE [UserAccounts].UserID=@id";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@id", id);
+
+                        conn.Open();
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            UserModel model = new UserModel()
+                            {
+                                UserMoney = (int)reader["UserMoney"],
+                                UserPoints = (int)reader["UserPoints"],
+                                UserLevel = (int)reader["UserLevel"],
+                                Character = reader["Character"] as string,
+                                UserName = reader["UserName"] as string,
+                                ID = (Guid)reader["UserID"]
+                            };
+                            //判斷是不是初次使用本系統
+                            if ((Guid)reader["PointsID"] == null)
+                            {
+                                havePointRecord = false;
+                            }else
+                            {
+                                havePointRecord = true;
+                            }
+
+                            return model;
+
+                        }
+                        havePointRecord = false;
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("", ex);
+                throw;
+            }
+        }
         public UserModel GetUserMoney(Guid id)
         {
             string connStr = ConfigHelper.GetConnectionString();
