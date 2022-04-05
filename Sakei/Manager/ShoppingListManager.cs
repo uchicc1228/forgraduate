@@ -101,7 +101,7 @@ namespace Sakei.Manager
                 throw;
             }
         }
-        public ShoppingListModel GetShoppingList_shoppingID(Guid userID)
+        public ShoppingListModel GetShoppingList_shoppingID(Guid userID,Guid itemID)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText = $@"
@@ -109,13 +109,18 @@ namespace Sakei.Manager
                                 FROM [ShoppingLists]
                                 LEFT JOIN [Malls]
                                 ON Malls.ItemID=ShoppingLists.ItemID
+                                WHERE ShoppingLists.ItemID=@itemID AND
+                                UserID=@userID
                                 ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
-                    {                        
+                    {
+                        command.Parameters.AddWithValue("@userID", userID);
+                        command.Parameters.AddWithValue("@itemID", itemID);
+
                         conn.Open();
                         SqlDataReader reader = command.ExecuteReader();
 
@@ -124,7 +129,6 @@ namespace Sakei.Manager
                             ShoppingListModel shoppingID = new ShoppingListModel()
                             {
                                 ID = (Guid)reader["ShoppingID"],
-                                IsHave = true,
                             };
                             return shoppingID;
                         };

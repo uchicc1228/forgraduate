@@ -148,7 +148,7 @@
                     <image src="<%#Eval("Content") %>"></image>
                     <asp:Literal ID="ltlName" runat="server" Text='<%#"名稱："+ Eval("Name") +"<br/>" %>'></asp:Literal>
                     <asp:Literal ID="ltlMoney" runat="server" Text='<%#"價錢："+ Eval("Price") +"<br/>" %>'></asp:Literal>
-                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") +","+ Eval("Price") %>' />
+                    <asp:Button runat="server" Text="購買" CommandName="BuyButton" CommandArgument='<%# Eval("ID") +","+ Eval("StyleContent") +","+ Eval("Price") +","+ Eval("Level") %>' />
                 </div>
             </ItemTemplate>
         </asp:Repeater>

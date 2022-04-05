@@ -58,7 +58,7 @@ namespace Sakei.Manager
                 Logger.WriteLog("", ex);
                 throw;
             }
-        }       
+        }
         #endregion
         public List<ItemModel> GetItem()
         {
@@ -100,7 +100,7 @@ namespace Sakei.Manager
                 throw;
             }
         }
-        public void UpdateUserMoney(Guid userID,Guid itemID)
+        public void UpdateUserMoney(UserModel model, Guid userID, Guid itemID)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -121,8 +121,9 @@ namespace Sakei.Manager
                 {
                     using (SqlCommand command = new SqlCommand(commandText, conn))
                     {
-                        command.Parameters.AddWithValue("@id", userID);
+                        command.Parameters.AddWithValue("@userID", userID);
                         command.Parameters.AddWithValue("@itemID", itemID);
+                        command.Parameters.AddWithValue("@UserMoney", model.UserMoney);
 
                         conn.Open();
                         command.ExecuteNonQuery();
