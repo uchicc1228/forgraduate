@@ -90,7 +90,7 @@
         var note = document.getElementById("btnNote");
         var msgBoard = document.getElementById("btnMsgBoard");
 
-        if (scheddule > TestCount - 1) {
+        if (theFirstExamScheddule > 9 || scheddule > TestCount - 1) {
             window.location.href = "../AfterLogin/Index.aspx";
         } else if (IsExam === false && theFirstExamScheddule > 8 || scheddule > TestCount - 2) {
             //判斷看完解答&作完所有題目
@@ -107,6 +107,7 @@
             note.style.visibility = "hidden";
             msgBoard.style.visibility = "hidden";
             scheddule += 1;
+            theFirstExamScheddule += 1;
         } else if (IsExam === false && scheddule === -1 && IsTheFirstExam === false) {
             //升級提示or選擇等級(練習模式)
             scheddule += 1;
