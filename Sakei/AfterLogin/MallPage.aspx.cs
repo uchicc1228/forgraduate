@@ -22,7 +22,6 @@ namespace Sakei
         private UserModel _model;
         private ShoppingListModel _shoppingModel;
         private int level;
-        ItemModel itemModel = new ItemModel();
         ShoppingListModel shoppingModel = new ShoppingListModel();
         protected void Page_Load(object sender, EventArgs e)
         {
