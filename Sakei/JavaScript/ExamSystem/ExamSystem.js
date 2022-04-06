@@ -373,6 +373,7 @@
                 var qusTextInDiv = "";
                 if (userLevel > 1 && userPoint >= 90 && point > 10) {
                     qusTextInDiv = `升級挑戰成功 ! 從今天起就是 N${userLevel - 1} 級的鮭魚了!`;
+                    point = 10;
                 } else if (userLevel > 1 && userPoint >= 90 && point < 10) {
                     qusTextInDiv = `升級挑戰失敗!`;
                 } else {
