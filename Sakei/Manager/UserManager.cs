@@ -49,7 +49,7 @@ namespace Sakei.Manager
                                 UserName = reader["UserName"] as string,
                                 ID = (Guid)reader["UserID"]
                             };
-                            
+
                             return model;
 
                         }
@@ -67,20 +67,20 @@ namespace Sakei.Manager
         /// 取得使用者資料且判斷是否為初次登入的使用者
         /// </summary>
         /// <param name="id">使用者ID</param>
-        /// <param name="havePointRecord">布林值，判斷是否為初次登入</param>
+        /// <param name="notHavePointRecord">布林值，判斷是否為初次登入</param>
         /// <returns></returns>
-        public UserModel GetUserData(Guid id,out bool havePointRecord)
+        public UserModel GetUserData(Guid id, out bool notHavePointRecord)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
-                 @" SELECT 
+                 @" SELECT TOP(1)
                         [UserAccounts].UserID
                        ,[UserName]
                        ,[Character]
                        ,[UserLevel] 
                        ,[UserPoints]
                        ,[UserMoney]
-                       ,PointsID
+                       ,Correct
                     FROM ([UserAccounts]
                     INNER JOIN [User]
                     ON [UserAccounts].UserID=[User].UserID)
@@ -111,18 +111,20 @@ namespace Sakei.Manager
                                 ID = (Guid)reader["UserID"]
                             };
                             //判斷是不是初次使用本系統
-                            if (Guid.TryParse(reader["PointsID"] as string,out Guid guid))
+                            string correct = reader["Correct"] as string;
+                            if (!string.IsNullOrEmpty(correct))
                             {
-                                havePointRecord = false;
-                            }else
+                                notHavePointRecord = false;
+                            }
+                            else
                             {
-                                havePointRecord = true;
+                                notHavePointRecord = true;
                             }
 
                             return model;
 
                         }
-                        havePointRecord = false;
+                        notHavePointRecord = false;
                         return null;
                     }
                 }
@@ -204,7 +206,7 @@ namespace Sakei.Manager
                 throw;
             }
         }
-        public void UpdateCharacter(Guid userID,Guid itemID)
+        public void UpdateCharacter(Guid userID, Guid itemID)
         {
             string connStr = ConfigHelper.GetConnectionString();
             string commandText =
@@ -235,7 +237,7 @@ namespace Sakei.Manager
                 Logger.WriteLog("UpdateCharacter", ex);
                 throw;
             }
-        }        
+        }
         #endregion
     }
 }
