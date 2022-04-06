@@ -4,7 +4,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
+    <script>alert('註冊成功!幫您導入初次的等級測試。')</script>
     <link href="../CSS/ExamSystemCSS.css" rel="stylesheet" />
 
 </asp:Content>
