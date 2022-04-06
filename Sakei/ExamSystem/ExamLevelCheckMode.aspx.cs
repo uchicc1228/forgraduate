@@ -18,6 +18,7 @@ namespace Sakei.ExamSystem
         public Guid UserID;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             UserID = (Guid)LoginHelper.GetUserID();
             //取得使用者等級
             UserData = _accMgr.GetUserPointsAndMoney(UserID);
