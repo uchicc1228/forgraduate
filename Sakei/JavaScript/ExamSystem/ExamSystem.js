@@ -92,7 +92,7 @@
 
         if (scheddule > TestCount - 1) {
             window.location.href = "../AfterLogin/Index.aspx";
-        } else if (IsExam === false && scheddule > TestCount - 2) {
+        } else if (IsExam === false && theFirstExamScheddule > 8 || scheddule > TestCount - 2) {
             //判斷看完解答&作完所有題目
             if (IsTheFirstExam) {
                 //初次試驗進程
