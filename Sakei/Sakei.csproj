@@ -78,10 +78,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\AdminDetail.aspx" />
     <Content Include="Admin\AdminLoginPage.aspx" />
     <Content Include="Admin\AdminMainPage.aspx" />
     <Content Include="Admin\EditItem.aspx" />
+    <Content Include="Admin\ItemDetail.aspx" />
     <Content Include="Admin\NoPage.aspx" />
+    <Content Include="Admin\TestDetail.aspx" />
     <Content Include="AfterLogin\ExamReview.aspx" />
     <Content Include="AfterLogin\Index.aspx" />
     <Content Include="AfterLogin\ItemChange.aspx" />
@@ -125,6 +128,13 @@
     <Compile Include="Admin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AdminDetail.aspx.cs">
+      <DependentUpon>AdminDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminDetail.aspx.designer.cs">
+      <DependentUpon>AdminDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AdminLoginPage.aspx.cs">
       <DependentUpon>AdminLoginPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -146,12 +156,26 @@
     <Compile Include="Admin\EditItem.aspx.designer.cs">
       <DependentUpon>EditItem.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ItemDetail.aspx.cs">
+      <DependentUpon>ItemDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ItemDetail.aspx.designer.cs">
+      <DependentUpon>ItemDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\NoPage.aspx.cs">
       <DependentUpon>NoPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\NoPage.aspx.designer.cs">
       <DependentUpon>NoPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TestDetail.aspx.cs">
+      <DependentUpon>TestDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TestDetail.aspx.designer.cs">
+      <DependentUpon>TestDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="AfterLogin\AfterLogin.Master.cs">
       <DependentUpon>AfterLogin.Master</DependentUpon>

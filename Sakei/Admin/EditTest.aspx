@@ -1,10 +1,31 @@
 ﻿<%@ Page Title="" Language="C#"   AutoEventWireup="true"  MasterPageFile="~/Admin/Admin.Master"  CodeBehind="EditTest.aspx.cs" Inherits="Sakei.Admin.EditTest" %>
 
-<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
+<%--<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
-
-    <img src="..\Images/page.jpg" style="margin: auto;" />
-</asp:Content>
+    <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnPreRender="Repeater1_PreRender" OnItemCommand="Repeater1_ItemCommand">
+            <ItemTemplate>
+                <div class="c1">
+                <asp:Literal runat="server" ID="ltl1"></asp:Literal>
+                   
+                <asp:Literal runat="server" ID="ltlID" Text='<%#Eval("ID") %>'></asp:Literal>
+                    
+                    <asp:TextBox runat="server" ID="intLevel" Text='<%# Eval("Level") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" ID="intType" Text='<%# Eval("Type") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtContent" Text='<%# Eval("Content") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtOptionA" Text='<%# Eval("OptionA") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtOptionB" Text='<%# Eval("OptionB") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtOptionC" Text='<%# Eval("OptionC") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtOptionD" Text='<%# Eval("OptionD") %>'></asp:TextBox>
+                      <asp:TextBox runat="server" ID="TextBox1" Text='<%# Eval("Answer") %>'></asp:TextBox>
+                    <asp:Literal runat="server" ID="ltlMobile" />
+                    <asp:Button runat="server" Text="刪除" CommandName="DeleteButton" CommandArgument='<%# Eval("ID") %>' />
+                    <asp:Button runat="server" Text="編輯" CommandName="EditButton" CommandArgument='<%# Eval("ID") %>' />
+                </div>
+            </ItemTemplate>
+            
+           
+        </asp:Repeater>
+</asp:Content>--%>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <label  class="label_title">新增題目</label><br />
     
@@ -60,3 +81,38 @@
      
 
 </asp:Content>
+
+
+
+
+
+
+
+<%@ Register Src="~/ShareControls/ucLevelChange.ascx" TagPrefix="uc1" TagName="ucLevelChange" %>
+<%@ Register Src="~/ShareControls/ucPageChange.ascx" TagPrefix="uc1" TagName="ucPageChange" %>
+
+
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        #divTestLest, #extraWindow, #extraWindow div {
+            border: 0px;
+        }
+
+        .accordion-item div {
+            border: 0px;
+        }
+        .spSubTitle{
+            font-size:8pt;
+            width:30%;
+        }
+        .spTitle{
+            width:70%;
+        }
+    </style>
+</asp:Content>
+
+
+
+  

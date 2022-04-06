@@ -14,10 +14,51 @@ namespace Sakei.Admin
     {
         TestModel modelTest = new TestModel();
         TestManager _mgr_Test = new TestManager();
-
+        TestManager _mgr_TestOut = new TestManager();
+        private const int _pageSize = 10;
+        public string aaa = "aaa";
+        public int TestLevel = 0;
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {   
+            string pageIndexText = this.Request.QueryString["Index"];
+            int pageIndex =
+                (string.IsNullOrWhiteSpace(pageIndexText))
+                    ? 1
+                    : Convert.ToInt32(pageIndexText);
+            if (!this.IsPostBack)
+            {
 
+                string keyword = this.Request.QueryString["keyword"];
+
+                //if (!string.IsNullOrWhiteSpace(keyword))
+                //    this.txtKeyword.Text = keyword;
+                //TestLevel = Convert.ToInt32( DDLserchLevel.SelectedValue);
+                //int totalRows = 0;
+              //  var list = this._mgr_TestOut.GetTestDataList(keyword, TestLevel, _pageSize, pageIndex, out totalRows);
+                ////this.ProcessPager(keyword, pageIndex, totalRows);
+                
+                //if (string.IsNullOrWhiteSpace(pageIndexText) || !int.TryParse(pageIndexText, out pageIndex))
+                //    pageIndex = 1;
+                //else
+                //    pageIndex = Convert.ToInt32(pageIndexText);
+
+               
+
+
+                //if (list.Count == 0)
+                //{
+                //    this.plcEmpty.Visible = true;
+                //    this.rptList.Visible = false;
+                //}
+                //else
+                //{
+                //    this.plcEmpty.Visible = false;
+                //    this.rptList.Visible = true;
+
+                //    this.rptList.DataSource = list;
+                //    this.rptList.DataBind();
+                //}
+            }
         }
 
         protected void btnConfirm_Click(object sender, EventArgs e)

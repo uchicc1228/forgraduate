@@ -208,7 +208,98 @@ namespace Sakei.Manager
                 throw;
             }
         }
+        public List<TestDataModel> GetTestDataList(string keyword, int testLevel, int pageSize, int pageIndex, out int totalRows)
+        {
+            string levelWhereText = "";
+            string andLevelText = "";
+            //計算跳頁數
+            int skip = pageSize * (pageIndex - 1);
+            if (skip < 0)
+                skip = 0;
+            string whereCondition = string.Empty;
+            if (!string.IsNullOrWhiteSpace(keyword))
+                whereCondition = "  TestContent LIKE '%'+@keyword+'%' ";
+            //如果testLevel，則尋找全等級
+            if (testLevel != 0)
+            {
+                levelWhereText = $"WHERE TestLevel = {testLevel}";
+                andLevelText = $"AND TestLevel = {testLevel}";
+            }
 
+            string commandExamText = $@"
+                                        SELECT 
+                                        TestID,TestLevel,TestTypes.TestTypeID,TypeContext,TestContent,
+	                                    OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer
+									FROM TestDatabases
+									INNER JOIN TestTypes
+									ON TestDatabases.TestTypeID = TestTypes.TestTypeID
+									WHERE IsEnable='TRUE'
+                                        ";
+
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText = $@"
+                                 SELECT TOP ({pageSize})
+                                    UserAnswers.TestID,TestLevel,TestTypeID,TypeContext,TestContent,
+	                                OptionsA,OptionsB,OptionsC,OptionsD,TestAnswer,UserAnswer
+                                 FROM TestDatabases
+                                WHERE 
+                              TestContent NOT IN 
+                         (
+                            SELECT TOP {skip} TestContent
+                            FROM TestDatabases
+                            WHERE 
+                                {whereCondition}
+                                {andLevelText}
+                                ORDER BY TestLevel DESC
+                                       
+                                  )    
+                                {whereCondition}
+                                ORDER BY TestLevel DESC
+                                ";
+            string commandCountText =
+                $@" SELECT COUNT(TestContent)
+                    FROM TestDatabases
+                    WHERE 
+                        {whereCondition}
+                        {andLevelText}
+                ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                            command.Parameters.AddWithValue("@keyword", keyword);   // 參數化查詢
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<TestDataModel> examDataList = new List<TestDataModel>();
+                        //將資料取出放到List中
+                        while (reader.Read())
+                        {
+                            TestDataModel info = BuildExamData(reader);
+                           
+                            examDataList.Add(info);
+                        }
+                        reader.Close();
+                        //取得總筆數
+                        command.CommandText = commandCountText;
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                        {
+                            command.Parameters.Clear();                             // 不同的查詢，必須使用不同的參數集合
+                            command.Parameters.AddWithValue("@keyword", keyword);
+                        }
+                        totalRows = (int)command.ExecuteScalar();
+                        return examDataList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("Sakei.Manager.TestManager.GetTestDataList", ex);
+                throw;
+            }
+        }
         private static TestDataModel BuildExamData(SqlDataReader reader)
         {
             return new TestDataModel

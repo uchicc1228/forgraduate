@@ -86,17 +86,8 @@
 </asp:Content>
      
 
-
-
-
-
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
-
-   
     <asp:PlaceHolder runat="server" ID="plcLogin">
 
         <label  class="label_title">會員登入</label><br />
@@ -112,10 +103,5 @@
 
     </asp:PlaceHolder>
        
-
-
-
-
-
 </asp:Content>
 
