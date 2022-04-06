@@ -22,13 +22,12 @@ namespace Sakei
         private UserModel _model;
         private ShoppingListModel _shoppingModel;
         private int level;
-        ItemModel itemModel = new ItemModel();
         ShoppingListModel shoppingModel = new ShoppingListModel();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                _model = _umgr.GetUserName(_userID);
+                _model = _umgr.GetUserData(_userID);
                 this.lblName.Text = _model.UserName;
 
                 this.lblRank.Text = _model.UserPoints.ToString();
@@ -110,7 +109,7 @@ namespace Sakei
                     int level;
                     int.TryParse(arr[3], out level);
 
-                    _model = _umgr.GetUserName(_userID);
+                    _model = _umgr.GetUserData(_userID);
                     _shoppingModel = _smgr.GetShoppingList_shoppingID(_userID, id);
 
                     if (_model.UserLevel > level)
@@ -135,11 +134,9 @@ namespace Sakei
                         shoppingModel.Content = arr[1];
                         _mmgr.UpdateUserMoney(_model, _userID, id);
                         _smgr.CreateShoppingList(shoppingModel);
+                        Response.Write("<script>alert('購買成功，來去換新衣ㄅ!!');location.href='Index.aspx';</script>");
                     }
-                    Response.Redirect(this.Request.RawUrl);
-
                     break;
-
                 default:
                     break;
             }

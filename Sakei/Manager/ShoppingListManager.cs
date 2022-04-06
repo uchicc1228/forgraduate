@@ -67,6 +67,7 @@ namespace Sakei.Manager
                         FROM [ShoppingLists]
                         INNER JOIN [Malls]
                         ON [ShoppingLists].ItemID=[Malls].ItemID
+                        WHERE UserID = @UserID
 	                    ORDER BY ItemLevel DESC";
             try
             {

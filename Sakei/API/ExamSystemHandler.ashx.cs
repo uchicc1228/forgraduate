@@ -32,6 +32,20 @@ namespace Sakei.API
                 context.Response.Write(jsonText);
                 return;
             }
+            //查詢初次試驗考題資料
+            if (string.Compare("POST", context.Request.HttpMethod, true) == 0 &&
+                string.Compare("FirstStart", context.Request.QueryString["Exam"], true) == 0)
+            {
+                
+                int testCount = int.Parse(context.Request.Form["TestCount"]);
+                Guid userID = Guid.Parse(context.Request.Form["UserID"]);
+                var examDataList = this._examMgr.GetTestDataForTest(testCount, userID);
+                string jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(examDataList);
+
+                context.Response.ContentType = "application/json";
+                context.Response.Write(jsonText);
+                return;
+            }
             //寫入使用者答案
             if (string.Compare("POST", context.Request.HttpMethod, true) == 0 &&
                 string.Compare("SaveAnswer", context.Request.QueryString["Exam"], true) == 0)

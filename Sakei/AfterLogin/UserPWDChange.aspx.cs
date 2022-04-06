@@ -21,7 +21,7 @@ namespace Sakei.AfterLogin
         {
             _userID = (Guid)LoginHelper.GetUserID();
 
-            _model = _umgr.GetUserName(_userID);
+            _model = _umgr.GetUserData(_userID);
             this.lblName.Text = _model.UserName;
 
             this.lblRank.Text = _model.UserPoints.ToString();
@@ -73,7 +73,7 @@ namespace Sakei.AfterLogin
         protected void btnNICKyes_Click(object sender, EventArgs e)
         {
             string newName = this.txtname.Text.Trim();
-            _model = _umgr.GetUserName(_userID);
+            _model = _umgr.GetUserData(_userID);
             if (!string.IsNullOrWhiteSpace(newName) && _model.UserName != newName)
             {
                 _model.UserName = newName;

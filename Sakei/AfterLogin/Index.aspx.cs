@@ -20,17 +20,15 @@ namespace Sakei.AfterLogin
         private UserModel _model;
         protected void Page_Load(object sender, EventArgs e)
         {
-            #region "cc"
-            string q1 = Request.QueryString["msg"];
-            if (!String.IsNullOrEmpty(q1))
-            {
-                Response.Write($"<script>alert('{q1}')</script>");
-            }
-            #endregion
+            
 
             #region "RYU"
             _userID = (Guid)LoginHelper.GetUserID();
-            _model = _umgr.GetUserName(_userID);
+            _model = _umgr.GetUserData(_userID,out bool isFirstLogin);
+            if (isFirstLogin)
+            {
+                Response.Redirect("../ExamSystem/ExamLevelCheckMode.aspx");
+            }
             this.lblName.Text = _model.UserName;
 
             this.lblRank.Text = _model.UserPoints.ToString();
